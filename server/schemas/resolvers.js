@@ -15,6 +15,17 @@ Query:{
     
         return foundUser;
       },
+      me: async function(parent,args,context ) {
+        const foundUser = await User.findOne({
+            _id: context.user._id ,
+        });
+    
+        if (!foundUser) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+    
+        return foundUser;
+      },
 
 },
 Mutation:{ 
