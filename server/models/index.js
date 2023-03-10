@@ -1,3 +1,4 @@
-const User = require('./User')
+const Volunteer = require('./Volunteer')
+const Charity = require('./Charity')
 
-module.exports = { User };
+module.exports = { Volunteer, Charity };
