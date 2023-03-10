@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// import schema from Book.js
+
 
 const userSchema = new Schema(
   {
@@ -20,26 +20,11 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    userType: {
-      type: String,
-      required: true,
-      enum: ['volunteer', 'charity'], // Add the two different user types
-    },
-    // Add properties specific to volunteers
-    skills: {
-      type: [String],
-      required: function() {
-        return this.userType === 'volunteer';
-      },
-    },
-    // Add properties specific to charities
-    charityName: {
-      type: String,
-      required: function() {
-        return this.userType === 'charity';
-      },
-    },
-  },
+    skills:{
+        type: String,
+        require: true,
+    }
+   },
   // set this to use virtual below
   {
     toJSON: {
@@ -63,10 +48,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
 
 
+const Volunteer = model('Volunteer', userSchema);
 
-
-const User = model('User', userSchema);
-
-module.exports = User;
+module.exports = Volunteer;

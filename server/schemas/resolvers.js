@@ -1,72 +1,79 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Volunteer, Charity } = require('../models');
+const { Volunteer, Charity } = require('../models');
 const { signToken } = require('../utils/auth');
+
 const resolvers = {
-  User: {
-    __resolveType(user, context, info) {
-      if (user.usertype === 'VOLUNTEER') {
-        return 'Volunteer';
-      } else if (user.usertype === 'CHARITY') {
-        return 'Charity';
-      } else {
-        return new AuthenticationError('Must have User Type');
-      }
+Query:{
+     
+      me: async function(parent,args,context ) {
+        const foundVolunteer = await Volunteer.findOne({
+            _id: context.userv._id ,
+        });
+    
+        if (!foundVolunteer) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+    
+        return foundVolunteer;
+      },
+
+},
+Mutation:{ 
+     createVolunteer:async function(parent, args ) {
+        const userv = await Volunteer.create(args);
+    
+        if (!userv) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+        const token = signToken(userv);
+        return {token, userv} ;
+      },
+
+      createCharity:async function(parent, args ) {
+        const userc = await Charity.create(args);
+    
+        if (!userc) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+        const token = signToken(userc);
+        return {token, userc} ;
+      },
+      // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
+      // {body} is destructured req.body
+       loginAsVolunteer:async function(parent, args) {
+        const userv = await Volunteer.findOne({ $or: [{ username: args.username }, { email: args.email }] });
+        if (!userv) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+    
+        const correctPw = await userv.isCorrectPassword(args.password);
+    
+        if (!correctPw) {
+          
+        }
+        const token = signToken(userv);
+        return{ token, userv };
+      },
+      loginAsCharity:async function(parent, args) {
+        const userc = await Charity.findOne({ $or: [{ username: args.username }, { email: args.email }] });
+        if (!userc) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+    
+        const correctPw = await userc.isCorrectPassword(args.password);
+    
+        if (!correctPw) {
+          
+        }
+        const token = signToken(userc);
+        return{ token, userc };
+      },
+      
+      
+    
+      
     }
-  },
+    
 
-  Query: {
-    getSingleUser: async function(parent, args, context) {
-      const foundUser = await User.findOne({
-        $or: [{ _id: context.user._id }, { username: args.username }],
-      });
-
-      if (!foundUser) {
-        throw new AuthenticationError('You need to be logged in!');
-      }
-
-      return foundUser;
-    },
-
-    me: async function(parent, args, context) {
-      const foundUser = await User.findOne({
-        _id: context.user._id,
-      });
-
-      if (!foundUser) {
-        throw new AuthenticationError('You need to be logged in!');
-      }
-
-      return foundUser;
-    },
-  },
-
-  Mutation: {
-    createVolunteer: async function(parent, args) {
-      const { username, email, password } = args;
-      // Hash the password before storing it
-      
-      const newVolunteer = await Volunteer.create({ username, email, password,skills, usertype: 'VOLUNTEER' });
-
-      if (!newVolunteer) {
-        throw new AuthenticationError('Error creating volunteer');
-      }
-
-      const token = signToken(newVolunteer);
-      return { token, user: newVolunteer };
-    },
-
-    createCharity: async function(parent, args) {
-      const { username, email, password,  } = args;
-      
-      const newChartiy = await Charity.create({ username, email, password, charityName, usertype: 'CHARITY' });
-
-      if (!newChartiy) {
-        throw new AuthenticationError('Error creating volunteer');
-      }
-
-      const token = signToken(newChartiy);
-      return { token, user: newChartiy };
-    },
-  },
-} 
+}
 module.exports=resolvers

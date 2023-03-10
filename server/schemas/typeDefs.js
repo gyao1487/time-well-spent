@@ -1,50 +1,35 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+type Auth{
+    token:String
+    userv: Volunteer
+    userc: Charity
+}
+type Volunteer{
+    _id:ID
+    username:String!
+    email:String!
+    skills:String!
+    password:String!
+}
 
-enum UserType {
-    VOLUNTEER
-    CHARITY
+type Charity{
+    _id:ID
+    password:String!
+    username:String!
+    charityName:String!
+}
+
+type Mutation{
+    createVolunteer(username:String!, email:String!, password:String!, skills:String!):Auth
+    createCharity(username:String!, email:String!, password:String!, charityName:String!):Auth
+    loginAsVolunteer(username: String!, password: String!,):Auth
+    loginAsCharity(username: String!, password: String!,):Auth
   }
-  
-  interface User {
-    _id: ID!
-    username: String!
-    email: String!
-    usertype: UserType!
-  }
-  
-  type Volunteer implements User {
-    _id: ID!
-    username: String!
-    email: String!
-    usertype: UserType!
-    password: String!
-    skills: String!
-  }
-  
-  type Charity implements User {
-    _id: ID!
-    username: String!
-    email: String!
-    password: String!
-    usertype: UserType!
-    charityName: String!
-  }
-  
-  type Auth {
-    token: String
-    user: User
-  }
-  
-  type Query {
-    getSingleUser(username: String!): User
-    me: User
-  }
-  
-  type Mutation {
-    createVolunteer(username: String!, email: String!, password: String! skill: String!): Auth
-    createCharity(username: String!, email: String!, password: String!, charityName: String!): Auth
-    login(email: String!, password: String!): Auth
-  }`
+
+  type Query{
+    me:Volunteer
+}
+`
 module.exports=typeDefs
