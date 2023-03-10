@@ -19,8 +19,27 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-    }
-   },
+    },
+    userType: {
+      type: String,
+      required: true,
+      enum: ['volunteer', 'charity'], // Add the two different user types
+    },
+    // Add properties specific to volunteers
+    skills: {
+      type: [String],
+      required: function() {
+        return this.userType === 'volunteer';
+      },
+    },
+    // Add properties specific to charities
+    charityName: {
+      type: String,
+      required: function() {
+        return this.userType === 'charity';
+      },
+    },
+  },
   // set this to use virtual below
   {
     toJSON: {
@@ -44,7 +63,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
+
+
 
 
 const User = model('User', userSchema);
