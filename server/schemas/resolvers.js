@@ -4,20 +4,24 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
 Query:{
+
+      allVolunteers: async () => {
+        return Volunteer.find()
+      },
      
-      me: async function(parent,args,context ) {
-        const foundVolunteer = await Volunteer.findOne({
-            _id: context.userv._id ,
-        });
-    
-        if (!foundVolunteer) {
-            throw new AuthenticationError('You need to be logged in!');
-        }
-    
-        return foundVolunteer;
+      volunteer: async (parent, { volunteerId }) => {
+        return Volunteer.findOne({ _id: volunteerId });
       },
 
-},
+      allCharity: async () => {
+        return Charity.find()
+      },
+     
+      charity: async (parent, { charityId }) => {
+        return Charity.findOne({ _id: charityId });
+      },
+    },
+
 Mutation:{ 
      createVolunteer:async function(parent, args ) {
         const userv = await Volunteer.create(args);

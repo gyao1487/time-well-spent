@@ -29,7 +29,10 @@ type Mutation{
   }
 
   type Query{
-    me:Volunteer
+    volunteer(volunteerId: ID!): Volunteer
+    allVolunteers: [Volunteer]!
+    charity(charityId: ID!): Chairty
+    allCharity: [Charity]!
 }
 `
 module.exports=typeDefs
