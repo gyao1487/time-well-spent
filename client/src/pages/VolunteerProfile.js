@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_VOLUNTEER } from '../utils/queries';
 
-function UserProfile() {
-  const { data } = useQuery(QUERY_USER);
-  let user;
+function VolunteerProfile() {
+  const { data } = useQuery(QUERY_VOLUNTEER);
+  let volunteer;
 
   if (data) {
-    user = data.user;
+    volunteer = data.volunteer;
   }
 
   return (
@@ -17,12 +17,12 @@ function UserProfile() {
       <div className="container my-1">
         <Link to="/">← Back to Products</Link>
 
-        {user ? (
+        {volunteer ? (
           <>
             <h2>
-              Order History for {user.firstName} {user.lastName}
+              Order History for {volunteer.firstName} {volunteer.lastName}
             </h2>
-            {user.orders.map((order) => (
+            {volunteer.orders.map((order) => (
               <div key={order._id} className="my-2">
                 <h3>
                   {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
@@ -49,4 +49,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default VolunteerProfile;

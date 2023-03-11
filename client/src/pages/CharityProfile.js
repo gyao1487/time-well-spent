@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_CHARITY } from '../utils/queries';
 
 function CharityProfile() {
-  const { data } = useQuery(QUERY_USER);
-  let user;
+  const { data } = useQuery(QUERY_CHARITY);
+  let charity;
 
   if (data) {
-    user = data.user;
+    charity = data.charity;
   }
 
   return (
@@ -17,12 +17,12 @@ function CharityProfile() {
       <div className="container my-1">
         <Link to="/">← Back to Products</Link>
 
-        {user ? (
+        {charity ? (
           <>
             <h2>
-              Order History for {user.firstName} {user.lastName}
+              Order History for {charity.firstName} {charity.lastName}
             </h2>
-            {user.orders.map((order) => (
+            {charity.orders.map((order) => (
               <div key={order._id} className="my-2">
                 <h3>
                   {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}

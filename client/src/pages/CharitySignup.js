@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_CHARITY } from '../utils/mutations';
 
 function CharitySignup(props) {
-  const [formState, setFormState] = useState({ charityName: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [addCharity] = useMutation(ADD_CHARITY);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
+    const mutationResponse = await addCharity({
       variables: {
         password: formState.password,
         charityName: formState.charityName,
@@ -19,7 +19,7 @@ function CharitySignup(props) {
         email: formState.email,
       },
     });
-    const token = mutationResponse.data.addUser.token;
+    const token = mutationResponse.data.addCharity.token;
     Auth.login(token);
   };
 
