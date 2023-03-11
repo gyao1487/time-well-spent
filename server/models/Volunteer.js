@@ -22,7 +22,7 @@ const userSchema = new Schema(
     },
     skills:{
         type: String,
-        require: true,
+        require: false,
     }
    },
   // set this to use virtual below
