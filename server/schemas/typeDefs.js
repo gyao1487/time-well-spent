@@ -31,7 +31,7 @@ type Mutation{
   type Query{
     volunteer(volunteerId: ID!): Volunteer
     allVolunteers: [Volunteer]!
-    charity(charityId: ID!): Chairty
+    charity(charityId: ID!): Charity
     allCharity: [Charity]!
 }
 `

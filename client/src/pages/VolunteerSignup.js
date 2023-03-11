@@ -14,7 +14,7 @@ function VolunteerSignup(props) {
       variables: {
         email: formState.email,
         password: formState.password,
-        name: formState.name,
+        username: formState.name,
       },
     });
     const token = mutationResponse.data.addVolunteer.token;

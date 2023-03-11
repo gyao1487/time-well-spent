@@ -6,67 +6,58 @@ export const LOGIN = gql`
       token
       volunteer {
         _id
+        username
       }
     }
   }
 `;
 
-export const ADD_ORDER = gql`
-  mutation addOrder($products: [ID]!) {
-    addOrder(products: $products) {
-      purchaseDate
-      products {
-        _id
-        name
-        description
-        price
-        quantity
-        category {
-          name
-        }
-      }
-    }
-  }
-`;
+// export const ADD_ORDER = gql`
+//   mutation addOrder($products: [ID]!) {
+//     addOrder(products: $products) {
+//       purchaseDate
+//       products {
+//         _id
+//         name
+//         description
+//         price
+//         quantity
+//         category {
+//           name
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export const ADD_VOLUNTEER = gql`
-  mutation addVolunteer(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
-  ) {
-    addVolunteer(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
-    ) {
-      token
-      volunteer {
-        _id
-      }
-    }
+mutation createVolunteer($username: String!, $password: String!, $email: String!) {
+  createVolunteer(username: $username, password: $password, email: $email) {
+    
+    volunteer {
+      _id
+      username
+      email
+      password
+}
+    
+    token
   }
+}
 `;
 
 export const ADD_CHARITY = gql`
-  mutation addCharity(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
-  ) {
-    addCharity(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
-    ) {
-      token
-      charity {
-        _id
-      }
-    }
+mutation createCharity($username: String!, $password: String!, $email: String!) {
+  createCharity(username: $username, password: $password, email: $email) {
+    
+    charity {
+      _id
+      username
+      email
+      password
+}
+    
+    token
   }
+}
 `;

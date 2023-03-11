@@ -1,25 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
 
-import Home from './pages/Home';
-import Discover from './pages/Discover';
-import NoMatch from './pages/NoMatch';
+
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import VolunteerSignup from './pages/VolunteerSignup';
-import CharitySignup from './pages/CharitySignup';
-import VolunteerProfile from './pages/VolunteerProfile';
-import CharityProfile from './pages/CharityProfile';
 import Nav from './components/Nav';
-import { CharityProvider } from './utils/GlobalState';
-import Success from './pages/Success';
+
+
+import { ApolloClient, InMemoryCache, ApolloProvider,createHttpLink,} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,18 +29,19 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <CharityProvider>
+          
             <Nav />
             <Routes>
-              <Route 
+              {/* <Route 
                 path="/" 
                 element={<Home />} 
-              />
+              /> */}
               <Route 
                 path="/login" 
                 element={<Login />} 
@@ -60,23 +50,23 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              <Route 
+              {/* <Route 
                 path="/VolunteerSignup" 
                 element={<VolunteerSignup />} 
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/CharitySignup" 
                 element={<CharitySignup />} 
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/success" 
                 element={<Success />} 
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/discover" 
                 element={<Discover />} 
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/VolunteerProfile/:id" 
                 element={<VolunteerProfile />} 
               />
@@ -87,9 +77,9 @@ function App() {
               <Route 
                 path="*" 
                 element={<NoMatch />} 
-              />
+              /> */}
             </Routes>
-          </CharityProvider>
+        
         </div>
       </Router>
     </ApolloProvider>

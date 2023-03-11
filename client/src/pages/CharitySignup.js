@@ -13,9 +13,9 @@ function CharitySignup(props) {
     const mutationResponse = await addCharity({
       variables: {
         password: formState.password,
-        charityName: formState.charityName,
-        focus: formState.focus,
-        address: formState.address,
+        username: formState.username,
+        // focus: formState.focus,
+        // address: formState.address,
         email: formState.email,
       },
     });
@@ -40,10 +40,10 @@ function CharitySignup(props) {
         <div className="flex-row space-between my-2">
           <label htmlFor="charityName">Charity/Nonprofit Name:</label>
           <input
-            placeholder="Charity Name"
-            name="charityName"
-            type="charityName"
-            id="charityName"
+            placeholder="username"
+            name="username"
+            type="username"
+            id="username"
             onChange={handleChange}
           />
         </div>
