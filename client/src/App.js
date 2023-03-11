@@ -13,9 +13,9 @@ import Discover from './pages/Discover';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import UserSignup from './pages/UserSignup';
+import VolunteerSignup from './pages/VolunteerSignup';
 import CharitySignup from './pages/CharitySignup';
-import UserProfile from './pages/UserProfile';
+import VolunteerProfile from './pages/VolunteerProfile';
 import CharityProfile from './pages/CharityProfile';
 import Nav from './components/Nav';
 import { CharityProvider } from './utils/GlobalState';
@@ -61,8 +61,8 @@ function App() {
                 element={<Signup />} 
               />
               <Route 
-                path="/UserSignup" 
-                element={<UserSignup />} 
+                path="/VolunteerSignup" 
+                element={<VolunteerSignup />} 
               />
               <Route 
                 path="/CharitySignup" 
@@ -77,8 +77,8 @@ function App() {
                 element={<Discover />} 
               />
               <Route 
-                path="/UserProfile/:id" 
-                element={<UserProfile />} 
+                path="/VolunteerProfile/:id" 
+                element={<VolunteerProfile />} 
               />
               <Route 
                 path="/CharityProfile/:id" 

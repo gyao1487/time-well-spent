@@ -48,9 +48,30 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
-export const QUERY_USER = gql`
+export const QUERY_VOLUNTEER = gql`
   {
-    user {
+    volunteer {
+      firstName
+      lastName
+      orders {
+        _id
+        purchaseDate
+        products {
+          _id
+          name
+          description
+          price
+          quantity
+          image
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_CHARITY = gql`
+  {
+    charity {
       firstName
       lastName
       orders {
