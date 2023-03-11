@@ -10,7 +10,7 @@ type Volunteer{
     _id:ID
     username:String!
     email:String!
-    skills:String!
+    skills:String
     password:String!
 }
 
@@ -18,12 +18,12 @@ type Charity{
     _id:ID
     password:String!
     username:String!
-    charityName:String!
+    email:String!
 }
 
 type Mutation{
-    createVolunteer(username:String!, email:String!, password:String!, skills:String!):Auth
-    createCharity(username:String!, email:String!, password:String!, charityName:String!):Auth
+    createVolunteer(username:String!, email:String!, password:String!, skills:String):Auth
+    createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
   }

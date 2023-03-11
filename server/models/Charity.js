@@ -7,14 +7,16 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    charityName:{
-      type: String,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
-    }
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
+    },
    },
   // set this to use virtual below
   {
