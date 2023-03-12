@@ -17,9 +17,10 @@
 
 
 export default function GoogleSignUp() {
+    const clientID = process.env.GOOGLE_CLIENT_ID
     return (
         <div id="g_id_onload"
-            data-client_id="1061771135114-asbv7ujlakmsrjt7ineom366c2bid44n.apps.googleusercontent.com"
+            data-client_id={clientID}
             data-context="signup"
             data-login_uri="http://localhost:3000/volunteers/signup"
             data-itp_support="true">
