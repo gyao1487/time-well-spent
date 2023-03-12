@@ -11,7 +11,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_VOLUNTEER } from '../utils/mutations';
 
 
-const SignupForm = () => {
+const Signup = () => {
   // set initial form state
   const [uservFormData, setVolunteerFormData] = useState({ username: '', email: '', password: '' });
   // set state for form validation
@@ -126,4 +126,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default Signup;
