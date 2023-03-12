@@ -12,6 +12,7 @@ import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import CharitySignup from "./pages/CharitySignup"
+import Footer from "./components/Footer";
 
 import {
   ApolloClient,
@@ -73,6 +74,7 @@ function App() {
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>
+      <Footer />
     </ApolloProvider>
   );
 }
