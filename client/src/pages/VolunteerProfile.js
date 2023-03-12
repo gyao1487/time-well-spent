@@ -1,7 +1,8 @@
 //Components on page:
-//Google Map display
-//Search Bar
-//Event cards
+//Profile picture
+//About section
+//Contact icons
+//Event cards (previous volunteer experience)
 
 import React from 'react';
 import { Link } from 'react-router-dom';
