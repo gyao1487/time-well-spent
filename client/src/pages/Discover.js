@@ -6,13 +6,15 @@
     //Search Fields
     import React from "react";
 
+//Logic needed:
+//Search function - populate cards with events that fit the parameters
+
 const Discover = () => {
   return (
     <div className="container">
-      <h1>This is the homepage!</h1>
-      <h2>This is where the Google map goes</h2>
-      <p>Search bar goes here</p>
-      <p>Event cards go here</p>
+      <h1>Discover New Opportunities</h1>
+      <h2>Event cards</h2>
+      <p>Filter for search! </p>
     </div>
   );
 };
