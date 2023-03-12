@@ -2,9 +2,148 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div className="container">
-      <h1>This is the Profile!</h1>
-      <h2>conditional rendering depending on usertype?</h2>
+    <div>
+      <section class="pt-16 bg-blueGray-50">
+        <div class="w-full lg:w-4/12 px-4 mx-auto">
+          <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+            <div class="px-6">
+              <div class="flex flex-wrap justify-center">
+                <div class="w-full px-4 flex justify-center">
+                  <div class="relative">
+                    <img
+                      alt="..."
+                      src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+                      class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                    ></img>
+                  </div>
+                </div>
+
+{/* ----------------------- ICONS ------------------------- */}
+                <div class="w-full px-4 justify-center mt-20">
+                  <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                    <div class="mr-4 p-3 text-center items-center ">
+                      <div class="flex justify-center space-x-2">
+                        <div>
+                          <button
+                            type="button"
+                            data-te-ripple-init
+                            data-te-ripple-color="light"
+                            class="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="h-4 w-4"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+
+                      <span class="text-sm text-blueGray-400">Contact</span>
+                    </div>
+                    <div class="mr-4 p-3 text-center">
+                      <div class="flex justify-center space-x-2">
+                        <div>
+                          <button
+                            type="button"
+                            data-te-ripple-init
+                            data-te-ripple-color="light"
+                            class="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="h-4 w-4"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+
+                      <span class="text-sm text-blueGray-400">Website</span>
+                    </div>
+                    <div class="lg:mr-4 p-3 text-center">
+                      <div class="flex justify-center space-x-2">
+                        <div>
+                          <button
+                            type="button"
+                            data-te-ripple-init
+                            data-te-ripple-color="light"
+                            class="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="h-4 w-4"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <span class="text-sm text-blueGray-400">Comments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-12">
+                <h3 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                  Jenna Stones
+                </h3>
+                <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                  <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  Los Angeles, California
+                </div>
+                <div class="mb-2 text-blueGray-600 mt-10">
+                  <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                  Solution Manager - Creative Tim Officer
+                </div>
+                <div class="mb-2 text-blueGray-600">
+                  <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                  University of Computer Science
+                </div>
+              </div>
+              <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                <div class="flex flex-wrap justify-center">
+                  <div class="w-full lg:w-9/12 px-4">
+                    <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                      An artist of considerable range, Jenna the name taken by
+                      Melbourne-raised, Brooklyn-based Nick Murphy writes,
+                      performs and records all of his own music, giving it a
+                      warm, intimate feel with a solid groove structure. An
+                      artist of considerable range.
+                    </p>
+                    <a
+                      href="javascript:void(0);"
+                      class="font-normal text-pink-500"
+                    >
+                      Show more
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
