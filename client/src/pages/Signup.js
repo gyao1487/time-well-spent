@@ -30,20 +30,19 @@ const Signup = () => {
     }
   }, [error]);
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    event.preventDefault();
+    // event.preventDefault();
     setVolunteerFormData({ ...uservFormData, [name]: value });
-    
   };
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
+      // event.preventDefault();
       event.stopPropagation();
     }
 
@@ -65,9 +64,63 @@ const Signup = () => {
     });
   };
   return (
-    <p>
-      Form placeholder
-    </p>
+    <div className="container my-1">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleFormSubmit}>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="username">Username</label>
+          <input
+            placeholder="Amazing person"
+            name="username"
+            type="username"
+            id="username"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="email">Email:</label>
+          <input
+            placeholder="email@domain.com"
+            name="email"
+            type="email"
+            id="email"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="pwd">Password:</label>
+          <input
+            placeholder="******"
+            name="password"
+            type="password"
+            id="pwd"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="skills">Skills:</label>
+          <input
+            placeholder="Organizing, outgoing,"
+            name="skills"
+            type="skills"
+            id="skills"
+            onChange={handleChange}
+          />
+        </div>
+        {error ? (
+          <div>
+            <p className="error-text">The provided credentials are incorrect</p>
+          </div>
+        ) : null}
+        <div className="flex-row flex-end">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Signup;
     // <>
     //   {/* This is needed for the validation functionality above */}
     //   <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -123,7 +176,3 @@ const Signup = () => {
     //     {/* {error && <div>Sign up failed</div>} */}
     //   </Form>
     // </>
-  );
-};
-
-export default Signup;
