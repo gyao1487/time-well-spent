@@ -1,11 +1,6 @@
-//Components on page:
-//Google Map display
-//Search Bar
-//Event cards
-
 import React from "react";
 
-const Home = () => {
+const Profile = () => {
   return (
     <div className="container">
       <h1>This is the homepage!</h1>
@@ -16,4 +11,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Profile;
