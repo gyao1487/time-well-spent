@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import { LOGIN } from '../utils/mutations';
+import { LOGIN_VOLUNTEER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error }] = useMutation(LOGIN);
+  const [uservformState, setFormState] = useState({ username: '', password: '' });
+  const [loginAsVolunteer, { error }] = useMutation(LOGIN_VOLUNTEER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const mutationResponse = await login({
-        variables: { email: formState.email, password: formState.password },
+      const mutationResponse = await loginAsVolunteer({
+        variables: { username: uservformState.username, password: uservformState.password },
       });
-      const token = mutationResponse.data.login.token;
+      const token = mutationResponse.data.loginAsVolunteer.token;
       Auth.login(token);
     } catch (e) {
       console.log(e);
@@ -24,7 +24,7 @@ function Login(props) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
-      ...formState,
+      ...uservformState,
       [name]: value,
     });
   };
@@ -36,12 +36,12 @@ function Login(props) {
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
+          <label htmlFor="username">Enter username</label>
           <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
+            placeholder="username"
+            name="username"
+            type="username"
+            id="username"
             onChange={handleChange}
           />
         </div>
