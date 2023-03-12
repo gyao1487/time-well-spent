@@ -1,3 +1,8 @@
+//Components on page:
+//Google Map display
+//Search Bar
+//Event cards
+
 import React from "react";
 import ProductList from "../components/ProductList";
 import CategoryMenu from "../components/CategoryMenu";

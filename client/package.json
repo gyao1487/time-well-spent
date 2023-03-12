@@ -2,7 +2,7 @@
   "name": "mern-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://:3001/",
   "dependencies": {
     "@apollo/client": "^3.5.8",
     "@headlessui/react": "^1.7.13",

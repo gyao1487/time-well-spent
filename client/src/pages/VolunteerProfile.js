@@ -1,3 +1,8 @@
+//Components on page:
+//Google Map display
+//Search Bar
+//Event cards
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
