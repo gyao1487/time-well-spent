@@ -3,10 +3,8 @@ import React from "react";
 const Profile = () => {
   return (
     <div className="container">
-      <h1>This is the homepage!</h1>
-      <h2>This is where the Google map goes</h2>
-      <p>Search bar goes here</p>
-      <p>Event cards go here</p>
+      <h1>This is the Profile!</h1>
+      <h2>conditional rendering depending on usertype?</h2>
     </div>
   );
 };
