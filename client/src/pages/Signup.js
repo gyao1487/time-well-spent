@@ -1,3 +1,9 @@
+//!!! NEED TO REPLACE WITH TAILWIND///
+//Need to create SignUp Landing Page
+//Components:
+// Logo
+//Background image
+// Buttons for two options as well as images/icons?
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 

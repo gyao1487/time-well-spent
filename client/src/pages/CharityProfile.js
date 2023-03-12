@@ -1,3 +1,11 @@
+//Components on page:
+//Profile picture/Banner
+//Google Map window
+//Donation Button
+//About section
+//Contact icons
+//Event cards (active volunteer experiences)
+//Edit buttons
 import React from 'react';
 import { Link } from 'react-router-dom';
 

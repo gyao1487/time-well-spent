@@ -1,3 +1,9 @@
+//Components on page:
+//Profile picture
+//About section
+//Contact icons
+//Event cards (previous volunteer experience)
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
