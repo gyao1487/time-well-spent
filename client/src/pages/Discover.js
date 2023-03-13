@@ -1,19 +1,24 @@
+import React from "react";
+import EventCard from "../components/EventCard";
+
 //Components:
 //Discover Header
 //Event Cards
 //Filter Popup
     //Search Bar
     //Search Fields
-    import React from "react";
+
 
 //Logic needed:
 //Search function - populate cards with events that fit the parameters
 
 const Discover = () => {
   return (
-    <div className="container">
+    <div >
       <h1>Discover New Opportunities</h1>
-      <h2>Event cards</h2>
+      <div className="container mx-auto my-auto">
+      <EventCard />
+      </div>
       <p>Filter for search! </p>
     </div>
   );
