@@ -4,6 +4,7 @@
 // Logo
 //Background image
 // Buttons for two options as well as images/icons?
+
 import React from 'react';
 
 

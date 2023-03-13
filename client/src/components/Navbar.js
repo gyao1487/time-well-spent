@@ -9,7 +9,11 @@ const navigation = [
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/login", current: false },
   { name: "Profile", href: "/profile", current: false },
+
   { name: "Sign In", href: "/Signup", current: false },
+  { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
+  {name: "Login As Charity", href: "/LoginCharity",current:false}
+
 ];
 
 function classNames(...classes) {
@@ -78,7 +82,7 @@ function Navbar() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Profile dropdown - CONDITIONAL RENDERING - only when user is logged in*/}
+{/* Profile dropdown - CONDITIONAL RENDERING - only when user is logged in*/}
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -146,6 +150,7 @@ function Navbar() {
             </div>
           </div>
 
+{/* Navbar View in Desktop Mode. Navigation items are mapped over and buttons are generated */}
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (

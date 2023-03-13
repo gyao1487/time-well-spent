@@ -3,16 +3,19 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+
 //This is placeholder for Volunteer signup - once we finish, signup will redirect
 //to the page where you can choose volunteer/charity signup
+
+import Signup from "./pages/Signup";
 import VolunteerSignup from "./pages/VolunteerSignup";
-import Signup from "./pages/Signup"
+import CharitySignup from "./pages/CharitySignup"
+
 import Navbar from "./components/Navbar";
 import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
-import CharitySignup from "./pages/CharitySignup"
+
 import Footer from "./components/Footer";
 
 import {
@@ -23,6 +26,8 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import GoogleSignUp from "./pages/volunteers/signup";
+import LoginVolunteer from "./pages/LoginVolunteer";
+import LoginCharity from "./pages/LoginCharity";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -50,11 +55,14 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/LoginVolunteer" element={<LoginVolunteer />} />
+          <Route path="/LoginCharity" element={<LoginCharity />} />
           <Route path="/signup" element={<Signup />} />
+          
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
           <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
           <Route path="/charitySignup" element={<CharitySignup />} />
+
           {/* <Route
                 path="/success"
                 element={<Success />}

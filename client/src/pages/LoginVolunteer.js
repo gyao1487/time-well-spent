@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { LOGIN_VOLUNTEER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-function Login(props) {
+function LoginVolunteer(props) {
   const [uservformState, setFormState] = useState({ username: '', password: '' });
   const [loginAsVolunteer, { error }] = useMutation(LOGIN_VOLUNTEER);
 
@@ -68,4 +68,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default LoginVolunteer;

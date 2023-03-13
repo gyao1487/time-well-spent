@@ -12,6 +12,18 @@ export const LOGIN_VOLUNTEER = gql`
   }
 `;
 
+export const LOGIN_CHARITY = gql`
+  mutation loginAsCharity($username: String!, $password: String!) {
+    loginAsCharity(username: $username, password: $password) {
+      token
+      userc {
+        _id
+        username
+      }
+    }
+  }
+`;
+
 // export const ADD_ORDER = gql`
 //   mutation addOrder($products: [ID]!) {
 //     addOrder(products: $products) {
@@ -48,7 +60,7 @@ export const ADD_CHARITY = gql`
 mutation createCharity($username: String!, $password: String!, $email: String!) {
   createCharity(username: $username, password: $password, email: $email) {
     
-    charity {
+    userc {
       _id
       username
       email
