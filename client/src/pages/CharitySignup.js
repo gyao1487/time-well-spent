@@ -1,46 +1,62 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
 import { ADD_CHARITY } from '../utils/mutations';
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
 
-function CharitySignup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addCharity] = useMutation(ADD_CHARITY);
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addCharity({
-      variables: {
-        password: formState.password,
-        username: formState.username,
-        // focus: formState.focus,
-        // address: formState.address,
-        email: formState.email,
-      },
-    });
-    const token = mutationResponse.data.addCharity.token;
-    Auth.login(token);
-  };
+
+const CharitySignup = () => {
+  // set initial form state
+  const [usercFormData, setCharityFormData] = useState({ username: '', email: '', password: '' });
+  // set state for form validation
+ 
+
+  // new code
+  const [createCharity, { error }] = useMutation(ADD_CHARITY);
+  
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    // event.preventDefault();
+    setCharityFormData({ ...usercFormData, [name]: value });
   };
 
+  const handleFormSubmit = async (event) => {
+    // event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      // event.preventDefault();
+      event.stopPropagation();
+    }
+
+    // new code
+    try {
+      const { data } = await createCharity({
+        variables: { ...usercFormData },
+      });
+
+      Auth.login(data.createCharity.token);
+    } catch (err) {
+      console.error(err);
+    };
+
+    setCharityFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+  };
   return (
     <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
-
-      <h2>Signup</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="charityName">Charity/Nonprofit Name:</label>
+          <label htmlFor="username">Username</label>
           <input
-            placeholder="username"
+            placeholder="Amazing person"
             name="username"
             type="username"
             id="username"
@@ -48,19 +64,9 @@ function CharitySignup(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="focus">Organizational Focus</label>
-          <input
-            placeholder="Helping the underpriveledged youth of Chicago"
-            name="focus"
-            type="focus"
-            id="focus"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
           <input
-            placeholder="youremail@test.com"
+            placeholder="email@domain.com"
             name="email"
             type="email"
             id="email"
@@ -77,26 +83,27 @@ function CharitySignup(props) {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="address">Address:</label>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="skills">Skills:</label>
           <input
-            placeholder="1060 W. Addison, Chicago IL, 60613"
-            name="address"
-            type="address"
-            id="address"
-            onChange={handleChange}  
+            placeholder="Organizing, outgoing,"
+            name="skills"
+            type="skills"
+            id="skills"
+            onChange={handleChange}
           />
         </div>
+        {error ? (
+          <div>
+            <p className="error-text">The provided credentials are incorrect</p>
+          </div>
+        ) : null}
         <div className="flex-row flex-end">
           <button type="submit">Submit</button>
-        </div>
-        <p>OR</p>
-        <div className="flex-row flex-end">
-          <button type="submit">Sign up with Google</button>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default CharitySignup;
