@@ -73,11 +73,36 @@ Mutation:{
         return{ token, userc };
       },
       
-      
+      addEvent:async function(parent,args,context ) {
+        try {
+          const updatedCharity = await Charity.findOneAndUpdate(
+            { _id: context.userc._id },
+            { $addToSet: { savedEvents: args.savedEvent } },
+            { new: true, runValidators: true }
+          );
+          return updatedCharity;
+        } catch (err) {
+          console.log(err);
+          throw new AuthenticationError('You need to be logged in!');
+        }
+      },
+    
+       removeEvent:async function(parent,args,context ) {
+        const updatedCharity = await Charity.findOneAndUpdate(
+          { _id: context.userc._id },
+          { $pull: { savedEvents: { title: args.title } } },
+          { new: true }
+        );
+        if (!updatedCharity) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+        return updatedCharity;
+      },
+    }
     
       
     }
     
 
-}
+
 module.exports=resolvers

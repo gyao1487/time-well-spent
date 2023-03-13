@@ -24,23 +24,22 @@ export const LOGIN_CHARITY = gql`
   }
 `;
 
-// export const ADD_ORDER = gql`
-//   mutation addOrder($products: [ID]!) {
-//     addOrder(products: $products) {
-//       purchaseDate
-//       products {
-//         _id
-//         name
-//         description
-//         price
-//         quantity
-//         category {
-//           name
-//         }
-//       }
-//     }
-//   }
-// `;
+export const ADD_EVENT = gql`
+  mutation addEvent($savedEvent: inputEvent!) {
+    saveBook(savedEvent: $savedEvent) {
+      username
+      email
+      savedEvents {
+        title
+        description
+        price
+        image
+        quantity
+       
+      }
+    }
+  }
+`;
 
 export const ADD_VOLUNTEER = gql`
 mutation createVolunteer($username: String!, $password: String!, $email: String!) {

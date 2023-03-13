@@ -12,6 +12,7 @@ type Volunteer{
     email:String!
     skills:String
     password:String!
+    
 }
 
 type Charity{
@@ -19,6 +20,23 @@ type Charity{
     password:String!
     username:String!
     email:String!
+    savedEvents:[Event]
+}
+type Event{
+
+    title:String!
+    description:String!
+    price:Int!
+    image:String
+    quantity:String
+    
+}
+input inputEvent {
+    title:String!
+    description:String!
+    price:Int!
+    image:String
+    quantity:String 
 }
 
 type Mutation{
@@ -26,7 +44,10 @@ type Mutation{
     createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
-  }
+    addEvent(savedEvent:inputEvent):Charity
+    removeEvent(title:String!):Charity
+}
+  
 
   type Query{
     volunteer(volunteerId: ID!): Volunteer

@@ -9,11 +9,10 @@ const navigation = [
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/login", current: false },
   { name: "Profile", href: "/profile", current: false },
-
-  { name: "Sign In", href: "/Signup", current: false },
-  { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
-  {name: "Login As Charity", href: "/LoginCharity",current:false}
-
+  // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
+  // { name: "Login As Charity", href: "/LoginCharity", current: false },
+  { name: "Login", href: "/Login", current: false },
+  { name: "Sign Up", href: "/Signup", current: false }
 ];
 
 function classNames(...classes) {
