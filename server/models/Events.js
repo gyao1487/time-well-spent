@@ -7,25 +7,27 @@ const eventSchema = new Schema({
       type: String,
     },
   ],
+  
+  title: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
   },
   // saved book id from GoogleBooks
-  bookId: {
-    type: String,
+  price: {
+    type: Number,
     required: true,
   },
   image: {
     type: String,
   },
-  link: {
+  quantity: {
     type: String,
   },
-  title: {
-    type: String,
-    required: true,
-  },
+  
 });
 
-module.exports = bookSchema;
+module.exports = eventSchema;

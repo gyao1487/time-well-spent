@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const eventSchema = require('./Events')
 const userSchema = new Schema(
   {
     username: {
@@ -17,6 +18,7 @@ const userSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
+    savedOrder:[eventSchema]
    },
   // set this to use virtual below
   {
