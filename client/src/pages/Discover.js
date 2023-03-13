@@ -19,7 +19,7 @@ const Discover = () => {
       <div className="container mx-auto my-auto">
       <EventCard />
       </div>
-      <p>Filter for search! </p>
+      <p>Filter for search!</p>
     </div>
   );
 };

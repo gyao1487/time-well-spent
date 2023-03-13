@@ -156,7 +156,7 @@ function Navbar() {
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  onClick={item.onClick}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -175,5 +175,4 @@ function Navbar() {
     </Disclosure>
   );
 }
-
 export default Navbar;
