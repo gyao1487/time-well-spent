@@ -12,6 +12,10 @@ import EventCard from "../components/EventCard";
 //Search function - populate cards with events that fit the parameters
 
 const Discover = () => {
+  // query for all events
+
+  // if loading, return something else
+
   return (
     <div>
       <h1 className="text-center text-gray-900 font-bold text-2xl tracking-tight m-4 dark:text-white">
@@ -51,6 +55,8 @@ const Discover = () => {
           </div>
         </div>
 
+{/* map through the events data */}
+{/* for each event, pass the props (title, description) */}
         <EventCard />
 
       </div>

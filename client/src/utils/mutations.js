@@ -26,9 +26,8 @@ export const LOGIN_CHARITY = gql`
 
 export const ADD_EVENT = gql`
   mutation addEvent($savedEvent: inputEvent!) {
-    saveBook(savedEvent: $savedEvent) {
+    addEvent(savedEvent: $savedEvent) {
       username
-      email
       savedEvents {
         title
         description

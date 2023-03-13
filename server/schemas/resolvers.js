@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Volunteer, Charity } = require('../models');
+const { Volunteer, Charity, Event } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -19,6 +19,9 @@ Query:{
      
       charity: async (parent, { charityId }) => {
         return Charity.findOne({ _id: charityId });
+      },
+      allEvents: async () => {
+        return Event.find()
       },
     },
 
@@ -74,12 +77,18 @@ Mutation:{
       },
       
       addEvent:async function(parent,args,context ) {
+        console.log(args)
+        console.log(context.user)
         try {
+          const newEvent = await Event.create(args.savedEvent);
+
+
           const updatedCharity = await Charity.findOneAndUpdate(
-            { _id: context.userc._id },
-            { $addToSet: { savedEvents: args.savedEvent } },
+            { _id: context.user._id },
+            { $addToSet: { savedEvent: newEvent._id } },
             { new: true, runValidators: true }
           );
+          console.log(updatedCharity)
           return updatedCharity;
         } catch (err) {
           console.log(err);
@@ -89,7 +98,7 @@ Mutation:{
     
        removeEvent:async function(parent,args,context ) {
         const updatedCharity = await Charity.findOneAndUpdate(
-          { _id: context.userc._id },
+          { _id: context.user._id },
           { $pull: { savedEvents: { title: args.title } } },
           { new: true }
         );

@@ -12,7 +12,8 @@ const navigation = [
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
   { name: "Login", href: "/Login", current: false },
-  { name: "Sign Up", href: "/Signup", current: false }
+  { name: "Sign Up", href: "/Signup", current: false },
+  {name: "Create Event", href:"/EventFrom", current:false}
 ];
 
 function classNames(...classes) {
