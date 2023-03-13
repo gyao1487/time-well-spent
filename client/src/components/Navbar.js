@@ -9,10 +9,10 @@ const navigation = [
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/login", current: false },
   { name: "Profile", href: "/profile", current: false },
-  { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
-  {name: "Volunteer Sign In", href: "/VolunteerSignup",current: false },
-  {name: "Charity Sign In", href: "/CharitySignup",current: false},
-  {name: "Login As Charity", href: "/LoginCharity",current:false}
+  // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
+  // { name: "Login As Charity", href: "/LoginCharity", current: false },
+  { name: "Login", href: "/Login", current: false },
+  { name: "Sign Up", href: "/Signup", current: false }
 ];
 
 function classNames(...classes) {
@@ -81,7 +81,7 @@ function Navbar() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Profile dropdown - CONDITIONAL RENDERING - only when user is logged in*/}
+{/* Profile dropdown - CONDITIONAL RENDERING - only when user is logged in*/}
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -149,13 +149,14 @@ function Navbar() {
             </div>
           </div>
 
+{/* Navbar View in Desktop Mode. Navigation items are mapped over and buttons are generated */}
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  onClick={item.onClick}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -174,5 +175,4 @@ function Navbar() {
     </Disclosure>
   );
 }
-
 export default Navbar;

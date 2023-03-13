@@ -8,9 +8,9 @@ TIME WELL SPENT is an application designed to connect users to charities and non
 
 ## Table of Contents
 
-### Installation
-### Usage
-### Credits
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
 
 
 ## Installation
