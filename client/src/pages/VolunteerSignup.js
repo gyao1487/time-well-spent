@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+
+//!!! NEED TO REPLACE WITH TAILWIND///
+//Need to create SignUp Landing Page
+//Components:
+// Logo
+//Background image
+// Buttons for two options as well as images/icons?
+import React, { useState, useEffect } from 'react';
+
 
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_VOLUNTEER } from '../utils/mutations';
-
 
 const VolunteerSignup = () => {
   // set initial form state
@@ -14,7 +21,6 @@ const VolunteerSignup = () => {
 
   // new code
   const [createVolunteer, { error }] = useMutation(ADD_VOLUNTEER);
-  
   
 
   const handleChange = (event) => {

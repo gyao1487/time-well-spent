@@ -9,10 +9,11 @@ const navigation = [
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/login", current: false },
   { name: "Profile", href: "/profile", current: false },
+
+  { name: "Sign In", href: "/Signup", current: false },
   { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
-  {name: "Volunteer Sign In", href: "/VolunteerSignup",current: false },
-  {name: "Charity Sign In", href: "/CharitySignup",current: false},
   {name: "Login As Charity", href: "/LoginCharity",current:false}
+
 ];
 
 function classNames(...classes) {
