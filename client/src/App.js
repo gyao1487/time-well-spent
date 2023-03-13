@@ -6,7 +6,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 //This is placeholder for Volunteer signup - once we finish, signup will redirect
 //to the page where you can choose volunteer/charity signup
-import Signup from "./pages/Signup";
+import VolunteerSignup from "./pages/VolunteerSignup";
+import Signup from "./pages/Signup"
 import Navbar from "./components/Navbar";
 import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
@@ -52,10 +53,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
-          {/* <Route
-                path="/VolunteerSignup"
-                element={<VolunteerSignup />}
-              /> */}
+          <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
           <Route path="/charitySignup" element={<CharitySignup />} />
           {/* <Route
                 path="/success"
