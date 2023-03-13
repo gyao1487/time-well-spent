@@ -5,14 +5,14 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Find Opportunities", href: "/discover", current: false },
-  { name: "Find Volunteers", href: "/login", current: false },
-  { name: "Profile", href: "/profile", current: false },
+  { name: "Home", to: "/", current: true },
+  { name: "Find Opportunities", to: "/discover", current: false },
+  { name: "Find Volunteers", to: "/login", current: false },
+  { name: "Profile", to: "/profile", current: false },
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
-  { name: "Login", href: "/Login", current: false },
-  { name: "Sign Up", href: "/Signup", current: false }
+  { name: "Login", to: "/Login", current: false },
+  { name: "Sign Up", to: "/Signup", current: false }
 ];
 
 function classNames(...classes) {
@@ -155,8 +155,8 @@ function Navbar() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  onClick={item.onClick}
+                  as = {Link}
+                  to = {item.to}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
