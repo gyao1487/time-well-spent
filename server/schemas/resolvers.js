@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Volunteer, Charity } = require('../models');
+const { Volunteer, Charity, GoogleVolunteer} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -31,6 +31,15 @@ Mutation:{
         }
         const token = signToken(userv);
         return {token, userv} ;
+      },
+      createGoogleVolunteer:async function(parent, args ) {
+        const googlev = await GoogleVolunteer.create(args);
+    
+        if (!googlev) {
+            throw new AuthenticationError('You need to be logged in!');
+        }
+        const token = signToken(googlev);
+        return {token, googlev} ;
       },
 
       createCharity:async function(parent, args ) {

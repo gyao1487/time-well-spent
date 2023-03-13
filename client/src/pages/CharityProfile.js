@@ -14,6 +14,7 @@ import { QUERY_CHARITY } from '../utils/queries';
 
 function CharityProfile() {
   const { data } = useQuery(QUERY_CHARITY);
+
   let charity;
 
   if (data) {

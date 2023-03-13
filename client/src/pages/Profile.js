@@ -1,6 +1,8 @@
 import React from "react";
+import { useStateContext } from "../utils/GlobalState";
 
 const Profile = () => {
+  const state = useStateContext();
   return (
     <div>
       <section className="pt-16 bg-blueGray-50">
