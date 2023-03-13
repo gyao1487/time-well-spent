@@ -4,7 +4,7 @@
 // Logo
 //Background image
 // Buttons for two options as well as images/icons?
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
@@ -15,21 +15,11 @@ const Signup = () => {
   // set initial form state
   const [uservFormData, setVolunteerFormData] = useState({ username: '', email: '', password: '' });
   // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
 
   // new code
   const [createVolunteer, { error }] = useMutation(ADD_VOLUNTEER);
   
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     // event.preventDefault();
