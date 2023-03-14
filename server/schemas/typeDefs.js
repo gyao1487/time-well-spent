@@ -4,6 +4,7 @@ const typeDefs = gql`
 type Auth{
     token:String
     userv: Volunteer
+    googlev: GoogleVolunteer
     userc: Charity
 }
 type Volunteer{
@@ -38,9 +39,18 @@ input inputEvent {
     image:String
     quantity:String 
 }
+type GoogleVolunteer{
+    _id:ID
+    username:String!
+    email:String!
+    jti:String!
+    sub:String!
+    picture:String!
+}
 
 type Mutation{
     createVolunteer(username:String!, email:String!, password:String!, skills:String):Auth
+    createGoogleVolunteer(username:String!, email:String!, jti:String!, sub:String!, picture:String!):Auth
     createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
