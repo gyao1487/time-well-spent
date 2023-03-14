@@ -12,11 +12,11 @@ const navigation = [
 
 
 
-  {name: "Create Event", to:"/EventForm", current:false},
+  {name: "Create Event", herf:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: true },
-  { name: "Find Opportunities", to: "/discover", current: false },
-  { name: "Find Volunteers", to: "/LoginCharity", current: false },
-  { name: "Profile", to: "/profile", current: false },
+  { name: "Find Opportunities", herf: "/discover", current: false },
+  { name: "Find Volunteers", herf: "/LoginCharity", current: false },
+  { name: "Profile", herf: "/profile", current: false },
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
   { name: "Login", href: "/LoginVolunteer", current: false },
