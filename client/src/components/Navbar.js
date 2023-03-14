@@ -194,6 +194,11 @@ function Navbar() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                <div 
+                  className="text-sm text-white-700 p-5 cursor-pointer"
+                  onClick={()=> Auth.logout()}
+                  >Logout
+                </div>
               </div>
               }
             </div>
