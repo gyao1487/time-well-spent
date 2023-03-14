@@ -3,6 +3,7 @@ function EventCard() {
   return (
     <div className="flex flex-wrap">
       <div className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
+        {/* Need to change to Link to="/..." for production mode later */}
         <a href="/event/:id">
           <img
             className="rounded-t-lg"
