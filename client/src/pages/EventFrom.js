@@ -4,7 +4,7 @@ import { ADD_EVENT } from '../utils/mutations';
 import { parse } from 'graphql';
 
 
-function EventFrom(props) {
+function EventForm(props) {
   const [usercformState, setFormState] = useState({ title: '', description: '', price: '',image: '',quantity: '',});
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
@@ -96,4 +96,4 @@ function EventFrom(props) {
   );
 }
 
-export default EventFrom;
+export default EventForm;

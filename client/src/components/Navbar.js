@@ -9,10 +9,18 @@ import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
 
+  // { name: "Home", to: "/", current: false },
+  // { name: "Find Opportunities", to: "/discover", href: "/discover",current: false },
+  // { name: "Find Volunteers", to: "/login", href: "/login", current: false },
+  // { name: "Profile", to: "/profile", href: "/profile", current: false },
+  // // { name: "Login As Volunteer", to: "/LoginVolunteer", current: false },
+  // // { name: "Login As Charity", to: "/LoginCharity", current: false },
+  // { name: "Login", to: "/Login", href: "/Login", current: false },
+  // { name: "Sign Up", to: "/Signup", href: "/Signup", current: false }
 
-  {name: "Create Event", href:"/EventFrom", current:false},
 
-  { name: "Home", to: "/", current: true },
+  {name: "Create Event", to:"/EventForm", current:false},
+  { name: "Home", to: "/", href: "/",  current: true },
   { name: "Find Opportunities", to: "/discover", current: false },
   { name: "Find Volunteers", to: "/LoginCharity", current: false },
   { name: "Profile", to: "/profile", current: false },
@@ -72,9 +80,10 @@ function Navbar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
+                      
                       <a
                         key={item.name}
-                        href={item.href}
+                        // href={item.href}
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -83,7 +92,7 @@ function Navbar() {
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
-                        {item.name}
+                       <Link to={item.to}> {item.name}</Link>
                       </a>
                     ))}
                   </div>
@@ -129,41 +138,31 @@ function Navbar() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="/profile"
+                          <Link
+                            to ="/profile"
+                            //href=""
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
                             Your Profile
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
+                  
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#settings"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#signout"
+                          <Link
+                          // we still need to make a signout route?
+                            to="/signout"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
                             Sign out
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>
@@ -180,7 +179,7 @@ function Navbar() {
                 <Disclosure.Button
                   key={item.name}
                   //To view in development mode, comment href back in
-                  // href ={item.href}
+                  href ={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -192,7 +191,7 @@ function Navbar() {
 
 
 {/* To view in development mode (client view), comment out the Link Element */}
-                  <Link to={item.to}>{item.name}</Link>
+                  {/* <Link to={item.to}>{item.name}</Link> */}
                 </Disclosure.Button>
               ))}
             </div>
