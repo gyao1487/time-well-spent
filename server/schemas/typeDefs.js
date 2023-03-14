@@ -65,6 +65,7 @@ type Mutation{
     allVolunteers: [Volunteer]!
     charity(charityId: ID!): Charity
     allCharity: [Charity]!
+    googleVolunteer(email: String!): GoogleVolunteer
 }
 `
 module.exports=typeDefs
