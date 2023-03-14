@@ -83,7 +83,7 @@ function Navbar() {
                       
                       <a
                         key={item.name}
-                        // href={item.href}
+                        href={item.href}
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -92,7 +92,9 @@ function Navbar() {
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
-                       <Link to={item.to}> {item.name}</Link>
+                       {/* <Link to={item.to}>  */}
+                       {item.name}
+                       {/* </Link>  */}
                       </a>
                     ))}
                   </div>

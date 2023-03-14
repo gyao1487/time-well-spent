@@ -1,4 +1,7 @@
 //Will make this a map function once we have save data
+
+
+
 function EventCard() {
   return (
     <div className="flex flex-wrap">
