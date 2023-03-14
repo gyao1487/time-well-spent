@@ -9,16 +9,6 @@ import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
 
-  // { name: "Home", to: "/", current: false },
-  // { name: "Find Opportunities", to: "/discover", href: "/discover",current: false },
-  // { name: "Find Volunteers", to: "/login", href: "/login", current: false },
-  // { name: "Profile", to: "/profile", href: "/profile", current: false },
-  // // { name: "Login As Volunteer", to: "/LoginVolunteer", current: false },
-  // // { name: "Login As Charity", to: "/LoginCharity", current: false },
-  // { name: "Login", to: "/Login", href: "/Login", current: false },
-  // { name: "Sign Up", to: "/Signup", href: "/Signup", current: false }
-
-
   {name: "Create Event", to:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: true },
   { name: "Find Opportunities", to: "/discover", current: false },
@@ -37,14 +27,6 @@ function classNames(...classes) {
 
 function Navbar() {
   const state = useStateContext();
-  //setting userData state to default of localstorage if user has already signed up/in
-  const [userData, setUserData] = useState(localStorage.getItem('userData') 
-  ? JSON.parse(localStorage.getItem('userData')) 
-  : null);
-//if user isnt signed up, userData will store to localstorage and update state
-  useEffect(()=>{
-    setUserData(JSON.parse(localStorage.getItem('userData')))
-  },[localStorage])
 
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky top-0">
@@ -115,15 +97,15 @@ function Navbar() {
                   <div 
                     className="flex"
                   >
-                    {userData && 
+                    {state.googleInfo.name && 
                     <span
                       className="mr-2"
-                    >{userData?.username}</span>}
+                    >{state.googleInfo?.name}</span>}
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={userData?.picture}
+                        src={state.googleInfo?.picture}
                         alt=""
                       />
                     </Menu.Button>

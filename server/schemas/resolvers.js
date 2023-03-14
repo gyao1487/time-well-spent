@@ -24,6 +24,9 @@ Query:{
         return Event.find()
       },
     },
+      // googleVolunteer: async (parent, { email }) =>{
+      //   return GoogleVolunteer.findOne({email: email})
+      // },
 
 Mutation:{ 
      createVolunteer:async function(parent, args ) {
