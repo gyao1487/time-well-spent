@@ -56,6 +56,16 @@ export const QUERY_VOLUNTEER = gql`
   }
 `;
 
+export const QUERY_ALL_EVENTS = gql`
+  {
+    allEvents {
+      _id
+      title
+      description
+    }
+  }
+`;
+
 export const QUERY_CHARITY = gql`
   {
     charity {
