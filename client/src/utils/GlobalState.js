@@ -1,23 +1,29 @@
-import React, { createContext, useContext } from "react";
-import { useCharityReducer } from './reducers'
+import React, { createContext, useContext, useReducer } from "react";
+import reducer from './reducers'
 
-const StoreContext = createContext();
-const { Provider } = StoreContext;
+const StateContext = React.createContext();
+const DispatchContext = React.createContext();
 
-const CharityProvider = ({ value = [], ...props }) => {
-  const [state, dispatch] = useCharityReducer({
-    products: [],
-    cart: [],
-    cartOpen: false,
-    categories: [],
-    currentCategory: '',
+export function useStateContext(){
+  return useContext(StateContext);
+} 
+export function useDispatchContext(){
+  return useContext(DispatchContext);
+}
+
+const CharityProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    googleInfo: '',
   });
 
-  return <Provider value={[state, dispatch]} {...props} />;
+  return (
+    <StateContext.Provider value={state}>
+        <DispatchContext.Provider value={dispatch}>
+            {children}
+        </DispatchContext.Provider>
+    </StateContext.Provider>
+)
 };
 
-const useStoreContext = () => {
-  return useContext(StoreContext);
-};
 
-export { CharityProvider, useStoreContext };
+export { CharityProvider };

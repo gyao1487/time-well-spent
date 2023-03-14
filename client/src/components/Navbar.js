@@ -5,6 +5,8 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
 
+import { useStateContext } from "../utils/GlobalState";
+import { useState, useEffect } from "react";
 const navigation = [
   { name: "Home", to: "/", current: true },
   { name: "Find Opportunities", to: "/discover", current: false },
@@ -14,6 +16,7 @@ const navigation = [
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
   { name: "Login", to: "/LoginVolunteer", current: false },
   { name: "Sign Up", to: "/Signup", current: false }
+
 ];
 
 function classNames(...classes) {
@@ -21,6 +24,16 @@ function classNames(...classes) {
 }
 
 function Navbar() {
+  const state = useStateContext();
+  //setting userData state to default of localstorage if user has already signed up/in
+  const [userData, setUserData] = useState(localStorage.getItem('userData') 
+  ? JSON.parse(localStorage.getItem('userData')) 
+  : null);
+//if user isnt signed up, userData will store to localstorage and update state
+  useEffect(()=>{
+    setUserData(JSON.parse(localStorage.getItem('userData')))
+  },[localStorage])
+
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky top-0">
       {({ open }) => (
@@ -84,12 +97,18 @@ function Navbar() {
 
 {/* Profile dropdown - CONDITIONAL RENDERING - only when user is logged in*/}
                 <Menu as="div" className="relative ml-3">
-                  <div>
+                  <div 
+                    className="flex"
+                  >
+                    {userData && 
+                    <span
+                      className="mr-2"
+                    >{userData?.username}</span>}
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={userData?.picture}
                         alt=""
                       />
                     </Menu.Button>
@@ -156,8 +175,8 @@ function Navbar() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as = {Link}
-                  to = {item.to}
+                  //To view in development mode, comment href back in
+                  // href ={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -166,7 +185,10 @@ function Navbar() {
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-                  {item.name}
+
+
+{/* To view in development mode (client view), comment out the Link Element */}
+                  <Link to={item.to}>{item.name}</Link>
                 </Disclosure.Button>
               ))}
             </div>

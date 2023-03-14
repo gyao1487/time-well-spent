@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { CharityProvider } from './utils/GlobalState';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CharityProvider>
+      <App />
+    </CharityProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
