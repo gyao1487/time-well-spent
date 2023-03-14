@@ -55,7 +55,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/LoginVolunteer" element={<LoginVolunteer />} />
           <Route path="/LoginCharity" element={<LoginCharity />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/Signup" element={<Signup />} />
           
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
           <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
