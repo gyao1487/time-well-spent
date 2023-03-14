@@ -6,14 +6,14 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
 
 const navigation = [
-  { name: "Home", to: "/", current: true },
-  { name: "Find Opportunities", to: "/discover", current: false },
-  { name: "Find Volunteers", to: "/login", current: false },
-  { name: "Profile", to: "/profile", current: false },
-  // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
-  // { name: "Login As Charity", href: "/LoginCharity", current: false },
-  { name: "Login", to: "/Login", current: false },
-  { name: "Sign Up", to: "/Signup", current: false }
+  { name: "Home", to: "/", href: "/", current: false },
+  { name: "Find Opportunities", to: "/discover", href: "/discover",current: false },
+  { name: "Find Volunteers", to: "/login", href: "/login", current: false },
+  { name: "Profile", to: "/profile", href: "/profile", current: false },
+  // { name: "Login As Volunteer", to: "/LoginVolunteer", current: false },
+  // { name: "Login As Charity", to: "/LoginCharity", current: false },
+  { name: "Login", to: "/Login", href: "/Login", current: false },
+  { name: "Sign Up", to: "/Signup", href: "/Signup", current: false }
 ];
 
 function classNames(...classes) {
@@ -156,8 +156,8 @@ function Navbar() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as = {Link}
-                  to = {item.to}
+                  //To view in development mode, comment href back in
+                  // href ={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -166,7 +166,10 @@ function Navbar() {
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-                  {item.name}
+
+
+{/* To view in development mode (client view), comment out the Link Element */}
+                  <Link to={item.to}>{item.name}</Link>
                 </Disclosure.Button>
               ))}
             </div>
