@@ -10,6 +10,23 @@ import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 
 
+
+const navigation = [
+
+
+  {name: "Create Event", href:"/EventForm", current:false},
+  { name: "Home", to: "/", href: "/",  current: true },
+  { name: "Find Opportunities", href: "/discover", current: false },
+  { name: "Find Volunteers", href: "/LoginCharity", current: false },
+  { name: "Profile", href: "/profile", current: false },
+  // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
+  // { name: "Login As Charity", href: "/LoginCharity", current: false },
+];
+const loggedInNav =[
+  { name: "Login", href: "/LoginVolunteer", current: false},
+  { name: "Sign Up", href: "/Signup", current: false},
+]
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -18,29 +35,16 @@ function Navbar() {
   
   const state = useStateContext();
   const [userData, setUserData] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const navigation = [
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
-    {name: "Create Event", href:"/EventForm", current:false},
-    { name: "Home", to: "/", href: "/",  current: true },
-    { name: "Find Opportunities", href: "/discover", current: false },
-    { name: "Find Volunteers", href: "/LoginCharity", current: false },
-    { name: "Profile", href: "/profile", current: false },
-    // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
-    // { name: "Login As Charity", href: "/LoginCharity", current: false },
-    { name: "Login", href: "/LoginVolunteer", current: false},
-    { name: "Sign Up", href: "/Signup", current: false}
-  
-  ];
 // if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
     if(Auth.loggedIn()){
       setUserData(JSON.parse(localStorage.getItem('userData')))
-      setLoggedIn(true);
+      setIsLoggedIn(true);
     }
-  },[localStorage])
+  },[])
 
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky top-0">
@@ -76,7 +80,6 @@ function Navbar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      
                       <a
                         key={item.name}
                         href={item.href}
@@ -88,9 +91,22 @@ function Navbar() {
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
-                       {/* <Link to={item.to}>  */}
                        {item.name}
-                       {/* </Link>  */}
+                      </a>
+                    ))}
+                    {!isLoggedIn && loggedInNav.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                       {item.name}
                       </a>
                     ))}
                   </div>
@@ -177,7 +193,7 @@ function Navbar() {
               {navigation.map((item) => {
                 return <Disclosure.Button
                   key={item.name}
-                  href ={item.href}
+                  href={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -186,8 +202,22 @@ function Navbar() {
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-                </Disclosure.Button>       
-})}
+                </Disclosure.Button>
+              })}
+              {!isLoggedIn && loggedInNav.map((item)=>{
+                return <Disclosure.Button
+                  key={item.name}
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
+                  )}
+                  aria-current={item.current ? "page" : undefined}
+                >
+                </Disclosure.Button>
+              })}
             </div>
           </Disclosure.Panel>
         </>
