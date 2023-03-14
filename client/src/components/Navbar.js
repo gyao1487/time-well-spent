@@ -8,6 +8,10 @@ import {Link} from "react-router-dom";
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
+
+
+  {name: "Create Event", href:"/EventFrom", current:false}
+
   { name: "Home", to: "/", current: true },
   { name: "Find Opportunities", to: "/discover", current: false },
   { name: "Find Volunteers", to: "/LoginCharity", current: false },

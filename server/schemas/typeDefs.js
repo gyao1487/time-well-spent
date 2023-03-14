@@ -60,6 +60,7 @@ type Mutation{
   
 
   type Query{
+    allEvents:[Event]
     volunteer(volunteerId: ID!): Volunteer
     allVolunteers: [Volunteer]!
     charity(charityId: ID!): Charity
