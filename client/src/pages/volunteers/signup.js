@@ -60,7 +60,9 @@ export default function GoogleSignUp() {
   };
 
      useEffect(()=>{
-
+        if(Auth.loggedIn()){
+          return;
+        }
         const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
         const options = {
             client_id: clientID, 
@@ -108,9 +110,9 @@ export default function GoogleSignUp() {
                 const responsePayload = decodeJwtResponse(response.credential);
                 dispatch({type: ACTIONS.GOOGLE_INFO, payload: responsePayload})
                 console.log(responsePayload);
-                // const token = data.createGoogleVolunteer.token;
+                localStorage.setItem('userData', JSON.stringify({username, email, picture}));
                 Auth.login(data.createGoogleVolunteer.token);
-                // localStorage.setItem('userData', JSON.stringify({username, email, picture, token}));
+                
             }
         });
      },[])   

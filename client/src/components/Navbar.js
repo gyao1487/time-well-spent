@@ -4,10 +4,21 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
+import Auth from '../utils/auth'
 
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
+
+  // { name: "Home", to: "/", current: false },
+  // { name: "Find Opportunities", to: "/discover", href: "/discover",current: false },
+  // { name: "Find Volunteers", to: "/login", href: "/login", current: false },
+  // { name: "Profile", to: "/profile", href: "/profile", current: false },
+  // // { name: "Login As Volunteer", to: "/LoginVolunteer", current: false },
+  // // { name: "Login As Charity", to: "/LoginCharity", current: false },
+  // { name: "Login", to: "/Login", href: "/Login", current: false },
+  // { name: "Sign Up", to: "/Signup", href: "/Signup", current: false }
+
 
   {name: "Create Event", to:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: true },
@@ -27,7 +38,16 @@ function classNames(...classes) {
 
 function Navbar() {
   const state = useStateContext();
-
+  const [userData, setUserData] = useState(null);
+// if user isnt signed up, userData will store to localstorage and update state
+  useEffect(()=>{
+    if(Auth.loggedIn()){
+      setUserData(JSON.parse(localStorage.getItem('userData')))
+    }
+  },[localStorage])
+useEffect(()=>{
+  console.log(state.googleInfo);
+},[])
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky top-0">
       {({ open }) => (
@@ -97,15 +117,15 @@ function Navbar() {
                   <div 
                     className="flex"
                   >
-                    {state.googleInfo.name && 
+                    {userData?.name && 
                     <span
                       className="mr-2"
-                    >{state.googleInfo?.name}</span>}
+                    >{userData?.name}</span>}
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={state.googleInfo?.picture}
+                        src={userData?.picture}
                         alt=""
                       />
                     </Menu.Button>

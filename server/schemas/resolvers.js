@@ -24,7 +24,7 @@ Query:{
         return Event.find()
       },
     },
-      // googleVolunteer: async (parent, { email }) =>{
+      // findGoogleVolunteer: async (parent, { email }) =>{
       //   return GoogleVolunteer.findOne({email: email})
       // },
 
