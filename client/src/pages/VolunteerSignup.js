@@ -6,40 +6,32 @@
 //Background image
 // Buttons for two options as well as images/icons?
 import React, { useState, useEffect } from 'react';
-
-
+import googleOneTap from 'google-one-tap'
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
-import { ADD_VOLUNTEER } from '../utils/mutations';
+import { ADD_VOLUNTEER, ADD_GOOGLE_VOLUNTEER } from '../utils/mutations';
+import { useStateContext, useDispatchContext } from "../utils/GlobalState";
+import ACTIONS from '../utils/actions'
 
 const VolunteerSignup = () => {
-  // set initial form state
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
+  const [createGoogleVolunteer] = useMutation(ADD_GOOGLE_VOLUNTEER);
   const [uservFormData, setVolunteerFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
- 
-  // set state for alert
-
-  // new code
   const [createVolunteer, { error }] = useMutation(ADD_VOLUNTEER);
   
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // event.preventDefault();
+   
     setVolunteerFormData({ ...uservFormData, [name]: value });
-  };
-
-  const handleFormSubmit = async (event) => {
-    // event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
+    };
+    const handleFormSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      // event.preventDefault();
       event.stopPropagation();
     }
 
-    // new code
     try {
       const { data } = await createVolunteer({
         variables: { ...uservFormData },
@@ -56,6 +48,66 @@ const VolunteerSignup = () => {
       password: '',
     });
   };
+
+
+  useEffect(()=>{
+    if(Auth.loggedIn()){
+      return;
+    }
+    const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
+    const options = {
+        client_id: clientID, 
+        auto_select: false, 
+        cancel_on_tap_outside: false, 
+        context: 'signup',
+    };
+    function decodeJwtResponse(token) {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+      }
+
+    googleOneTap(options, async (response) => {
+        const res = await fetch('/api/google-signup',{
+            method: 'POST',
+            body: JSON.stringify({
+                token: response.credential
+            }),
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+        });
+        if(res.ok){
+            const userData = await res.json();
+            console.log(userData);
+            const { name: username, email, picture, sub, jti } = userData
+            
+            const { data, errors } = await createGoogleVolunteer({
+                variables: {
+                    username: username,
+                    email: email,
+                    jti: jti,
+                    sub: sub,
+                    picture: picture,
+                }
+            })
+            if(errors){
+                console.log(errors);
+            }
+            const responsePayload = decodeJwtResponse(response.credential);
+            dispatch({type: ACTIONS.GOOGLE_INFO, payload: responsePayload})
+            console.log(responsePayload);
+            localStorage.setItem('userData', JSON.stringify({username, email, picture}));
+            Auth.login(data.createGoogleVolunteer.token);
+            
+        }
+    });
+ },[])  
+
   return (
     <div className="container my-1">
       <h1>Sign Up</h1>

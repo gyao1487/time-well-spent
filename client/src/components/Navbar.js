@@ -10,25 +10,16 @@ import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
 
-  // { name: "Home", to: "/", current: false },
-  // { name: "Find Opportunities", to: "/discover", href: "/discover",current: false },
-  // { name: "Find Volunteers", to: "/login", href: "/login", current: false },
-  // { name: "Profile", to: "/profile", href: "/profile", current: false },
-  // // { name: "Login As Volunteer", to: "/LoginVolunteer", current: false },
-  // // { name: "Login As Charity", to: "/LoginCharity", current: false },
-  // { name: "Login", to: "/Login", href: "/Login", current: false },
-  // { name: "Sign Up", to: "/Signup", href: "/Signup", current: false }
 
-
-  {name: "Create Event", to:"/EventForm", current:false},
+  {name: "Create Event", href:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: true },
-  { name: "Find Opportunities", to: "/discover", current: false },
-  { name: "Find Volunteers", to: "/LoginCharity", current: false },
-  { name: "Profile", to: "/profile", current: false },
+  { name: "Find Opportunities", href: "/discover", current: false },
+  { name: "Find Volunteers", href: "/LoginCharity", current: false },
+  { name: "Profile", href: "/profile", current: false },
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
-  { name: "Login", to: "/LoginVolunteer", current: false },
-  { name: "Sign Up", to: "/Signup", current: false }
+  { name: "Login", href: "/LoginVolunteer", current: false },
+  { name: "Sign Up", href: "/Signup", current: false }
 
 ];
 
