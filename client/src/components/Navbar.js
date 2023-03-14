@@ -4,22 +4,23 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
+import Auth from '../utils/auth'
 
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
 
 
-  {name: "Create Event", to:"/EventFrom", current:false},
 
-  { name: "Home", to: "/", current: true },
+  {name: "Create Event", to:"/EventForm", current:false},
+  { name: "Home", to: "/", href: "/",  current: true },
   { name: "Find Opportunities", to: "/discover", current: false },
   { name: "Find Volunteers", to: "/LoginCharity", current: false },
   { name: "Profile", to: "/profile", current: false },
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
-  { name: "Login", to: "/LoginVolunteer", current: false },
-  { name: "Sign Up", to: "/Signup", current: false }
+  { name: "Login", href: "/LoginVolunteer", current: false },
+  { name: "Sign Up", href: "/Signup", current: false }
 
 ];
 
@@ -29,15 +30,16 @@ function classNames(...classes) {
 
 function Navbar() {
   const state = useStateContext();
-  //setting userData state to default of localstorage if user has already signed up/in
-  const [userData, setUserData] = useState(localStorage.getItem('userData') 
-  ? JSON.parse(localStorage.getItem('userData')) 
-  : null);
-//if user isnt signed up, userData will store to localstorage and update state
+  const [userData, setUserData] = useState(null);
+// if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
-    setUserData(JSON.parse(localStorage.getItem('userData')))
+    if(Auth.loggedIn()){
+      setUserData(JSON.parse(localStorage.getItem('userData')))
+    }
   },[localStorage])
-
+useEffect(()=>{
+  console.log(state.googleInfo);
+},[])
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky top-0">
       {({ open }) => (
@@ -104,10 +106,10 @@ function Navbar() {
                   <div 
                     className="flex"
                   >
-                    {userData && 
+                    {userData?.name && 
                     <span
                       className="mr-2"
-                    >{userData?.username}</span>}
+                    >{userData?.name}</span>}
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
