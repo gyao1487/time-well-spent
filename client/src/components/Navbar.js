@@ -8,11 +8,11 @@ import {Link} from "react-router-dom";
 const navigation = [
   { name: "Home", to: "/", current: true },
   { name: "Find Opportunities", to: "/discover", current: false },
-  { name: "Find Volunteers", to: "/login", current: false },
+  { name: "Find Volunteers", to: "/LoginCharity", current: false },
   { name: "Profile", to: "/profile", current: false },
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
-  { name: "Login", to: "/Login", current: false },
+  { name: "Login", to: "/LoginVolunteer", current: false },
   { name: "Sign Up", to: "/Signup", current: false }
 ];
 
