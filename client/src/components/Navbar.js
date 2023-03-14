@@ -8,9 +8,6 @@ import Auth from '../utils/auth'
 
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
-const navigation = [
-
-
 
   {name: "Create Event", herf:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: true },
@@ -24,22 +21,39 @@ const navigation = [
 
 ];
 
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 function Navbar() {
+  
   const state = useStateContext();
   const [userData, setUserData] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const navigation = [
+
+
+    {name: "Create Event", href:"/EventForm", current:false},
+    { name: "Home", to: "/", href: "/",  current: true },
+    { name: "Find Opportunities", href: "/discover", current: false },
+    { name: "Find Volunteers", href: "/LoginCharity", current: false },
+    { name: "Profile", href: "/profile", current: false },
+    // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
+    // { name: "Login As Charity", href: "/LoginCharity", current: false },
+    { name: "Login", href: "/LoginVolunteer", current: false},
+    { name: "Sign Up", href: "/Signup", current: false}
+  
+  ];
 // if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
     if(Auth.loggedIn()){
       setUserData(JSON.parse(localStorage.getItem('userData')))
+      setLoggedIn(true);
     }
   },[localStorage])
-useEffect(()=>{
-  console.log(state.googleInfo);
-},[])
+
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky top-0">
       {({ open }) => (
@@ -91,16 +105,77 @@ useEffect(()=>{
                   </div>
                 </div>
               </div>
+              {Auth.loggedIn() && 
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <button
+                    type="button"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="sr-only">View notifications</span>
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
 
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                  <Menu as="div" className="relative ml-3">
+                    <div
+                      className="flex"
+                    >
+                      {userData?.name &&
+                        <span
+                          className="mr-2"
+                        >{userData?.name}</span>}
+                      <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span className="sr-only">Open user menu</span>
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src={userData?.picture}
+                          alt=""
+                        />
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/profile"
+                              //href=""
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Your Profile
+                            </Link>
+                          )}
+                        </Menu.Item>
 
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              // we still need to make a signout route?
+                              to="/signout"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Sign out
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
+              }
 {/* Profile dropdown - CONDITIONAL RENDERING - only when user is logged in*/}
                 <Menu as="div" className="relative ml-3">
                   <div 
@@ -174,15 +249,13 @@ useEffect(()=>{
               </div>
             </div>
           </div>
-
 {/* Navbar View in Desktop Mode. Navigation items are mapped over and buttons are generated */}
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
+              {navigation.map((item) => {
+                return <Disclosure.Button
                   key={item.name}
-                  //To view in development mode, comment href back in
-                  // href ={item.href}
+                  href ={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -191,8 +264,8 @@ useEffect(()=>{
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-
-
+                </Disclosure.Button>       
+})}
 {/* To view in development mode (client view), comment out the Link Element */}
                   <Link to={item.to}>{item.name}</Link>
                 </Disclosure.Button>
