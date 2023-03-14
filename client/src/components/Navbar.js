@@ -8,15 +8,19 @@ import {Link} from "react-router-dom";
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Find Opportunities", href: "/discover", current: false },
-  { name: "Find Volunteers", href: "/login", current: false },
-  { name: "Profile", href: "/profile", current: false },
+
+
+  {name: "Create Event", href:"/EventFrom", current:false}
+
+  { name: "Home", to: "/", current: true },
+  { name: "Find Opportunities", to: "/discover", current: false },
+  { name: "Find Volunteers", to: "/LoginCharity", current: false },
+  { name: "Profile", to: "/profile", current: false },
   // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
   // { name: "Login As Charity", href: "/LoginCharity", current: false },
-  { name: "Login", href: "/Login", current: false },
-  { name: "Sign Up", href: "/Signup", current: false }
-  {name: "Create Event", href:"/EventFrom", current:false}
+  { name: "Login", to: "/LoginVolunteer", current: false },
+  { name: "Sign Up", to: "/Signup", current: false }
+
 ];
 
 function classNames(...classes) {

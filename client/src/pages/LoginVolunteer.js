@@ -64,6 +64,7 @@ function LoginVolunteer(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Link to="/LoginCharity">← Charity Login</Link>
     </div>
   );
 }
