@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 const navigation = [
 
 
-  {name: "Create Event", href:"/EventFrom", current:false}
+  {name: "Create Event", to:"/EventFrom", current:false},
 
   { name: "Home", to: "/", current: true },
   { name: "Find Opportunities", to: "/discover", current: false },

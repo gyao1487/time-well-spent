@@ -25,7 +25,7 @@ import { setContext } from "@apollo/client/link/context";
 import GoogleSignUp from "./pages/volunteers/signup";
 import LoginVolunteer from "./pages/LoginVolunteer";
 import LoginCharity from "./pages/LoginCharity";
-import EventFrom from "./pages/EventFrom";
+import EventFrom from "./pages/EventForm";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
