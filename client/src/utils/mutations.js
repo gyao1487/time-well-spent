@@ -26,9 +26,8 @@ export const LOGIN_CHARITY = gql`
 
 export const ADD_EVENT = gql`
   mutation addEvent($savedEvent: inputEvent!) {
-    saveBook(savedEvent: $savedEvent) {
+    addEvent(savedEvent: $savedEvent) {
       username
-      email
       savedEvents {
         title
         description
@@ -49,6 +48,21 @@ mutation createVolunteer($username: String!, $password: String!, $email: String!
       _id
       username
       email 
+    }
+    token
+  }
+}
+`;
+export const ADD_GOOGLE_VOLUNTEER = gql`
+mutation createVolunteer($username: String!, $email: String!, $sub: String!, $jti: String!, $picture: String!) {
+  createGoogleVolunteer(username: $username, email: $email, sub: $sub, jti: $jti, picture: $picture) {
+    
+    googlev {
+      username
+      email
+      jti
+      sub
+      picture
     }
     token
   }

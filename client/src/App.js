@@ -12,7 +12,6 @@ import Navbar from "./components/Navbar";
 import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
-import Login from "./pages/Login";
 
 import Footer from "./components/Footer";
 
@@ -26,6 +25,7 @@ import { setContext } from "@apollo/client/link/context";
 import GoogleSignUp from "./pages/volunteers/signup";
 import LoginVolunteer from "./pages/LoginVolunteer";
 import LoginCharity from "./pages/LoginCharity";
+import EventFrom from "./pages/EventFrom";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -60,6 +60,7 @@ function App() {
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
           <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
           <Route path="/charitySignup" element={<CharitySignup />} />
+          <Route path="/eventfrom" element={<EventFrom />} />
 
           {/* <Route
                 path="/success"
@@ -67,7 +68,6 @@ function App() {
               /> */}
           <Route path="/discover" element={<Discover />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/Login" element={<Login />} />
           {/* <Route
                 path="/VolunteerProfile/:id"
                 element={<VolunteerProfile />}
