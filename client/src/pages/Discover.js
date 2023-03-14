@@ -1,18 +1,16 @@
 import React from "react";
 import EventCard from "../components/EventCard";
-
-//Components:
-//Discover Header
-//Event Cards
-//Filter Popup
-//Search Bar
-//Search Fields
+import { useQuery } from "@apollo/client";
+//Will have to use queries with specific parameters later
+import { QUERY_ALL_EVENTS } from "../utils/queries";
 
 //Logic needed:
 //Search function - populate cards with events that fit the parameters
 
 const Discover = () => {
   // query for all events
+  const { loading, data } = useQuery(QUERY_ALL_EVENTS);
+  const events = data?.events || [];
 
   // if loading, return something else
 
@@ -56,11 +54,21 @@ const Discover = () => {
           </div>
         </div>
 
-        <EventCard />
-
+        {/* ---------------Event Cards----------------- */}
+        {/* If loading, show loading div. If done loading, show event cards
+       !!!!!!!!!!!!!!!  Need to create better loading element later */}
+        <div className="flex flex-wrap">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              {events.map((event) => (
+                <EventCard event={event} key={event._id} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-
-      <EventCard />
     </div>
   );
 };
