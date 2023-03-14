@@ -12,15 +12,11 @@ import { useState, useEffect } from "react";
 
 
 const navigation = [
-
-
   {name: "Create Event", href:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: true },
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/LoginCharity", current: false },
   { name: "Profile", href: "/profile", current: false },
-  // { name: "Login As Volunteer", href: "/LoginVolunteer", current: false },
-  // { name: "Login As Charity", href: "/LoginCharity", current: false },
 ];
 const loggedInNav =[
   { name: "Login", href: "/LoginVolunteer", current: false},
@@ -79,7 +75,7 @@ function Navbar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
+                    {isLoggedIn ? navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -93,7 +89,22 @@ function Navbar() {
                       >
                        {item.name}
                       </a>
-                    ))}
+                    )) : navigation.slice(0,4).map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                       {item.name}
+                      </a>
+                    ))
+                    }
                     {!isLoggedIn && loggedInNav.map((item) => (
                       <a
                         key={item.name}
