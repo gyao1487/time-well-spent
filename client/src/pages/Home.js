@@ -9,41 +9,41 @@ import EventCard from "../components/EventCard";
 const Home = () => {
   return (
     <div>
-      <div class="relative isolate px-6 pt-14 lg:px-8">
-        <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div class="text-center">
+      <div className="relative isolate px-6 pt-14 lg:px-8">
+        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div className="text-center">
             
-            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Time Well Spent
             </h1>
           
-            <p class="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600">
               "Time well spent adds to a life well lived." 
             </p>
-            <p class="mt-2 text-lg leading-8 text-gray-600">
+            <p className="mt-2 text-lg leading-8 text-gray-600">
             We match volunteers to non-profits and charities to make sure that your time is well spent on helping others. 
             </p>
-            <div class="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/signup"
-                class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get started
               </a>
-              <a href="/discover" class="text-sm font-semibold leading-6 text-gray-900">
+              <a href="/discover" className="text-sm font-semibold leading-6 text-gray-900">
                 Find Opportunities <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
         </div>
-        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+        <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
           <svg
-            class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
+            className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
             viewBox="0 0 1155 678"
           >
             <path
               fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
-              fill-opacity=".3"
+              fillOpacity=".3"
               d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
             />
             <defs>
@@ -55,8 +55,8 @@ const Home = () => {
                 y2="474.645"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#9089FC" />
-                <stop offset="1" stop-color="#FF80B5" />
+                <stop stopColor="#9089FC" />
+                <stop offset="1" stopColor="#FF80B5" />
               </linearGradient>
             </defs>
           </svg>
@@ -81,9 +81,9 @@ const Home = () => {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
@@ -100,9 +100,9 @@ const Home = () => {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
@@ -119,9 +119,9 @@ const Home = () => {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
