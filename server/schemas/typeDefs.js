@@ -64,12 +64,12 @@ type Mutation{
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
     addEvent(savedEvent:inputEvent):Event
-    //addEvent(savedEvent:inputEvent):Charity
+
     addVolunteerEvent(savedEvent:inputEvent):Volunteer
     removeVolunteerEvent(title:String!):Volunteer
     removeEvent(title:String!):Charity
 }
-  
+
 
   type Query{
     allEvents:[Event]
@@ -81,3 +81,6 @@ type Mutation{
 }
 `
 module.exports=typeDefs
+
+// addEvent(savedEvent:inputEvent):Charity
+//replqced with addEvent(savedEvent:inputEvent):Event
