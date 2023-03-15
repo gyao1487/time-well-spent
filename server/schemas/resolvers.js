@@ -90,7 +90,9 @@ Mutation:{
       
       addEvent:async function(parent,args,context ) {
         console.log(args)
+        console.log(context)
         console.log(context.user)
+        console.log(context.user._id)
         try {
           const newEvent = await Event.create(args.savedEvent);
 
@@ -101,7 +103,7 @@ Mutation:{
             { new: true, runValidators: true }
           );
           console.log(updatedCharity)
-          return updatedCharity;
+          return (updatedCharity, updatedEvent)
         } catch (err) {
           console.log(err);
           throw new AuthenticationError('You need to be logged in!');

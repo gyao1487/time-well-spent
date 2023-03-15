@@ -41,13 +41,14 @@ export const ADD_EVENT = gql`
 `;
 
 export const ADD_VOLUNTEER = gql`
-mutation createVolunteer($username: String!, $password: String!, $email: String!) {
-  createVolunteer(username: $username, password: $password, email: $email) {
+mutation createVolunteer($username: String!, $password: String!, $email: String!, $fullName: String!) {
+  createVolunteer(username: $username, password: $password, email: $email, fullName: $fullName) {
     
     userv {
       _id
       username
       email 
+      fullName
     }
     token
   }
