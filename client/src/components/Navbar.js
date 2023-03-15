@@ -13,6 +13,7 @@ import { QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
 
 
 const navigation = [
+  //This create event field needs to be conditionally rendered IF the user logged in is userc
   {name: "Create Event",to: '/EventForm', href:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/",  current: false },
   { name: "Find Opportunities", href: "/discover", current: false },
@@ -56,7 +57,7 @@ function Navbar() {
   },[data])
 
   return (
-    <Disclosure as="nav" className="bg-gray-700 sticky top-0">
+    <Disclosure as="nav" className="bg-gray-700 sticky absolute top-0">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

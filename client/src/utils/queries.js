@@ -14,6 +14,11 @@ export const QUERY_ALL_EVENTS = gql`
       _id
       title
       description
+      image
+      title
+      savedCharity
+      date
+      address
     }
   }
 `;

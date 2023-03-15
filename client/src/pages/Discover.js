@@ -14,8 +14,9 @@ const Discover = () => {
 
   // if loading, return something else]
   console.log(events)
+  console.log(data)
   return (
-    <div>
+    <div className="flex ">
       <h1 className="text-center text-gray-900 font-bold text-2xl tracking-tight m-4 dark:text-white">
         Discover New Opportunities
       </h1>

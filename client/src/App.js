@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import VolunteerSignup from "./pages/VolunteerSignup";
-import CharitySignup from "./pages/CharitySignup"
+import CharitySignup from "./pages/CharitySignup";
 
 import Navbar from "./components/Navbar";
 
@@ -49,28 +49,30 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Navbar />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/LoginVolunteer" element={<LoginVolunteer />} />
-          <Route path="/LoginCharity" element={<LoginCharity />} />
-          <Route path="/Signup" element={<Signup />} />
-          
-          <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
-          <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
-          <Route path="/charitySignup" element={<CharitySignup />} />
+      <header className="sticky top-0 z-50">
+        <Navbar />
+      </header>
+      <main>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/LoginVolunteer" element={<LoginVolunteer />} />
+            <Route path="/LoginCharity" element={<LoginCharity />} />
+            <Route path="/Signup" element={<Signup />} />
 
-          <Route path="/EventForm" element={<EventForm />} />
+            <Route path="/volunteers/signup" element={<GoogleSignUp />} />
+            <Route path="/VolunteerSignup" element={<VolunteerSignup />} />
+            <Route path="/charitySignup" element={<CharitySignup />} />
 
+            <Route path="/EventForm" element={<EventForm />} />
 
-          {/* <Route
+            {/* <Route
                 path="/success"
                 element={<Success />}
               /> */}
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/profile" element={<Profile />} />
-          {/* <Route
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route
                 path="/VolunteerProfile/:id"
                 element={<VolunteerProfile />}
               />
@@ -78,14 +80,13 @@ function App() {
                 path="/CharityProfile/:id"
                 element={<CharityProfile />}
               /> */}
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </Router>
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </Router>
+      </main>
       <Footer />
     </ApolloProvider>
   );
 }
 
-
 export default App;
-
