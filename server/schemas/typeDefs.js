@@ -28,18 +28,20 @@ type Event{
     title:String!
     description:String!
     image:String
-    date:Date!
+    date:String!
     address:String!
-    savedCharity: Charity
+    savedCharity: ID
     
 }
 input inputEvent {
     title:String!
     description:String!
-    price:Int!
     image:String
-    quantity:String 
+    date:String!
+    address:String!
+    savedCharity: ID
 }
+
 type GoogleVolunteer{
     _id:ID
     username:String!

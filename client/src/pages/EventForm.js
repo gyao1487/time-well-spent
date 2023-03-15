@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
+
 import { ADD_EVENT } from "../utils/mutations";
 import { parse } from "graphql";
 
@@ -7,9 +8,9 @@ function EventForm(props) {
   const [usercformState, setFormState] = useState({
     title: "",
     description: "",
-    price: "",
     image: "",
-    quantity: "",
+    date: "",
+    address: ""
   });
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
@@ -24,7 +25,9 @@ function EventForm(props) {
             image: usercformState.image,
             date: usercformState.date,
             address: usercformState.address,
-            savedCharity: context.user._id,
+            // savedCharity: {
+            //   _id:
+            // }
           },
         },
       });
@@ -107,6 +110,7 @@ function EventForm(props) {
       </form>
     </div>
   );
+  console.log(error)
 }
 
 export default EventForm;

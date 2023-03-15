@@ -60,7 +60,7 @@ function App() {
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
           <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
           <Route path="/charitySignup" element={<CharitySignup />} />
-          <Route path="/eventfrom" element={<EventFrom />} />
+          <Route path="/eventform" element={<EventFrom />} />
 
           {/* <Route
                 path="/success"
