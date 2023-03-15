@@ -30,7 +30,7 @@ type Event{
     image:String
     date:String!
     address:String!
-    savedCharity: ID
+    savedCharity: String!
     
 }
 input inputEvent {
@@ -39,7 +39,7 @@ input inputEvent {
     image:String
     date:String!
     address:String!
-    savedCharity: ID
+    savedCharity: String!
 }
 
 type GoogleVolunteer{

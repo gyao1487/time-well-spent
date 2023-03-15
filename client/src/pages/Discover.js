@@ -10,10 +10,10 @@ import { QUERY_ALL_EVENTS } from "../utils/queries";
 const Discover = () => {
   // query for all events
   const { loading, data } = useQuery(QUERY_ALL_EVENTS);
-  const events = data?.events || [];
+  const events = data?.allEvents || [];
 
-  // if loading, return something else
-
+  // if loading, return something else]
+  console.log(events)
   return (
     <div>
       <h1 className="text-center text-gray-900 font-bold text-2xl tracking-tight m-4 dark:text-white">

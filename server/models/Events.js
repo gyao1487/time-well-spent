@@ -24,8 +24,10 @@ const eventSchema = new Schema({
   },
 
   savedCharity: {
-    type: Schema.Types.ObjectId,
-    ref: "Charity"
+    // type: Schema.Types.ObjectId,
+    type: String,
+    required: true
+    // ref: "Charity"
   },
   
 });

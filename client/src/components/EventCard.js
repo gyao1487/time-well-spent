@@ -22,7 +22,7 @@ function EventCard({event}) {
             </h5>
           </a>
           <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
-            <a href="/charity/:id</p>">{event.charity}</a>
+            <a href="/charity/:id</p>">{event.savedCharity}</a>
           </p>
 
           <div className="flex space-x-1 mb-2">
@@ -40,7 +40,7 @@ function EventCard({event}) {
                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>{" "}
-            <p className="font-normal text-gray-400 ">{event.time} on {event.date}</p>
+            <p className="font-normal text-gray-400 ">{event.date}</p>
           </div>
 
           <div className="flex space-x-1">
