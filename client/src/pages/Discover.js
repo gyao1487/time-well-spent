@@ -1,7 +1,6 @@
 import React from "react";
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
-//Will have to use queries with specific parameters later
 import { QUERY_ALL_EVENTS } from "../utils/queries";
 
 //Logic needed:
@@ -54,8 +53,8 @@ const Discover = () => {
             </button>
           </div>
         </div>
-
-        {/* ---------------Event Cards----------------- */}
+      </div>
+   {/* ---------------Event Cards----------------- */}
         {/* If loading, show loading div. If done loading, show event cards
        !!!!!!!!!!!!!!!  Need to create better loading element later */}
         <div className="flex flex-wrap">
@@ -69,7 +68,6 @@ const Discover = () => {
             </div>
           )}
         </div>
-      </div>
     </div>
   );
 };
