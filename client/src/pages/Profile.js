@@ -1,15 +1,26 @@
 import React from "react";
-import { useStateContext } from "../utils/GlobalState";
+import { useStateContext, useDispatchContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 import Auth from '../utils/auth'
+import { useQuery } from "@apollo/client";
+import { QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
 
 const Profile = () => {
   const state = useStateContext();
+  const dispatch = useDispatchContext();
   const [userData, setUserData] = useState(null);
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem('ID'))?
+  JSON.parse(localStorage.getItem('ID')): null) 
+  const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
+    variables: {
+      _id: userID
+    },
+    skip: !userID
+  })
 
   useEffect(()=>{
-    setUserData(JSON.parse(localStorage.getItem('userData')))
-  },[])
+    setUserData(data?.googleVolunteer)
+  },[data])
   return (
     <div>
       <section className="pt-16 bg-blueGray-50">

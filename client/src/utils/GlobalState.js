@@ -13,7 +13,7 @@ export function useDispatchContext(){
 
 const CharityProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    googleInfo: '',
+    userInfo: '',
   });
 
   return (

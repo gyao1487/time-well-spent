@@ -77,7 +77,7 @@ type Mutation{
     allVolunteers: [Volunteer]!
     charity(charityId: ID!): Charity
     allCharity: [Charity]!
-    googleVolunteer(email: String!): GoogleVolunteer
+    googleVolunteer(_id: ID!): GoogleVolunteer
 }
 `
 module.exports=typeDefs
