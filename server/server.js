@@ -4,10 +4,12 @@ const path = require('path');
 const {authMiddleware} = require('./utils/auth')
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-// const session = require('express-session');
-// const {v4} = require('uuid')
 const dotenv = require('dotenv').config();
 const apiRoutes = require('./routes/api/index');
+
+// Stripe
+const cors = require("cors")
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -29,6 +31,31 @@ app.get('/*', (req, res) => {
 });
 
 app.use('/', apiRoutes);
+
+// Stripe integration
+app.post("/payment", cors(), async (req, res) => {
+	let { amount, id } = req.body
+	try {
+		const payment = await stripe.paymentIntents.create({
+			amount,
+			currency: "USD",
+			description: "Donation",
+			payment_method: id,
+			confirm: true
+		})
+		console.log("Payment", payment)
+		res.json({
+			message: "Payment successful",
+			success: true
+		})
+	} catch (error) {
+		console.log("Error", error)
+		res.json({
+			message: "Payment failed",
+			success: false
+		})
+	}
+})
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {

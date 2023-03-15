@@ -23,6 +23,7 @@ Once the github has been cloned, the following technologies are required using '
 - graphql
 - daisyui
 - Google onetap
+- Stripe
 
 Other technologies required are Sequelize, Node.js and Insomnia.  
 
