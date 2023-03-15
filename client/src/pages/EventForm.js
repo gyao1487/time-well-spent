@@ -25,6 +25,7 @@ function EventForm(props) {
             image: usercformState.image,
             date: usercformState.date,
             address: usercformState.address,
+            savedCharity:usercformState.charity
             // savedCharity: {
             //   _id:
             // }
@@ -82,9 +83,9 @@ function EventForm(props) {
           <label htmlFor="address">Address</label>
           <input
             placeholder="Enter address"
-            name="date"
+            name="address"
             type="text"
-            id="date"
+            id="address"
             onChange={handleChange}
           />
         </div>
@@ -95,6 +96,16 @@ function EventForm(props) {
             name="image"
             type="text"
             id="image"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="image">Name of your charity:</label>
+          <input
+            placeholder="Type Charity Name Here"
+            name="charity"
+            type="text"
+            id="charity"
             onChange={handleChange}
           />
         </div>

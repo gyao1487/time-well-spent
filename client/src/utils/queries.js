@@ -17,10 +17,7 @@ export const QUERY_ALL_EVENTS = gql`
       image
       date
       address
-      savedCharity{
-        _id
-        name
-      }
+      savedCharity
     }
   }
 `;
