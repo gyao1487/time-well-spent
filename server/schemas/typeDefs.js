@@ -24,12 +24,13 @@ type Charity{
     savedEvents:[Event]
 }
 type Event{
-
+    _id:ID
     title:String!
     description:String!
-    price:Int!
     image:String
-    quantity:String
+    date:Date!
+    address:String!
+    savedCharity: Charity
     
 }
 input inputEvent {
@@ -54,7 +55,7 @@ type Mutation{
     createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
-    addEvent(savedEvent:inputEvent):Charity
+    addEvent(savedEvent:inputEvent):Event
     removeEvent(title:String!):Charity
 }
   

@@ -1,28 +1,33 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_EVENT } from '../utils/mutations';
-import { parse } from 'graphql';
-
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_EVENT } from "../utils/mutations";
+import { parse } from "graphql";
 
 function EventForm(props) {
-  const [usercformState, setFormState] = useState({ title: '', description: '', price: '',image: '',quantity: '',});
+  const [usercformState, setFormState] = useState({
+    title: "",
+    description: "",
+    price: "",
+    image: "",
+    quantity: "",
+  });
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       const mutationResponse = await addEvent({
-        variables: { 
-            savedEvent:{
-        title: usercformState.title, 
-        description: usercformState.description,
-        price:parseInt(usercformState.price),
-        image: usercformState.image,
-        quantity: usercformState.quantity
-            }
+        variables: {
+          savedEvent: {
+            title: usercformState.title,
+            description: usercformState.description,
+            image: usercformState.image,
+            date: usercformState.date,
+            address: usercformState.address,
+            savedCharity: context.user._id,
+          },
         },
       });
-     
     } catch (e) {
       console.log(e);
     }
@@ -38,8 +43,6 @@ function EventForm(props) {
 
   return (
     <div className="container my-1">
-   
-
       <h2>Create New Event</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
@@ -55,7 +58,7 @@ function EventForm(props) {
         <div className="flex-row space-between my-2">
           <label htmlFor="description">Description:</label>
           <input
-            placeholder="Descirbe the Event here"
+            placeholder="Describe the Event here"
             name="description"
             type="text"
             id="description"
@@ -63,12 +66,22 @@ function EventForm(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="price">price:</label>
+          <label htmlFor="date">Date:</label>
           <input
-            placeholder="Add Price to enter event here"
-            name="price"
-            type="number"
-            id="price"
+            placeholder="Enter date of event"
+            name="date"
+            type="text"
+            id="date"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="address">Address</label>
+          <input
+            placeholder="Enter address"
+            name="date"
+            type="text"
+            id="date"
             onChange={handleChange}
           />
         </div>
@@ -82,7 +95,7 @@ function EventForm(props) {
             onChange={handleChange}
           />
         </div>
-       
+
         {error ? (
           <div>
             <p className="error-text">Fail to create an Event</p>

@@ -11,10 +11,6 @@ const eventSchema = new Schema({
     required: true,
   },
   // saved book id from GoogleBooks
-  time: {
-    type: Time,
-    required: true,
-  },
   image: {
     type: String,
   },

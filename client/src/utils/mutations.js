@@ -27,15 +27,13 @@ export const LOGIN_CHARITY = gql`
 export const ADD_EVENT = gql`
   mutation addEvent($savedEvent: inputEvent!) {
     addEvent(savedEvent: $savedEvent) {
-      username
-      savedEvents {
-        title
-        description
-        price
-        image
-        quantity
-       
-      }
+     _id
+     title
+     description
+     image
+     date
+     address
+     savedCharity
     }
   }
 `;
