@@ -1,7 +1,6 @@
 import React from "react";
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
-//Will have to use queries with specific parameters later
 import { QUERY_ALL_EVENTS } from "../utils/queries";
 
 //Logic needed:
