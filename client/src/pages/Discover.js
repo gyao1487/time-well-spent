@@ -54,8 +54,8 @@ const Discover = () => {
             </button>
           </div>
         </div>
-
-        {/* ---------------Event Cards----------------- */}
+      </div>
+   {/* ---------------Event Cards----------------- */}
         {/* If loading, show loading div. If done loading, show event cards
        !!!!!!!!!!!!!!!  Need to create better loading element later */}
         <div className="flex flex-wrap">
@@ -69,7 +69,6 @@ const Discover = () => {
             </div>
           )}
         </div>
-      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 
+
 function EventCard({event}) {
 
   if (!event) {

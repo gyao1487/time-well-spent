@@ -1,12 +1,13 @@
-//Components on page:
-//Google Map display
-//Search Bar
-//Event cards
+
 
 import React from "react";
 import EventCard from "../components/EventCard";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_EVENTS } from "../utils/queries";
 
 const Home = () => {
+  const { loading, data } = useQuery(QUERY_ALL_EVENTS);
+  const events = data?.allEvents || [];
   return (
     <div>
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -158,7 +159,20 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <EventCard />
+        {/* ---------------Event Cards----------------- */}
+        {/* If loading, show loading div. If done loading, show event cards
+       !!!!!!!!!!!!!!!  Need to create better loading element later */}
+        <div className="flex flex-wrap">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              {events.map((event) => (
+                <EventCard event={event} key={event._id} />
+              ))}
+            </div>
+          )}
+        </div>
     </div>
   );
 };
