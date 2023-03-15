@@ -23,10 +23,11 @@ Query:{
       allEvents: async () => {
         return Event.find()
       },
+      googleVolunteer: async (parent, { email }) => {
+        return GoogleVolunteer.findOne({email: email})
+      },
     },
-      // findGoogleVolunteer: async (parent, { email }) =>{
-      //   return GoogleVolunteer.findOne({email: email})
-      // },
+      
 
 Mutation:{ 
      createVolunteer:async function(parent, args ) {
@@ -39,13 +40,27 @@ Mutation:{
         return {token, userv} ;
       },
       createGoogleVolunteer:async function(parent, args ) {
-        const googlev = await GoogleVolunteer.create(args);
-    
-        if (!googlev) {
-            throw new AuthenticationError('You need to be logged in!');
+
+        try{
+          let user = await GoogleVolunteer.findOne({email: args.email});
+          console.log(user)
+          if (!user) user = await GoogleVolunteer.create(args);
+
+          const token = signToken(user);
+          return {
+            token, user
+          }
+        }catch(err){
+          console.log(err)
         }
-        const token = signToken(googlev);
-        return {token, googlev} ;
+        
+        // const googlev = await GoogleVolunteer.create(args);
+
+        // if (!googlev) {
+        //     throw new AuthenticationError('You need to be logged in!');
+        // }
+        // const token = signToken(googlev);
+        // return {token, googlev} ;
       },
 
       createCharity:async function(parent, args ) {
@@ -90,9 +105,12 @@ Mutation:{
       
       addEvent:async function(parent,args,context ) {
         console.log(args)
+        console.log(context)
         console.log(context.user)
+        console.log(context.user._id)
         try {
           const newEvent = await Event.create(args.savedEvent);
+
 
 
           // const updatedCharity = await Charity.findOneAndUpdate(
@@ -102,6 +120,7 @@ Mutation:{
           // );
           // console.log(updatedCharity)
           // return updatedCharity;
+
         } catch (err) {
           console.log(err);
           // throw new AuthenticationError('You need to be logged in!');

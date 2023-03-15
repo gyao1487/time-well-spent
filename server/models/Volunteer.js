@@ -10,6 +10,11 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    fullName: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
       type: String,
       required: true,
@@ -23,8 +28,13 @@ const userSchema = new Schema(
     skills:{
         type: String,
         require: false,
-    }
+    },
+    savedEvent:[{
+      type: Schema.Types.ObjectId,
+      ref: "Event"
+    }]
    },
+  
   // set this to use virtual below
   {
     toJSON: {

@@ -1,6 +1,6 @@
 // ------------------- ORIGINAL CODE ---------------------
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -25,7 +25,7 @@ import { setContext } from "@apollo/client/link/context";
 import GoogleSignUp from "./pages/volunteers/signup";
 import LoginVolunteer from "./pages/LoginVolunteer";
 import LoginCharity from "./pages/LoginCharity";
-import EventFrom from "./pages/EventForm";
+import EventForm from "./pages/EventForm";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -60,7 +60,9 @@ function App() {
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
           <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
           <Route path="/charitySignup" element={<CharitySignup />} />
-          <Route path="/eventform" element={<EventFrom />} />
+
+          <Route path="/EventForm" element={<EventForm />} />
+
 
           {/* <Route
                 path="/success"
@@ -83,6 +85,7 @@ function App() {
     </ApolloProvider>
   );
 }
+
 
 export default App;
 
