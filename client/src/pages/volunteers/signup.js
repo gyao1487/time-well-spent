@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import googleOneTap from 'google-one-tap'
 import { useStateContext,useDispatchContext } from "../../utils/GlobalState";
 import ACTIONS from '../../utils/actions'
-import { ADD_GOOGLE_VOLUNTEER, ADD_VOLUNTEER } from "../../utils/mutations";
+import { ADD_GOOGLE_VOLUNTEER, ADD_VOLUNTEER} from "../../utils/mutations";
+import {  QUERY_GOOGLE_VOLUNTEER } from '../../utils/queries'
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { useState } from "react";
@@ -12,7 +13,7 @@ export default function GoogleSignUp() {
     const state = useStateContext();
     const dispatch = useDispatchContext();
     const [createGoogleVolunteer] = useMutation(ADD_GOOGLE_VOLUNTEER);
-    // const [googleVolunteer] = useQuery(QUERY_GOOGLE_VOLUNTEER)
+    const [findGoogleVolunteer] = useQuery(QUERY_GOOGLE_VOLUNTEER)
 
       // set initial form state
   const [uservFormData, setVolunteerFormData] = useState({ username: '', email: '', password: '' });
@@ -93,7 +94,18 @@ export default function GoogleSignUp() {
                 const userData = await res.json();
                 console.log(userData);
                 const { name: username, email, picture, sub, jti } = userData
-                
+                const { existingUser, error} = await findGoogleVolunteer({
+                  variables:{
+                    email,
+                  }
+                })
+                console.log(existingUser);
+                if(error){
+                  console.log(error)
+                }
+                if(existingUser){
+                  return alert('Account already exists!');
+                }
                 const { data, errors } = await createGoogleVolunteer({
                     variables: {
                         username: username,

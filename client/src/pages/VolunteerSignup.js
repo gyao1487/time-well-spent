@@ -8,10 +8,11 @@
 import React, { useState, useEffect } from 'react';
 import googleOneTap from 'google-one-tap'
 import Auth from '../utils/auth';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_VOLUNTEER, ADD_GOOGLE_VOLUNTEER } from '../utils/mutations';
 import { useStateContext, useDispatchContext } from "../utils/GlobalState";
 import ACTIONS from '../utils/actions'
+import { QUERY_GOOGLE_VOLUNTEER } from '../utils/queries';
 
 const VolunteerSignup = () => {
   const state = useStateContext();
@@ -19,6 +20,7 @@ const VolunteerSignup = () => {
   const [createGoogleVolunteer] = useMutation(ADD_GOOGLE_VOLUNTEER);
   const [uservFormData, setVolunteerFormData] = useState({ username: '', email: '', password: '' });
   const [createVolunteer, { error }] = useMutation(ADD_VOLUNTEER);
+
   
 
   const handleChange = (event) => {
@@ -85,6 +87,10 @@ const VolunteerSignup = () => {
             const userData = await res.json();
             console.log(userData);
             const { name: username, email, picture, sub, jti } = userData
+
+            // if(error){
+            //   console.log(error)
+            // }
             
             const { data, errors } = await createGoogleVolunteer({
                 variables: {

@@ -74,9 +74,11 @@ export const QUERY_CHARITY = gql`
   }
 `;
 export const QUERY_GOOGLE_VOLUNTEER = gql`
+
 {
   googleVolunteer {
     email
   }
 }
+
 `
