@@ -1,7 +1,7 @@
 
-function EventCard({events}) {
+function EventCard({event}) {
 
-  if (!events.length) {
+  if (!event) {
     return <h3>No events match this search, check again later!</h3>
   }
 
