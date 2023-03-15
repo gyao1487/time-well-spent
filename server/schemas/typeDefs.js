@@ -63,6 +63,7 @@ type Mutation{
     createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
+    loginAsGoogleVolunteer(email: String!, jti: String!):Auth
     addEvent(savedEvent:inputEvent):Event
 
     addVolunteerEvent(savedEvent:inputEvent):Volunteer

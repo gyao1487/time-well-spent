@@ -4,7 +4,7 @@ const {OAuth2Client} = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
-router.post('/google-signup', (req, res)=>{
+router.post('/login', (req, res)=>{
   const { token } = req.body;
   async function verify(){
     try{

@@ -80,6 +80,14 @@ Mutation:{
         const token = signToken(userv);
         return{ token, userv };
       },
+      loginAsGoogleVolunteer: async function(parent, args){
+        const googlev = await GoogleVolunteer.findOne({email: args.email});
+        if(!googlev){
+          throw new AuthenticationError('Account does not exist');
+        }
+        const token = signToken(googlev);
+        return {token, googlev};
+      },
       loginAsCharity:async function(parent, args) {
         const userc = await Charity.findOne({ $or: [{ username: args.username }, { email: args.email }] });
         if (!userc) {

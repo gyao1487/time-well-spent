@@ -11,6 +11,19 @@ export const LOGIN_VOLUNTEER = gql`
     }
   }
 `;
+export const LOGIN_GOOGLE_VOLUNTEER =gql `
+  mutation loginAsGoogleVolunteer($email: String!, $jti: String!) {
+    loginAsGoogleVolunteer(email: $email, jti: $jti) {
+      token
+      googlev {
+        _id
+        username
+        email
+        picture
+      }
+    }
+  }
+`
 
 export const LOGIN_CHARITY = gql`
   mutation loginAsCharity($username: String!, $password: String!) {

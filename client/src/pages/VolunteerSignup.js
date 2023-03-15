@@ -75,7 +75,7 @@ const VolunteerSignup = () => {
       }
 
     googleOneTap(options, async (response) => {
-        const res = await fetch('/api/google-signup',{
+        const res = await fetch('/api/google/signup',{
             method: 'POST',
             body: JSON.stringify({
                 token: response.credential
