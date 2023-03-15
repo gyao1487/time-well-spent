@@ -1,5 +1,42 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_VOLUNTEER = gql`
+  {
+    volunteer {
+      _id
+    }
+  }
+`;
+
+export const QUERY_ALL_EVENTS = gql`
+  {
+    allEvents {
+      _id
+      title
+      description
+      image
+      date
+      address
+      savedCharity
+    }
+  }
+`;
+
+export const QUERY_CHARITY = gql`
+  {
+    charity {
+      _id
+    }
+  }
+`;
+export const QUERY_GOOGLE_VOLUNTEER = gql`
+{
+  googleVolunteer {
+    email
+  }
+}
+`
+
 // export const QUERY_PRODUCTS = gql`
 //   query getProducts($category: ID) {
 //     products(category: $category) {
@@ -47,38 +84,3 @@ import { gql } from '@apollo/client';
 //     }
 //   }
 // `;
-
-export const QUERY_VOLUNTEER = gql`
-  {
-    volunteer {
-      _id
-    }
-  }
-`;
-
-export const QUERY_ALL_EVENTS = gql`
-  {
-    allEvents {
-      _id
-      title
-      description
-    }
-  }
-`;
-
-export const QUERY_CHARITY = gql`
-  {
-    charity {
-      _id
-    }
-  }
-`;
-export const QUERY_GOOGLE_VOLUNTEER = gql`
-
-{
-  googleVolunteer {
-    email
-  }
-}
-
-`

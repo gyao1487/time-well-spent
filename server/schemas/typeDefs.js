@@ -28,20 +28,26 @@ type Charity{
 }
 
 type Event{
+    _id:ID
     title:String!
     description:String!
-    price:Int!
     image:String
-    quantity:String
+    date:String!
+    address:String!
+    savedCharity: String!
+    
+
 }
 
 input inputEvent {
     title:String!
     description:String!
-    price:Int!
     image:String
-    quantity:String 
+    date:String!
+    address:String!
+    savedCharity: String!
 }
+
 type GoogleVolunteer{
     _id:ID
     username:String!
@@ -57,12 +63,13 @@ type Mutation{
     createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
-    addEvent(savedEvent:inputEvent):Charity
+    addEvent(savedEvent:inputEvent):Event
+
     addVolunteerEvent(savedEvent:inputEvent):Volunteer
     removeVolunteerEvent(title:String!):Volunteer
     removeEvent(title:String!):Charity
 }
-  
+
 
   type Query{
     allEvents:[Event]
@@ -74,3 +81,6 @@ type Mutation{
 }
 `
 module.exports=typeDefs
+
+// addEvent(savedEvent:inputEvent):Charity
+//replqced with addEvent(savedEvent:inputEvent):Event

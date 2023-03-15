@@ -112,16 +112,18 @@ Mutation:{
           const newEvent = await Event.create(args.savedEvent);
 
 
-          const updatedCharity = await Charity.findOneAndUpdate(
-            { _id: context.user._id },
-            { $addToSet: { savedEvent: newEvent._id } },
-            { new: true, runValidators: true }
-          );
-          console.log(updatedCharity)
-          return (updatedCharity, updatedEvent)
+
+          // const updatedCharity = await Charity.findOneAndUpdate(
+          //   { _id: context.user._id },
+          //   { $addToSet: { savedEvent: newEvent._id } },
+          //   { new: true, runValidators: true }
+          // );
+          // console.log(updatedCharity)
+          // return updatedCharity;
+
         } catch (err) {
           console.log(err);
-          throw new AuthenticationError('You need to be logged in!');
+          // throw new AuthenticationError('You need to be logged in!');
         }
       },
     

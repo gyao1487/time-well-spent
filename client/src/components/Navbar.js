@@ -12,8 +12,8 @@ import { useState, useEffect } from "react";
 
 
 const navigation = [
-  {name: "Create Event", href:"/EventForm", current:false},
-  { name: "Home", to: "/", href: "/",  current: true },
+  {name: "Create Event",to: '/EventForm', href:"/EventForm", current:false},
+  { name: "Home", to: "/", href: "/",  current: false },
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/LoginCharity", current: false },
   { name: "Profile", href: "/profile", current: false },

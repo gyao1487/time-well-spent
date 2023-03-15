@@ -60,7 +60,9 @@ function App() {
           <Route path='/volunteers/signup' element={<GoogleSignUp />}/>
           <Route path="/VolunteerSignup" element={<VolunteerSignup />}/>
           <Route path="/charitySignup" element={<CharitySignup />} />
+
           <Route path="/EventForm" element={<EventForm />} />
+
 
           {/* <Route
                 path="/success"
@@ -84,4 +86,6 @@ function App() {
   );
 }
 
+
 export default App;
+
