@@ -48,6 +48,7 @@ const VolunteerSignup = () => {
       username: '',
       email: '',
       password: '',
+      fullName: '',
     });
   };
 
@@ -128,6 +129,7 @@ const VolunteerSignup = () => {
             onChange={handleChange}
           />
         </div>
+        
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
           <input
@@ -145,6 +147,16 @@ const VolunteerSignup = () => {
             name="password"
             type="password"
             id="pwd"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
+          <label htmlFor="fullName">Full Name:</label>
+          <input
+            placeholder="Put your full name here"
+            name="fullName"
+            type="fullName"
+            id="fullName"
             onChange={handleChange}
           />
         </div>

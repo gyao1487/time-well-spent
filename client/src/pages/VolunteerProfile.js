@@ -26,7 +26,7 @@ function VolunteerProfile() {
         {volunteer ? (
           <>
             <h2>
-              Order History for {volunteer.firstName} {volunteer.lastName}
+              Order History for {volunteer.fullName}
             </h2>
             {volunteer.orders.map((order) => (
               <div key={order._id} className="my-2">
