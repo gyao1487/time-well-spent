@@ -1,8 +1,8 @@
 import ACTIONS from './actions'
 const reducer = (state, action)=>{
     switch(action.type){
-        case ACTIONS.GOOGLE_INFO:
-            return {...state, googleInfo: action.payload}
+        case ACTIONS.USER_INFO:
+            return {...state, userInfo: action.payload}
             default:
                 throw new Error();
     }

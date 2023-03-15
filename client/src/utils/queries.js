@@ -14,10 +14,6 @@ export const QUERY_ALL_EVENTS = gql`
       _id
       title
       description
-      image
-      date
-      address
-      savedCharity
     }
   }
 `;
@@ -30,11 +26,14 @@ export const QUERY_CHARITY = gql`
   }
 `;
 export const QUERY_GOOGLE_VOLUNTEER = gql`
-{
-  googleVolunteer {
-    email
+  query googleVolunteer($_id: ID!) {
+    googleVolunteer(_id: $_id){
+      username
+      email
+      picture
+    }
   }
-}
+
 `
 
 // export const QUERY_PRODUCTS = gql`
@@ -84,3 +83,5 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
 //     }
 //   }
 // `;
+
+
