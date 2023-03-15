@@ -8,7 +8,8 @@ import Auth from '../utils/auth'
 
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
-
+import { useQuery } from "@apollo/client";
+import { QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
 
 
 const navigation = [
@@ -29,19 +30,31 @@ function classNames(...classes) {
 }
 
 function Navbar() {
-  
   const state = useStateContext();
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem('ID'))?
+  JSON.parse(localStorage.getItem('ID')): null) 
+  const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
+    variables: {
+      _id: userID
+    },
+    skip: !userID
+  })
+  
+  
 
 
 // if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
+    setUserData(data?.googleVolunteer);
+    console.log(data);
     if(Auth.loggedIn()){
-      setUserData(JSON.parse(localStorage.getItem('userData')))
       setIsLoggedIn(true);
     }
-  },[])
+
+    // setUserData(getUserData());
+  },[data])
 
   return (
     <Disclosure as="nav" className="bg-gray-700 sticky absolute top-0">
@@ -148,6 +161,7 @@ function Navbar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
+                        referrerPolicy="no-referrer"
                         src={userData?.picture}
                         alt=""
                       />

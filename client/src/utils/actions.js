@@ -1,5 +1,5 @@
 const ACTIONS = {
-    GOOGLE_INFO: 'GOOGLE_INFO'
+    USER_INFO: 'USER_INFO'
 }
 
 export default ACTIONS;

@@ -102,13 +102,14 @@ const VolunteerSignup = () => {
                     picture: picture,
                 }
             })
+            console.log(data)
             if(errors){
                 console.log(errors);
             }
             const responsePayload = decodeJwtResponse(response.credential);
-            dispatch({type: ACTIONS.GOOGLE_INFO, payload: responsePayload})
+            dispatch({type: ACTIONS.USER_INFO, payload: responsePayload})
             console.log(responsePayload);
-            localStorage.setItem('userData', JSON.stringify({username, email, picture}));
+            localStorage.setItem('ID', JSON.stringify(data.createGoogleVolunteer.googlev._id));
             Auth.login(data.createGoogleVolunteer.token);
             
         }

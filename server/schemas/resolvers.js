@@ -23,8 +23,8 @@ Query:{
       allEvents: async () => {
         return Event.find()
       },
-      googleVolunteer: async (parent, { email }) => {
-        return GoogleVolunteer.findOne({email: email})
+      googleVolunteer: async (parent, { _id }) => {
+        return GoogleVolunteer.findOne({_id: _id })
       },
     },
       
@@ -42,25 +42,17 @@ Mutation:{
       createGoogleVolunteer:async function(parent, args ) {
 
         try{
-          let user = await GoogleVolunteer.findOne({email: args.email});
-          console.log(user)
-          if (!user) user = await GoogleVolunteer.create(args);
+          let googlev = await GoogleVolunteer.findOne({email: args.email});
+          console.log(googlev)
+          if (!googlev) googlev = await GoogleVolunteer.create(args);
 
-          const token = signToken(user);
+          const token = signToken(googlev);
           return {
-            token, user
+            token, googlev,
           }
         }catch(err){
           console.log(err)
         }
-        
-        // const googlev = await GoogleVolunteer.create(args);
-
-        // if (!googlev) {
-        //     throw new AuthenticationError('You need to be logged in!');
-        // }
-        // const token = signToken(googlev);
-        // return {token, googlev} ;
       },
 
       createCharity:async function(parent, args ) {
