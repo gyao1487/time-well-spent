@@ -71,6 +71,11 @@ const Profile = () => {
       const locationData = await response.json();
       console.log(locationData);
     }
+    const getMap = async ()=>{
+      const response = await fetch(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&callback=initMap`)
+      console.log(response);
+    }
+    getMap();
     getUserLocation();
   },[])
   return (

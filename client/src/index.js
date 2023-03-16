@@ -4,15 +4,27 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { CharityProvider } from './utils/GlobalState';
+import { createRoot } from 'react-dom/client'
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+
+<React.StrictMode>
     <CharityProvider>
       <App />
     </CharityProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  </React.StrictMode>
+
+)
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <CharityProvider>
+//       <App />
+//     </CharityProvider>
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
 // this is for the stuff
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
