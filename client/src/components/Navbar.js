@@ -33,7 +33,7 @@ function Navbar() {
   const state = useStateContext();
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(Auth.getProfile().data._id);
+  const [userId, setUserId] = useState(Auth.getProfile()?.data._id);
   const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
     variables: {
       _id: userId
