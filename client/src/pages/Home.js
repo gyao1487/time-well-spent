@@ -25,14 +25,56 @@ const Home = () => {
     id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
   })
+  
   const [map, setMap] = useState(null);
-  const onLoad = React.useCallback(function callback(map){
+
+  const onLoad = React.useCallback(function callback(map) {
+    let infoWindow;
     const bounds = new window.google.maps.LatLngBounds(center);
     map.setCenter(bounds)
     map.setZoom(10)
+    infoWindow = new window.google.maps.InfoWindow();
 
+    const locationButton = document.createElement("button");
+    
+    locationButton.textContent = "Pan to Current Location";
+    locationButton.classList.add("custom-map-control-button");
+    map.controls[window.google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+    locationButton.addEventListener("click", () => {
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent("Location found.");
+            infoWindow.open(map);
+            map.setCenter(pos);
+          },
+          () => {
+            handleLocationError(true, infoWindow, map.getCenter());
+          }
+        );
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(
+          browserHasGeolocation
+            ? "Error: The Geolocation service failed."
+            : "Error: Your browser doesn't support geolocation."
+        );
+      }
+    })
     setMap(map)
-  },[])
+  }, [])
+
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
   }, [])
@@ -191,6 +233,13 @@ const Home = () => {
                 onLoad={onLoad}
                 onUnmount={onUnmount}
               >
+                {/* <button
+                  id='location button'
+                  className=""
+                  style={{width: '5em', height: '3em'}}
+                >
+                  Find Current Location
+                </button> */}
               </GoogleMap>
         }
           </div>
