@@ -15,7 +15,6 @@ export const QUERY_ALL_EVENTS = gql`
       title
       description
       image
-      title
       savedCharity
       date
       address
@@ -25,7 +24,7 @@ export const QUERY_ALL_EVENTS = gql`
 
 
 export const QUERY_EVENT = gql`
-  query queryEvent($_id: objectId!) {
+  query Event($_id: ID!) {
     event(_id: $_id) {
       _id
       title

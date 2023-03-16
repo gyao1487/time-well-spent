@@ -66,7 +66,7 @@ function App() {
             <Route path="/charitySignup" element={<CharitySignup />} />
 
             <Route path="/EventForm" element={<EventForm />} />
-            <Route path="Event/:id" element ={<EventPage />}/>
+            <Route path="/event/:id" element ={<EventPage />}/>
             
             
             

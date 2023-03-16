@@ -25,8 +25,7 @@ const resolvers = {
     },
 
     event: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Event.find(params);
+     return Event.findOne({_id:_id})
     },
 
     googleVolunteer: async (parent, { _id }) => {

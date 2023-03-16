@@ -9,14 +9,17 @@ const EventPage = () => {
   const { loading, error, data } = useQuery(QUERY_EVENT, {
     variables: { _id: id },
   });
-  const event = data?.event || [];
-
+  console.log(data);
+  const event = data?.event;
+  console.log(event);
   return (
     <div>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error.message}</p>
+      ) : !event ? (
+        <p>Event not found</p>
       ) : (
         <div>
           <img className="rounded-t-lg" src={event.image} alt="" />
