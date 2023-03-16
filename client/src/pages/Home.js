@@ -30,7 +30,7 @@ const Home = () => {
 
   const onLoad = React.useCallback(function callback(map) {
     let infoWindow;
-    const bounds = new window.google.maps.LatLngBounds(center);
+    const bounds = new window.google.maps.LatLng(center);
     map.setCenter(bounds)
     map.setZoom(10)
     infoWindow = new window.google.maps.InfoWindow();

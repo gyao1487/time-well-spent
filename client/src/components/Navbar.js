@@ -33,12 +33,12 @@ function Navbar() {
   const state = useStateContext();
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userToken, setUserToken] = useState(null);
+  const [userId, setUserId] = useState(Auth.getProfile()?.data._id);
   const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
     variables: {
-      _id: userToken
+      _id: userId
     },
-    skip: !userToken
+    skip: !userId
   })
   
   
@@ -46,7 +46,6 @@ function Navbar() {
 
 // if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
-    setUserToken(Auth.getToken());
     setUserData(data?.googleVolunteer);
     if(Auth.loggedIn()){
       setIsLoggedIn(true);
