@@ -20,9 +20,16 @@ Query:{
       charity: async (parent, { charityId }) => {
         return Charity.findOne({ _id: charityId });
       },
+
       allEvents: async () => {
         return Event.find()
       },
+
+      event: async(parent, {_id}) => {
+        const params = _id?{_id} : {};
+        return Event.find(params)
+      },
+
       googleVolunteer: async (parent, { _id }) => {
         return GoogleVolunteer.findOne({_id: _id })
       },

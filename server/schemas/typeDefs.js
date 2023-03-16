@@ -35,8 +35,6 @@ type Event{
     date:String!
     address:String!
     savedCharity: String!
-    
-
 }
 
 input inputEvent {
