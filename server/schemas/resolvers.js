@@ -38,7 +38,7 @@ Query:{
       const userv = await Volunteer.create(args);
 
       if (!userv) {
-        throw new AuthenticationError("You need to be logged in!");
+       throw new Error("Failed to create volunteer.");;
       }
       const token = signToken(userv);
       return { token, userv };
@@ -140,7 +140,7 @@ Query:{
       const userc = await Charity.create(args);
 
       if (!userc) {
-        throw new AuthenticationError("You need to be logged in!");
+        throw new Error("Failed to create charity.");
       }
       const token = signToken(userc);
       return { token, userc };
@@ -152,7 +152,7 @@ Query:{
         $or: [{ username: args.username }, { email: args.email }],
       });
       if (!userv) {
-        throw new AuthenticationError("You need to be logged in!");
+        throw new Error("Failed to login as volunteer.");
       }
 
       const correctPw = await userv.isCorrectPassword(args.password);
@@ -170,12 +170,13 @@ Query:{
       const token = signToken(googlev);
       return { token, googlev };
     },
+
     loginAsCharity: async function (parent, args) {
       const userc = await Charity.findOne({
         $or: [{ username: args.username }, { email: args.email }],
       });
       if (!userc) {
-        throw new AuthenticationError("You need to be logged in!");
+        throw new Error("Failed to login charity.");
       }
 
       const correctPw = await userc.isCorrectPassword(args.password);
@@ -186,26 +187,6 @@ Query:{
       return { token, userc };
     },
 
-    addEvent: async function (parent, args, context) {
-      console.log(args);
-      console.log(context);
-      console.log(context.user);
-      console.log(context.user._id);
-      try {
-        const newEvent = await Event.create(args.savedEvent);
-
-        // const updatedCharity = await Charity.findOneAndUpdate(
-        //   { _id: context.user._id },
-        //   { $addToSet: { savedEvent: newEvent._id } },
-        //   { new: true, runValidators: true }
-        // );
-        // console.log(updatedCharity)
-        // return updatedCharity;
-      } catch (err) {
-        console.log(err);
-        // throw new AuthenticationError('You need to be logged in!');
-      }
-    },
 
     removeEvent: async function (parent, args, context) {
       const updatedCharity = await Charity.findOneAndUpdate(
