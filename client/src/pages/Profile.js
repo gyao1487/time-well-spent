@@ -11,23 +11,23 @@ const Profile = () => {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const [userData, setUserData] = useState(null);
-  const [userToken, setUserToken] = useState(null);
+  const [userId, setUserId] = useState(Auth.getProfile().data._id);
   const [userDescription, setUserDescription] = useState('');
   const [isUserEditingDescription, setIsUserEditingDescription] = useState(false);
   const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
     variables: {
-      _id: userToken
+      _id: userId
     },
-    skip: !userToken
+    skip: !userId
   })
   const [updateGoogleVolunteer] = useMutation(UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION,{
     variables: {
       user_description: userDescription,
       _id: Auth.getProfile()?.data._id,
     },
-    context:{
-      userToken,
-    }
+    // context:{
+    //   userToken,
+    // }
   })
   
   const handleDescriptionSubmit =(e)=>{
@@ -55,7 +55,6 @@ const Profile = () => {
 
   useEffect(()=>{
     console.log(userData)
-    setUserToken(Auth.getToken());
     setUserData(data?.googleVolunteer)
     setUserDescription(data?.googleVolunteer?.user_description)
   },[data])
@@ -71,11 +70,6 @@ const Profile = () => {
       const locationData = await response.json();
       console.log(locationData);
     }
-    const getMap = async ()=>{
-      const response = await fetch(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&callback=initMap`)
-      console.log(response);
-    }
-    getMap();
     getUserLocation();
   },[])
   return (
