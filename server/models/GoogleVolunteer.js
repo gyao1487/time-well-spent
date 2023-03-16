@@ -30,6 +30,10 @@ const googleUserSchema = new Schema(
     skills:{
         type: String,
         require: false,
+    },
+    user_description: {
+      type: String,
+      required: false,
     }
    },
 );

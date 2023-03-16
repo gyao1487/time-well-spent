@@ -81,6 +81,13 @@ mutation createVolunteer($username: String!, $email: String!, $sub: String!, $jt
   }
 }
 `;
+export const UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION =gql`
+mutation updateGoogleVolunteer($_id: ID!, $user_description: String){
+  updateGoogleVolunteer(_id: $_id, user_description: $user_description){
+    user_description
+  }
+}
+`
 
 export const ADD_CHARITY = gql`
 mutation createCharity($username: String!, $password: String!, $email: String!) {
