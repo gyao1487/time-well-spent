@@ -1,11 +1,42 @@
 
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_EVENTS } from "../utils/queries";
+import {GoogleMap, useJsApiLoader} from '@react-google-maps/api'
+
+
+const containerStyle = {
+  width: '700px',
+  height: '400px',
+  alignSelf: 'center',
+  borderRadius: '5px',
+  // marginLeft: '50em'
+};
+
+const center = {
+  lat: 41.9703133,
+  lng: -87.663045
+};
 
 const Home = () => {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+  })
+  const [map, setMap] = useState(null);
+  const onLoad = React.useCallback(function callback(map){
+    const bounds = new window.google.maps.LatLngBounds(center);
+    map.setCenter(bounds)
+    map.setZoom(10)
+
+    setMap(map)
+  },[])
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
   const { loading, data } = useQuery(QUERY_ALL_EVENTS);
   const events = data?.allEvents || [];
   return (
@@ -151,11 +182,17 @@ const Home = () => {
           </div>
 
           <div className="flex items-center justify-center w-full h-96 lg:w-1/2">
-            <img
-              className="object-cover w-full h-full mx-auto rounded-md lg:max-w-2xl"
-              src="https://i0.wp.com/www.beingbridget.com/wp-content/uploads/2018/11/Screen-Shot-2018-11-09-at-12.44.07-AM.png?w=901&ssl=1"
-              alt="glasses photo"
-            />
+        
+            {isLoaded && 
+              <GoogleMap
+                center={center}
+                zoom={5}
+                mapContainerStyle={containerStyle}
+                onLoad={onLoad}
+                onUnmount={onUnmount}
+              >
+              </GoogleMap>
+        }
           </div>
         </div>
       </section>
@@ -173,6 +210,8 @@ const Home = () => {
             </div>
           )}
         </div>
+          
+        
     </div>
   );
 };
