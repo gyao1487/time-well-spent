@@ -23,21 +23,19 @@ export const QUERY_ALL_EVENTS = gql`
   }
 `;
 
+
 export const QUERY_EVENT = gql`
-{
- query event($_id: String) {
-    event(_id:$_id) {
-    _id
-    title
-    description
-    image
-    title
-    savedCharity
-    date
-    address
+  query queryEvent($_id: objectId!) {
+    event(_id: $_id) {
+      _id
+      title
+      description
+      image
+      savedCharity
+      date
+      address
     }
   }
-}
 `;
 
 export const QUERY_CHARITY = gql`

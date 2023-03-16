@@ -13,6 +13,7 @@ import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 
+import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
 
 import {
@@ -65,7 +66,10 @@ function App() {
             <Route path="/charitySignup" element={<CharitySignup />} />
 
             <Route path="/EventForm" element={<EventForm />} />
-            {/* <Route path="Event/:id" element ={<EventPage />} */}
+            <Route path="Event/:id" element ={<EventPage />}/>
+            
+            
+            
             {/* <Route
                 path="/success"
                 element={<Success />}
