@@ -23,7 +23,7 @@ const Profile = () => {
   const [updateGoogleVolunteer] = useMutation(UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION,{
     variables: {
       user_description: userDescription,
-      _id: Auth.getProfile().data._id,
+      _id: Auth.getProfile()?.data._id,
     },
     context:{
       userToken,
