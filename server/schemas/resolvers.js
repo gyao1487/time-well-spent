@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Volunteer, Charity, Event, GoogleVolunteer } = require("../models");
 const { signToken } = require("../utils/auth");
+const { decodeToken } = require('../utils/auth')
 
 const resolvers = {
 
@@ -77,6 +78,63 @@ Query:{
           console.log(err)
         }
       },
+
+      
+      
+      addVolunteerEvent:async function(parent,{ eventId },context ) {
+        console.log('addVolunteerEvent called'); // Add this line
+        
+          try {
+            console.log('Token in context:', context.token); // Log the token in context for debugging
+            const volunteerId = decodeToken(context.token);
+            const volunteer = await Volunteer.findById(volunteerId);
+            const event = await Event.findById(eventId);
+    
+            if (!volunteer || !event) {
+              throw new Error('Volunteer or event not found');
+            }
+    
+            // Check if the event is already saved
+            if (!volunteer.savedEvents.some((savedEvent) => savedEvent.equals(eventId))) {
+              volunteer.savedEvents.push(eventId);
+              await volunteer.save();
+            }
+            console.log("Volunteer:", volunteer); // Add this line
+            console.log("Volunteer.toObject():", volunteer.toObject());
+            return volunteer;
+          } catch (error) {
+            console.error('Token error:', error.message); // Log the error message for debugging
+            throw new Error('Invalid token');
+          }
+        },
+      
+      
+      addCharityEvent:async function(parent,args,context ) {
+        console.log(args)
+        console.log(context.user)
+        console.log(context.user._id)
+        try {
+          const newEvent = await Event.create(args.savedEvent);
+
+          const updatedCharity = await Charity.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { savedEvents: newEvent._id } },
+            { new: true, runValidators: true }
+          );
+          console.log(updatedCharity)
+          return updatedCharity;
+
+        } catch (err) {
+          console.log(err);
+          // throw new AuthenticationError('You need to be logged in!');
+        }
+      },
+    
+       
+    
+      
+    
+    
 
     createCharity: async function (parent, args) {
       const userc = await Charity.create(args);

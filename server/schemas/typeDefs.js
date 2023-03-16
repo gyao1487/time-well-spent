@@ -15,7 +15,8 @@ type Volunteer{
     email:String!
     skills:String
     password:String!
-    savedEvents:[Event]
+    title:String
+    savedEvents:[ID]!
     
 }
 
@@ -66,8 +67,8 @@ type Mutation{
     loginAsCharity(username: String!, password: String!,):Auth
     loginAsGoogleVolunteer(email: String!, jti: String!):Auth
     addEvent(savedEvent:inputEvent):Event
-
-    addVolunteerEvent(savedEvent:inputEvent):Volunteer
+    addCharityEvent(savedEvents:inputEvent):Event
+    addVolunteerEvent(eventId: ID!): Volunteer
     removeVolunteerEvent(title:String!):Volunteer
     removeEvent(title:String!):Charity
 }

@@ -37,9 +37,9 @@ export const LOGIN_CHARITY = gql`
   }
 `;
 
-export const ADD_EVENT = gql`
-  mutation addEvent($savedEvent: inputEvent!) {
-    addEvent(savedEvent: $savedEvent) {
+export const ADD_CHARITY_EVENT = gql`
+  mutation addCharityEvent($savedEvents: inputEvent!) {
+    addCharityEvent(savedEvents: $savedEvents) {
      _id
      title
      description
@@ -47,6 +47,21 @@ export const ADD_EVENT = gql`
      date
      address
      savedCharity
+    }
+  }
+`;
+
+export const ADD_VOLUNTEER_EVENT = gql`
+  mutation addVolunteerEvent($eventId: ID!) {
+    addVolunteerEvent(eventId: $eventId) {
+      _id
+      fullName
+      username
+      email
+      skills
+      password
+      title
+      savedEvents
     }
   }
 `;

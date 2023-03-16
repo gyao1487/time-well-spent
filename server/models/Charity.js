@@ -18,7 +18,7 @@ const userSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
-    savedEvent:[{
+    savedEvents:[{
       type: Schema.Types.ObjectId,
       ref: "Event"
     }]

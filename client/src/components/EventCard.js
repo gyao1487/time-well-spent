@@ -1,15 +1,71 @@
+<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
+=======
+import { ADD_VOLUNTEER_EVENT } from "../utils/mutations";
+import React, { useState, useEffect } from 'react';
+import { useMutation, useQuery } from "@apollo/client";
+import Auth from "../utils/auth";
+>>>>>>> Stashed changes
 
-function EventCard({event}) {
+function EventCard({ event }) {
+  const [userToken, setUserToken] = useState(Auth.getToken());
+  
+  const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
+    context: { token: userToken }, // Pass the JWT token in the context here
+    update: (cache, { data: { addVolunteerEvent } }) => {
+      
+      // Update the cache
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+  });
 
+  const handleAddEvent = async (e) => { // Make the function async
+    const eventId = e.target.dataset.id;
+    console.log(eventId, userToken);
+  
+    try {
+      const { data } = await addVolunteerEvent({
+        variables: { eventId },
+        update: (cache, { data: { addVolunteerEvent } }) => {
+          // ...
+        },
+      });
+  
+      console.log('Mutation response data:', data); // Add this line
+    } catch (error) {
+      console.error('Error in addVolunteerEvent mutation:', error); // Add this line
+    }
+  };
+
+  useEffect(() => {
+    console.log(event);
+  }, [event]);
+
+  // create state to hold saved bookId values
+  // const [savedEventIds, setSavedEventIds] = useState(getSavedEventIds());
+  // // new
+  // const [savedEvent] = useMutation(ADD_EVENT);
+
+  // useEffect(() => {
+  //   return () => saveEventIds(savedEventIds);
+  // });
+
+  
   if (!event) {
     return <h3>No events match this search, check again later!</h3>
   }
 
   return (
     
+<<<<<<< Updated upstream
       <div className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
         <Link to={`/event/${event._id}`}>
+=======
+      <div data-name={event.name} className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
+        <a href="/event/:id">
+>>>>>>> Stashed changes
           <img
             className="rounded-t-lg"
             src= {event.image}
@@ -66,6 +122,14 @@ function EventCard({event}) {
             </svg>
 
             <p className="font-normal text-gray-400 ">{event.address}</p>
+            <button
+            type="button"
+            className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-4xl px-6 py-8 text-center m-2"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+            data-id={event._id} onClick={handleAddEvent}>
+            Add to saved events
+          </button>
           </div>
         </div>
       </div>

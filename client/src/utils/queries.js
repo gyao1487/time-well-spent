@@ -1,11 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_VOLUNTEER = gql`
-  {
-    volunteer {
+{
+  volunteer {
+    _id
+    fullName
+    username
+    email
+    title
+    savedEvents {
       _id
+      title
+      description
+      image
+      date
+      address
+      savedCharity
     }
   }
+}
 `;
 
 export const QUERY_ALL_EVENTS = gql`
@@ -38,11 +51,13 @@ export const QUERY_EVENT = gql`
 `;
 
 export const QUERY_CHARITY = gql`
-  {
-    charity {
-      _id
-    }
+query charity($_id: ID!) {
+    charity (_id: $_id){
+    username
+    email
+    savedEvents
   }
+}
 `;
 export const QUERY_GOOGLE_VOLUNTEER = gql`
   query googleVolunteer($_id: ID!) {

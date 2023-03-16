@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 
-import { ADD_EVENT } from "../utils/mutations";
+import { ADD_CHARITY_EVENT } from "../utils/mutations";
 import { parse } from "graphql";
 
 function EventForm(props) {
@@ -10,22 +10,24 @@ function EventForm(props) {
     description: "",
     image: "",
     date: "",
-    address: ""
+    address: "",
+    savedCharity:""
   });
-  const [addEvent, { error }] = useMutation(ADD_EVENT);
+  const [addCharityEvent, { error }] = useMutation(ADD_CHARITY_EVENT);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    
     try {
-      const mutationResponse = await addEvent({
+      const mutationResponse = await addCharityEvent({
         variables: {
-          savedEvent: {
+          savedEvents: {
             title: usercformState.title,
             description: usercformState.description,
             image: usercformState.image,
             date: usercformState.date,
             address: usercformState.address,
-            savedCharity:usercformState.charity
+            savedCharity: usercformState.savedCharity
             // savedCharity: {
             //   _id:
             // }
@@ -41,7 +43,7 @@ function EventForm(props) {
     const { name, value } = event.target;
     setFormState({
       ...usercformState,
-      [name]: value,
+      [name === "charity" ? "savedCharity" : name]: value,
     });
   };
 
@@ -121,7 +123,6 @@ function EventForm(props) {
       </form>
     </div>
   );
-  console.log(error)
 }
 
 export default EventForm;
