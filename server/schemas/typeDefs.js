@@ -72,6 +72,7 @@ type Mutation{
 
   type Query{
     allEvents:[Event]
+    event(_id:String): Event
     volunteer(volunteerId: ID!): Volunteer
     allVolunteers: [Volunteer]!
     charity(charityId: ID!): Charity
