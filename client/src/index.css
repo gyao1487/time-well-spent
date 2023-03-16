@@ -2,22 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-map-control-button{
-  background-color: white;
-  padding: 1em 2em 1em 2em;
-  cursor: pointer;
-  margin-top: 1em;
-  border-radius: 3px;
-  font-size: 12px;
-  color: black;
-  font-weight: bold;
-  letter-spacing: 1px;
 
-  transition: 0.1s all ease-in-out;
-}
-.custom-map-control-button:hover{
-  background-color: rgb(232, 232, 232);
-}
 /* :root {
   --primary: #232F3E;
   --secondary: #F3A847;
