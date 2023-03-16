@@ -23,11 +23,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+//change back to /build/index.html after
+  app.use(express.static(path.join(__dirname, '../client/src/')));
 }
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+//change back to /build/index.html after
+//change to /* for it to work on heroku
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/src/server.js'));
 });
 
 app.use('/', apiRoutes);

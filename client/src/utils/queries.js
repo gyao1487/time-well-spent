@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_VOLUNTEER = gql`
   {
@@ -15,7 +15,21 @@ export const QUERY_ALL_EVENTS = gql`
       title
       description
       image
+      savedCharity
+      date
+      address
+    }
+  }
+`;
+
+
+export const QUERY_EVENT = gql`
+  query Event($_id: ID!) {
+    event(_id: $_id) {
+      _id
       title
+      description
+      image
       savedCharity
       date
       address
@@ -32,14 +46,13 @@ export const QUERY_CHARITY = gql`
 `;
 export const QUERY_GOOGLE_VOLUNTEER = gql`
   query googleVolunteer($_id: ID!) {
-    googleVolunteer(_id: $_id){
+    googleVolunteer(_id: $_id) {
       username
       email
       picture
     }
   }
-
-`
+`;
 
 // export const QUERY_PRODUCTS = gql`
 //   query getProducts($category: ID) {
@@ -88,5 +101,3 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
 //     }
 //   }
 // `;
-
-

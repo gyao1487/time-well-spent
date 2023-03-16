@@ -29,14 +29,12 @@ type Charity{
 
 type Event{
     _id:ID
-    title:String!
+    title:String
     description:String!
     image:String
     date:String!
     address:String!
     savedCharity: String!
-    
-
 }
 
 input inputEvent {
@@ -74,6 +72,7 @@ type Mutation{
 
   type Query{
     allEvents:[Event]
+    event(_id: ID!): Event
     volunteer(volunteerId: ID!): Volunteer
     allVolunteers: [Volunteer]!
     charity(charityId: ID!): Charity

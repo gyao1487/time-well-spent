@@ -13,6 +13,7 @@ import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 
+import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
 
 import {
@@ -52,7 +53,7 @@ function App() {
       <header className="sticky top-0 z-50">
         <Navbar />
       </header>
-      <main>
+      <main className="pb-60 pt-10">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -65,7 +66,10 @@ function App() {
             <Route path="/charitySignup" element={<CharitySignup />} />
 
             <Route path="/EventForm" element={<EventForm />} />
-
+            <Route path="/event/:id" element ={<EventPage />}/>
+            
+            
+            
             {/* <Route
                 path="/success"
                 element={<Success />}

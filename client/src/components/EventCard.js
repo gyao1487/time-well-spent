@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 function EventCard({event}) {
 
@@ -9,19 +9,19 @@ function EventCard({event}) {
   return (
     
       <div className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
-        <a href="/event/:id">
+        <Link to={`/event/${event._id}`}>
           <img
             className="rounded-t-lg"
             src= {event.image}
             alt=""
           />
-        </a>
+        </Link>
         <div className="p-5">
-          <a href="/event/:id">
+          <Link to={`/event/${event._id}`}>
             <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
               {event.title}
             </h5>
-          </a>
+          </Link>
           <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
             <a href="/charity/:id</p>">{event.savedCharity}</a>
           </p>
