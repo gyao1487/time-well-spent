@@ -1,11 +1,8 @@
-<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
-=======
 import { ADD_VOLUNTEER_EVENT } from "../utils/mutations";
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
->>>>>>> Stashed changes
 
 function EventCard({ event }) {
   const [userToken, setUserToken] = useState(Auth.getToken());
@@ -59,13 +56,8 @@ function EventCard({ event }) {
 
   return (
     
-<<<<<<< Updated upstream
       <div className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
         <Link to={`/event/${event._id}`}>
-=======
-      <div data-name={event.name} className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
-        <a href="/event/:id">
->>>>>>> Stashed changes
           <img
             className="rounded-t-lg"
             src= {event.image}

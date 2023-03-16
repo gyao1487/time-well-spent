@@ -29,7 +29,7 @@ Query:{
         return Event.findOne({_id:_id})
        },
       googleVolunteer: async (parent, { _id }, context) => {
-        return GoogleVolunteer.findOne({_id: context.user._id })
+        return GoogleVolunteer.findOne({_id: _id})
       },
     },
 
