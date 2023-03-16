@@ -53,7 +53,7 @@ function App() {
       <header className="sticky top-0 z-50">
         <Navbar />
       </header>
-      <main>
+      <main className="pb-60 pt-10">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
