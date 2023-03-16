@@ -27,15 +27,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/src/')));
 }
 
-<<<<<<< Updated upstream
-//change back to /build/index.html after
-//change to /* for it to work on heroku
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/src/server.js'));
-=======
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
->>>>>>> Stashed changes
 });
 
 app.use('/', apiRoutes);

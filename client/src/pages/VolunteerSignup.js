@@ -100,6 +100,7 @@ const VolunteerSignup = () => {
                     jti: jti,
                     sub: sub,
                     picture: picture,
+                    skills: ''
                 }
             })
             console.log(data)
@@ -109,7 +110,7 @@ const VolunteerSignup = () => {
             const responsePayload = decodeJwtResponse(response.credential);
             dispatch({type: ACTIONS.USER_INFO, payload: responsePayload})
             console.log(responsePayload);
-            localStorage.setItem('ID', JSON.stringify(data.createGoogleVolunteer.googlev._id));
+            // localStorage.setItem('ID', JSON.stringify(data.createGoogleVolunteer.googlev._id));
             Auth.login(data.createGoogleVolunteer.token);
             
         }

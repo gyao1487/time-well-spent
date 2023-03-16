@@ -2,28 +2,80 @@ import React from "react";
 import { useStateContext, useDispatchContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 import Auth from '../utils/auth'
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
+import { UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION } from "../utils/mutations";
+import styles from '../styles/Profile.module.css'
 
 const Profile = () => {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const [userData, setUserData] = useState(null);
-  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem('ID'))?
-  JSON.parse(localStorage.getItem('ID')): null) 
+  const [userToken, setUserToken] = useState(null);
+  const [userDescription, setUserDescription] = useState('');
+  const [isUserEditingDescription, setIsUserEditingDescription] = useState(false);
   const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
     variables: {
-      _id: userID
+      _id: userToken
     },
-    skip: !userID
+    skip: !userToken
   })
+  const [updateGoogleVolunteer] = useMutation(UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION,{
+    variables: {
+      user_description: userDescription,
+      _id: Auth.getProfile().data._id,
+    },
+    context:{
+      userToken,
+    }
+  })
+  
+  const handleDescriptionSubmit =(e)=>{
+    e.preventDefault();
+    this.blur();
+    setIsUserEditingDescription(false);
+  }
+  const handleSaveDescription = async (e)=>{
+    
+    setIsUserEditingDescription(false);
+    const { data, error } = await updateGoogleVolunteer({
+      
+    })
+    if(error){
+      alert('Something went wrong.')
+      console.log(error)
+    }
+    
+    if(data){
+
+     
+    }
+    
+  }
 
   useEffect(()=>{
+    console.log(userData)
+    setUserToken(Auth.getToken());
     setUserData(data?.googleVolunteer)
+    setUserDescription(data?.googleVolunteer?.user_description)
   },[data])
+
+  useEffect(()=>{
+    const getUserLocation = async () =>{
+      const response = await fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,{
+        method: 'POST',
+        headers: {
+          "Content-Type" : "application/json"
+        },
+      })
+      const locationData = await response.json();
+      console.log(locationData);
+    }
+    getUserLocation();
+  },[])
   return (
     <div>
-      <section className="pt-16 bg-blueGray-50">
+      <section className={styles.mainContainer}>
         <div className="w-full lg:w-4/12 px-4 mx-auto">
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div className="px-6">
@@ -31,7 +83,7 @@ const Profile = () => {
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
                     <img
-                      alt="..."
+                      alt={userData?.username}
                       src={userData?.picture}
                       className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     ></img>
@@ -141,22 +193,48 @@ const Profile = () => {
                   University of Computer Science
                 </div>
               </div>
-              <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-                <div className="flex flex-wrap justify-center">
-                  <div className="w-full lg:w-9/12 px-4">
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      An artist of considerable range, Jenna the name taken by
-                      Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                      performs and records all of his own music, giving it a
-                      warm, intimate feel with a solid groove structure. An
-                      artist of considerable range.
-                    </p>
-                    <a
-                      href=""
-                      className="font-normal text-pink-500"
+              <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
+                <div className="flex flex-wrap justify-center flex-col items-center">
+                  {isUserEditingDescription ?
+                    <button
+                      className={styles.saveDescription}
+                      onClick={handleSaveDescription}  
                     >
-                      Show more
-                    </a>
+                      Save
+                    </button>
+                    :
+                    <button
+                    className={styles.editDescription}
+                    onClick={()=> setIsUserEditingDescription(true)}
+                  >
+                    Edit Description
+                  </button>
+                  }
+                  
+                  <div className="w-full lg:w-9/12 px-4">
+                    {isUserEditingDescription ?
+                      <textarea
+                        className="textarea textarea-info bg-transparent w-96 mt-7"
+                        placeholder="Bio"
+                        type="text"
+                        autoFocus={true}
+                        id="description"
+                        value={userDescription}
+                        onChange={(e)=> setUserDescription(e.target.value)}
+                        onKeyDown={(e)=>{
+                          if(e.keyCode === 27){
+                            e.currentTarget.blur();
+                            setIsUserEditingDescription(false);
+                          }
+                        }}
+                        // onBlur={()=> setIsUserEditingDescription(false)}
+                      /> :
+                      <p
+                        className="mb-4 text-blueGray-700 mt-7"
+                      >
+                        {userDescription}
+                      </p>
+                    }
                   </div>
                 </div>
               </div>

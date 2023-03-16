@@ -53,11 +53,14 @@ type GoogleVolunteer{
     jti:String!
     sub:String!
     picture:String!
+    skills: String
+    user_description: String
 }
 
 type Mutation{
     createVolunteer(username:String!, fullName:String!, email:String!, password:String!, skills:String):Auth
     createGoogleVolunteer(username:String!, email:String!, jti:String!, sub:String!, picture:String!):Auth
+    updateGoogleVolunteer(_id: ID!, user_description: String):GoogleVolunteer
     createCharity(username:String!, password:String!, email:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth

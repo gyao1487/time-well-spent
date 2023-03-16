@@ -50,6 +50,8 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
       username
       email
       picture
+      skills
+      user_description
     }
   }
 `;

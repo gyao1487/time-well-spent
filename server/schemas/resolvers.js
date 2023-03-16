@@ -3,35 +3,34 @@ const { Volunteer, Charity, Event, GoogleVolunteer } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
-  Query: {
-    allVolunteers: async () => {
-      return Volunteer.find();
-    },
 
-    volunteer: async (parent, { volunteerId }) => {
-      return Volunteer.findOne({ _id: volunteerId });
-    },
+Query:{
 
-    allCharity: async () => {
-      return Charity.find();
-    },
+      allVolunteers: async () => {
+        return Volunteer.find()
+      },
+     
+      volunteer: async (parent, { volunteerId }) => {
+        return Volunteer.findOne({ _id: volunteerId });
+      },
 
-    charity: async (parent, { charityId }) => {
-      return Charity.findOne({ _id: charityId });
+      allCharity: async () => {
+        return Charity.find()
+      },
+     
+      charity: async (parent, { charityId }) => {
+        return Charity.findOne({ _id: charityId });
+      },
+      allEvents: async () => {
+        return Event.find()
+      },
+      event: async (parent, { _id }) => {
+        return Event.findOne({_id:_id})
+       },
+      googleVolunteer: async (parent, { _id }, context) => {
+        return GoogleVolunteer.findOne({_id: context.user._id })
+      },
     },
-
-    allEvents: async () => {
-      return Event.find();
-    },
-
-    event: async (parent, { _id }) => {
-     return Event.findOne({_id:_id})
-    },
-
-    googleVolunteer: async (parent, { _id }) => {
-      return GoogleVolunteer.findOne({ _id: _id });
-    },
-  },
 
   Mutation: {
     createVolunteer: async function (parent, args) {
@@ -48,16 +47,36 @@ const resolvers = {
         let googlev = await GoogleVolunteer.findOne({ email: args.email });
         console.log(googlev);
         if (!googlev) googlev = await GoogleVolunteer.create(args);
-
-        const token = signToken(googlev);
-        return {
-          token,
-          googlev,
-        };
-      } catch (err) {
-        console.log(err);
-      }
-    },
+          const token = signToken(googlev);
+          return {
+            token, googlev,
+          }
+        }catch(err){
+          console.log(err)
+        }
+      },
+      updateGoogleVolunteer: async function (parent, args, context){
+        console.log(context.user._id)
+        console.log(args)
+        try{
+          const googlev = await GoogleVolunteer.findOneAndUpdate(
+            {
+              _id: args._id
+            },
+            {
+               $set : { user_description: args.user_description },
+            },
+            {
+              new: true,
+            })
+            console.log(googlev)
+    
+            if(!googlev) throw new Error('User not found.')
+            return { googlev }
+        }catch(err){
+          console.log(err)
+        }
+      },
 
     createCharity: async function (parent, args) {
       const userc = await Charity.create(args);
