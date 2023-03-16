@@ -48,7 +48,6 @@ function Navbar() {
   useEffect(()=>{
     setUserToken(Auth.getToken());
     setUserData(data?.googleVolunteer);
-    console.log(data);
     if(Auth.loggedIn()){
       setIsLoggedIn(true);
     }

@@ -14,6 +14,7 @@ export function useDispatchContext(){
 const CharityProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     userInfo: '',
+    loggedIn: false,
   });
 
   return (

@@ -1,5 +1,5 @@
 // ------------------- ORIGINAL CODE ---------------------
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -15,6 +15,8 @@ import Profile from "./pages/Profile";
 
 import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
+import Auth from './utils/auth'
+import { useStateContext, useDispatchContext } from "./utils/GlobalState";
 
 import {
   ApolloClient,
@@ -27,6 +29,7 @@ import GoogleSignUp from "./pages/volunteers/signup";
 import LoginVolunteer from "./pages/LoginVolunteer";
 import LoginCharity from "./pages/LoginCharity";
 import EventForm from "./pages/EventForm";
+import ACTIONS from "./utils/actions";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -48,6 +51,16 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
+
+  //if token is expired or tampered with, the token is destroyed and the user is logged out.
+  useEffect(()=>{
+    if(Auth.isTokenExpired() || (!Auth.getProfile() && localStorage.getItem('id_token'))){
+      dispatch({type: ACTIONS.LOGGED_IN, payload: false});
+      Auth.logout();
+    }
+  },[])
   return (
     <ApolloProvider client={client}>
       <header className="sticky top-0 z-50">
