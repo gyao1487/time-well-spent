@@ -57,8 +57,6 @@ Query:{
         }
       },
       updateGoogleVolunteer: async function (parent, args, context){
-        console.log(context.user._id)
-        console.log(args)
         try{
           const googlev = await GoogleVolunteer.findOneAndUpdate(
             {
