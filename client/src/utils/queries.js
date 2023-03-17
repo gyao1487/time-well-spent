@@ -30,6 +30,7 @@ export const QUERY_ALL_EVENTS = gql`
       image
       savedCharity
       date
+      time
       address
     }
   }
@@ -45,6 +46,7 @@ export const QUERY_EVENT = gql`
       image
       savedCharity
       date
+      time
       address
     }
   }

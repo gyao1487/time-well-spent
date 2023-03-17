@@ -1,6 +1,13 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind forms;
 
 .custom-map-control-button{
   background-color: white;
@@ -17,6 +24,17 @@
 }
 .custom-map-control-button:hover{
   background-color: rgb(232, 232, 232);
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media (min-width:801px)  {
+  
+  main {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+
+
 }
 /* :root {
   --primary: #232F3E;

@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer
-      className="footer items-center p-4 bg-gray-700 text-neutral-content  fixed
+      className="footer items-center p-4 bg-gray-700 text-neutral-content 
              inset-x-0
              bottom-0
              p-4"
