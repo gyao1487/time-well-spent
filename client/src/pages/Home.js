@@ -88,35 +88,6 @@ const Home = () => {
     })
     
     setMap(map)
-
-    const request = {
-      query: "Museum of Contemporary Art Australia",
-      fields: ["name", "geometry"],
-    };
-    function createMarker(place) {
-      
-      if (!place.geometry || !place.geometry.location) return;
-    
-      const marker = new window.google.maps.Marker({
-        map,
-        position: place.geometry.location,
-      });
-    
-      window.google.maps.event.addListener(marker, "click", () => {
-        infowindow.setContent(place.name || "");
-        infowindow.open(map);
-      });
-    }
-    service = new window.google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
-        for (let i = 0; i < results.length; i++) {
-          createMarker(results[i]);
-        }
-  
-        map.setCenter(results[0].geometry.location);
-      }
-    });
   }, [])
 
   
@@ -125,8 +96,103 @@ const Home = () => {
     setMap(null)
   }, [])
 
-  const handleSearchClick = () =>{
+  const handleSearchClick = async () =>{
+
+    const getSearchInputLatLng = async () =>{
+      const geocoder = new window.google.maps.Geocoder();
+      let response = geocoder.geocode({
+        'address': searchOpportunityInput 
+      },
+        function (results, status){
+          if(status == 'OK'){
+            // console.log(results)
+            // let x = {lat:results[0].geometry.bounds.Va.lo , Lng :results[0].geometry.bounds.Ja.lo }
+            // return x;
+          }
+          else{
+            alert('Geocode was not successful.', status)
+          }
+        }
+      )
+      console.log(await response)
+      // const latLng = new window.google.maps.LatLng((await response).results[0].geometry.bounds.Va.lo, (await response).results[0].geometry.bounds.Ja.lo)
+      const latLng = {lat:(await response).results[0].geometry.bounds.Va.lo , lng :(await response).results[0].geometry.bounds.Ja.lo }
+      console.log(latLng)
+      return latLng;
+    }
+    // const request = {
+    //   query: searchOpportunityInput,
+    //   fields: ["name", "geometry"],
+    // };
+    // let service;
+    // service = new window.google.maps.places.PlacesService(map);
+    // service.findPlaceFromQuery(request, (results, status) => {
+    //   if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+    //     for (let i = 0; i < results.length; i++) {
+    //       createMarker(results[i]);
+    //     }
+  
+    //     map.setCenter(results[0].geometry.location);
+    //   }
+    // });
+
+    // const latLng = await getSearchInputLatLng();
+    const chicago = {
+      lat: 41.9703133,
+      lng: -87.663045
+    };
+    let service;
+    const latLng = new window.google.maps.LatLng(41.9703133,-87.663045)
+    function createMarker(place) {
+      
+      if (!place.geometry || !place.geometry.location) return;
     
+      const marker = new window.google.maps.Marker({
+        map,
+        position: place.geometry.location,
+      });
+      let infoWindow = new window.google.maps.InfoWindow({
+        content: 'Testing',
+        ariaLabel: 'testing'
+      })
+      marker.addListener('mouseover', ()=>{
+        
+        infoWindow.open({
+          anchor: marker,
+          map: map,
+        })
+      })
+      marker.addListener('mouseout', ()=>{
+        
+        infoWindow.close({
+          anchor: marker,
+          map: map,
+        })
+      })
+      marker.setMap(map)
+    }
+    var request = {
+      location: latLng,
+      radius: '500',
+      keyword: 'charity'
+    };
+  
+    service = new window.google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+  
+  
+  function callback(results, status) {
+    if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+      }
+    }
+    else{
+      console.log(status)
+      throw new Error('something went wrong.')
+    }
+  }
+
   }
 
 
