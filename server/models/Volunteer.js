@@ -29,10 +29,6 @@ const userSchema = new Schema(
         type: String,
         require: false,
     },
-    title:{
-    type:String,
-    require:false
-    },
     savedEvents:[{
       type: Schema.Types.ObjectId,
       ref: "Event"

@@ -60,7 +60,6 @@ export const ADD_VOLUNTEER_EVENT = gql`
       email
       skills
       password
-      title
       savedEvents
     }
   }

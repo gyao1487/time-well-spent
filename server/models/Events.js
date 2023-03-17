@@ -16,19 +16,19 @@ const eventSchema = new Schema({
   },
   date: {
     type: String,
-    required: true,
+    required: false,
   },
   time: {
     type: String,
   },
   address: {
     type: String,
-    required: true,
+    required: false,
   },
   savedCharity: {
     type: Schema.Types.ObjectId,
     ref: "Charity",
-    required: true,
+    required: false,
   },
   
 });
