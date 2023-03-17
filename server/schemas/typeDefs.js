@@ -42,6 +42,7 @@ type Event{
     description:String!
     image:String
     date:String!
+    time:String
     address:String!
     savedCharity: String!
 }

@@ -2,6 +2,7 @@
 
 import React, { useCallback, useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
+
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_EVENTS } from "../utils/queries";
 import {GoogleMap, useJsApiLoader, Libraries} from '@react-google-maps/api'
@@ -133,14 +134,12 @@ const Home = () => {
   
   return (
     <div>
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
-            
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Time Well Spent
             </h1>
-          
             <p className="mt-6 text-lg leading-8 text-gray-600">
               "Time well spent adds to a life well lived." 
             </p>
