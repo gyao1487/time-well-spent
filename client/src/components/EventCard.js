@@ -40,16 +40,6 @@ function EventCard({ event }) {
     console.log(event);
   }, [event]);
 
-  // create state to hold saved bookId values
-  // const [savedEventIds, setSavedEventIds] = useState(getSavedEventIds());
-  // // new
-  // const [savedEvent] = useMutation(ADD_EVENT);
-
-  // useEffect(() => {
-  //   return () => saveEventIds(savedEventIds);
-  // });
-
-  
   if (!event) {
     return <h3>No events match this search, check again later!</h3>
   }

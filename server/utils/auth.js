@@ -26,12 +26,12 @@ module.exports = {
       req.user = data;
     } catch {
       console.log('Invalid token');
-      return { token: null }; // return context with token set to null if token is invalid
+      return { user: null }; // return context with token set to null if token is invalid
     }
   
     // send to next endpoint
     console.log('req.user:', req.user); // Add this line
-    return { token }; // return context with token
+    return { token, user:req.user }; // return context with token
   },
   signToken: function ({ email, name, _id }) {
     const payload = { email, name, _id };
