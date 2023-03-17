@@ -43,8 +43,7 @@ const Profile = () => {
     }
     
     if(data){
-
-     
+      
     }
     
   }
