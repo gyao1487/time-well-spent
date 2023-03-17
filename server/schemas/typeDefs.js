@@ -71,6 +71,7 @@ type Mutation{
     createGoogleVolunteer(username:String!, email:String!, jti:String!, sub:String!, picture:String!):Auth
     updateGoogleVolunteer(_id: ID!, user_description: String):GoogleVolunteer
     createCharity(username:String!, password:String!, email:String!, websiteURL:String!):Auth
+    updateCharity(_id:ID!, description:String):Charity
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
     loginAsGoogleVolunteer(email: String!, jti: String!):Auth

@@ -119,4 +119,11 @@ mutation createCharity($username: String!, $password: String!, $email: String!, 
     token
   }
 }
-`;
+`
+
+export const UPDATE_CHARITY_DESCRIPTION =gql`
+mutation updateCharityDescription($_id: ID!, $description: String){
+  updateCharity(_id: $_id, description: $description){
+    description
+  }
+}`

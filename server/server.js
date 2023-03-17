@@ -24,11 +24,11 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
 //change back to /build/index.html after
-  app.use(express.static(path.join(__dirname, '../client/build/')));
+  app.use(express.static(path.join(__dirname, '../client/src/')));
 }
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/src/index.js'));
 });
 
 app.use('/', apiRoutes);

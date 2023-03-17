@@ -18,7 +18,8 @@ const navigation = [
   { name: "Home", to: "/", href: "/",  current: false },
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Find Volunteers", href: "/LoginCharity", current: false },
-  { name: "Profile", href: "/profile", current: false },
+  //CHANGE BACK TO /profile
+  { name: "Profile", href: "/charityprofile", current: false },
 ];
 const loggedInNav =[
   { name: "Login", href: "/LoginVolunteer", current: false},
@@ -41,9 +42,6 @@ function Navbar() {
     skip: !userId
   })
   
-  
-
-
 // if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
     setUserData(data?.googleVolunteer);
