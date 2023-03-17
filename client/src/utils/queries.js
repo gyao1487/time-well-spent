@@ -53,9 +53,17 @@ export const QUERY_EVENT = gql`
 export const QUERY_CHARITY = gql`
 query charity($_id: ID!) {
     charity (_id: $_id){
-    username
-    email
-    savedEvents
+      username
+      email
+      savedEvents
+      websiteURL
+      description
+      address
+      facebook
+      instagram
+      twitter
+      phoneNumber
+      charityName
   }
 }
 `;

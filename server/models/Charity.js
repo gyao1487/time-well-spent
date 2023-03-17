@@ -21,7 +21,37 @@ const userSchema = new Schema(
     savedEvents:[{
       type: Schema.Types.ObjectId,
       ref: "Event"
-    }]
+    }],
+    websiteURL: {
+      type: String,
+      required: true,
+      match: [/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/, 'Must be a valid website']
+    },
+    description: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    facebook: {
+      type: String,
+      match: [/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/, 'Must be a valid website']
+    },
+    instagram: {
+      type: String,
+      match: [/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/, 'Must be a valid website']
+    },
+    twitter: {
+      type: String,
+      match: [/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/, 'Must be a valid website']
+    },
+    phoneNumber: {
+      type: String,
+    },
+    charityName: {
+      type: String,
+      // required: true
+    }
    },
   // set this to use virtual below
   {

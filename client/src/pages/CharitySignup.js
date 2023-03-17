@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client';
 
 const CharitySignup = () => {
   // set initial form state
-  const [usercFormData, setCharityFormData] = useState({ username: '', email: '', password: '' });
+  const [usercFormData, setCharityFormData] = useState({ username: '', email: '', password: '', websiteURL: '' });
   // set state for form validation
  
 
@@ -47,6 +47,7 @@ const CharitySignup = () => {
       username: '',
       email: '',
       password: '',
+      websiteURL: '',
     });
   };
   return (
@@ -87,12 +88,12 @@ const CharitySignup = () => {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="skills">Skills:</label>
+          <label htmlFor="websiteURL">WebsiteURL:</label>
           <input
-            placeholder="Organizing, outgoing,"
-            name="skills"
-            type="skills"
-            id="skills"
+            placeholder="https://yourwebsite.org"
+            name="websiteURL"
+            type="websiteURL"
+            id="websiteURL"
             onChange={handleChange}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
