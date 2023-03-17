@@ -39,7 +39,7 @@ type Charity{
 type Event{
     _id:ID
     title:String
-    description:String!
+    description:String
     image:String
     date:String!
     time:String
@@ -49,8 +49,9 @@ type Event{
 
 input inputEvent {
     title:String!
-    description:String!
+    description:String
     image:String
+    time:String
     date:String!
     address:String!
     savedCharity: String!
