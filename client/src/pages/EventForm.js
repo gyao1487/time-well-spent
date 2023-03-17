@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-
 import { ADD_CHARITY_EVENT } from "../utils/mutations";
 import { parse } from "graphql";
 
@@ -18,7 +17,10 @@ function EventForm(props) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     
+  
+    console.log("Form state before submission:", usercformState);
     try {
+      console.log('Before calling addCharityEvent');
       const mutationResponse = await addCharityEvent({
         variables: {
           savedEvents: {
@@ -28,16 +30,21 @@ function EventForm(props) {
             date: usercformState.date,
             address: usercformState.address,
             savedCharity: usercformState.savedCharity
-            // savedCharity: {
-            //   _id:
-            // }
           },
         },
+        
       });
-    } catch (e) {
-      console.log(e);
+      console.log('After calling addCharityEvent');
+    console.log('Mutation response:', mutationResponse);
+  } 
+  catch (e) {
+    console.log('Error during addCharityEvent call:', e);
+  }
+  finally {
+      console.log("Form submission completed");
     }
   };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;

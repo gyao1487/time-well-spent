@@ -79,55 +79,59 @@ const resolvers = {
         }
       },
 
-    addVolunteerEvent: async function (parent, { eventId }, context) {
-      console.log("addVolunteerEvent called"); // Add this line
-
-      try {
-        console.log("Token in context:", context.token); // Log the token in context for debugging
-        const volunteerId = decodeToken(context.token);
-        const volunteer = await Volunteer.findById(volunteerId);
-        const event = await Event.findById(eventId);
-
-        if (!volunteer || !event) {
-          throw new Error("Volunteer or event not found");
-        }
-
-        // Check if the event is already saved
-        if (
-          !volunteer.savedEvents.some((savedEvent) =>
-            savedEvent.equals(eventId)
-          )
-        ) {
-          volunteer.savedEvents.push(eventId);
-          await volunteer.save();
-        }
-        console.log("Volunteer:", volunteer); // Add this line
-        console.log("Volunteer.toObject():", volunteer.toObject());
-        return volunteer;
-      } catch (error) {
-        console.error("Token error:", error.message); // Log the error message for debugging
-        throw new Error("Invalid token");
-      }
-    },
+      addVolunteerEvent:async function(parent,{ eventId },context ) {
+        console.log('addVolunteerEvent called'); // Add this line
+        
+          try {
+            console.log('Token in context:', context.token); // Log the token in context for debugging
+            const volunteerId = decodeToken(context.token);
+            const volunteer = await Volunteer.findById(volunteerId);
+            const event = await Event.findById(eventId);
+    
+            if (!volunteer || !event) {
+              throw new Error('Volunteer or event not found');
+            }
+    
+            // Check if the event is already saved
+            if (!volunteer.savedEvents.some((savedEvent) => savedEvent.equals(eventId))) {
+              volunteer.savedEvents.push(eventId);
+              await volunteer.save();
+            }
+            console.log("Volunteer:", volunteer); // Add this line
+            console.log("Volunteer.toObject():", volunteer.toObject());
+            return volunteer;
+          } catch (error) {
+            console.error('Token error:', error.message); // Log the error message for debugging
+            throw new Error('Invalid token');
+          }
+        },
 
     // ---------------------------------- Charity Mutations ----------------------------------
-    addCharityEvent: async function (parent, args, context) {
-      console.log(args);
+    addCharityEvent: async function (parent, { savedEvents }, context)  {
+     
       console.log(context.user);
       console.log(context.user._id);
       try {
-        const newEvent = await Event.create(args.savedEvent);
-
+        if (!savedEvents.description) {
+          throw new Error("Event description is required.");
+        }
+        const charity = await Charity.findOne({ username: savedEvents.savedCharity });
+        savedEvents.savedCharity = charity._id;
+        const newEvent = await Event.create({
+          ...savedEvents,
+          savedCharity: charity._id,
+        });
+        console.log('Newly created event:', newEvent); // Add this line
         const updatedCharity = await Charity.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedEvents: newEvent._id } },
           { new: true, runValidators: true }
         );
-        console.log(updatedCharity);
-        return updatedCharity;
+        console.log("charity updated", updatedCharity);
+        return {updatedCharity, newEvent};
       } catch (err) {
         console.log(err);
-        // throw new AuthenticationError('You need to be logged in!');
+        throw new AuthenticationError('You need to be logged in!');
       }
     },
   
