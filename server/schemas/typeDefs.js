@@ -26,6 +26,14 @@ type Charity{
     username:String!
     email:String!
     savedEvents:[Event]
+    websiteURL:String!
+    description:String
+    address:String
+    facebook:String
+    instagram:String
+    twitter:String
+    phoneNumber:String
+    charityName:String
 }
 
 type Event{
@@ -62,7 +70,7 @@ type Mutation{
     createVolunteer(username:String!, fullName:String!, email:String!, password:String!, skills:String):Auth
     createGoogleVolunteer(username:String!, email:String!, jti:String!, sub:String!, picture:String!):Auth
     updateGoogleVolunteer(_id: ID!, user_description: String):GoogleVolunteer
-    createCharity(username:String!, password:String!, email:String!):Auth
+    createCharity(username:String!, password:String!, email:String!, websiteURL:String!):Auth
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
     loginAsGoogleVolunteer(email: String!, jti: String!):Auth

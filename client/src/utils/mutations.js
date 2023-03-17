@@ -105,14 +105,15 @@ mutation updateGoogleVolunteer($_id: ID!, $user_description: String){
 `
 
 export const ADD_CHARITY = gql`
-mutation createCharity($username: String!, $password: String!, $email: String!) {
-  createCharity(username: $username, password: $password, email: $email) {
+mutation createCharity($username: String!, $password: String!, $email: String!, $websiteURL: String!) {
+  createCharity(username: $username, password: $password, email: $email, websiteURL: $websiteURL) {
     
     userc {
       _id
       username
       email
       password
+      websiteURL
 }
     
     token
