@@ -1,39 +1,38 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Volunteer, Charity, Event, GoogleVolunteer } = require("../models");
 const { signToken } = require("../utils/auth");
-const { decodeToken } = require('../utils/auth')
+const { decodeToken } = require("../utils/auth");
 
 const resolvers = {
-
-Query:{
-
-      allVolunteers: async () => {
-        return Volunteer.find()
-      },
-     
-      volunteer: async (parent, { volunteerId }) => {
-        return Volunteer.findOne({ _id: volunteerId });
-      },
-
-      allCharity: async () => {
-        return Charity.find()
-      },
-     
-      charity: async (parent, { charityId }) => {
-        return Charity.findOne({ _id: charityId });
-      },
-      allEvents: async () => {
-        return Event.find()
-      },
-      event: async (parent, { _id }) => {
-        return Event.findOne({_id:_id})
-       },
-      googleVolunteer: async (parent, { _id }, context) => {
-        return GoogleVolunteer.findOne({_id: _id})
-      },
+  Query: {
+    allVolunteers: async () => {
+      return Volunteer.find();
     },
 
+    volunteer: async (parent, { volunteerId }) => {
+      return Volunteer.findOne({ _id: volunteerId });
+    },
+
+    allCharity: async () => {
+      return Charity.find();
+    },
+
+    charity: async (parent, { charityId }) => {
+      return Charity.findOne({ _id: charityId });
+    },
+    allEvents: async () => {
+      return Event.find();
+    },
+    event: async (parent, { _id }) => {
+      return Event.findOne({ _id: _id });
+    },
+    googleVolunteer: async (parent, { _id }, context) => {
+      return GoogleVolunteer.findOne({ _id: _id });
+    },
+  },
+
   Mutation: {
+    // ---------------------------------- Volunteer Mutations ----------------------------------
     createVolunteer: async function (parent, args) {
       const userv = await Volunteer.create(args);
 
@@ -43,19 +42,22 @@ Query:{
       const token = signToken(userv);
       return { token, userv };
     },
+
     createGoogleVolunteer: async function (parent, args) {
       try {
         let googlev = await GoogleVolunteer.findOne({ email: args.email });
         console.log(googlev);
         if (!googlev) googlev = await GoogleVolunteer.create(args);
-          const token = signToken(googlev);
-          return {
-            token, googlev,
-          }
-        }catch(err){
-          console.log(err)
-        }
-      },
+        const token = signToken(googlev);
+        return {
+          token,
+          googlev,
+        };
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
       updateGoogleVolunteer: async function (parent, args, context){
         try{
           const googlev = await GoogleVolunteer.findOneAndUpdate(
@@ -77,62 +79,79 @@ Query:{
         }
       },
 
-      
-      
-      addVolunteerEvent:async function(parent,{ eventId },context ) {
-        console.log('addVolunteerEvent called'); // Add this line
-        
-          try {
-            console.log('Token in context:', context.token); // Log the token in context for debugging
-            const volunteerId = decodeToken(context.token);
-            const volunteer = await Volunteer.findById(volunteerId);
-            const event = await Event.findById(eventId);
-    
-            if (!volunteer || !event) {
-              throw new Error('Volunteer or event not found');
-            }
-    
-            // Check if the event is already saved
-            if (!volunteer.savedEvents.some((savedEvent) => savedEvent.equals(eventId))) {
-              volunteer.savedEvents.push(eventId);
-              await volunteer.save();
-            }
-            console.log("Volunteer:", volunteer); // Add this line
-            console.log("Volunteer.toObject():", volunteer.toObject());
-            return volunteer;
-          } catch (error) {
-            console.error('Token error:', error.message); // Log the error message for debugging
-            throw new Error('Invalid token');
-          }
-        },
-      
-      
-      addCharityEvent:async function(parent,args,context ) {
-        console.log(args)
-        console.log(context.user)
-        console.log(context.user._id)
-        try {
-          const newEvent = await Event.create(args.savedEvent);
+    addVolunteerEvent: async function (parent, { eventId }, context) {
+      console.log("addVolunteerEvent called"); // Add this line
 
-          const updatedCharity = await Charity.findOneAndUpdate(
-            { _id: context.user._id },
-            { $addToSet: { savedEvents: newEvent._id } },
-            { new: true, runValidators: true }
-          );
-          console.log(updatedCharity)
-          return updatedCharity;
+      try {
+        console.log("Token in context:", context.token); // Log the token in context for debugging
+        const volunteerId = decodeToken(context.token);
+        const volunteer = await Volunteer.findById(volunteerId);
+        const event = await Event.findById(eventId);
 
-        } catch (err) {
-          console.log(err);
-          // throw new AuthenticationError('You need to be logged in!');
+        if (!volunteer || !event) {
+          throw new Error("Volunteer or event not found");
         }
-      },
-    
-       
-    
-      
-    
-    
+
+        // Check if the event is already saved
+        if (
+          !volunteer.savedEvents.some((savedEvent) =>
+            savedEvent.equals(eventId)
+          )
+        ) {
+          volunteer.savedEvents.push(eventId);
+          await volunteer.save();
+        }
+        console.log("Volunteer:", volunteer); // Add this line
+        console.log("Volunteer.toObject():", volunteer.toObject());
+        return volunteer;
+      } catch (error) {
+        console.error("Token error:", error.message); // Log the error message for debugging
+        throw new Error("Invalid token");
+      }
+    },
+
+    // ---------------------------------- Charity Mutations ----------------------------------
+    addCharityEvent: async function (parent, args, context) {
+      console.log(args);
+      console.log(context.user);
+      console.log(context.user._id);
+      try {
+        const newEvent = await Event.create(args.savedEvent);
+
+        const updatedCharity = await Charity.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedEvents: newEvent._id } },
+          { new: true, runValidators: true }
+        );
+        console.log(updatedCharity);
+        return updatedCharity;
+      } catch (err) {
+        console.log(err);
+        // throw new AuthenticationError('You need to be logged in!');
+      }
+    },
+  
+    updateCharity: async function (parent, args, context) {
+      try {
+        const userc = await Charity.findOneAndUpdate(
+          {
+            _id: args._id,
+          },
+          {
+            $set: {description: args.description },
+          },
+          {
+            new: true,
+          }
+        );
+
+        if (!userc) throw new Error("User not found.");
+        return { userc};
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
 
     createCharity: async function (parent, args) {
       const userc = await Charity.create(args);
@@ -145,6 +164,8 @@ Query:{
     },
     // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
     // {body} is destructured req.body
+
+    // ---------------------------------- Authentication Mutations ----------------------------------
     loginAsVolunteer: async function (parent, args) {
       const userv = await Volunteer.findOne({
         $or: [{ username: args.username }, { email: args.email }],
@@ -160,6 +181,7 @@ Query:{
       const token = signToken(userv);
       return { token, userv };
     },
+
     loginAsGoogleVolunteer: async function (parent, args) {
       const googlev = await GoogleVolunteer.findOne({ email: args.email });
       if (!googlev) {
@@ -168,6 +190,7 @@ Query:{
       const token = signToken(googlev);
       return { token, googlev };
     },
+
     loginAsCharity: async function (parent, args) {
       const userc = await Charity.findOne({
         $or: [{ username: args.username }, { email: args.email }],
@@ -184,6 +207,7 @@ Query:{
       return { token, userc };
     },
 
+    // ---------------------------------- Event Mutations ----------------------------------
     addEvent: async function (parent, args, context) {
       console.log(args);
       console.log(context);

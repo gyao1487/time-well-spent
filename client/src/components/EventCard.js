@@ -120,7 +120,7 @@ function EventCard({ event }) {
             data-te-ripple-init
             data-te-ripple-color="light"
             data-id={event._id} onClick={handleAddEvent}>
-            Add to saved events
+            Sign up!
           </button>
           </div>
         </div>
