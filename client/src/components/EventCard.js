@@ -56,7 +56,7 @@ function EventCard({ event }) {
 
   return (
     
-      <div className="mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4">
+      <div className="flex mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4   transform hover:-translate-y-2 transition-transform duration-500 ease-in-out">
         <Link to={`/event/${event._id}`}>
           <img
             className="rounded-t-lg"
@@ -120,7 +120,7 @@ function EventCard({ event }) {
             data-te-ripple-init
             data-te-ripple-color="light"
             data-id={event._id} onClick={handleAddEvent}>
-            Add to saved events
+            Sign up!
           </button>
           </div>
         </div>

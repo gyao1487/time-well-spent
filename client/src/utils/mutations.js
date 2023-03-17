@@ -99,23 +99,32 @@ mutation createVolunteer($username: String!, $email: String!, $sub: String!, $jt
 export const UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION =gql`
 mutation updateGoogleVolunteer($_id: ID!, $user_description: String){
   updateGoogleVolunteer(_id: $_id, user_description: $user_description){
+    _id
     user_description
   }
 }
 `
 
 export const ADD_CHARITY = gql`
-mutation createCharity($username: String!, $password: String!, $email: String!) {
-  createCharity(username: $username, password: $password, email: $email) {
+mutation createCharity($username: String!, $password: String!, $email: String!, $websiteURL: String!) {
+  createCharity(username: $username, password: $password, email: $email, websiteURL: $websiteURL) {
     
     userc {
       _id
       username
       email
       password
+      websiteURL
 }
     
     token
   }
 }
-`;
+`
+
+export const UPDATE_CHARITY_DESCRIPTION =gql`
+mutation updateCharityDescription($_id: ID!, $description: String){
+  updateCharity(_id: $_id, description: $description){
+    description
+  }
+}`
