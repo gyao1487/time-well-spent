@@ -41,9 +41,6 @@ function Navbar() {
     skip: !userId
   })
   
-  
-
-
 // if user isnt signed up, userData will store to localstorage and update state
   useEffect(()=>{
     setUserData(data?.googleVolunteer);

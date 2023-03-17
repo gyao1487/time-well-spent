@@ -12,7 +12,7 @@ import Navbar from "./components/Navbar";
 import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
-
+import CharityProfile from "./pages/CharityProfile"
 import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
 import Auth from './utils/auth'
@@ -88,6 +88,7 @@ function App() {
                 element={<Success />}
               /> */}
             <Route path="/discover" element={<Discover />} />
+{/* change back to /profile */}
             <Route path="/profile" element={<Profile />} />
             {/* <Route
                 path="/VolunteerProfile/:id"
