@@ -26,9 +26,6 @@ const Profile = () => {
       user_description: userDescription,
       _id: Auth.getProfile()?.data._id,
     },
-    // context:{
-    //   userToken,
-    // }
   })
   
   const handleDescriptionSubmit =(e)=>{
@@ -39,9 +36,7 @@ const Profile = () => {
   const handleSaveDescription = async (e)=>{
     
     setIsUserEditingDescription(false);
-    const { data, error } = await updateGoogleVolunteer({
-      
-    })
+    const { data, error } = await updateGoogleVolunteer()
     if(error){
       alert('Something went wrong.')
       console.log(error)

@@ -58,29 +58,26 @@ const resolvers = {
       }
     },
 
-    updateGoogleVolunteer: async function (parent, args, context) {
-      console.log(context.user._id);
-      console.log(args);
-      try {
-        const googlev = await GoogleVolunteer.findOneAndUpdate(
-          {
-            _id: args._id,
-          },
-          {
-            $set: { user_description: args.user_description },
-          },
-          {
-            new: true,
-          }
-        );
-        console.log(googlev);
-
-        if (!googlev) throw new Error("User not found.");
-        return { googlev };
-      } catch (err) {
-        console.log(err);
-      }
-    },
+      updateGoogleVolunteer: async function (parent, args, context){
+        try{
+          const googlev = await GoogleVolunteer.findOneAndUpdate(
+            {
+              _id: args._id
+            },
+            {
+               $set : { user_description: args.user_description },
+            },
+            {
+              new: true,
+            })
+            console.log(googlev)
+    
+            if(!googlev) throw new Error('User not found.')
+            return { googlev }
+        }catch(err){
+          console.log(err)
+        }
+      },
 
     addVolunteerEvent: async function (parent, { eventId }, context) {
       console.log("addVolunteerEvent called"); // Add this line

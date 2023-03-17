@@ -1,10 +1,10 @@
 
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_EVENTS } from "../utils/queries";
-import {GoogleMap, useJsApiLoader} from '@react-google-maps/api'
+import {GoogleMap, useJsApiLoader, Libraries} from '@react-google-maps/api'
 
 
 const containerStyle = {
@@ -14,22 +14,35 @@ const containerStyle = {
   borderRadius: '5px',
   // marginLeft: '50em'
 };
-
+const googleMapsLibraries = ['places']
 const center = {
   lat: 41.9703133,
   lng: -87.663045
 };
 
 const Home = () => {
+
+  const [searchOpportunityInput, setSearchOpportunityInput] = useState('');
+
+  const { loading, data } = useQuery(QUERY_ALL_EVENTS);
+  const events = data?.allEvents || [];
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: googleMapsLibraries,
   })
   
   const [map, setMap] = useState(null);
 
+  
+  
+
   const onLoad = React.useCallback(function callback(map) {
+    
+    let service;
+    let infowindow;
     let infoWindow;
+    
     const bounds = new window.google.maps.LatLng(center);
     map.setCenter(bounds)
     map.setZoom(10)
@@ -72,15 +85,52 @@ const Home = () => {
         );
       }
     })
+    
     setMap(map)
+
+    const request = {
+      query: "Museum of Contemporary Art Australia",
+      fields: ["name", "geometry"],
+    };
+    function createMarker(place) {
+      
+      if (!place.geometry || !place.geometry.location) return;
+    
+      const marker = new window.google.maps.Marker({
+        map,
+        position: place.geometry.location,
+      });
+    
+      window.google.maps.event.addListener(marker, "click", () => {
+        infowindow.setContent(place.name || "");
+        infowindow.open(map);
+      });
+    }
+    service = new window.google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, (results, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+        for (let i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+  
+        map.setCenter(results[0].geometry.location);
+      }
+    });
   }, [])
+
+  
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
   }, [])
 
-  const { loading, data } = useQuery(QUERY_ALL_EVENTS);
-  const events = data?.allEvents || [];
+  const handleSearchClick = () =>{
+    
+  }
+
+
+
+  
   return (
     <div>
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -211,11 +261,14 @@ const Home = () => {
                   type="input"
                   placeholder="Search for opportunity"
                   className="flex-1 h-10 px-4 py-2 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0"
+                  value={searchOpportunityInput}
+                  onChange={(e)=>setSearchOpportunityInput(e.target.value)}
                 />
 
                 <button
                   type="button"
                   className="h-10 px-4 py-2 m-1 text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400"
+                  onClick={handleSearchClick}
                 >
                   Search
                 </button>
