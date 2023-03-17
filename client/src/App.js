@@ -89,7 +89,7 @@ function App() {
               /> */}
             <Route path="/discover" element={<Discover />} />
 {/* change back to /profile */}
-            <Route path="/charityprofile" element={<CharityProfile />} />
+            <Route path="/profile" element={<Profile />} />
             {/* <Route
                 path="/VolunteerProfile/:id"
                 element={<VolunteerProfile />}
