@@ -301,11 +301,11 @@ const Home = () => {
         {/* ---------------Event Cards----------------- */}
         {/* If loading, show loading div. If done loading, show event cards
        !!!!!!!!!!!!!!!  Need to create better loading element later */}
-        <div className="flex flex-wrap">
+        <div>
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <div>
+            <div className="container flex flex-col px-6 py-10 mx-auto lg:h-[32rem] lg:py-16 lg:flex-row lg:items-center">
               {events.map((event) => (
                 <EventCard event={event} key={event._id} />
               ))}
