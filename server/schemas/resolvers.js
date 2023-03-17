@@ -106,6 +106,45 @@ const resolvers = {
           }
         },
 
+        updateVolunteer: async function(parent, args , ) { 
+          const { _id,
+            fullName,
+            username,
+            email,
+            skills, } = args;
+          const updateVolunteer = await Volunteer.findByIdAndUpdate(
+            _id,{fullName, username, email, skills,},
+        { new: true } // Return the updated document
+      );
+    
+      if (!updateVolunteer) {
+        throw new Error("Volunteer not found");
+      }
+    
+      return updateVolunteer;
+    },
+    removeVolunteer: async function (parent, args, context) {
+      // Find and remove the event from the Events collection
+      const removedVolunteer = await Volunteer.findByIdAndDelete(args._id);
+      if (!removedVolunteer) {
+        throw new Error("Event not found");
+      }
+    
+      // Remove the event from the savedEvents array in the Charity document
+      // const updatedCharity = await Charity.findOneAndUpdate(
+      //   { _id: context.user._id },
+      //   { $pull: { savedEvents: args._id } },
+      //   { new: true }
+      // );
+    
+      // if (!updatedCharity) {
+      //   throw new AuthenticationError("You need to be logged in!");
+      // }
+    
+      return removedVolunteer;
+    },
+        
+
     // ---------------------------------- Charity Mutations ----------------------------------
     addCharityEvent: async function (parent, { savedEvents }, context)  {
      
@@ -134,7 +173,7 @@ const resolvers = {
         throw new AuthenticationError('You need to be logged in!');
       }
     },
-  
+  // Needs looked at is not working on back end
     updateCharity: async function (parent, args, context) {
       try {
         const userc = await Charity.findOneAndUpdate(
@@ -168,7 +207,26 @@ const resolvers = {
     },
     // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
     // {body} is destructured req.body
-
+    removeCharity: async function (parent, args, context) {
+      // Find and remove the event from the Events collection
+      const removedCharity = await Charity.findByIdAndDelete(args._id);
+      if (!removedCharity) {
+        throw new Error("Event not found");
+      }
+    
+      // Remove the event from the savedEvents array in the Charity document
+      // const updatedCharity = await Charity.findOneAndUpdate(
+      //   { _id: context.user._id },
+      //   { $pull: { savedEvents: args._id } },
+      //   { new: true }
+      // );
+    
+      // if (!updatedCharity) {
+      //   throw new AuthenticationError("You need to be logged in!");
+      // }
+    
+      return removedCharity;
+    },
     // ---------------------------------- Authentication Mutations ----------------------------------
     loginAsVolunteer: async function (parent, args) {
       const userv = await Volunteer.findOne({
@@ -210,18 +268,46 @@ const resolvers = {
       const token = signToken(userc);
       return { token, userc };
     },
-
+ // ---------------------------------- Evnet Mutations -------------------------------------------
+    updateEvent: async function (parent, args, context) {
+      
+      const { _id, ...updateFields } = args;
+    
+      const updatedEvent = await Event.findByIdAndUpdate(
+        _id,
+        updateFields,
+        { new: true } // Return the updated document
+      );
+    
+      if (!updatedEvent) {
+        throw new Error("Event not found");
+      }
+    
+      return updatedEvent;
+    },
 
     removeEvent: async function (parent, args, context) {
-      const updatedCharity = await Charity.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { savedEvents: { title: args.title } } },
-        { new: true }
-      );
-      if (!updatedCharity) {
-        throw new AuthenticationError("You need to be logged in!");
+      
+      
+    
+      // Find and remove the event from the Events collection
+      const removedEvent = await Event.findByIdAndDelete(args._id);
+      if (!removedEvent) {
+        throw new Error("Event not found");
       }
-      return updatedCharity;
+    
+      // Remove the event from the savedEvents array in the Charity document
+      // const updatedCharity = await Charity.findOneAndUpdate(
+      //   { _id: context.user._id },
+      //   { $pull: { savedEvents: args._id } },
+      //   { new: true }
+      // );
+    
+      // if (!updatedCharity) {
+      //   throw new AuthenticationError("You need to be logged in!");
+      // }
+    
+      return removedEvent;
     },
   },
 };

@@ -22,6 +22,7 @@ function LoginVolunteer(props) {
         },
       });
       const token = mutationResponse.data.loginAsVolunteer.token;
+      console.log(token)
       Auth.login(token);
     } catch (e) {
       console.log(e);

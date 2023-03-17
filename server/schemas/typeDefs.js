@@ -15,7 +15,6 @@ type Volunteer{
     email:String!
     skills:String
     password:String!
-    title:String
     savedEvents:[ID]!
     
 }
@@ -41,10 +40,10 @@ type Event{
     title:String
     description:String
     image:String
-    date:String!
+    date:String
     time:String
-    address:String!
-    savedCharity: String!
+    address:String
+    savedCharity: String
 }
 
 input inputEvent {
@@ -80,8 +79,12 @@ type Mutation{
     addEvent(savedEvent:inputEvent):Event
     addCharityEvent(savedEvents:inputEvent):Event
     addVolunteerEvent(eventId: ID!): Volunteer
+    updateVolunteer(_id:ID!,fullName:String!, username:String!, email:String!, skills:String):Volunteer
+    updateEvent(_id:ID!,title:String, description:String, image:String, date:String, time:String, address:String):Event
     removeVolunteerEvent(title:String!):Volunteer
-    removeEvent(title:String!):Charity
+    removeEvent(_id:ID!):Event
+    removeVolunteer(_id:ID!):Volunteer
+    removeCharity(_id:ID!):Charity
 }
 
 
