@@ -28,9 +28,6 @@ function EventForm(props) {
             date: usercformState.date,
             address: usercformState.address,
             savedCharity: usercformState.savedCharity
-            // savedCharity: {
-            //   _id:
-            // }
           },
         },
       });
@@ -102,7 +99,7 @@ function EventForm(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="image">Name of your charity:</label>
+          <label htmlFor="charity">Name of your charity:</label>
           <input
             placeholder="Type Charity Name Here"
             name="charity"

@@ -22,7 +22,7 @@ export const QUERY_VOLUNTEER = gql`
 `;
 
 export const QUERY_ALL_EVENTS = gql`
-  {
+  query AllEvents {
     allEvents {
       _id
       title
