@@ -126,12 +126,20 @@ const Home = () => {
         animation: window.google.maps.Animation.DROP,
         position: place.geometry.location,
       });
-
-      let infoWindow = new window.google.maps.InfoWindow({
-        content: `${place.name} 
-        ${place.vicinity}`,
-        ariaLabel: 'testing',
-      })
+      const content = document.createElement('div')
+      const placeName = document.createElement('h2')
+      placeName.style.fontSize = '20px'
+      placeName.style.fontWeight = 'bold'
+      const placeAddress = document.createElement('p')
+      const placePhone = document.createElement('p')
+      placeName.textContent = place.name;
+      placeAddress.textContent = placeDetails.formatted_address;
+      placePhone.textContent = placeDetails.formatted_phone_number;
+      content.appendChild(placeName);
+      content.appendChild(placeAddress);
+      content.appendChild(placePhone);
+      let infoWindow = new window.google.maps.InfoWindow({})
+      infoWindow.setContent(content)
       marker.addListener('mouseover', ()=>{
         
         infoWindow.open({
