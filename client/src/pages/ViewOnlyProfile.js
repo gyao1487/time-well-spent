@@ -73,7 +73,7 @@ function ViewOnlyProfile() {
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400">Website</span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
 
                     {/* ----------------------------------------------------------- */}
@@ -103,7 +103,7 @@ function ViewOnlyProfile() {
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400">Twitter</span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
                     <div className="lg:mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
@@ -131,7 +131,6 @@ function ViewOnlyProfile() {
                         </div>
                       </div>
                       <span className="text-sm text-blueGray-400">
-                        Instagram
                       </span>
                     </div>
                   </div>
@@ -141,17 +140,17 @@ function ViewOnlyProfile() {
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
                   {charity.username}
                 </h3>
-                <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                  <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                <div className="mb-2 text-blueGray-600 mt-10">
+                  <i className="fas fa-location-dot mr-2 text-lg text-blueGray-400"></i>
                   {charity.address}
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
-                  <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                  <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
                   {charity.phoneNumber}
                 </div>
-                <div className="mb-2 text-blueGray-600">
+                {/* <div className="mb-2 text-blueGray-600">
                   <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                </div>
+                </div> */}
               </div>
               <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
                 <div className="flex flex-wrap justify-center flex-col items-center">
