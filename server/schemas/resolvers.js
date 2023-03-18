@@ -9,8 +9,8 @@ const resolvers = {
       return Volunteer.find();
     },
 
-    volunteer: async (parent, { volunteerId }) => {
-      return Volunteer.findOne({ _id: volunteerId });
+    volunteer: async (parent, { _id }, context) => {
+      return Volunteer.findOne({ _id: _id });
     },
 
     allCharity: async () => {
@@ -21,8 +21,8 @@ const resolvers = {
     //   return Charity.findOne({ _id: charityId });
     // },
     //GY: for view 
-    charity: async (parent, { charityId, username }) => {
-      return Charity.findOne({ $or: [{ _id: charityId }, { username: username }] });
+    charity: async (parent, { _id, username }) => {
+      return Charity.findOne({ $or: [{ _id: _id }, { username: username }] });
     },
 
     allEvents: async () => {
@@ -39,7 +39,7 @@ const resolvers = {
   Mutation: {
     // ---------------------------------- Volunteer Mutations ----------------------------------
     createVolunteer: async function (parent, args) {
-      const userv = await Volunteer.create(args);
+      const userv = await Volunteer.create({ ...args, isCharity:false});
 
       if (!userv) {
        throw new Error("Failed to create volunteer.");;
@@ -52,7 +52,7 @@ const resolvers = {
       try {
         let googlev = await GoogleVolunteer.findOne({ email: args.email });
         console.log(googlev);
-        if (!googlev) googlev = await GoogleVolunteer.create(args);
+        if (!googlev) googlev = await GoogleVolunteer.create({ ...args, isCharity:false});
         const token = signToken(googlev);
         return {
           token,
@@ -206,7 +206,7 @@ const resolvers = {
 
 
     createCharity: async function (parent, args) {
-      const userc = await Charity.create(args);
+      const userc = await Charity.create({ ...args, isCharity:true});
 
       if (!userc) {
         throw new Error("Failed to create charity.");

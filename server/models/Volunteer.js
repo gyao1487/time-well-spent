@@ -29,6 +29,10 @@ const userSchema = new Schema(
         type: String,
         require: false,
     },
+    isCharity: {
+      type: Boolean,
+      required: false
+    },
     savedEvents:[{
       type: Schema.Types.ObjectId,
       ref: "Event"

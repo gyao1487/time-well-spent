@@ -3,6 +3,7 @@ import decode from 'jwt-decode';
 class AuthService {
   getProfile() {
     try{
+      console.log(this.getProfile, "token received")
       return decode(this.getToken());
     }
     catch(err){

@@ -125,6 +125,7 @@ const VolunteerSignup = () => {
           <label htmlFor="username">Username</label>
           <input
             placeholder="Amazing person"
+            autoComplete='username'
             name="username"
             type="username"
             id="username"
@@ -137,6 +138,7 @@ const VolunteerSignup = () => {
           <label htmlFor="email">Email:</label>
           <input
             placeholder="email@domain.com"
+            autoComplete='email'
             name="email"
             type="email"
             id="email"
@@ -148,6 +150,7 @@ const VolunteerSignup = () => {
           <label htmlFor="pwd">Password:</label>
           <input
             placeholder="******"
+            autoComplete='current-password'
             name="password"
             type="password"
             id="pwd"
