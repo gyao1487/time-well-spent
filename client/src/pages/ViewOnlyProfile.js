@@ -73,7 +73,7 @@ function ViewOnlyProfile() {
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400">Website</span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
 
                     {/* ----------------------------------------------------------- */}
@@ -103,7 +103,7 @@ function ViewOnlyProfile() {
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400">Twitter</span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
                     <div className="lg:mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
@@ -131,7 +131,6 @@ function ViewOnlyProfile() {
                         </div>
                       </div>
                       <span className="text-sm text-blueGray-400">
-                        Instagram
                       </span>
                     </div>
                   </div>
