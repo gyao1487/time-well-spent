@@ -25,6 +25,7 @@
 .custom-map-control-button:hover{
   background-color: rgb(232, 232, 232);
 }
+.gm-style-iw > button  {display: none !important; border: none; outline:none;}
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */ 
 @media (min-width:801px)  {
