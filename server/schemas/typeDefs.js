@@ -16,7 +16,7 @@ type Volunteer{
     skills:String
     password:String!
     savedEvents:[ID]!
-    
+    isCharity:Boolean
 }
 
 type Charity{
@@ -33,6 +33,7 @@ type Charity{
     twitter:String
     phoneNumber:String
     charityName:String
+    isCharity:Boolean
 }
 
 type Event{
@@ -91,7 +92,7 @@ type Mutation{
   type Query{
     allEvents:[Event]
     event(_id: ID!): Event
-    volunteer(volunteerId: ID!): Volunteer
+    volunteer(_id: ID!): Volunteer
     allVolunteers: [Volunteer]!
     charity(charityId: ID, username: String): Charity
     

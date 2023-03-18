@@ -51,7 +51,11 @@ const userSchema = new Schema(
     charityName: {
       type: String,
       // required: true
-    }
+    },
+    isCharity: {
+      type: Boolean,
+      required: false
+    },
    },
   // set this to use virtual below
   {

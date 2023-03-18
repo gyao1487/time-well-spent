@@ -55,9 +55,9 @@ const CharitySignup = () => {
       <h2>Sign Up</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Account Name</label>
           <input
-            placeholder="Amazing person"
+            placeholder="Amazing charity"
             name="username"
             type="username"
             id="username"

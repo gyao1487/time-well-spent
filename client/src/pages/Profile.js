@@ -15,6 +15,7 @@ const Profile = () => {
   const [userId, setUserId] = useState(Auth.getProfile().data._id);
   const [userDescription, setUserDescription] = useState('');
   const [isUserEditingDescription, setIsUserEditingDescription] = useState(false);
+  // const [isUserEditingLocation, setIsUserEditingLocation] = useState(false);
   const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
     variables: {
       _id: userId
@@ -176,6 +177,21 @@ const Profile = () => {
                 </h3>
                 <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                   <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  {/* {isUserEditingLocation ?
+                    <button
+                      className={styles.saveLocation}
+                      onClick={handleSaveLocation}  
+                    >
+                      Save
+                    </button>
+                    :
+                    <button
+                    className={styles.editLocation}
+                    onClick={()=> setIsUserEditingLocation(true)}
+                  >
+                    Edit
+                  </button>
+                  } */}
                   Los Angeles, California
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
