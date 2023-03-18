@@ -1,24 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_VOLUNTEER = gql`
-{
-  volunteer {
-    _id
-    fullName
-    username
-    email
-    title
-    savedEvents {
+  {
+    volunteer {
       _id
+      fullName
+      username
+      email
       title
-      description
-      image
-      date
-      address
-      savedCharity
+      savedEvents {
+        _id
+        title
+        description
+        image
+        date
+        address
+        savedCharity
+      }
     }
   }
-}
 `;
 
 export const QUERY_ALL_EVENTS = gql`
@@ -36,7 +36,6 @@ export const QUERY_ALL_EVENTS = gql`
   }
 `;
 
-
 export const QUERY_EVENT = gql`
   query Event($_id: ID!) {
     event(_id: $_id) {
@@ -53,8 +52,8 @@ export const QUERY_EVENT = gql`
 `;
 
 export const QUERY_CHARITY = gql`
-query charity($_id: ID!) {
-    charity (_id: $_id){
+  query charity($_id: ID!) {
+    charity(_id: $_id) {
       username
       email
       savedEvents
@@ -66,9 +65,29 @@ query charity($_id: ID!) {
       twitter
       phoneNumber
       charityName
+    }
   }
-}
 `;
+
+export const QUERY_CHARITY_BY_USERNAME = gql`
+  query charity($username: String!) {
+    charity(username: $username) {
+      _id
+      username
+      email
+      savedEvents
+      websiteURL
+      description
+      address
+      facebook
+      instagram
+      twitter
+      phoneNumber
+      charityName
+    }
+  }
+`;
+
 export const QUERY_GOOGLE_VOLUNTEER = gql`
   query googleVolunteer($_id: ID!) {
     googleVolunteer(_id: $_id) {
