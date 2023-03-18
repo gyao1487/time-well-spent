@@ -149,17 +149,20 @@ const resolvers = {
     addCharityEvent: async function (parent, { savedEvents }, context)  {
      
       console.log(context.user);
-      console.log(context.user._id);
+      // console.log(context.user._id);
       try {
         if (!savedEvents.description) {
           throw new Error("Event description is required.");
         }
-        const charity = await Charity.findOne({ username: savedEvents.savedCharity });
-        savedEvents.savedCharity = charity._id;
+        //Need to change parameters to id? {_id: context.user._id}?
+        const charity = await Charity.findOne({ _id: context.user._id });
+        // savedEvents.savedCharity = charity._id;
+        console.log(charity)
         const newEvent = await Event.create({
           ...savedEvents,
-          savedCharity: charity._id,
+          savedCharity: charity.username,
         });
+
         console.log('Newly created event:', newEvent); // Add this line
         const updatedCharity = await Charity.findOneAndUpdate(
           { _id: context.user._id },
@@ -173,6 +176,7 @@ const resolvers = {
         throw new AuthenticationError('You need to be logged in!');
       }
     },
+
   // Needs looked at is not working on back end
     updateCharity: async function (parent, args, context) {
       try {

@@ -11,7 +11,7 @@ function EventForm(props) {
     date: "",
     time: "",
     address: "",
-    savedCharity: "",
+    // savedCharity: "",
   });
   const [addCharityEvent, { error }] = useMutation(ADD_CHARITY_EVENT);
 
@@ -24,7 +24,7 @@ function EventForm(props) {
     date: "",
     time: "",
     address: "",
-    savedCharity: "",
+    // savedCharity: "",
   });
 
   const handleFormSubmit = async (event) => {
@@ -39,7 +39,7 @@ function EventForm(props) {
       date: date ? "" : "Please enter the date of your event",
       time: time ? "" : "Please enter the time of your event",
       address: address ? "" : "Please enter the address of your event",
-      savedCharity: savedCharity ? "" : "Please enter the name of your Charity",
+      // savedCharity: savedCharity ? "" : "Please enter the name of your Charity",
     };
     if(Object.values(formErrors).some((error) => error)){
       setErrors(formErrors);
@@ -58,7 +58,6 @@ function EventForm(props) {
             date: usercformState.date,
             time: usercformState.time,
             address: usercformState.address,
-            savedCharity: usercformState.savedCharity,
           },
         },
       });
@@ -261,7 +260,7 @@ function EventForm(props) {
                     {errors.image && <p className="mt-1 text-sm text-red-500">{errors.image}</p>}
                   </div>
                   {/*---------------------------- PLACEHOLDER ONLY: Charity Name------------------------- */}
-                  <div className="col-span-6 sm:col-span-3">
+                  {/* <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="charityName"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -277,7 +276,7 @@ function EventForm(props) {
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.savedCharity && <p className="mt-1 text-sm text-red-500">{errors.savedCharity}</p>}
-                  </div>
+                  </div> */}
                 </div>
                 {/*---------------------------- Submit Button------------------------- */}
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
