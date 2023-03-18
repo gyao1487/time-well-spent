@@ -47,7 +47,7 @@ function EventCard({ event }) {
 
   return (
     
-      <div className="flex mx-auto bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 mb-4   transform hover:-translate-y-2 transition-transform duration-500 ease-in-out">
+      <div className="max-w-sm rounded overflow-hidden shadow-lg">
         <Link to={`/event/${event._id}`}>
           <img
             className="rounded-t-lg"
@@ -105,9 +105,16 @@ function EventCard({ event }) {
             </svg>
 
             <p className="font-normal text-gray-400 ">{event.address}</p>
+           
+          </div>
+          <div className ="grid place-self-end pt-2">
             <button
             type="button"
-            className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-4xl px-6 py-8 text-center m-2"
+            className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 
+            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+            focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
+            text-4xl text-center m-2 
+            rounded-full px-3 py-1 text-sm font-semibold   mb-2"
             data-te-ripple-init
             data-te-ripple-color="light"
             data-id={event._id} onClick={handleAddEvent}>
@@ -116,6 +123,7 @@ function EventCard({ event }) {
           </div>
         </div>
       </div>
+      
   );
 }
 
