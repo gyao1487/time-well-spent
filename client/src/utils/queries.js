@@ -10,6 +10,7 @@ export const QUERY_VOLUNTEER = gql`
     isCharity
     savedEvents
   }
+}
 `;
 
 export const QUERY_ALL_EVENTS = gql`
@@ -67,6 +68,7 @@ export const QUERY_CHARITY = gql`
         savedCharity
       }
   }
+}
 `;
 
 export const QUERY_CHARITY_BY_USERNAME = gql`
