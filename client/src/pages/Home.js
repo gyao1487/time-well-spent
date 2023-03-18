@@ -178,7 +178,7 @@ const Home = () => {
           service.getDetails({placeId: results[i].place_id, fields: ['formatted_address', 'formatted_phone_number', 'website']}, (PlaceResult, PlacesServiceStatus)=>{
             createMarker(results[i], PlaceResult);
               if(PlacesServiceStatus == window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT){
-                return console.log('query limit hit.')
+                return
               }
               console.log(PlaceResult);
           })
