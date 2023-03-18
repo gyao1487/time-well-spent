@@ -105,9 +105,7 @@ const Home = () => {
       },
         function (results, status){
           if(status == 'OK'){
-            // console.log(results)
-            // let x = {lat:results[0].geometry.bounds.Va.lo , Lng :results[0].geometry.bounds.Ja.lo }
-            // return x;
+            console.log(results[0].geometry.location.lat())
           }
           else{
             alert('Geocode was not successful.', status)
@@ -115,45 +113,24 @@ const Home = () => {
         }
       )
       console.log(await response)
-      // const latLng = new window.google.maps.LatLng((await response).results[0].geometry.bounds.Va.lo, (await response).results[0].geometry.bounds.Ja.lo)
-      const latLng = {lat:(await response).results[0].geometry.bounds.Va.lo , lng :(await response).results[0].geometry.bounds.Ja.lo }
+      const latLng = {lat:(await response).results[0].geometry.location.lat() , lng :(await response).results[0].geometry.location.lng() }
       console.log(latLng)
       return latLng;
     }
-    // const request = {
-    //   query: searchOpportunityInput,
-    //   fields: ["name", "geometry"],
-    // };
-    // let service;
-    // service = new window.google.maps.places.PlacesService(map);
-    // service.findPlaceFromQuery(request, (results, status) => {
-    //   if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
-    //     for (let i = 0; i < results.length; i++) {
-    //       createMarker(results[i]);
-    //     }
-  
-    //     map.setCenter(results[0].geometry.location);
-    //   }
-    // });
+   getSearchInputLatLng();
 
-    // const latLng = await getSearchInputLatLng();
-    const chicago = {
-      lat: 41.9703133,
-      lng: -87.663045
-    };
-    let service;
-    const latLng = new window.google.maps.LatLng(41.9703133,-87.663045)
-    function createMarker(place) {
-      
+    function createMarker(place, placeDetails) {
       if (!place.geometry || !place.geometry.location) return;
-    
       const marker = new window.google.maps.Marker({
         map,
+        animation: window.google.maps.Animation.DROP,
         position: place.geometry.location,
       });
+
       let infoWindow = new window.google.maps.InfoWindow({
-        content: 'Testing',
-        ariaLabel: 'testing'
+        content: `${place.name} 
+        ${place.vicinity}`,
+        ariaLabel: 'testing',
       })
       marker.addListener('mouseover', ()=>{
         
@@ -161,6 +138,10 @@ const Home = () => {
           anchor: marker,
           map: map,
         })
+      })
+      
+      marker.addListener('click', ()=>{
+        window.open(placeDetails.website)
       })
       marker.addListener('mouseout', ()=>{
         
@@ -171,33 +152,51 @@ const Home = () => {
       })
       marker.setMap(map)
     }
-    var request = {
-      location: latLng,
-      radius: '500',
+    
+    const request = {
+      location: await getSearchInputLatLng(),
+      radius: '2500',
       keyword: 'charity'
     };
-  
+    
+    let service;
+    
     service = new window.google.maps.places.PlacesService(map);
     service.nearbySearch(request, callback);
-  
-  
-  function callback(results, status) {
-    if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
+    function callback(results, status) {
+      console.log(results)
+      if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+        for (let i = 0; i < results.length; i++) {
+          service.getDetails({placeId: results[i].place_id, fields: ['formatted_address', 'formatted_phone_number', 'website']}, (PlaceResult, PlacesServiceStatus)=>{
+            createMarker(results[i], PlaceResult);
+              if(PlacesServiceStatus == window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT){
+                return console.log('query limit hit.')
+              }
+              console.log(PlaceResult);
+          })
+        }
+      }
+      
+      if(results.length === 0){
+        return console.log('zero results')
+      }
+      else{
+        console.log( new Error('something went wrong.'))
+        
       }
     }
-    else{
-      console.log(status)
-      throw new Error('something went wrong.')
-    }
   }
 
-  }
+  // const getPlacePhotos = async (placesDetails)=>{
+  //   let responses =[];
+  //   for(const placeDetail of placesDetails){
+  //     let response = await fetch(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
+  //     let photoData = await response.json()
+  //     responses.push(photoData);
+  //   }
+  //   return Promise.all(responses).then((data)=> console.log(data))
+  // }
 
-
-
-  
   return (
     <div>
       <div className="relative isolate px-6 lg:px-8">
@@ -328,6 +327,16 @@ const Home = () => {
                   className="flex-1 h-10 px-4 py-2 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0"
                   value={searchOpportunityInput}
                   onChange={(e)=>setSearchOpportunityInput(e.target.value)}
+                  onKeyDown={(e)=>{
+                    if (e.key === 'Escape') {
+                        e.target.blur()
+                    }
+                    //for some reason e.preventDefault works here but not in onSubmit.
+                    if(e.key === 'Enter'){
+                      e.preventDefault();
+                      handleSearchClick();
+                    }
+                  }}
                 />
 
                 <button
