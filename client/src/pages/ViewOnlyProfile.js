@@ -6,6 +6,7 @@ import { gql } from '@apollo/client';
 
 function ViewOnlyProfile(){
   const {username} = useParams();
+  
     // const params = window.location;
     // const href = params.href.split("/");
     // const url = href[href.length-1];

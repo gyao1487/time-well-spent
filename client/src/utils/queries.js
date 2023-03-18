@@ -75,7 +75,9 @@ export const QUERY_CHARITY_BY_USERNAME = gql`
       _id
       username
       email
-      savedEvents
+      savedEvents{
+        _id
+      }
       websiteURL
       description
       address
