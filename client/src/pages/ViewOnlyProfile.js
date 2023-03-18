@@ -3,31 +3,19 @@ import React from "react";import { QUERY_CHARITY, QUERY_CHARITY_BY_USERNAME} fro
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 function ViewOnlyProfile(){
   const {username} = useParams();
-  
-    // const params = window.location;
-    // const href = params.href.split("/");
-    // const url = href[href.length-1];
-    // const plainUsername = url.replace("%20", " ")
-    // console.log(url.replace("%20", " ")) //use regex to replace all %20 with empty space
-    // console.log(plainUsername)
-    // let username = plainUsername
-    // run a mutation and pass username to find charity by username 
     console.log(username)
     const {loading, error, data} = useQuery(QUERY_CHARITY_BY_USERNAME, {
       variables: {username: username}
     });
     const charity = data?.charity
   
-    console.log(charity)
-    console.log(data)
-    if (loading) return <p>Loadiong</p>
+  //Make better loading screen/
+    if (loading) return <p>Loading</p>
     if (error) return <p>{error.message}</p>
-
-
-
 
   return (
     <div>
@@ -40,7 +28,7 @@ function ViewOnlyProfile(){
                   <div className="">
                     <img
                       alt=""
-                      src=""
+                      src={charity.image}
                       className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     ></img>
                   </div>
@@ -51,6 +39,11 @@ function ViewOnlyProfile(){
                     <div className="mr-4 p-3 text-center items-center ">
                       <div className="flex justify-center space-x-2">
                         <div>
+                          <a
+                          href ={`https://${charity.websiteURL}`}
+                          target='blank'
+                          rel="noopener"
+                          >
                           <button
                             type="button"
                             data-te-ripple-init
@@ -70,11 +63,15 @@ function ViewOnlyProfile(){
                               />
                             </svg>
                           </button>
+                          </a>
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400"></span>
+                      <span className="text-sm text-blueGray-400">Website</span>
                     </div>
+
+
+          {/* ----------------------------------------------------------- */}
                     <div className="mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
                         <div>
