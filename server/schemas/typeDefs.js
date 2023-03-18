@@ -53,7 +53,7 @@ input inputEvent {
     time:String
     date:String!
     address:String!
-    savedCharity: String!
+    savedCharity: String
 }
 
 type GoogleVolunteer{

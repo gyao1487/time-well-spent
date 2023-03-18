@@ -13,6 +13,7 @@ import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import CharityProfile from "./pages/CharityProfile"
+import TestProfile from "./pages/TestProfile"
 import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
 import Auth from './utils/auth'
@@ -73,6 +74,8 @@ function App() {
             <Route path="/LoginVolunteer" element={<LoginVolunteer />} />
             <Route path="/LoginCharity" element={<LoginCharity />} />
             <Route path="/Signup" element={<Signup />} />
+
+            <Route path="/profile/:username" element={<TestProfile />} />
 
             <Route path="/volunteers/signup" element={<GoogleSignUp />} />
             <Route path="/VolunteerSignup" element={<VolunteerSignup />} />

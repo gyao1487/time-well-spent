@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 
 function EventCard({ event }) {
+  console.log( "params " +window.location);
   const [userToken, setUserToken] = useState(Auth.getToken());
   
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
@@ -61,7 +62,7 @@ function EventCard({ event }) {
             </h5>
           </Link>
           <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
-            <a href="/charity/:id</p>">{event.savedCharity}</a>
+            <Link to ={`/profile/${event.savedCharity}`}>{event.savedCharity}</Link>
           </p>
 
           <div className="flex space-x-1 mb-2">

@@ -26,8 +26,7 @@ const eventSchema = new Schema({
     required: false,
   },
   savedCharity: {
-    type: Schema.Types.ObjectId,
-    ref: "Charity",
+    type: String,
     required: false,
   },
   
