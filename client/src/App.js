@@ -13,7 +13,10 @@ import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import CharityProfile from "./pages/CharityProfile"
-import TestProfile from "./pages/TestProfile"
+
+//GY - working on non-logged in charity profile view
+import ViewOnlyProfile from "./pages/ViewOnlyProfile"
+
 import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
 import Auth from './utils/auth'
@@ -75,7 +78,7 @@ function App() {
             <Route path="/LoginCharity" element={<LoginCharity />} />
             <Route path="/Signup" element={<Signup />} />
 
-            <Route path="/profile/:username" element={<TestProfile />} />
+            <Route path="/profile/:username" element={<ViewOnlyProfile />} />
 
             <Route path="/volunteers/signup" element={<GoogleSignUp />} />
             <Route path="/VolunteerSignup" element={<VolunteerSignup />} />

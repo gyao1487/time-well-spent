@@ -1,12 +1,34 @@
 import styles from '../styles/Profile.module.css'
-import React from "react";;
+import React from "react";import { QUERY_CHARITY, QUERY_CHARITY_BY_USERNAME} from '../utils/queries';
+import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
+import { gql } from '@apollo/client';
 
-const TestProfile = () => {
-    var params = window.location;
-    var href = params.href.split("/");
-    var username = href[href.length-1];
-    console.log(username.replace("%20", " "))
+function ViewOnlyProfile(){
+  const {username} = useParams();
+  
+    // const params = window.location;
+    // const href = params.href.split("/");
+    // const url = href[href.length-1];
+    // const plainUsername = url.replace("%20", " ")
+    // console.log(url.replace("%20", " ")) //use regex to replace all %20 with empty space
+    // console.log(plainUsername)
+    // let username = plainUsername
     // run a mutation and pass username to find charity by username 
+    console.log(username)
+    const {loading, error, data} = useQuery(QUERY_CHARITY_BY_USERNAME, {
+      variables: {username: username}
+    });
+    const charity = data?.charity
+  
+    console.log(charity)
+    console.log(data)
+    if (loading) return <p>Loadiong</p>
+    if (error) return <p>{error.message}</p>
+
+
+
+
   return (
     <div>
       <section className={styles.mainContainer}>
@@ -51,7 +73,7 @@ const TestProfile = () => {
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400">Contact</span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
                     <div className="mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
@@ -111,15 +133,15 @@ const TestProfile = () => {
               </div>
               <div className="text-center mt-12">
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                  Username
+                  {charity.username}
                 </h3>
                 <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                   <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                  Address
+                  {charity.address}
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
                   <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                  Phone
+                  {charity.phoneNumber}
                 </div>
                 <div className="mb-2 text-blueGray-600">
                   <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
@@ -142,4 +164,4 @@ const TestProfile = () => {
   );
 };
 
-export default TestProfile;
+export default ViewOnlyProfile;

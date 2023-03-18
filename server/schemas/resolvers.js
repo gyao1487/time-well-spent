@@ -17,9 +17,14 @@ const resolvers = {
       return Charity.find();
     },
 
-    charity: async (parent, { charityId }) => {
-      return Charity.findOne({ _id: charityId });
+    // charity: async (parent, { charityId }) => {
+    //   return Charity.findOne({ _id: charityId });
+    // },
+    //GY: for view 
+    charity: async (parent, { charityId, username }) => {
+      return Charity.findOne({ $or: [{ _id: charityId }, { username: username }] });
     },
+
     allEvents: async () => {
       return Event.find();
     },
