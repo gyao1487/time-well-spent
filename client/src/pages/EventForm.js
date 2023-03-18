@@ -15,10 +15,40 @@ function EventForm(props) {
   });
   const [addCharityEvent, { error }] = useMutation(ADD_CHARITY_EVENT);
 
+  //Form Validation:
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    image: "",
+    date: "",
+    time: "",
+    address: "",
+    savedCharity: "",
+  });
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    //Form validation:
+    const {title, description, image, date, time, address, savedCharity} = usercformState;
+    const formErrors = {
+      title: title ? "" : "Please enter a title for your event",
+      description: description ? "" : "Please enter a description for your event",
+      image: image ? "" : "Please insert an image for your event",
+      date: date ? "" : "Please enter the date of your event",
+      time: time ? "" : "Please enter the time of your event",
+      address: address ? "" : "Please enter the address of your event",
+      savedCharity: savedCharity ? "" : "Please enter the name of your Charity",
+    };
+    if(Object.values(formErrors).some((error) => error)){
+      setErrors(formErrors);
+      setSubmitted(false);
+      return; 
+    }
+
     try {
-      console.log('Before calling addCharityEvent');
+      console.log("Before calling addCharityEvent");
       const mutationResponse = await addCharityEvent({
         variables: {
           savedEvents: {
@@ -28,22 +58,19 @@ function EventForm(props) {
             date: usercformState.date,
             time: usercformState.time,
             address: usercformState.address,
-            savedCharity: usercformState.savedCharity
+            savedCharity: usercformState.savedCharity,
           },
         },
-        
       });
-      console.log('After calling addCharityEvent');
-    console.log('Mutation response:', mutationResponse);
-  } 
-  catch (e) {
-    console.log('Error during addCharityEvent call:', e);
-  }
-  finally {
+      console.log("After calling addCharityEvent");
+      console.log("Mutation response:", mutationResponse);
+    } catch (e) {
+      console.log("Error during addCharityEvent call:", e);
+    } finally {
+      setSubmitted(true);
       console.log("Form submission completed");
     }
   };
-  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -87,6 +114,7 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title}</p>}
                   </div>
                   {/*---------------------------- Event Details -------------------------- */}
                   <div>
@@ -110,6 +138,7 @@ function EventForm(props) {
                     <p className="mt-2 text-sm text-gray-500">
                       What do you want your volunteers to know about the event?
                     </p>
+                    {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
                   </div>
 
                   {/*---------------------------- Date-------------------------- 
@@ -129,6 +158,7 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {errors.date && <p className="mt-1 text-sm text-red-500">{errors.date}</p>}
                   </div>
 
                   {/*----------------------------Time------------------------- 
@@ -148,9 +178,10 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {errors.time && <p className="mt-1 text-sm text-red-500">{errors.time}</p>}
                   </div>
                   {/*----------------------------Address------------------------- 
-                  Will add cooler date and time picker later*/}
+                  */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="address"
@@ -166,6 +197,7 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {errors.address && <p className="mt-1 text-sm text-red-500">{errors.address}</p>}
                   </div>
                   {/*---------------------------- Image------------------------- 
                   This is just a placeholder for now*/}
@@ -226,6 +258,7 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {errors.image && <p className="mt-1 text-sm text-red-500">{errors.image}</p>}
                   </div>
                   {/*---------------------------- PLACEHOLDER ONLY: Charity Name------------------------- */}
                   <div className="col-span-6 sm:col-span-3">
@@ -243,9 +276,10 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {errors.savedCharity && <p className="mt-1 text-sm text-red-500">{errors.savedCharity}</p>}
                   </div>
                 </div>
-  {/*---------------------------- Submit Button------------------------- */}
+                {/*---------------------------- Submit Button------------------------- */}
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
@@ -254,10 +288,10 @@ function EventForm(props) {
                     Create Event
                   </button>
                 </div>
-  {/*---------------------------- Error Message (make it a modal/notification)------------------------- */}
+                {/*---------------------------- Error Message (make it a modal/notification)------------------------- */}
                 {error ? (
                   <div>
-                    <p className="error-text">Fail to create an Event</p>
+                    <p className="error-text">Failed to create event. Please try again!</p>
                   </div>
                 ) : null}
               </div>
