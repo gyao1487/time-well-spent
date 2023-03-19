@@ -210,13 +210,13 @@ const Home = () => {
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-white">
               Time Well Spent
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-200">
               "Time well spent adds to a life well lived." 
             </p>
-            <p className="mt-2 text-lg leading-8 text-gray-600">
+            <p className="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-200">
             We match volunteers to non-profits and charities to make sure that your time is well spent on helping others. 
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
@@ -226,7 +226,7 @@ const Home = () => {
               >
                 Get started
               </a>
-              <a href="/discover" className="text-sm font-semibold leading-6 text-gray-900">
+              <a href="/discover" className="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white ">
                 Find Opportunities <span aria-hidden="true">→</span>
               </a>
             </div>
