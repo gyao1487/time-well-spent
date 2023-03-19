@@ -64,6 +64,16 @@ export const ADD_VOLUNTEER_EVENT = gql`
     }
   }
 `;
+export const ADD_GOOGLE_VOLUNTEER_EVENT =gql`
+mutation addGoogleVolunteerEvent($eventId: ID!){
+  addGoogleVolunteerEvent(eventId: $eventId){
+      _id
+      username
+      email
+      skills
+      savedEvents
+  }
+}`
 
 export const ADD_VOLUNTEER = gql`
 mutation createVolunteer($username: String!, $password: String!, $email: String!, $fullName: String!) {

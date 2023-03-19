@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ADD_VOLUNTEER_EVENT } from "../utils/mutations";
+import { ADD_VOLUNTEER_EVENT, ADD_GOOGLE_VOLUNTEER_EVENT } from "../utils/mutations";
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
@@ -15,7 +15,17 @@ function EventCard({ event }) {
       // Update the cache
     },
     onError: (err) => {
-      console.error(err);
+      // console.error(err);
+    },
+  });
+  const [addGoogleVolunteerEvent, { error: googlevError }] = useMutation(ADD_GOOGLE_VOLUNTEER_EVENT, {
+    context: { token: userToken }, // Pass the JWT token in the context here
+    update: (cache, { data: { addVolunteerEvent } }) => {
+      
+      // Update the cache
+    },
+    onError: (err) => {
+      // console.error(err);
     },
   });
 
@@ -24,16 +34,18 @@ function EventCard({ event }) {
     console.log(eventId, userToken);
   
     try {
-      const { data } = await addVolunteerEvent({
+      const { data, errors } = await addVolunteerEvent({
         variables: { eventId },
         update: (cache, { data: { addVolunteerEvent } }) => {
           // ...
         },
       });
-  
-      console.log('Mutation response data:', data); // Add this line
+      
+      const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
+        variables: { eventId }
+      })
     } catch (error) {
-      console.error('Error in addVolunteerEvent mutation:', error); // Add this line
+      // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
 
