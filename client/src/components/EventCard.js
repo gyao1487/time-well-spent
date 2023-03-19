@@ -121,7 +121,7 @@ function EventCard({ event }) {
   }
 
   return (
-      <div className="max-w-sm max-h-max rounded overflow-hidden shadow-lg">
+      <div className="max-w-sm max-h-max rounded overflow-hidden shadow-lg dark:bg-slate-600">
           <Link to={`/event/${event._id}`}>
             <img
               className="rounded-t-lg h-48 w-96 object-cover"

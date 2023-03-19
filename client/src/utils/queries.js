@@ -72,7 +72,6 @@ export const QUERY_CHARITY = gql`
         image
         date
         address
-        savedCharity
       }
     }
   }
@@ -84,7 +83,15 @@ export const QUERY_CHARITY_BY_USERNAME = gql`
     charity(username: $username) {
       _id
       email
-      savedEvents
+      savedEvents{
+        _id
+        title
+        description
+        image
+        date
+        address
+        savedCharity
+      }
       websiteURL
       description
       address

@@ -22,7 +22,7 @@ const resolvers = {
     // },
     //GY: for view 
     charity: async (parent, { _id, username }) => {
-      return Charity.findOne({ $or: [{ _id: _id }, { username: username }] });
+      return Charity.findOne({ $or: [{ _id: _id }, { username: username }] }).populate('savedEvents');
     },
 
     allEvents: async () => {

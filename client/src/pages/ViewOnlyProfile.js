@@ -15,7 +15,6 @@ function ViewOnlyProfile() {
   });
   const charity = data?.charity;
 
-  //Make better loading screen/
   if (loading)
     return (
   <Loading />
