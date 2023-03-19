@@ -130,15 +130,33 @@ function CharityProfile() {
   return (
     <div>
       <section className={styles.mainContainer}>
-        <div className="w-full lg:w-4/12 px-4 mx-auto">
-          <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+        <div className="w-full lg:w-8/12 xl:w-6/12 2xl:4/12 px-4 mx-auto">
+          <div className="pb-2">
+            {isEditing ? (
+              <button
+                className="group relative flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={() => setIsEditing(true)}
+              >
+                Edit Profile
+              </button>
+            )}
+          </div>
+          <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
             <div className="px-6">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
                     <img
                       alt=""
-                      src={data?.charity.image}
+                      src="https://ih1.redbubble.net/image.4283908803.4109/st,small,845x845-pad,1000x1000,f8f8f8.jpg"
+                      // "{data?.charity.image}"
                       className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     ></img>
                   </div>
@@ -228,7 +246,7 @@ function CharityProfile() {
                       htmlFor="title"
                       className="text-sm font-small leading-6 text-gray-900"
                     >
-                      Website:
+                      Website
                     </label>
                     <input
                       className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -254,7 +272,7 @@ function CharityProfile() {
                       htmlFor="title"
                       className="text-sm font-small leading-6 text-gray-900"
                     >
-                      Twitter Handle:
+                      Twitter Handle
                     </label>
                     <input
                       className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -280,7 +298,7 @@ function CharityProfile() {
                       htmlFor="title"
                       className="text-sm font-small leading-6 text-gray-900"
                     >
-                      Instagram Handle:
+                      Instagram Handle
                     </label>
                     <input
                       className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -302,36 +320,145 @@ function CharityProfile() {
                 </div>
               ) : null}
 
-              <div className="text-center mt-12">
-                <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                  {data?.charity.username}
-                </h3>
-                <div className="mb-2 text-blueGray-600 mt-10">
-                  <i className="fas fa-location-dot mr-2 text-lg text-blueGray-400"></i>
-                  {data?.charity.address}
-                </div>
-                <div className="mb-2 text-blueGray-600 mt-10">
-                  <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
-                  {data?.charity.phoneNumber}
-                </div>
-                {/* <div className="mb-2 text-blueGray-600">
-                  <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                </div> */}
-              </div>
-              <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
-                <div className="flex flex-wrap justify-center flex-col items-center">
-                  <div className="w-full lg:w-9/12 px-4">
-                    <p>{data?.charity.description}</p>
+              {/* Editing Written Fields */}
+              {isEditing ? (
+                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                  {/* Name field edit */}
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="title"
+                      className="text-sm font-small leading-6 text-gray-900"
+                    >
+                      Organization Name
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder={data?.charity.username}
+                      type="username"
+                      autoFocus={true}
+                      id="username"
+                      value={data?.charity.username}
+                      // onChange={(e) => setWebsiteURL(e.target.value)}
+                      // onKeyDown={(e) => {
+                      //   if (e.keyCode === 27) {
+                      //     e.currentTarget.blur();
+                      //     setIsEditing(false);
+                      //   }
+                      // }}
+                      disabled
+                    />
+                    <p className="mt-2 text-xs text-gray-500">
+                      To change the name of your organization, please contact
+                      support.
+                    </p>
+                  </div>
+
+                  {/* Address field edit */}
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="title"
+                      className="text-sm font-small leading-6 text-gray-900"
+                    >
+                      Address
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder="MyOrganizationAddress"
+                      type="address"
+                      autoFocus={true}
+                      id="address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 27) {
+                          e.currentTarget.blur();
+                          setIsEditing(false);
+                        }
+                      }}
+                      // onBlur={()=> setIsUserEditingDescription(false)}
+                    />
+                  </div>
+
+                  {/* Phone field edit */}
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="title"
+                      className="text-sm font-small leading-6 text-gray-900"
+                    >
+                      Phone Number:
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder="(800)-800-0000"
+                      type="phoneNumber"
+                      autoFocus={true}
+                      id="phoneNumber"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 27) {
+                          e.currentTarget.blur();
+                          setIsEditing(false);
+                        }
+                      }}
+                      // onBlur={()=> setIsUserEditingDescription(false)}
+                    />
                   </div>
                 </div>
+              ) : (
+                <div className="text-center mt-12">
+                  <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                    {data?.charity.username}
+                  </h3>
+                  <div className="mb-2 text-blueGray-600 mt-10">
+                    <i className="fas fa-location-dot mr-2 text-lg text-blueGray-400"></i>
+                    {data?.charity.address}
+                  </div>
+                  <div className="mb-2 text-blueGray-600 mt-10">
+                    <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
+                    {data?.charity.phoneNumber}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
+                {isEditing ? (
+                  <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="title"
+                        className="text-sm font-small leading-6 text-gray-900"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                        className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Mission statement: We are an charity that does things that charities do."
+                        type="description"
+                        autoFocus={true}
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.keyCode === 27) {
+                            e.currentTarget.blur();
+                            setIsEditing(false);
+                          }
+                        }}
+                        // onBlur={()=> setIsUserEditingDescription(false)}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap justify-center flex-col items-center">
+                    <div className="w-full lg:w-9/12 px-4">
+                      <p>{data?.charity.description}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-          {isEditing ? (
-            <button onClick={handleSave}>Save</button>
-          ) : (
-            <button onClick={() => setIsEditing(true)}>Edit Description</button>
-          )}
         </div>
       </section>
     </div>
