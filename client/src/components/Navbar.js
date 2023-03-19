@@ -6,6 +6,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
 import Auth from '../utils/auth'
 
+import CharityHamburger from "./CharityHamburger";
+import UserHamburger from "./UserHamburger";
+
 import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
@@ -38,7 +41,6 @@ function classNames(...classes) {
 }
 
 function Navbar() {
-
   const state = useStateContext();
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,7 +51,7 @@ function Navbar() {
     },
     skip: !userId
   })  
-
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const { loading:loadingCharity, error:errorCharity, data:dataCharity } = useQuery(QUERY_CHARITY, {
     variables: {
       _id: userId,
@@ -92,14 +94,7 @@ if(isCharity)
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
+                <CharityHamburger />
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
@@ -294,14 +289,7 @@ if(isCharity)
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
+                <UserHamburger />
               </div>
 
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">

@@ -9,6 +9,7 @@ import styles from '../styles/EventCard.module.css'
 function EventCard({ event }) {
   console.log( "params " +window.location);
   const [userToken, setUserToken] = useState(null);
+  const [isEventRemoved, setIsEventRemoved] = useState(false);
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
     context: { token: userToken }, // Pass the JWT token in the context here
     update: (cache, { data: { addVolunteerEvent } }) => {
@@ -59,10 +60,14 @@ function EventCard({ event }) {
       const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
         variables: { eventId }
       })
+      setIsEventRemoved(false)
     } catch (error) {
       // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
+  const handleRemoveEvent = async (e) =>{
+        setIsEventRemoved(true)
+  }
   
   useEffect(() => {
     setUserToken(Auth.getProfile())
@@ -75,25 +80,23 @@ function EventCard({ event }) {
   }
 
   return (
-    
-      <div className="max-w-sm rounded overflow-hidden shadow-lg dark:bg-slate-700">
-        <Link to={`/event/${event._id}`}>
-          <img
-            className="rounded-t-lg"
-            src= {event.image}
-            alt=""
-          />
-        </Link>
-        <div className="p-5">
+      <div className="max-w-sm max-h-max rounded overflow-hidden shadow-lg">
           <Link to={`/event/${event._id}`}>
-            <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
-              {event.title}
-            </h5>
+            <img
+              className="rounded-t-lg h-48 w-96 object-cover"
+              src= {event.image}
+              alt=""
+            />
           </Link>
-          <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
-            <Link to ={`/profile/${event.savedCharity}`}>{event.savedCharity}</Link>
-          </p>
-
+          <div className="p-5">
+            <Link to={`/event/${event._id}`}>
+              <h5 className="text-gray-900 font-bold text-2xl text-left tracking-tight mb-2 dark:text-white">
+                {event.title}
+              </h5>
+            </Link>
+            <p className="font-normal text-gray-700 mb-3 text-left dark:text-gray-400">
+              <Link to ={`/profile/${event.savedCharity}`}>{event.savedCharity}</Link>
+            </p>
           <div className="flex space-x-1 mb-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +140,7 @@ function EventCard({ event }) {
            
           </div>
           <div className ="grid place-self-end pt-2">
-          {googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id) || volunteerData?.volunteer?.savedEvents?.includes(event._id) ?
+          {(!isEventRemoved &&  googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id)) || (!isEventRemoved && volunteerData?.volunteer?.savedEvents?.includes(event._id)) ?
             <button
               type="button"
               className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
@@ -147,7 +150,7 @@ function EventCard({ event }) {
               rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.removeEvent}
               data-te-ripple-init
               data-te-ripple-color="light"
-              data-id={event._id} onClick={handleAddEvent}>
+              data-id={event._id} onClick={handleRemoveEvent}>
               Remove Event
             </button>
             :
