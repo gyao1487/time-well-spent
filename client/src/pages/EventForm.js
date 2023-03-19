@@ -85,10 +85,10 @@ function EventForm(props) {
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h2 className="text-base font-semibold leading-6 text-gray-900">
+              <h2 className="text-base font-semibold leading-6 text-gray-900 dark:text-white">
                 Create a new event
               </h2>
-              <p className="mt-1 text-sm text-gray-600">
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-200">
                 Just type in details about your event, and we'll work our magic!
               </p>
             </div>

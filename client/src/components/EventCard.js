@@ -76,7 +76,7 @@ function EventCard({ event }) {
 
   return (
     
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
+      <div className="max-w-sm rounded overflow-hidden shadow-lg dark:bg-slate-700">
         <Link to={`/event/${event._id}`}>
           <img
             className="rounded-t-lg"

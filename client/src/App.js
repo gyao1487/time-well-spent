@@ -70,7 +70,7 @@ function App() {
       <header className="sticky top-0 z-50">
         <Navbar />
       </header>
-      <main className="pb-60 pt-10">
+      <main className="pb-60 pt-10 bg-gray-100 dark:bg-gray-800">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -78,7 +78,7 @@ function App() {
             <Route path="/LoginCharity" element={<LoginCharity />} />
             <Route path="/Signup" element={<Signup />} />
 
-            <Route path="/profile/:username" element={<ViewOnlyProfile />} />
+            
 
             <Route path="/volunteers/signup" element={<GoogleSignUp />} />
             <Route path="/VolunteerSignup" element={<VolunteerSignup />} />
@@ -96,14 +96,9 @@ function App() {
             <Route path="/discover" element={<Discover />} />
 {/* change back to /profile */}
             <Route path="/profile" element={<Profile />} />
-            {/* <Route
-                path="/VolunteerProfile/:id"
-                element={<VolunteerProfile />}
-              />
-              <Route
-                path="/CharityProfile/:id"
-                element={<CharityProfile />}
-              /> */}
+            <Route path="/profile/:username" element={<ViewOnlyProfile />} />
+            <Route path="/charityprofile" element ={<CharityProfile/>}/>
+           
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </Router>

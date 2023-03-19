@@ -207,26 +207,42 @@ const resolvers = {
     },
 
   // Needs looked at is not working on back end
-    updateCharity: async function (parent, args, context) {
-      try {
-        const userc = await Charity.findOneAndUpdate(
-          {
-            _id: args._id,
-          },
-          {
-            $set: {description: args.description },
-          },
-          {
-            new: true,
-          }
-        );
+  updateCharity: async function (parent, args, context) {
+      
+    const { _id, ...updateFields } = args;
+  
+    const updatedCharity = await Charity.findByIdAndUpdate(
+      _id,
+      updateFields,
+      { new: true } // Return the updated document
+    );
+  
+    if (!updatedCharity) {
+      throw new Error("Charity not found");
+    }
+  
+    return updatedCharity;
+  },
+    // updateCharity: async function (parent, args, context) {
+    //   try {
+    //     const userc = await Charity.findOneAndUpdate(
+    //       {
+    //         _id: args._id,
+    //       },
+    //       {
+    //         $set: {description: args.description },
+    //       },
+    //       {
+    //         new: true,
+    //       }
+    //     );
 
-        if (!userc) throw new Error("User not found.");
-        return { userc};
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    //     if (!userc) throw new Error("User not found.");
+    //     return { userc};
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
 
 
     createCharity: async function (parent, args) {

@@ -1,27 +1,118 @@
-//GY: Pasted in styling/logic from ViewOnlyProfile. Just need to add the correct logic/query for 
+//GY: Pasted in styling/logic from ViewOnlyProfile. Just need to add the correct logic/query for
 //logged in charity via _id. Then implement the edit features for fields and description at the bottom
 import styles from "../styles/Profile.module.css";
-import React from "react";
-import { QUERY_CHARITY, QUERY_CHARITY_BY_USERNAME } from "../utils/queries";
-import { useQuery } from "@apollo/client";
+import React, { useEffect } from "react";
+import { QUERY_CHARITY, QUERY_ALL_EVENTS} from "../utils/queries";
+import { UPDATE_CHARITY } from "../utils/mutations";
+import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { gql } from "@apollo/client";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useState } from "react";
+import Auth from "../utils/auth";
+import { useDispatchContext, useStateContext} from "../utils/GlobalState";
 
 function CharityProfile() {
-  const { username } = useParams();
-  console.log(username);
-  const { loading, error, data } = useQuery(QUERY_CHARITY_BY_USERNAME, {
-    variables: { username: username },
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
+  const userId = Auth.getProfile().data._id
+  const { loading, error, data } = useQuery(QUERY_CHARITY, {
+    variables: {
+      _id: userId,
+    },
   });
-  const charity = data?.charity;
+
+console.log(userId)
+  const [userEvents, setUserEvents] = useState(null);
+  const [userData, setUserData] = useState(null); // add closing parenthesis
+  const [isEditing, setIsEditing] = useState(false);
+  const [description, setDescription] = useState(data?.description); // add missing variables
+  const [charityName, setCharityName] = useState(data?.charityName);
+  const [websiteURL, setWebsiteURL] = useState("");
+  const [address, setAddress] = useState(data?.address);
+  const [facebook, setFacebook] = useState(data?.facebook);
+  const [instagram, setInstagram] = useState(data?.instagram);
+  const [twitter, setTwitter] = useState(data?.twitter);
+  const [phoneNumber, setPhoneNumber] = useState(data?.phoneNumber);
+  const [savedEvents, setSavedEvents] = useState(data?.savedEvents);
+  const [image, setImage] = useState(data?.image);
+  // const [userEvents, setUserEvents] =useState(null)
+  // const [userData, setUserData] = useState(
+  //   {
+  //   userInformation: {
+  //     _id: Auth.getProfile()?.data._id,
+  //     description: data.description,
+  //     charityName: data.charityName,
+  //     websiteURL: data.websiteURL,
+  //     address: data.address,
+  //     facebook: data.facebook,
+  //     instagram: data.instagram,
+  //     twitter: data.twitter,
+  //     phoneNumber: data.phoneNumber,
+  //   },
+  // }
+  // );
+
+  // const [isEditing, setIsEditing] = useState(false);
+
+  // //ID
+
+  // const [userId, setUserId] = useState(Auth.getProfile().data._id);
+
+  const [updateCharity] = useMutation(UPDATE_CHARITY, {
+    variables: {
+      _id: Auth.getProfile()?.data._id,
+      description: description,
+      charityName: charityName,
+      websiteURL: websiteURL,
+      address: address,
+      facebook: facebook,
+      instagram: instagram,
+      twitter: twitter,
+      phoneNumber: phoneNumber,
+      savedEvents: savedEvents,
+    },
+  });
+  const {loading: eventsLoading, error:eventsError, data: eventsData} = useQuery(QUERY_ALL_EVENTS,{
+    variables: {
+      _id: data?.charity.savedEvents
+    }
+  });
+
+  console.log(data)
 
 
-  if (loading)
-    return (
-  <Loading />
-    );
+  useEffect(() => {
+    setUserData(data);
+    setWebsiteURL(data?.charity.websiteURL)
+    setUserEvents(eventsData)},[data, eventsData]
+  );
+  // const { _id } = useParams();
+  // console.log(username);
+  // const { loading, error, data } = useQuery(QUERY_CHARITY_BY_USERNAME, {
+  //   variables: { username: username },
+  // });
+  // const charity = data?.charity;
+
+//Save function
+const handleSave = async (e) => {
+  setIsEditing(false);
+  const { data, error } = await updateCharity();
+  if (error) {
+    alert("Something went wrong.");
+    console.log(error);
+  }
+};
+
+//Edit function
+const handleEdit = async (e) => {
+  setUserData();
+  setIsEditing(true);
+};
+
+
+  if (loading) return <Loading />;
   if (error) return <p>{error.message}</p>;
 
   return (
@@ -31,15 +122,17 @@ function CharityProfile() {
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div className="px-6">
               <div className="flex flex-wrap justify-center">
+
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
                     <img
                       alt=""
-                      src={charity.image}
+                      src={data?.charity.image}
                       className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     ></img>
                   </div>
                 </div>
+
                 {/* ----------------------- ICONS ------------------------- */}
                 <div className="w-full px-4 justify-center mt-20">
                   <div className="flex justify-center py-4 lg:pt-4 pt-8">
@@ -47,7 +140,7 @@ function CharityProfile() {
                       <div className="flex justify-center space-x-2">
                         <div>
                           <a
-                            href={`https://${charity.websiteURL}`}
+                            href={`https://${data?.charity.websiteURL}`}
                             target="blank"
                             rel="noopener"
                           >
@@ -72,6 +165,23 @@ function CharityProfile() {
                             </svg> */}
                             </button>
                           </a>
+                          {isEditing? 
+                           <textarea
+                           className="textarea textarea-info bg-transparent w-96 mt-7"
+                           placeholder="website"
+                           type="website"
+                           autoFocus={true}
+                           id="websiteURL"
+                           value={websiteURL}
+                           onChange={(e)=> setWebsiteURL(e.target.value)}
+                           onKeyDown={(e)=>{
+                             if(e.keyCode === 27){
+                               e.currentTarget.blur();
+                               setIsEditing(false);
+                             }
+                           }}
+                           // onBlur={()=> setIsUserEditingDescription(false)}
+                         /> : <div>{data?.charity.description}</div>}
                         </div>
                       </div>
 
@@ -132,23 +242,22 @@ function CharityProfile() {
                           </button>
                         </div>
                       </div>
-                      <span className="text-sm text-blueGray-400">
-                      </span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="text-center mt-12">
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                  {charity.username}
+                  {data?.charity.username}
                 </h3>
                 <div className="mb-2 text-blueGray-600 mt-10">
                   <i className="fas fa-location-dot mr-2 text-lg text-blueGray-400"></i>
-                  {charity.address}
+                  {data?.charity.address}
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
                   <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
-                  {charity.phoneNumber}
+                  {data?.charity.phoneNumber}
                 </div>
                 {/* <div className="mb-2 text-blueGray-600">
                   <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
@@ -157,12 +266,17 @@ function CharityProfile() {
               <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
                 <div className="flex flex-wrap justify-center flex-col items-center">
                   <div className="w-full lg:w-9/12 px-4">
-                    <p>{charity.description}</p>
+                    <p>{data?.charity.description}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          {isEditing ? (
+            <button onClick={handleSave}>Save</button>
+          ) : (
+            <button onClick={() => setIsEditing(true)}>Edit Description</button>
+          )}
         </div>
       </section>
     </div>
