@@ -9,6 +9,7 @@ import styles from '../styles/EventCard.module.css'
 function EventCard({ event }) {
   console.log( "params " +window.location);
   const [userToken, setUserToken] = useState(null);
+  const [isEventRemoved, setIsEventRemoved] = useState(false);
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
     context: { token: userToken }, // Pass the JWT token in the context here
     update: (cache, { data: { addVolunteerEvent } }) => {
@@ -59,10 +60,14 @@ function EventCard({ event }) {
       const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
         variables: { eventId }
       })
+      setIsEventRemoved(false)
     } catch (error) {
       // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
+  const handleRemoveEvent = async (e) =>{
+        setIsEventRemoved(true)
+  }
   
   useEffect(() => {
     setUserToken(Auth.getProfile())
@@ -137,7 +142,7 @@ function EventCard({ event }) {
            
           </div>
           <div className ="grid place-self-end pt-2">
-          {googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id) || volunteerData?.volunteer?.savedEvents?.includes(event._id) ?
+          {(!isEventRemoved &&  googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id)) || (!isEventRemoved && volunteerData?.volunteer?.savedEvents?.includes(event._id)) ?
             <button
               type="button"
               className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
@@ -147,7 +152,7 @@ function EventCard({ event }) {
               rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.removeEvent}
               data-te-ripple-init
               data-te-ripple-color="light"
-              data-id={event._id} onClick={handleAddEvent}>
+              data-id={event._id} onClick={handleRemoveEvent}>
               Remove Event
             </button>
             :
