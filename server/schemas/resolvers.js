@@ -110,6 +110,30 @@ const resolvers = {
             throw new Error('Invalid token');
           }
         },
+        addGoogleVolunteerEvent: async function(parent, { eventId }, context) {
+          try {
+            console.log('Token in context:', context.token); // Log the token in context for debugging
+            const volunteerId = decodeToken(context.token);
+            const volunteer = await GoogleVolunteer.findById(volunteerId);
+            const event = await Event.findById(eventId);
+    
+            if (!volunteer || !event) {
+              throw new Error('Volunteer or event not found');
+            }
+    
+            // Check if the event is already saved
+            if (!volunteer.savedEvents.some((savedEvent) => savedEvent.equals(eventId))) {
+              volunteer.savedEvents.push(eventId);
+              await volunteer.save();
+            }
+            console.log("Volunteer:", volunteer); // Add this line
+            console.log("Volunteer.toObject():", volunteer.toObject());
+            return volunteer;
+          } catch (error) {
+            console.error('Token error:', error.message); // Log the error message for debugging
+            throw new Error('Invalid token');
+          }
+        },
 
         updateVolunteer: async function(parent, args , ) { 
           const { _id,

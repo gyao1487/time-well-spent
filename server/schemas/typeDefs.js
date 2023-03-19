@@ -66,6 +66,7 @@ type GoogleVolunteer{
     picture:String!
     skills: String
     user_description: String
+    savedEvents: [ID]!
 }
 
 type Mutation{
@@ -80,6 +81,7 @@ type Mutation{
     addEvent(savedEvent:inputEvent):Event
     addCharityEvent(savedEvents:inputEvent):Event
     addVolunteerEvent(eventId: ID!): Volunteer
+    addGoogleVolunteerEvent(eventId: ID!): GoogleVolunteer
     updateVolunteer(_id:ID!,fullName:String!, username:String!, email:String!, skills:String):Volunteer
     updateEvent(_id:ID!,title:String, description:String, image:String, date:String, time:String, address:String):Event
     removeVolunteerEvent(title:String!):Volunteer

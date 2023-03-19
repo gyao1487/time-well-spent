@@ -34,8 +34,16 @@ const googleUserSchema = new Schema(
     user_description: {
       type: String,
       required: false,
-    }
-   },
+    },
+    isCharity: {
+      type: Boolean,
+      required: false
+    },
+    savedEvents:[{
+      type: Schema.Types.ObjectId,
+      ref: "Event"
+    }],
+  },
 );
 
 const GoogleVolunteer = model('GoogleVolunteer', googleUserSchema);
