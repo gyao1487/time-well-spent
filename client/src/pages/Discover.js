@@ -27,11 +27,11 @@ const Discover = () => {
 
       {/* ---------------Event Cards----------------- */}
       
-        <div className="flex flex-col px-6 py-10 mx-auto">
+        <div className="flex flex-wrap gap-4 mx-auto">
           {loading ? (
             <Loading/>
           ) : (
-              <div  className="flex flex-col px-6 py-10 mx-auto lg:mx-5 lg:h-[32rem] lg:py-16 lg:px-5 lg:flex-row lg:items-center">
+              <div  className="flex flex-wrap gap-4 mx-auto lg:py-16 lg:px-5 lg:flex-row lg:items-center">
                 {events.filter((event) => {
                   if (searchInput.toLowerCase()==='') {
                     return event
@@ -40,7 +40,9 @@ const Discover = () => {
                     return event
                   }
                 }).map((event) => (
-                  <EventCard event={event} key={event._id} />
+                  <div className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
+                    <EventCard event={event} key={event._id} />
+                  </div>
                 ))}
               </div>
           )}
