@@ -43,10 +43,6 @@ const Profile = () => {
       console.log(error)
     }
     
-    if(data){
-      
-    }
-    
   }
 
   useEffect(()=>{

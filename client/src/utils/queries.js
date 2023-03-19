@@ -1,16 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_VOLUNTEER = gql`
-  query volunteer($_id: ID!){  
-    volunteer (_id: $_id) {
-    _id
-    fullName
-    username
-    email
-    isCharity
-    savedEvents
+  {
+    volunteer {
+      _id
+      fullName
+      username
+      email
+      title
+      savedEvents {
+        _id
+        title
+        description
+        image
+        date
+        address
+        savedCharity
+      }
+    }
   }
-}
 `;
 
 export const QUERY_ALL_EVENTS = gql`
@@ -46,9 +54,9 @@ export const QUERY_EVENT = gql`
 export const QUERY_CHARITY = gql`
   query charity($_id: ID!) {
     charity(_id: $_id) {
-      _id
       username
       email
+      savedEvents
       websiteURL
       description
       address
@@ -57,29 +65,16 @@ export const QUERY_CHARITY = gql`
       twitter
       phoneNumber
       charityName
-      isCharity
-      savedEvents{
-        _id
-        title
-        description
-        image
-        date
-        address
-        savedCharity
-      }
+    }
   }
-}
 `;
 
 export const QUERY_CHARITY_BY_USERNAME = gql`
   query charity($username: String!) {
     charity(username: $username) {
       _id
-      username
       email
-      savedEvents{
-        _id
-      }
+      savedEvents
       websiteURL
       description
       address
@@ -103,3 +98,51 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
     }
   }
 `;
+
+// export const QUERY_PRODUCTS = gql`
+//   query getProducts($category: ID) {
+//     products(category: $category) {
+//       _id
+//       name
+//       description
+//       price
+//       quantity
+//       image
+//       category {
+//         _id
+//       }
+//     }
+//   }
+// `;
+
+// export const QUERY_CHECKOUT = gql`
+//   query getCheckout($products: [ID]!) {
+//     checkout(products: $products) {
+//       session
+//     }
+//   }
+// `;
+
+// export const QUERY_ALL_PRODUCTS = gql`
+//   {
+//     products {
+//       _id
+//       name
+//       description
+//       price
+//       quantity
+//       category {
+//         name
+//       }
+//     }
+//   }
+// `;
+
+// export const QUERY_CATEGORIES = gql`
+//   {
+//     categories {
+//       _id
+//       name
+//     }
+//   }
+// `;

@@ -1,27 +1,88 @@
-//GY: Pasted in styling/logic from ViewOnlyProfile. Just need to add the correct logic/query for 
+//GY: Pasted in styling/logic from ViewOnlyProfile. Just need to add the correct logic/query for
 //logged in charity via _id. Then implement the edit features for fields and description at the bottom
 import styles from "../styles/Profile.module.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { QUERY_CHARITY, QUERY_CHARITY_BY_USERNAME } from "../utils/queries";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { gql } from "@apollo/client";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useState } from "react";
+import Auth from "../utils/auth";
 
 function CharityProfile() {
-  const { username } = useParams();
-  console.log(username);
-  const { loading, error, data } = useQuery(QUERY_CHARITY_BY_USERNAME, {
-    variables: { username: username },
+  const [userData, setUserData] = useState({
+    userInformation: {
+      _id: Auth.getProfile()?.data._id,
+      description: description,
+      charityName: charityName,
+      websiteURL: websiteURL,
+      address: address,
+      facebook: facebook,
+      instagram: instagram,
+      twitter: twitter,
+      phoneNumber: phoneNumber,
+    },
   });
-  const charity = data?.charity;
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  // //ID
+  
+  // const [userId, setUserId] = useState(Auth.getProfile().data._id);
 
 
-  if (loading)
-    return (
-  <Loading />
-    );
+  //Save function
+  const handleSave = async (e) => {
+    setIsEditing(false);
+    const { data, error } = await updateCharity();
+    if (error) {
+      alert("Something went wrong.");
+      console.log(error);
+    }
+  };
+
+  //Edit function
+  const handleEdit = async (e) => {
+    setUserData();
+    setIsEditing(true);
+  };
+
+  const { loading, error, data } = useQuery(QUERY_CHARITY, {
+    variables: {
+      _id: userId,
+    },
+    skip: !userId,
+  });
+
+  const [updateCharity] = useMutation(UPDATE_CHARITY, {
+    variables: {
+      _id: Auth.getProfile()?.data._id,
+      description: description,
+      charityName: charityName,
+      websiteURL: websiteURL,
+      address: address,
+      facebook: facebook,
+      instagram: instagram,
+      twitter: twitter,
+      phoneNumber: phoneNumber,
+      savedEvents: [savedEvents],
+    },
+  });
+
+  useEffect(() => {
+    setUserData(data?.charity);
+    setUser;
+  });
+  // const { _id } = useParams();
+  // console.log(username);
+  // const { loading, error, data } = useQuery(QUERY_CHARITY_BY_USERNAME, {
+  //   variables: { username: username },
+  // });
+  // const charity = data?.charity;
+
+  if (loading) return <Loading />;
   if (error) return <p>{error.message}</p>;
 
   return (
@@ -72,6 +133,25 @@ function CharityProfile() {
                             </svg> */}
                             </button>
                           </a>
+                          {isEditing? 
+                           <textarea
+                           className="textarea textarea-info bg-transparent w-96 mt-7"
+                           placeholder="Description"
+                           type="text"
+                           autoFocus={true}
+                           id="description"
+                           value={userData.userInformation.description}
+                           onChange={(e)=> setUserData({userInformation: {
+                            ...userInformation, 
+                            description: userData.userInformation.description}})}
+                           onKeyDown={(e)=>{
+                             if(e.keyCode === 27){
+                               e.currentTarget.blur();
+                               setIsUserEditingDescription(false);
+                             }
+                           }}
+                           // onBlur={()=> setIsUserEditingDescription(false)}
+                         /> : <div>{userData.userInformation.description}</div>}
                         </div>
                       </div>
 
@@ -132,8 +212,7 @@ function CharityProfile() {
                           </button>
                         </div>
                       </div>
-                      <span className="text-sm text-blueGray-400">
-                      </span>
+                      <span className="text-sm text-blueGray-400"></span>
                     </div>
                   </div>
                 </div>
@@ -163,6 +242,11 @@ function CharityProfile() {
               </div>
             </div>
           </div>
+          {isEditing ? (
+            <button onClick={handleSave}>Save</button>
+          ) : (
+            <button onClick={() => setIsEditing(true)}>Edit Description</button>
+          )}
         </div>
       </section>
     </div>
