@@ -118,7 +118,6 @@ const Profile = () => {
                                   {event.title} 
                                 </a>
                       })}
-                   
                       
                     </div>
                   </div>

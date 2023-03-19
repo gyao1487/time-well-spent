@@ -3,6 +3,7 @@ import EventCard from "../components/EventCard";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_EVENTS} from "../utils/queries";
 import SearchBar from "../components/SearchBar"
+import Loading from "../components/Loading";
 
 const Discover = () => {
   // query for all events
@@ -25,11 +26,10 @@ const Discover = () => {
       </div>
 
       {/* ---------------Event Cards----------------- */}
-        {/* If loading, show loading div. If done loading, show event cards
-       !!!!!!!!!!!!!!!  Need to create better loading element later */}
+      
         <div className="flex flex-col px-6 py-10 mx-auto">
           {loading ? (
-            <div>Loading...</div>
+            <Loading/>
           ) : (
               <div  className="flex flex-col px-6 py-10 mx-auto lg:mx-5 lg:h-[32rem] lg:py-16 lg:px-5 lg:flex-row lg:items-center">
                 {events.filter((event) => {
