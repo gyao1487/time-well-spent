@@ -326,7 +326,7 @@ const Home = () => {
         <div className="container flex flex-col px-6 py-10 mx-auto space-y-6 lg:h-[32rem] lg:py-16 lg:flex-row lg:items-center">
           <div className="w-full lg:w-1/2">
             <div className="lg:max-w-lg">
-              <h1 className="text-3xl font-bold tracking-wide text-gray-800 dark:text-white lg:text-5xl">
+              <h1 className="text-2xl font-bold tracking-wide text-gray-800 dark:text-white lg:text-5xl">
                 Find Opportunities
               </h1>
 
@@ -450,7 +450,7 @@ const Home = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <div className="container flex flex-col px-6 py-10 mx-auto lg:h-[32rem] lg:py-16 lg:flex-row lg:items-center">
+            <div className="flex flex-wrap justify-center gap-4 px-6 py-10 mx-auto lg:flex lg:flex-wrap lg:justify-center">
               {events.map((event) => (
                 <EventCard event={event} key={event._id} />
               ))}
