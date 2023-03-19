@@ -4,7 +4,7 @@ import { useStateContext, useDispatchContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 import Auth from '../utils/auth'
 import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
+import { QUERY_EVENT, QUERY_GOOGLE_VOLUNTEER, QUERY_ALL_EVENTS } from '../utils/queries'
 import { UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION } from "../utils/mutations";
 import styles from '../styles/Profile.module.css'
 
@@ -14,6 +14,9 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [userId, setUserId] = useState(Auth.getProfile().data._id);
   const [userDescription, setUserDescription] = useState('');
+  const [userEvents, setUserEvents] = useState(null)
+  const [userLocation, setUserLocation] = useState(null);
+  const [isLocationLoading, setIsLocationLoading] = useState(false);
   const [isUserEditingDescription, setIsUserEditingDescription] = useState(false);
   // const [isUserEditingLocation, setIsUserEditingLocation] = useState(false);
   const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
@@ -28,6 +31,13 @@ const Profile = () => {
       _id: Auth.getProfile()?.data._id,
     },
   })
+  const {loading: eventsLoading, error:eventsError, data: eventsData} = useQuery(QUERY_ALL_EVENTS,{
+    variables: {
+      _id: data?.googleVolunteer.savedEvents
+    }
+  });
+
+
   
   const handleDescriptionSubmit =(e)=>{
     e.preventDefault();
@@ -46,13 +56,13 @@ const Profile = () => {
   }
 
   useEffect(()=>{
-    console.log(userData)
+    setUserEvents(eventsData)
     setUserData(data?.googleVolunteer)
     setUserDescription(data?.googleVolunteer?.user_description)
-  },[data])
+  },[data, eventsData])
 
   useEffect(()=>{
-    const getUserLocation = async () =>{
+    const getUserLatLng = async () =>{
       const response = await fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,{
         method: 'POST',
         headers: {
@@ -61,8 +71,20 @@ const Profile = () => {
       })
       const locationData = await response.json();
       console.log(locationData);
+      return locationData;
     }
-    getUserLocation();
+    // getUserLatLng();
+
+    const getUserAddress = async(locationData)=>{
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${locationData.lat},${locationData.lng}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
+      const addressData = await response.json();
+      console.log(addressData);
+      return addressData.results[6].formatted_address;
+    }
+    setIsLocationLoading(true);
+    getUserLatLng().then((locationData)=>getUserAddress(locationData.location))
+      .then((address)=> setUserLocation(address));
+    setIsLocationLoading(false);
   },[])
   return (
     <div>
@@ -76,7 +98,7 @@ const Profile = () => {
                     <img
                       alt={userData?.username}
                       src={userData?.picture}
-                      className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 lg:-ml-16 max-w-150-px"
                     ></img>
                   </div>
                 </div>
@@ -84,85 +106,20 @@ const Profile = () => {
 {/* ----------------------- ICONS ------------------------- */}
                 <div className="w-full px-4 justify-center mt-20">
                   <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                    <div className="mr-4 p-3 text-center items-center ">
-                      <div className="flex justify-center space-x-2">
-                        <div>
-                          <button
-                            type="button"
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                            className="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="h-4 w-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
+                    <div className=" p-3 text-center items-center ">
+                      
 
-                      <span className="text-sm text-blueGray-400">Contact</span>
-                    </div>
-                    <div className="mr-4 p-3 text-center">
-                      <div className="flex justify-center space-x-2">
-                        <div>
-                          <button
-                            type="button"
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                            className="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="h-4 w-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-
-                      <span className="text-sm text-blueGray-400">Website</span>
-                    </div>
-                    <div className="lg:mr-4 p-3 text-center">
-                      <div className="flex justify-center space-x-2">
-                        <div>
-                          <button
-                            type="button"
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                            className="inline-block rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="h-4 w-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                      <span className="text-sm text-blueGray-400">Comments</span>
+                      <span className="text-sm text-blueGray-400">Events</span>
+                      {userEvents?.allEvents?.map((event)=>{
+                        return <a
+                                  key={event._id}
+                                  href={`/event/${event._id}`}
+                                >
+                                  {event.title} 
+                                </a>
+                      })}
+                   
+                      
                     </div>
                   </div>
                 </div>
@@ -171,25 +128,17 @@ const Profile = () => {
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
                   {userData?.username}
                 </h3>
-                <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                  <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                  {/* {isUserEditingLocation ?
-                    <button
-                      className={styles.saveLocation}
-                      onClick={handleSaveLocation}  
-                    >
-                      Save
-                    </button>
-                    :
-                    <button
-                    className={styles.editLocation}
-                    onClick={()=> setIsUserEditingLocation(true)}
-                  >
-                    Edit
-                  </button>
-                  } */}
-                  Los Angeles, California
-                </div>
+                {!isLocationLoading ?
+                  <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                    <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  
+                    {userLocation}
+                      
+                  </div>
+                  : <div>
+
+                  </div>
+                }
                 <div className="mb-2 text-blueGray-600 mt-10">
                   <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
                   Solution Manager - Creative Tim Officer

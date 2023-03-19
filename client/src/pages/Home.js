@@ -190,7 +190,6 @@ const Home = () => {
       }
       else{
         console.log( new Error('something went wrong.'))
-        
       }
     }
   }
@@ -331,7 +330,7 @@ const Home = () => {
               <form className="flex flex-col lg:flex-row">
                 <input
                   type="input"
-                  placeholder="Search for opportunity"
+                  placeholder="Search a city or zip code"
                   className="flex-1 h-10 px-4 py-2 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0"
                   value={searchOpportunityInput}
                   onChange={(e)=>setSearchOpportunityInput(e.target.value)}

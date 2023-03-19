@@ -29,7 +29,7 @@ function CharityProfile() {
   const [isEditing, setIsEditing] = useState(false);
 
   // //ID
-  
+
   // const [userId, setUserId] = useState(Auth.getProfile().data._id);
 
 
@@ -92,6 +92,7 @@ function CharityProfile() {
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div className="px-6">
               <div className="flex flex-wrap justify-center">
+
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
                     <img
@@ -101,6 +102,7 @@ function CharityProfile() {
                     ></img>
                   </div>
                 </div>
+                
                 {/* ----------------------- ICONS ------------------------- */}
                 <div className="w-full px-4 justify-center mt-20">
                   <div className="flex justify-center py-4 lg:pt-4 pt-8">
