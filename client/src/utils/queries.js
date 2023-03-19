@@ -67,8 +67,9 @@ export const QUERY_CHARITY = gql`
         address
         savedCharity
       }
+    }
   }
-}
+
 `;
 
 export const QUERY_CHARITY_BY_USERNAME = gql`
@@ -99,6 +100,7 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
       email
       picture
       skills
+      savedEvents
       user_description
     }
   }

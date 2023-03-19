@@ -10,7 +10,7 @@ import { useStateContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_GOOGLE_VOLUNTEER, QUERY_CHARITY, QUERY_VOLUNTEER } from '../utils/queries'
-
+import Toggle from '../components/Toggle';
 
 const volunteerNavigation = [
   //This create event field needs to be conditionally rendered IF the user logged in is userc
@@ -101,7 +101,6 @@ if(isCharity)
                   )}
                 </Disclosure.Button>
               </div>
-
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
@@ -174,7 +173,8 @@ if(isCharity)
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-
+                  
+                  <Toggle />
 
                 
                   <Menu as="div" className="relative ml-3">
@@ -277,6 +277,8 @@ if(isCharity)
                 >
                 </Disclosure.Button>
               })}
+
+
             </div>
           </Disclosure.Panel>
         </>
@@ -374,7 +376,7 @@ if(isCharity)
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-
+                  <Toggle />
 
                 
                   <Menu as="div" className="relative ml-3">
@@ -477,6 +479,7 @@ if(isCharity)
                 >
                 </Disclosure.Button>
               })}
+              
             </div>
           </Disclosure.Panel>
         </>
