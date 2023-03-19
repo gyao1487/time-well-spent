@@ -2,7 +2,7 @@
 //logged in charity via _id. Then implement the edit features for fields and description at the bottom
 import styles from "../styles/Profile.module.css";
 import React, { useEffect } from "react";
-import { QUERY_CHARITY, QUERY_ALL_EVENTS} from "../utils/queries";
+import { QUERY_CHARITY, QUERY_ALL_EVENTS } from "../utils/queries";
 import { UPDATE_CHARITY } from "../utils/mutations";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
@@ -11,32 +11,32 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import { useState } from "react";
 import Auth from "../utils/auth";
-import { useDispatchContext, useStateContext} from "../utils/GlobalState";
+import { useDispatchContext, useStateContext } from "../utils/GlobalState";
 
 function CharityProfile() {
   const state = useStateContext();
   const dispatch = useDispatchContext();
-  const userId = Auth.getProfile().data._id
+  const userId = Auth.getProfile().data._id;
   const { loading, error, data } = useQuery(QUERY_CHARITY, {
     variables: {
       _id: userId,
     },
   });
 
-console.log(userId)
+  console.log(userId);
   const [userEvents, setUserEvents] = useState(null);
   const [userData, setUserData] = useState(null); // add closing parenthesis
   const [isEditing, setIsEditing] = useState(false);
-  const [description, setDescription] = useState(data?.description); // add missing variables
-  const [charityName, setCharityName] = useState(data?.charityName);
+  const [description, setDescription] = useState(""); // add missing variables
+  const [charityName, setCharityName] = useState("");
   const [websiteURL, setWebsiteURL] = useState("");
-  const [address, setAddress] = useState(data?.address);
-  const [facebook, setFacebook] = useState(data?.facebook);
-  const [instagram, setInstagram] = useState(data?.instagram);
-  const [twitter, setTwitter] = useState(data?.twitter);
-  const [phoneNumber, setPhoneNumber] = useState(data?.phoneNumber);
-  const [savedEvents, setSavedEvents] = useState(data?.savedEvents);
-  const [image, setImage] = useState(data?.image);
+  const [address, setAddress] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [savedEvents, setSavedEvents] = useState("");
+  const [image, setImage] = useState("");
   // const [userEvents, setUserEvents] =useState(null)
   // const [userData, setUserData] = useState(
   //   {
@@ -74,20 +74,32 @@ console.log(userId)
       savedEvents: savedEvents,
     },
   });
-  const {loading: eventsLoading, error:eventsError, data: eventsData} = useQuery(QUERY_ALL_EVENTS,{
+  const {
+    loading: eventsLoading,
+    error: eventsError,
+    data: eventsData,
+  } = useQuery(QUERY_ALL_EVENTS, {
     variables: {
-      _id: data?.charity.savedEvents
-    }
+      _id: data?.charity.savedEvents,
+    },
   });
 
-  console.log(data)
-
+  console.log(data);
 
   useEffect(() => {
-    setUserData(data);
-    setWebsiteURL(data?.charity.websiteURL)
-    setUserEvents(eventsData)},[data, eventsData]
-  );
+    // setUserData(data);
+    setDescription(data?.charity.description);
+    setCharityName(data?.charityName);
+    setWebsiteURL(data?.charity.websiteURL);
+    setAddress(data?.address);
+    setFacebook(data?.facebook);
+    setInstagram(data?.instagram);
+    setTwitter(data?.twitter);
+    setPhoneNumber(data?.phoneNumber);
+    setSavedEvents(data?.savedEvents);
+    setUserEvents(eventsData);
+    setImage(data?.image);
+  }, [data, eventsData]);
   // const { _id } = useParams();
   // console.log(username);
   // const { loading, error, data } = useQuery(QUERY_CHARITY_BY_USERNAME, {
@@ -95,22 +107,22 @@ console.log(userId)
   // });
   // const charity = data?.charity;
 
-//Save function
-const handleSave = async (e) => {
-  setIsEditing(false);
-  const { data, error } = await updateCharity();
-  if (error) {
-    alert("Something went wrong.");
-    console.log(error);
-  }
-};
+  //Save function
+  const handleSave = async (e) => {
+    setIsEditing(false);
+    const { data, error } = await updateCharity();
+    window.location.reload();
+    if (error) {
+      alert("Something went wrong.");
+      console.log(error);
+    }
+  };
 
-//Edit function
-const handleEdit = async (e) => {
-  setUserData();
-  setIsEditing(true);
-};
-
+  //Edit function
+  const handleEdit = async (e) => {
+    setUserData();
+    setIsEditing(true);
+  };
 
   if (loading) return <Loading />;
   if (error) return <p>{error.message}</p>;
@@ -122,7 +134,6 @@ const handleEdit = async (e) => {
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div className="px-6">
               <div className="flex flex-wrap justify-center">
-
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
                     <img
@@ -151,37 +162,8 @@ const handleEdit = async (e) => {
                               className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                             >
                               <i className="fa-solid fa-globe"></i>
-                              {/* <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="h-4 w-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg> */}
                             </button>
                           </a>
-                          {isEditing? 
-                           <textarea
-                           className="textarea textarea-info bg-transparent w-96 mt-7"
-                           placeholder="website"
-                           type="website"
-                           autoFocus={true}
-                           id="websiteURL"
-                           value={websiteURL}
-                           onChange={(e)=> setWebsiteURL(e.target.value)}
-                           onKeyDown={(e)=>{
-                             if(e.keyCode === 27){
-                               e.currentTarget.blur();
-                               setIsEditing(false);
-                             }
-                           }}
-                           // onBlur={()=> setIsUserEditingDescription(false)}
-                         /> : <div>{data?.charity.description}</div>}
                         </div>
                       </div>
 
@@ -192,6 +174,11 @@ const handleEdit = async (e) => {
                     <div className="mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
                         <div>
+                        <a
+                            href={`https://twitter.com/${data?.charity.twitter}`}
+                            target="blank"
+                            rel="noopener"
+                          >
                           <button
                             type="button"
                             data-te-ripple-init
@@ -199,19 +186,8 @@ const handleEdit = async (e) => {
                             className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                           >
                             <i className="fa-brands fa-twitter"></i>
-                            {/* <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="h-4 w-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg> */}
                           </button>
+                          </a>
                         </div>
                       </div>
 
@@ -227,18 +203,6 @@ const handleEdit = async (e) => {
                             className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                           >
                             <i className="fa-brands fa-instagram"></i>
-                            {/* <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="h-4 w-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M19.5 21a3 3 0 003-3V9a3 3 0 00-3-3h-5.379a.75.75 0 01-.53-.22L11.47 3.66A2.25 2.25 0 009.879 3H4.5a3 3 0 00-3 3v12a3 3 0 003 3h15zm-6.75-10.5a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V10.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg> */}
                           </button>
                         </div>
                       </div>
@@ -247,6 +211,65 @@ const handleEdit = async (e) => {
                   </div>
                 </div>
               </div>
+
+              {isEditing ? (
+                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+              {/* Email edit field */}
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="title"
+                      className="text-sm font-small leading-6 text-gray-900"
+                    >
+                      Website:
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder="www.mynewURL.com"
+                      type="website"
+                      autoFocus={true}
+                      id="websiteURL"
+                      value={websiteURL}
+                      onChange={(e) => setWebsiteURL(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 27) {
+                          e.currentTarget.blur();
+                          setIsEditing(false);
+                        }
+                      }}
+                      // onBlur={()=> setIsUserEditingDescription(false)}
+                    />
+                  </div>
+
+                {/* Twitter edit field */}
+                   <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="title"
+                      className="text-sm font-small leading-6 text-gray-900"
+                    >
+                      Twitter Handle:
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder="myTwitterHandle"
+                      type="twitter"
+                      autoFocus={true}
+                      id="twitter"
+                      value={twitter}
+                      onChange={(e) => setTwitter(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 27) {
+                          e.currentTarget.blur();
+                          setIsEditing(false);
+                        }
+                      }}
+                      // onBlur={()=> setIsUserEditingDescription(false)}
+                    />
+                  </div>
+                  
+                </div>
+              ) : null}
+
+
               <div className="text-center mt-12">
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
                   {data?.charity.username}
