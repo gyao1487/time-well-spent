@@ -1,8 +1,15 @@
-import { useState } from "react";
-
+import { useState,useEffect } from "react";
+import Auth from '../utils/auth'
 function UserHamburger() {
     
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
+    useEffect(()=>{
+        if(Auth.loggedIn()){
+            setIsLoggedIn(true)
+        }
+    },[])
 
     return (
     <nav>
@@ -41,9 +48,20 @@ function UserHamburger() {
         <li className="border-b border-gray-400 my-8 uppercase">
             <a href="/Discover">Find Opportunities</a>
         </li>
-        <li className="border-b border-gray-400 my-8 uppercase">
-            <a href="/Profile">Profile</a>
-        </li>
+        {isLoggedIn ?
+                    <li>
+                        <a href="/Profile">Profile</a>
+                    </li> :
+                    <>
+                        <li>
+                            <a href="/Login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/Signup">Signup</a>
+                        </li>
+                    </>
+
+                }
         </ul>
     </div>
     </section>
@@ -55,9 +73,8 @@ function UserHamburger() {
     <li>
         <a href="/Discover">Find Opportunities</a>
     </li>
-    <li>
-        <a href="/Profile">Profile</a>
-    </li>
+                
+    
     </ul>
     </nav>
 )};
