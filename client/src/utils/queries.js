@@ -99,6 +99,7 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
       email
       picture
       skills
+      savedEvents
       user_description
     }
   }
