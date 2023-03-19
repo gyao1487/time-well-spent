@@ -134,6 +134,34 @@ const resolvers = {
             throw new Error('Invalid token');
           }
         },
+        removeVolunteerEvent: async (parent,  {_id} , context) => {
+          const updatedVolunteer = await Volunteer.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { savedEvents: _id } },
+            { new: true }
+          );
+
+          if (!updatedVolunteer) {
+            throw new Error('Failed to remove volunteer event');
+          }
+
+          return updatedVolunteer;
+        },
+        removeGoogleVolunteerEvent: async (parent,  {_id} , context) => {
+          console.log(context.user._id)
+          console.log(_id);
+          const updatedVolunteer = await GoogleVolunteer.findOneAndUpdate(
+            { _id: context.user._id},
+            { $pull: { savedEvents:  _id  } },
+            { new: true }
+          );
+            console.log((await updatedVolunteer));
+          if (!updatedVolunteer) {
+            throw new Error('Failed to remove volunteer event');
+          }
+
+          return updatedVolunteer;
+        },
 
         updateVolunteer: async function(parent, args , ) { 
           const { _id,
