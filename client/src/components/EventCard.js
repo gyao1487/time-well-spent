@@ -80,25 +80,23 @@ function EventCard({ event }) {
   }
 
   return (
-    
-      <div className="max-w-sm rounded overflow-hidden shadow-lg dark:bg-slate-700">
-        <Link to={`/event/${event._id}`}>
-          <img
-            className="rounded-t-lg"
-            src= {event.image}
-            alt=""
-          />
-        </Link>
-        <div className="p-5">
+      <div className="max-w-sm max-h-max rounded overflow-hidden shadow-lg">
           <Link to={`/event/${event._id}`}>
-            <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
-              {event.title}
-            </h5>
+            <img
+              className="rounded-t-lg h-48 w-96 object-cover"
+              src= {event.image}
+              alt=""
+            />
           </Link>
-          <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
-            <Link to ={`/profile/${event.savedCharity}`}>{event.savedCharity}</Link>
-          </p>
-
+          <div className="p-5">
+            <Link to={`/event/${event._id}`}>
+              <h5 className="text-gray-900 font-bold text-2xl text-left tracking-tight mb-2 dark:text-white">
+                {event.title}
+              </h5>
+            </Link>
+            <p className="font-normal text-gray-700 mb-3 text-left dark:text-gray-400">
+              <Link to ={`/profile/${event.savedCharity}`}>{event.savedCharity}</Link>
+            </p>
           <div className="flex space-x-1 mb-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
