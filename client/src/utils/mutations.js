@@ -186,3 +186,26 @@ mutation updateCharityDescription($_id: ID!, $savedEvents:inputEvent, $websiteUR
     charityName
   }
 }`;
+
+
+export const DELETE_VOLUNTEER =gql`
+mutation deleteVolunteer($_id: ID!){
+  deleteVolunteer(_id: $_id){
+    _id
+  }
+}
+`
+export const REMOVE_VOLUNTEER_EVENT =gql`
+mutation removeVolunteerEvent($_id: ID!) {
+  removeVolunteerEvent(_id: $_id) {
+    savedEvents 
+  }
+}
+`
+export const REMOVE_GOOGLE_VOLUNTEER_EVENT =gql`
+mutation removeGoogleVolunteerEvent($_id: ID!) {
+  removeGoogleVolunteerEvent(_id: $_id) {
+    savedEvents
+  }
+}
+`

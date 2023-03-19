@@ -447,7 +447,7 @@ const Home = () => {
         {/* ---------------Event Cards----------------- */}
         {/* If loading, show loading div. If done loading, show event cards
        !!!!!!!!!!!!!!!  Need to create better loading element later */}
-        {Auth.loggedIn() && 
+        
           <div>
           {loading ? (
             <div>Loading...</div>
@@ -459,7 +459,7 @@ const Home = () => {
             </div>
           )}
           </div>
-        }
+        
         
           
         

@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
-import { ADD_VOLUNTEER_EVENT, ADD_GOOGLE_VOLUNTEER_EVENT } from "../utils/mutations";
+import { ADD_VOLUNTEER_EVENT, ADD_GOOGLE_VOLUNTEER_EVENT, REMOVE_VOLUNTEER_EVENT, REMOVE_GOOGLE_VOLUNTEER_EVENT } from "../utils/mutations";
 import { QUERY_VOLUNTEER, QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 import styles from '../styles/EventCard.module.css'
+import client from '../App'
 
 function EventCard({ event }) {
   console.log( "params " +window.location);
   const [userToken, setUserToken] = useState(null);
-  const [isEventRemoved, setIsEventRemoved] = useState(false);
+  const [userData, setUserData] = useState(null)
+  const [isEventRemoved, setIsEventRemoved] = useState(true);
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
     context: { token: userToken }, // Pass the JWT token in the context here
     update: (cache, { data: { addVolunteerEvent } }) => {
@@ -30,13 +32,19 @@ function EventCard({ event }) {
       // console.error(err);
     },
   });
+  const [removeVolunteerEvent] = useMutation(REMOVE_VOLUNTEER_EVENT,{
+    context: { token: userToken}
+  })
+  const [removeGoogleVolunteerEvent] = useMutation(REMOVE_GOOGLE_VOLUNTEER_EVENT,{
+    context: { token: userToken}
+  })
   const {loading: volunteerLoading, error: volunteerError, data: volunteerData} = useQuery(QUERY_VOLUNTEER,{
     variables:{
       _id: userToken?.data._id,
     },
     skip: !userToken?.data._id,
   })
-  const {loading: googleVolunteerLoading, error: googleVolunteerError, data: googleVolunteerData} = useQuery(QUERY_GOOGLE_VOLUNTEER,{
+  const {loading: googleVolunteerLoading, error: googleVolunteerError, data: googleVolunteerData, refetch} = useQuery(QUERY_GOOGLE_VOLUNTEER,{
     variables:{
       _id: userToken?.data._id,
     },
@@ -60,18 +68,34 @@ function EventCard({ event }) {
       const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
         variables: { eventId }
       })
-      setIsEventRemoved(false)
+      refetch({
+        _id: userToken?.data._id,
+      })
     } catch (error) {
       // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
+  
   const handleRemoveEvent = async (e) =>{
-        setIsEventRemoved(true)
+      const { volunteerData, errors} = await removeVolunteerEvent({
+        variables: {
+          _id: event._id
+        }
+      });
+      const {googleVolunteerData, errors: googleErrors} = await removeGoogleVolunteerEvent({
+        variables: {
+          _id: event._id,
+        }
+      });
+      refetch({
+          _id: userToken?.data._id,
+      })
   }
   
+
   useEffect(() => {
     setUserToken(Auth.getProfile())
-    console.log(event);
+    console.log(event._id);
   }, [event]);
 
 
@@ -140,7 +164,9 @@ function EventCard({ event }) {
            
           </div>
           <div className ="grid place-self-end pt-2">
-          {(!isEventRemoved &&  googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id)) || (!isEventRemoved && volunteerData?.volunteer?.savedEvents?.includes(event._id)) ?
+            {Auth.loggedIn() && 
+            <div>
+              { googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id) ||  volunteerData?.googleVolunteer?.savedEvents?.includes(event._id) ?
             <button
               type="button"
               className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
@@ -150,7 +176,9 @@ function EventCard({ event }) {
               rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.removeEvent}
               data-te-ripple-init
               data-te-ripple-color="light"
-              data-id={event._id} onClick={handleRemoveEvent}>
+              data-id={event._id} 
+              data-button='remove'
+              onClick={handleRemoveEvent}>
               Remove Event
             </button>
             :
@@ -163,10 +191,15 @@ function EventCard({ event }) {
               rounded-full px-3 py-1 text-sm font-semibold   mb-2"
               data-te-ripple-init
               data-te-ripple-color="light"
-              data-id={event._id} onClick={handleAddEvent}>
+              data-id={event._id} 
+              data-button='add'
+              onClick={handleAddEvent}>
               Sign up!
             </button>
           }
+            </div>
+            }
+          
             
           </div>
         </div>
