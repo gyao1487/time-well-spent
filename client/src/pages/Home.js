@@ -124,9 +124,18 @@ const Home = () => {
       let infoWindow = new window.google.maps.InfoWindow({})
 
       const content = document.createElement('div')
+      content.classList.add('content')
+
+      if(placeDetails?.photos){
+        const placePhotoWrapper = document.createElement('div');
+        placePhotoWrapper.classList.add('photoWrapper');
+        const placePhoto = document.createElement('img');
+        placePhotoWrapper.appendChild(placePhoto);
+        placePhoto.setAttribute('src', placeDetails?.photos[0]?.getUrl())
+        console.log(placeDetails?.photos[0]?.getUrl());
+        content.appendChild(placePhotoWrapper)
+      }
       const placeName = document.createElement('h2')
-      placeName.style.fontSize = '20px'
-      placeName.style.fontWeight = 'bold'
       const placeAddress = document.createElement('p')
       const placePhone = document.createElement('p')
       placeName.textContent = markerObject.place.name;
@@ -135,7 +144,7 @@ const Home = () => {
       content.appendChild(placeName);
       content.appendChild(placeAddress);
       content.appendChild(placePhone);
-
+      
       infoWindow.setContent(content);
 
       markerObject.marker.addListener('mouseover', ()=>{
@@ -154,9 +163,34 @@ const Home = () => {
         })
       })
       
-      markerObject.marker.addListener('click', ()=>{
-        window.open(placeDetails.website)
-      })
+      if(placeDetails.website){
+        markerObject.marker.addListener('click', ()=>{
+          window.open(placeDetails.website)
+        })
+        let clickForWebsite = document.createElement('p')
+        clickForWebsite.textContent = 'Click marker to view website.'
+        clickForWebsite.style.fontSize = '12px'
+        clickForWebsite.style.alignSelf = 'center'
+        clickForWebsite.style.color = 'green'
+        content.appendChild(clickForWebsite);
+      }
+    // let isOpen = false;
+    //  markerObject.marker.addListener('click', ()=>{
+    //     if(!isOpen){
+    //       isOpen = true;
+    //       infoWindow.open({
+    //         anchor: markerObject.marker,
+    //         map: map,
+    //       })
+    //     }
+    //     else{
+    //       isOpen = false;
+    //       infoWindow.close({
+    //         anchor: markerObject.marker,
+    //         map: map,
+    //       })
+    //     }
+    //   })
 
       return infoWindow;
     }
@@ -196,7 +230,7 @@ const Home = () => {
 
           (function (i) {
             setTimeout(function () {
-              service.getDetails({placeId: results[i].place_id, fields: ['formatted_address', 'formatted_phone_number', 'website']}, (PlaceDetails, PlacesServiceStatus)=>{
+              service.getDetails({placeId: results[i].place_id, fields: ['formatted_address', 'formatted_phone_number', 'website', 'photos']}, (PlaceDetails, PlacesServiceStatus)=>{
                 createMarker(results[i])
                   .then((markerObject)=>{
                     createInfoWindow(markerObject, PlaceDetails);
@@ -205,7 +239,7 @@ const Home = () => {
                   if(PlacesServiceStatus == window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT){
                     return console.log(PlacesServiceStatus);
                   }
-                  console.log(PlaceDetails);
+                  console.log(PlaceDetails)
               })
             }, 500 * i);
           })(i);
