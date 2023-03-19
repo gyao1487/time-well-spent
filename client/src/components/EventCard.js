@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { ADD_VOLUNTEER_EVENT, ADD_GOOGLE_VOLUNTEER_EVENT } from "../utils/mutations";
+import { QUERY_VOLUNTEER, QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
+import styles from '../styles/EventCard.module.css'
 
 function EventCard({ event }) {
   console.log( "params " +window.location);
-  const [userToken, setUserToken] = useState(Auth.getToken());
-  
+  const [userToken, setUserToken] = useState(null);
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
     context: { token: userToken }, // Pass the JWT token in the context here
     update: (cache, { data: { addVolunteerEvent } }) => {
@@ -28,10 +29,24 @@ function EventCard({ event }) {
       // console.error(err);
     },
   });
+  const {loading: volunteerLoading, error: volunteerError, data: volunteerData} = useQuery(QUERY_VOLUNTEER,{
+    variables:{
+      _id: userToken?.data._id,
+    },
+    skip: !userToken?.data._id,
+  })
+  const {loading: googleVolunteerLoading, error: googleVolunteerError, data: googleVolunteerData} = useQuery(QUERY_GOOGLE_VOLUNTEER,{
+    variables:{
+      _id: userToken?.data._id,
+    },
+    skip: !userToken?.data._id,
+  })
 
   const handleAddEvent = async (e) => { // Make the function async
     const eventId = e.target.dataset.id;
-    console.log(eventId, userToken);
+    // console.log(eventId, userToken);
+    console.log(volunteerData)
+    console.log(googleVolunteerData)
   
     try {
       const { data, errors } = await addVolunteerEvent({
@@ -48,10 +63,12 @@ function EventCard({ event }) {
       // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
-
+  
   useEffect(() => {
+    setUserToken(Auth.getProfile())
     console.log(event);
   }, [event]);
+
 
   if (!event) {
     return <h3>No events match this search, check again later!</h3>
@@ -120,18 +137,34 @@ function EventCard({ event }) {
            
           </div>
           <div className ="grid place-self-end pt-2">
+          {googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id) || volunteerData?.volunteer?.savedEvents?.includes(event._id) ?
             <button
-            type="button"
-            className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 
-            hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
-            focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
-            text-4xl text-center m-2 
-            rounded-full px-3 py-1 text-sm font-semibold   mb-2"
-            data-te-ripple-init
-            data-te-ripple-color="light"
-            data-id={event._id} onClick={handleAddEvent}>
-            Sign up!
-          </button>
+              type="button"
+              className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
+              hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+              focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
+              text-4xl text-center m-2 
+              rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.signedUp}
+              data-te-ripple-init
+              data-te-ripple-color="light"
+              data-id={event._id} onClick={handleAddEvent}>
+              Signed up!
+            </button>
+            :
+            <button
+              type="button"
+              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 
+              hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+              focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
+              text-4xl text-center m-2 
+              rounded-full px-3 py-1 text-sm font-semibold   mb-2"
+              data-te-ripple-init
+              data-te-ripple-color="light"
+              data-id={event._id} onClick={handleAddEvent}>
+              Sign up!
+            </button>
+          }
+            
           </div>
         </div>
       </div>

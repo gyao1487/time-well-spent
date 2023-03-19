@@ -1,0 +1,8 @@
+.signedUp{
+    background: green !important;
+    opacity: 0.5;
+    cursor: unset;
+}
+.signedUp:hover{
+
+}
