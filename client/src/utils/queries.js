@@ -67,8 +67,9 @@ export const QUERY_CHARITY = gql`
         address
         savedCharity
       }
+    }
   }
-}
+
 `;
 
 export const QUERY_CHARITY_BY_USERNAME = gql`
