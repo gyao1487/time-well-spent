@@ -460,6 +460,7 @@ function CharityProfile() {
             </div>
           </div>
         </div>
+        
       </section>
     </div>
   );
