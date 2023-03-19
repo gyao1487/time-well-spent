@@ -58,38 +58,55 @@ function EventCard({ event }) {
     console.log(googleVolunteerData)
   
     try {
-      const { data, errors } = await addVolunteerEvent({
-        variables: { eventId },
-        update: (cache, { data: { addVolunteerEvent } }) => {
-          // ...
-        },
-      });
+      if(volunteerData){
+        const { data, errors } = await addVolunteerEvent({
+          variables: { eventId },
+          update: (cache, { data: { addVolunteerEvent } }) => {
+            // ...
+          },
+        });
+        refetch({
+          _id: userToken?.data._id,
+      })
+      }
+      if(googleVolunteerData){
+        const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
+          variables: { eventId }
+        })
+        refetch({
+          _id: userToken?.data._id,
+        })
+      }
+        
       
-      const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
-        variables: { eventId }
-      })
-      refetch({
-        _id: userToken?.data._id,
-      })
     } catch (error) {
       // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
   
   const handleRemoveEvent = async (e) =>{
+    if(volunteerData){
       const { volunteerData, errors} = await removeVolunteerEvent({
         variables: {
           _id: event._id
         }
       });
+      refetch({
+        _id: userToken?.data._id,
+    })
+    }
+    if(googleVolunteerData){
       const {googleVolunteerData, errors: googleErrors} = await removeGoogleVolunteerEvent({
         variables: {
           _id: event._id,
         }
       });
       refetch({
-          _id: userToken?.data._id,
-      })
+        _id: userToken?.data._id,
+    })
+    }
+      
+      
   }
   
 
