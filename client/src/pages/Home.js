@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
-
+import  Auth  from '../utils/auth'
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_EVENTS } from "../utils/queries";
 import {GoogleMap, useJsApiLoader, Libraries} from '@react-google-maps/api'
@@ -97,7 +97,7 @@ const Home = () => {
   }, [])
 
   const handleSearchClick = async () =>{
-
+   
     const getSearchInputLatLng = async () =>{
       const geocoder = new window.google.maps.Geocoder();
       let response = geocoder.geocode({
@@ -115,50 +115,68 @@ const Home = () => {
       console.log(await response)
       const latLng = {lat:(await response).results[0].geometry.location.lat() , lng :(await response).results[0].geometry.location.lng() }
       console.log(latLng)
+      map.setCenter(latLng);
       return latLng;
     }
    getSearchInputLatLng();
 
-    function createMarker(place, placeDetails) {
-      if (!place.geometry || !place.geometry.location) return;
-      const marker = new window.google.maps.Marker({
-        map,
-        animation: window.google.maps.Animation.DROP,
-        position: place.geometry.location,
-      });
+    function createInfoWindow(markerObject, placeDetails){
+      let infoWindow = new window.google.maps.InfoWindow({})
+
       const content = document.createElement('div')
       const placeName = document.createElement('h2')
       placeName.style.fontSize = '20px'
       placeName.style.fontWeight = 'bold'
       const placeAddress = document.createElement('p')
       const placePhone = document.createElement('p')
-      placeName.textContent = place.name;
+      placeName.textContent = markerObject.place.name;
       placeAddress.textContent = placeDetails.formatted_address;
       placePhone.textContent = placeDetails.formatted_phone_number;
       content.appendChild(placeName);
       content.appendChild(placeAddress);
       content.appendChild(placePhone);
-      let infoWindow = new window.google.maps.InfoWindow({})
-      infoWindow.setContent(content)
-      marker.addListener('mouseover', ()=>{
+
+      infoWindow.setContent(content);
+
+      markerObject.marker.addListener('mouseover', ()=>{
         
         infoWindow.open({
-          anchor: marker,
+          anchor: markerObject.marker,
+          map: map,
+        })
+      })
+
+      markerObject.marker.addListener('mouseout', ()=>{
+        
+        infoWindow.close({
+          anchor: markerObject.marker,
           map: map,
         })
       })
       
-      marker.addListener('click', ()=>{
+      markerObject.marker.addListener('click', ()=>{
         window.open(placeDetails.website)
       })
-      marker.addListener('mouseout', ()=>{
-        
-        infoWindow.close({
-          anchor: marker,
-          map: map,
-        })
-      })
+
+      return infoWindow;
+    }
+
+    async function createMarker(place) {
+      if (!place.geometry || !place.geometry.location) return;
+      const marker = new window.google.maps.Marker({
+        map,
+        animation: window.google.maps.Animation.DROP,
+        position: place.geometry.location,
+      });
+      function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        }
+      }
       marker.setMap(map)
+      return {marker, place};
     }
     
     const request = {
@@ -175,25 +193,37 @@ const Home = () => {
       console.log(results)
       if (status == window.google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
-          service.getDetails({placeId: results[i].place_id, fields: ['formatted_address', 'formatted_phone_number', 'website']}, (PlaceResult, PlacesServiceStatus)=>{
-            createMarker(results[i], PlaceResult);
-              if(PlacesServiceStatus == window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT){
-                return
-              }
-              console.log(PlaceResult);
-          })
+
+          (function (i) {
+            setTimeout(function () {
+              service.getDetails({placeId: results[i].place_id, fields: ['formatted_address', 'formatted_phone_number', 'website']}, (PlaceDetails, PlacesServiceStatus)=>{
+                createMarker(results[i])
+                  .then((markerObject)=>{
+                    createInfoWindow(markerObject, PlaceDetails);
+                  })
+                
+                  if(PlacesServiceStatus == window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT){
+                    return console.log(PlacesServiceStatus);
+                  }
+                  console.log(PlaceDetails);
+              })
+            }, 500 * i);
+          })(i);
+          
         }
       }
       
       if(results.length === 0){
         return console.log('zero results')
       }
-      else{
-        console.log( new Error('something went wrong.'))
-      }
     }
   }
 
+  useEffect(()=>{
+    if(Auth.isTokenExpired()){
+      Auth.logout();
+    }
+  },[])
   // const getPlacePhotos = async (placesDetails)=>{
   //   let responses =[];
   //   for(const placeDetail of placesDetails){
