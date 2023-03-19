@@ -80,7 +80,7 @@ const Profile = () => {
                     <img
                       alt={userData?.username}
                       src={userData?.picture}
-                      className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 lg:-ml-16 max-w-150-px"
                     ></img>
                   </div>
                 </div>

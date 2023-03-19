@@ -94,8 +94,7 @@ type Mutation{
     event(_id: ID!): Event
     volunteer(_id: ID!): Volunteer
     allVolunteers: [Volunteer]!
-    charity(charityId: ID, username: String): Charity
-    
+    charity(_id: ID, username: String): Charity
     allCharity: [Charity]!
     googleVolunteer(_id: ID!): GoogleVolunteer
 }
