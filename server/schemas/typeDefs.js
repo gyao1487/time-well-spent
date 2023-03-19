@@ -15,7 +15,7 @@ type Volunteer{
     email:String!
     skills:String
     password:String!
-    savedEvents:[ID]!
+    savedEvents:[ID]
     isCharity:Boolean
 }
 
@@ -66,7 +66,7 @@ type GoogleVolunteer{
     picture:String!
     skills: String
     user_description: String
-    savedEvents: [ID]!
+    savedEvents: [ID]
 }
 
 type Mutation{
@@ -74,7 +74,7 @@ type Mutation{
     createGoogleVolunteer(username:String!, email:String!, jti:String!, sub:String!, picture:String!):Auth
     updateGoogleVolunteer(_id: ID!, user_description: String):GoogleVolunteer
     createCharity(username:String!, password:String!, email:String!, websiteURL:String!):Auth
-    updateCharity(_id:ID!, savedEvents:[Event], websiteURL:String!, description:String, address:String, facebook:String, instagram:String, twitter:String, phoneNumber:String, charityName:String):Charity
+    updateCharity(_id:ID!, savedEvents:inputEvent, websiteURL:String!, description:String, address:String, facebook:String, instagram:String, twitter:String, phoneNumber:String, charityName:String):Charity
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
     loginAsGoogleVolunteer(email: String!, jti: String!):Auth
@@ -94,7 +94,7 @@ type Mutation{
   type Query{
     allEvents:[Event]
     event(_id: ID!): Event
-    volunteer(_id: ID!): Volunteer
+    volunteer(_id: ID): Volunteer
     allVolunteers: [Volunteer]!
     charity(_id: ID, username: String): Charity
     allCharity: [Charity]!
