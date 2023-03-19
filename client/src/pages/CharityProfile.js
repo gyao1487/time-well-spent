@@ -12,6 +12,7 @@ import Loading from "../components/Loading";
 import { useState } from "react";
 import Auth from "../utils/auth";
 import { useDispatchContext, useStateContext } from "../utils/GlobalState";
+import EventCard from "../components/EventCard";
 
 function CharityProfile() {
   const state = useStateContext();
@@ -24,7 +25,6 @@ function CharityProfile() {
   });
 
   console.log(userId);
-  const [userEvents, setUserEvents] = useState(null);
   const [userData, setUserData] = useState(null); // add closing parenthesis
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(""); // add missing variables
@@ -74,17 +74,17 @@ function CharityProfile() {
       savedEvents: savedEvents,
     },
   });
-  const {
-    loading: eventsLoading,
-    error: eventsError,
-    data: eventsData,
-  } = useQuery(QUERY_ALL_EVENTS, {
-    variables: {
-      _id: data?.charity.savedEvents,
-    },
-  });
+  // const {
+  //   loading: eventsLoading,
+  //   error: eventsError,
+  //   data: eventsData,
+  // } = useQuery(QUERY_ALL_EVENTS, {
+  //   variables: {
+  //     _id: data?.charity.savedEvents,
+  //   },
+  // });
 
-  console.log(data);
+  console.log(data?.charity);
 
   useEffect(() => {
     // setUserData(data);
@@ -96,10 +96,8 @@ function CharityProfile() {
     setInstagram(data?.charity.instagram);
     setTwitter(data?.charity.twitter);
     setPhoneNumber(data?.charity.phoneNumber);
-    setSavedEvents(data?.savedEvents);
-    setUserEvents(eventsData);
     setImage(data?.image);
-  }, [data, eventsData]);
+  }, [data]);
   // const { _id } = useParams();
   // console.log(username);
   // const { loading, error, data } = useQuery(QUERY_CHARITY_BY_USERNAME, {
@@ -458,7 +456,14 @@ function CharityProfile() {
                 )}
               </div>
             </div>
+           
           </div>
+          
+            {data?.charity.savedEvents.map((event)=>{
+                        return     <div className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
+                        <EventCard event={event} key={event._id} />
+                      </div>
+                      })}
         </div>
         
       </section>
