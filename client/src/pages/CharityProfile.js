@@ -91,11 +91,11 @@ function CharityProfile() {
     setDescription(data?.charity.description);
     setCharityName(data?.charityName);
     setWebsiteURL(data?.charity.websiteURL);
-    setAddress(data?.address);
-    setFacebook(data?.facebook);
-    setInstagram(data?.instagram);
-    setTwitter(data?.twitter);
-    setPhoneNumber(data?.phoneNumber);
+    setAddress(data?.charity.address);
+    setFacebook(data?.charity.facebook);
+    setInstagram(data?.charity.instagram);
+    setTwitter(data?.charity.twitter);
+    setPhoneNumber(data?.charity.phoneNumber);
     setSavedEvents(data?.savedEvents);
     setUserEvents(eventsData);
     setImage(data?.image);
