@@ -190,7 +190,6 @@ const Home = () => {
       }
       else{
         console.log( new Error('something went wrong.'))
-        
       }
     }
   }
