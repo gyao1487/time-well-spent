@@ -17,8 +17,7 @@ root.render(
       <App /> 
     </CharityProvider>
     </ThemeProvider>
-  </React.StrictMode>,
- document.getElementById('root')
+  </React.StrictMode>
 )
 // ReactDOM.render(
 //   <React.StrictMode>
