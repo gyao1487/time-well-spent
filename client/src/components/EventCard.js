@@ -144,11 +144,11 @@ function EventCard({ event }) {
               hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
               focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
               text-4xl text-center m-2 
-              rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.signedUp}
+              rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.removeEvent}
               data-te-ripple-init
               data-te-ripple-color="light"
               data-id={event._id} onClick={handleAddEvent}>
-              Signed up!
+              Remove Event
             </button>
             :
             <button
