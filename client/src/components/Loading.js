@@ -11,7 +11,7 @@ function Loading() {
       </div>
       <p className="mt-6 text-base leading-7 text-gray-600"></p>
       <div className="mt-10 flex items-center justify-center gap-x-6">
-        <p className=" mt-4 text-2xl tracking-tight text-gray-900 sm:text-5xl">
+        <p className=" mt-4 text-small text-gray-700">
           Loading...
         </p>
       </div>

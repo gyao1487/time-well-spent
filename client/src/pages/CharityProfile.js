@@ -144,7 +144,9 @@ function CharityProfile() {
                   </div>
                 </div>
 
-                {/* ----------------------- ICONS ------------------------- */}
+                {/* ----------------------- ICONS -------------------------
+                
+                ----------------------- Website ------------------------- */}
                 <div className="w-full px-4 justify-center mt-20">
                   <div className="flex justify-center py-4 lg:pt-4 pt-8">
                     <div className="mr-4 p-3 text-center items-center ">
@@ -170,40 +172,45 @@ function CharityProfile() {
                       <span className="text-sm text-blueGray-400"></span>
                     </div>
 
-                    {/* ----------------------------------------------------------- */}
+                    {/* -----------------------Twitter-------------------------- */}
                     <div className="mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
                         <div>
-                        <a
+                          <a
                             href={`https://twitter.com/${data?.charity.twitter}`}
                             target="blank"
                             rel="noopener"
                           >
-                          <button
-                            type="button"
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                            className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                          >
-                            <i className="fa-brands fa-twitter"></i>
-                          </button>
+                            <button
+                              type="button"
+                              data-te-ripple-init
+                              data-te-ripple-color="light"
+                              className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                            >
+                              <i className="fa-brands fa-twitter"></i>
+                            </button>
                           </a>
                         </div>
                       </div>
 
+                      {/* -----------------------Instagram------------------------- */}
                       <span className="text-sm text-blueGray-400"></span>
                     </div>
                     <div className="lg:mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
                         <div>
-                          <button
-                            type="button"
-                            data-te-ripple-init
-                            data-te-ripple-color="light"
-                            className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                          <a
+                            href={`https://instagram.com/${data?.charity.instagram}`}
                           >
-                            <i className="fa-brands fa-instagram"></i>
-                          </button>
+                            <button
+                              type="button"
+                              data-te-ripple-init
+                              data-te-ripple-color="light"
+                              className="inline-flex items-center justify-center w-8 h-8 mr-2  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                            >
+                              <i className="fa-brands fa-instagram"></i>
+                            </button>
+                          </a>
                         </div>
                       </div>
                       <span className="text-sm text-blueGray-400"></span>
@@ -212,9 +219,10 @@ function CharityProfile() {
                 </div>
               </div>
 
+              {/* -----------------------Edit Icons Input-------------------------- */}
               {isEditing ? (
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-              {/* Email edit field */}
+                  {/* Email edit field */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
@@ -240,8 +248,8 @@ function CharityProfile() {
                     />
                   </div>
 
-                {/* Twitter edit field */}
-                   <div className="col-span-6 sm:col-span-3">
+                  {/* Twitter edit field */}
+                  <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
                       className="text-sm font-small leading-6 text-gray-900"
@@ -265,10 +273,34 @@ function CharityProfile() {
                       // onBlur={()=> setIsUserEditingDescription(false)}
                     />
                   </div>
-                  
+
+                  {/* Instagram edit field */}
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="title"
+                      className="text-sm font-small leading-6 text-gray-900"
+                    >
+                      Instagram Handle:
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder="myInstagramHandle"
+                      type="instagram"
+                      autoFocus={true}
+                      id="instagram"
+                      value={instagram}
+                      onChange={(e) => setInstagram(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 27) {
+                          e.currentTarget.blur();
+                          setIsEditing(false);
+                        }
+                      }}
+                      // onBlur={()=> setIsUserEditingDescription(false)}
+                    />
+                  </div>
                 </div>
               ) : null}
-
 
               <div className="text-center mt-12">
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
