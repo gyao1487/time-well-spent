@@ -100,7 +100,7 @@ function CharityProfile() {
     setInstagram(data?.charity?.instagram);
     setTwitter(data?.charity?.twitter);
     setPhoneNumber(data?.charity?.phoneNumber);
-    setImage(data?.image);
+    setImage(data?.charity.image);
   }, [data]);
   // const { _id } = useParams();
   // console.log(username);
@@ -111,6 +111,7 @@ function CharityProfile() {
 
   //Save function
   const handleSave = async (e) => {
+    console.log(websiteURL)
     setIsEditing(false);
     const { data, error } = await updateCharity();
 
@@ -173,8 +174,7 @@ function CharityProfile() {
                   <div className="">
                     <img
                       alt=""
-                      src="https://ih1.redbubble.net/image.4283908803.4109/st,small,845x845-pad,1000x1000,f8f8f8.jpg"
-                      // "{data?.charity.image}"
+                      src={image}
                       className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     ></img>
                   </div>
@@ -422,16 +422,16 @@ function CharityProfile() {
                   </div>
                 </div>
               ) : (
-                <div className="text-center mt-12">
-                  <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2">
+                <div className="text-center mt-12 dark:text-white">
+                  <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 dark:text-white mb-2">
                     {username}
                   </h3>
-                  <div className="mb-2 text-blueGray-600 mt-10">
-                    <i className="fas fa-location-dot mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
+                  <div className="mb-2 text-blueGray-600 mt-10 dark:text-white">
+                    <i className="fas fa-location-dot mr-2 text-lg text-gray-900 "></i>
                     {address}
                   </div>
-                  <div className="mb-2 text-blueGray-600 mt-10">
-                    <i className="fas fa-phone mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
+                  <div className="mb-2 text-blueGray-600 mt-10 dark:text-white">
+                    <i className="fas fa-phone mr-2 text-lg text-gray-900 "></i>
                     {phoneNumber}
                   </div>
                 </div>
@@ -466,7 +466,7 @@ function CharityProfile() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-wrap justify-center flex-col items-center">
+                  <div className="flex flex-wrap justify-center flex-col items-center dark:text-white">
                     <div className="w-full lg:w-9/12 px-4">
                       <p>{description}</p>
                     </div>
@@ -484,12 +484,12 @@ function CharityProfile() {
               >
                 <EventCard event={event} key={event._id} />
                 <button
-                  className="group relative flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className=" group absolute flex rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={() => {
                     window.location.href = "/event/edit/" + event._id;
                   }}
                 >
-                  Edit
+                  Edit Event
                 </button>
               </div>
             );

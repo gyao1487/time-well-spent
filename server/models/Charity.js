@@ -52,6 +52,10 @@ const userSchema = new Schema(
       type: String,
       // required: true
     },
+    image:{
+      type: String,
+      default:"https://static.vecteezy.com/system/resources/previews/001/880/049/non_2x/volunteers-collecting-donations-for-charity-free-vector.jpg"
+    },
     isCharity: {
       type: Boolean,
       required: false
