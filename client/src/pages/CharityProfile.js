@@ -3,7 +3,7 @@
 import styles from "../styles/Profile.module.css";
 import React, { useEffect } from "react";
 import { QUERY_CHARITY, QUERY_ALL_EVENTS } from "../utils/queries";
-import { UPDATE_CHARITY,REMOVE_CHARITY } from "../utils/mutations";
+import { UPDATE_CHARITY, REMOVE_CHARITY } from "../utils/mutations";
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
@@ -23,7 +23,7 @@ function CharityProfile() {
     variables: {
       _id: userId,
     },
-    skip:!userId
+    skip: !userId,
   });
 
   console.log(userId);
@@ -37,8 +37,8 @@ function CharityProfile() {
   const [instagram, setInstagram] = useState("");
   const [twitter, setTwitter] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const[username, setUsername] = useState(data?.charity.username)
- 
+  const [username, setUsername] = useState(data?.charity.username);
+
   const [image, setImage] = useState("");
   // const [userEvents, setUserEvents] =useState(null)
   // const [userData, setUserData] = useState(
@@ -113,7 +113,7 @@ function CharityProfile() {
   const handleSave = async (e) => {
     setIsEditing(false);
     const { data, error } = await updateCharity();
-   
+
     if (error) {
       alert("Something went wrong.");
       console.log(error);
@@ -127,18 +127,20 @@ function CharityProfile() {
   };
   const [removeCharity] = useMutation(REMOVE_CHARITY, {
     onError: (err) => {
-      console.error('Error in removeCharity mutation:', err);
+      console.error("Error in removeCharity mutation:", err);
     },
   });
 
   const handleRemoveCharity = async () => {
     try {
-      const { data, errors } = await removeCharity({ variables: { _id: userId } });
+      const { data, errors } = await removeCharity({
+        variables: { _id: userId },
+      });
       window.location.reload();
     } catch (error) {
-      console.error('Error in remove charity mutation:', error);
+      console.error("Error in remove charity mutation:", error);
     }
-    Auth.logout()
+    Auth.logout();
   };
   if (loading) return <Loading />;
   if (error) return <p>{error.message}</p>;
@@ -162,7 +164,6 @@ function CharityProfile() {
               >
                 Edit Profile
               </button>
-              
             )}
           </div>
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
@@ -234,9 +235,7 @@ function CharityProfile() {
                     <div className="lg:mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
                         <div>
-                          <a
-                            href={`https://instagram.com/${instagram}`}
-                          >
+                          <a href={`https://instagram.com/${instagram}`}>
                             <button
                               type="button"
                               data-te-ripple-init
@@ -475,31 +474,68 @@ function CharityProfile() {
                 )}
               </div>
             </div>
-           
           </div>
-          
-            {data?.charity.savedEvents.map((event,i)=>{
-                        return     <div 
-                        key={i}
-                        className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
-                        <EventCard event={event} key={event._id} />
-                        <button
-                className="group relative flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={()=>{window.location.href="/event/edit/" + event._id}}
+
+          {data?.charity.savedEvents.map((event, i) => {
+            return (
+              <div
+                key={i}
+                className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
               >
-                Edit
-              </button>
-                      </div>
-                      })}
+                <EventCard event={event} key={event._id} />
+                <button
+                  className="group relative flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => {
+                    window.location.href = "/event/edit/" + event._id;
+                  }}
+                >
+                  Edit
+                </button>
+              </div>
+            );
+          })}
         </div>
-        <button
-      type="button"
-      className="btn btn-danger"
-      onClick={handleRemoveCharity}
-    >
-      Remove Charity
-    </button>
+        <label htmlFor="nuke-modal" className="btn btn-danger"
+        >
+          Deactivate Account
+        </label>
       </section>
+      {/* The button to open modal
+      <label htmlFor="nuke-modal" className="btn">
+        open modal
+      </label> */}
+
+      {/* Put this part before </body> tag */}
+      <input type="checkbox" id="nuke-modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">WARNING: DEACTIVATING ACCOUNT</h3>
+          <p className="py-4 text-left">
+            Are you sure you want to deactivate your account? All of your data
+            will be permanently removed. This action cannot be undone.
+          </p>
+          <div className="flex flex-row-reverse space-x-4 ">
+            <div className="modal-action ">
+              <button
+                htmlFor="nuke-modal"
+                className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded"
+                onClick={handleRemoveCharity}
+              >
+                Deactivate
+              </button>
+            </div>
+            <span> </span>
+            <div className="modal-action">
+              <label
+                htmlFor="nuke-modal"
+                className="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded"
+              >
+                Cancel
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -227,7 +227,7 @@ function LoginVolunteer(props) {
         </div>
       </div>
 
-      {/* <div classNameName="container my-1">
+      {/* <div className="container my-1">
       <Link to="/signup">← Go to Signup</Link>
 
       <h2>Login</h2>

@@ -3,7 +3,7 @@ function Footer() {
 
 <footer className="bg-white dark:bg-gray-900">
     <div className="mx-auto w-full container p-4 sm:p-6">
-        <div classNameName="md:flex md:justify-between">
+        <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
               <a href="https://github.com/TotallyReactingNodeTurtles/timewellspent" className="flex items-center pb-5 ">
                   <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="FlowBite Logo" />

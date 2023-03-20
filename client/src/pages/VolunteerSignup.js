@@ -250,7 +250,7 @@ export default VolunteerSignup;
     //                 checked
     //               />
     //               <label
-    //                 classNameName="inline-block pl-[0.15rem] hover:cursor-pointer"
+    //                 className="inline-block pl-[0.15rem] hover:cursor-pointer"
     //                 for="exampleCheck3"
     //               >
     //                 Remember me
