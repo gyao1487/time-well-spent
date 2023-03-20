@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Auth from '../utils/auth'
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_EVENT, QUERY_GOOGLE_VOLUNTEER, QUERY_ALL_EVENTS,QUERY_VOLUNTEER } from '../utils/queries'
-import { UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION, UPDATE_VOLUNTEER_DESCRIPTION } from "../utils/mutations";
+import { UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION, UPDATE_VOLUNTEER_DESCRIPTION, REMOVE_GOOGLE_VOLUNTEER, REMOVE_VOLUNTEER } from "../utils/mutations";
 import styles from '../styles/Profile.module.css'
 import EventForm from "./EventForm";
 
@@ -45,6 +45,22 @@ const Profile = () => {
       _id: Auth.getProfile()?.data._id,
     },
   })
+  const [removeVolunteer] = useMutation(REMOVE_VOLUNTEER);
+const [removeGoogleVolunteer] = useMutation(REMOVE_GOOGLE_VOLUNTEER);
+
+const handleRemoveVolunteer = async () => {
+  if (volunteerData?.volunteer) {
+    await removeVolunteer({ variables: { _id: userId } });
+
+    // Handle any additional logic, e.g., updating the UI or redirecting the user.
+  } else if (googleVolunteerData?.googleVolunteer) {
+    await removeGoogleVolunteer({ variables: { _id: userId } });
+    // Handle any additional logic, e.g., updating the UI or redirecting the user.
+  } else {
+    console.error("No volunteer or Google volunteer found for the current user");
+  }
+  Auth.logout()
+};
 
   const handleSaveDescription = async (e)=>{
     
@@ -173,6 +189,12 @@ const Profile = () => {
                     Edit Description
                   </button>
                   }
+                  <button
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={handleRemoveVolunteer}
+                    >
+                  Remove Volunteer
+                  </button>
                   
                   <div className="w-full lg:w-9/12 px-4">
                     {isUserEditingDescription ?
