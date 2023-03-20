@@ -7,6 +7,7 @@ export const QUERY_VOLUNTEER = gql`
       fullName
       username
       email
+      skills
       savedEvents{
         _id
         title

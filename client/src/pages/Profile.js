@@ -60,8 +60,8 @@ const Profile = () => {
       }
     }
     }
-    console.log(volunteerData)
-
+    console.log(googleVolunteerData)
+    console.log(userData)
   useEffect(()=>{
       if(volunteerData?.volunteer){
         setUserData(volunteerData?.volunteer)
@@ -153,11 +153,7 @@ const Profile = () => {
                 }
                 <div className="mb-2 mt-10 text-gray-900">
                   <i className="fas fa-briefcase mr-2 text-lg  "></i>
-                  Solution Manager - Creative Tim Officer
-                </div>
-                <div className="mb-2 text-gray-900">
-                  <i className="fas fa-university mr-2 text-lg  "></i>
-                  University of Computer Science
+                  {userData?.skills}
                 </div>
               </div>
               <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
