@@ -33,14 +33,16 @@ const Discover = () => {
           ) : (
               <div  className="flex flex-wrap gap-4 mx-auto lg:py-16 lg:px-5 lg:flex-row lg:items-center">
                 {events.filter((event) => {
-                  if (searchInput.toLowerCase()==='') {
+                  if (searchInput?.toLowerCase()==='') {
                     return event
                   } 
-                  else if (event.title.toLowerCase().includes(searchInput) || event.description.toLowerCase().includes(searchInput)) {
+                  else if (event?.title?.toLowerCase().includes(searchInput) || event?.description?.toLowerCase().includes(searchInput)) {
                     return event
                   }
-                }).map((event) => (
-                  <div className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
+                }).map((event,i) => (
+                  <div 
+                  className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
+                  key={i}>
                     <EventCard event={event} key={event._id} />
                   </div>
                 ))}
