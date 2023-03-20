@@ -104,7 +104,7 @@ const Profile = () => {
       <section className={styles.mainContainer}>
         <div className="w-full lg:w-4/12 px-4 mx-auto">
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
-            <div className="px-6">
+            <div className="px-6 bg-gray-200 dark:bg-gray-600  text-gray-900">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
@@ -137,7 +137,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="text-center mt-12">
-                <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2">
                   {userData?.username}
                 </h3>
                 {!isLocationLoading ?
@@ -151,12 +151,12 @@ const Profile = () => {
 
                   </div>
                 }
-                <div className="mb-2 text-blueGray-600 mt-10">
-                  <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                <div className="mb-2 mt-10 text-gray-900">
+                  <i className="fas fa-briefcase mr-2 text-lg  "></i>
                   Solution Manager - Creative Tim Officer
                 </div>
-                <div className="mb-2 text-blueGray-600">
-                  <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                <div className="mb-2 text-gray-900">
+                  <i className="fas fa-university mr-2 text-lg  "></i>
                   University of Computer Science
                 </div>
               </div>

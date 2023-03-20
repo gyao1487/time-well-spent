@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { CharityProvider } from './utils/GlobalState';
-// import { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from './components/ThemeContext';
 
-// const container = document.getElementById('root');
-// const root = createRoot(container);
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
 
 <React.StrictMode>
   <ThemeProvider>
@@ -18,7 +18,7 @@ ReactDOM.render(
     </CharityProvider>
     </ThemeProvider>
   </React.StrictMode>
-, document.getElementById('root'))
+)
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <CharityProvider>

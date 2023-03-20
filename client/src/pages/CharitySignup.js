@@ -18,12 +18,12 @@ const CharitySignup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // event.preventDefault();
+    event.preventDefault();
     setCharityFormData({ ...usercFormData, [name]: value });
   };
 
   const handleFormSubmit = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -90,7 +90,7 @@ const CharitySignup = () => {
         <div className="col-span-3 sm:col-span-2">
           <label
             htmlFor="company-website"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-sm font-medium leading-6 dark:text-gray-400"
           >
             Website:
           </label>
@@ -103,7 +103,7 @@ const CharitySignup = () => {
                type="websiteURL"
                id="websiteURL"
               onChange={handleChange}
-              className="block w-full flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="  www.yourwebsite.org"
             />
           </div>

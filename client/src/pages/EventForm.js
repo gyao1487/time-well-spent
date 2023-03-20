@@ -87,10 +87,10 @@ function EventForm(props) {
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
-              <h2 className="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              <h2 className="text-base font-semibold leading-6 text-gray-900 dark:text-white text-center">
                 Create a new event
               </h2>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-200">
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-200 text-center">
                 Just type in details about your event, and we'll work our magic!
               </p>
             </div>
@@ -98,12 +98,12 @@ function EventForm(props) {
           <div className="mt-5 md:col-span-2 md:mt-0">
             <form onSubmit={handleFormSubmit}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
-                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                <div className="space-y-6 bg-white px-4 py-5 sm:p-6 bg-gray-200 dark:bg-gray-600">
                   {/*---------------------------- TITLE-------------------------- */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-600 dark:text-gray-200"
                     >
                       Event Title
                     </label>
@@ -113,7 +113,7 @@ function EventForm(props) {
                       type="text"
                       id="title"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title}</p>}
                   </div>
@@ -121,7 +121,7 @@ function EventForm(props) {
                   <div>
                     <label
                       htmlFor="details"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-600 dark:text-gray-200"
                     >
                       Event Details
                     </label>
@@ -133,10 +133,10 @@ function EventForm(props) {
                         id="description"
                         onChange={handleChange}
                         defaultValue={""}
-                        className="mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                        className="mt-1 block w-full rounded-md border-0 text-gray-600 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       />
                     </div>
-                    <p className="mt-2 text-sm text-gray-500">
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-200">
                       What do you want your volunteers to know about the event?
                     </p>
                     {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
@@ -147,7 +147,7 @@ function EventForm(props) {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="date"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-600 dark:text-gray-200"
                     >
                       Date
                     </label>
@@ -157,7 +157,7 @@ function EventForm(props) {
                       type="date"
                       id="date"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.date && <p className="mt-1 text-sm text-red-500">{errors.date}</p>}
                   </div>
@@ -167,7 +167,7 @@ function EventForm(props) {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="time"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-600"
                     >
                       Time
                     </label>
@@ -177,7 +177,7 @@ function EventForm(props) {
                       type="time"
                       id="time"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.time && <p className="mt-1 text-sm text-red-500">{errors.time}</p>}
                   </div>
@@ -186,7 +186,7 @@ function EventForm(props) {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="address"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-600 dark:text-gray-200"
                     >
                       Address
                     </label>
@@ -196,14 +196,13 @@ function EventForm(props) {
                       type="address"
                       id="address"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-600 bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.address && <p className="mt-1 text-sm text-red-500">{errors.address}</p>}
                   </div>
                   {/*---------------------------- Image------------------------- 
                   This is just a placeholder for now*/}
-
-                  <div>
+                  {/* <div>
                     <label className="block text-sm font-medium leading-6 text-gray-900">
                       Cover photo
                     </label>
@@ -243,11 +242,11 @@ function EventForm(props) {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="imageLink"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-600 dark:text-gray-200"
                     >
                       Image Link
                     </label>
@@ -257,7 +256,7 @@ function EventForm(props) {
                       type="link"
                       id="image"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-600 bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.image && <p className="mt-1 text-sm text-red-500">{errors.image}</p>}
                   </div>
@@ -281,7 +280,7 @@ function EventForm(props) {
                   </div> */}
                 </div>
                 {/*---------------------------- Submit Button------------------------- */}
-                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 bg-gray-200 dark:bg-gray-600">
                   <button
                     type="submit"
                     className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
