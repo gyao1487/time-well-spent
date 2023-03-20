@@ -259,9 +259,9 @@ const resolvers = {
           {
             _id: args._id,
           },
-          {
-            $set: {description: args.description },
-          },
+          
+           args,
+          
           {
             new: true,
           }
