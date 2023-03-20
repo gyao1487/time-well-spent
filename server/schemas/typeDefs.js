@@ -76,7 +76,7 @@ type Mutation{
     updateGoogleVolunteer(_id: ID!, user_description: String):GoogleVolunteer
     updateVolunteerDescription(_id: ID!, user_description: String):Volunteer
     createCharity(username:String!, password:String!, email:String!, websiteURL:String!):Auth
-    updateCharity(_id:ID!, websiteURL:String, description:String, address:String, facebook:String, instagram:String, twitter:String, phoneNumber:String, charityName:String):Charity
+    updateCharity(_id:ID!, websiteURL:String!, description:String, address:String, facebook:String, instagram:String, twitter:String, phoneNumber:String, charityName:String):Charity
     loginAsVolunteer(username: String!, password: String!,):Auth
     loginAsCharity(username: String!, password: String!,):Auth
     loginAsGoogleVolunteer(email: String!, jti: String!):Auth
@@ -90,6 +90,7 @@ type Mutation{
     removeEvent(_id:ID!):Event
     removeVolunteer(_id:ID!):Volunteer
     removeCharity(_id: ID!): Charity
+    removeGoogle(_id:ID!): GoogleVolunteer
 }
 
 
