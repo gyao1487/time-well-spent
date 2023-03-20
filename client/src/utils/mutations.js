@@ -212,7 +212,13 @@ mutation updateCharityDescription($_id: ID!, $savedEvents:inputEvent, $websiteUR
     charityName
   }
 }`;
-
+export const REMOVE_CHARITY = gql`
+  mutation removeCharity($_id: ID!) {
+    removeCharity(_id: $_id) {
+      _id
+    }
+  }
+`;
 
 export const DELETE_VOLUNTEER =gql`
 mutation deleteVolunteer($_id: ID!){

@@ -90,7 +90,7 @@ type Mutation{
     removeGoogleVolunteerEvent(_id:ID!):GoogleVolunteer
     removeEvent(_id:ID!):Event
     removeVolunteer(_id:ID!):Volunteer
-    removeCharity(_id:ID!):Charity
+    removeCharity(_id: ID!): Charity
 }
 
 
