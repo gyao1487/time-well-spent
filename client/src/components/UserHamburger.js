@@ -25,7 +25,7 @@ function UserHamburger() {
 
     <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
         <div
-        className="absolute top-0 right-0 px-8 py-8"
+        className="absolute top-0 left-0 px-6 py-6"
         onClick={() => setIsNavOpen(false)}
         >
         <svg
@@ -48,20 +48,19 @@ function UserHamburger() {
         <li className="border-b border-gray-400 my-8 uppercase">
             <a href="/Discover">Find Opportunities</a>
         </li>
-        {isLoggedIn ?
-                    <li>
-                        <a href="/Profile">Profile</a>
-                    </li> :
-                    <>
-                        <li>
-                            <a href="/Login">Login</a>
-                        </li>
-                        <li>
-                            <a href="/Signup">Signup</a>
-                        </li>
-                    </>
-
-                }
+            {isLoggedIn ?
+                <li className="border-b border-gray-400 my-8 uppercase">
+                    <a href="/Profile">Profile</a>
+                </li> :
+                <>
+                    <li className="border-b border-gray-400 my-8 uppercase">
+                        <a href="/Login">Login</a>
+                    </li>
+                    <li className="border-b border-gray-400 my-8 uppercase">
+                        <a href="/Signup">Signup</a>
+                    </li>
+                </>
+            }
         </ul>
     </div>
     </section>

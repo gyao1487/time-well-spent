@@ -18,7 +18,7 @@ function CharityHamburger() {
 
     <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
         <div
-        className="absolute top-0 right-0 px-8 py-8"
+        className="absolute top-0 left-0 px-6 py-6"
         onClick={() => setIsNavOpen(false)}
         >
         <svg
