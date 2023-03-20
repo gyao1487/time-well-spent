@@ -135,6 +135,7 @@ function CharityProfile() {
     } catch (error) {
       console.error('Error in remove charity mutation:', error);
     }
+    Auth.logout()
   };
   if (loading) return <Loading />;
   if (error) return <p>{error.message}</p>;

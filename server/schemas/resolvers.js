@@ -260,25 +260,31 @@ const resolvers = {
     },
     // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
     // {body} is destructured req.body
-    removeCharity: async function (parent, {_id}, context) {
-      // Find and remove the event from the Events collection
-      const removedCharity = await Charity.findByIdAndDelete(_id);
-      if (!removedCharity) {
-        throw new Error("Event not found");
+    removeCharity: async (parent, { _id }, context) => {
+      // Check if the user is authenticated
+      if (context.user) {
+        // Find the charity by _id
+        const charity = await Charity.findOne({ _id });
+    
+        if (!charity) {
+          throw new Error('Charity not found');
+        }
+        
+        // Find and log events to delete
+        const eventsToDelete = await Event.find({ savedCharity: charity.username });
+        console.log('Events to delete:', eventsToDelete);
+    
+        // Remove all events with the same savedCharity name
+        await Event.deleteMany({ savedCharity: charity.username });
+        console.log('Deleting events with savedCharity:', charity.username);
+    
+        // Remove the charity
+        await Charity.findByIdAndDelete(_id);
+    
+        // Return the removed charity
+        return charity;
       }
-    
-      // Remove the event from the savedEvents array in the Charity document
-      // const updatedCharity = await Charity.findOneAndUpdate(
-      //   { _id: context.user._id },
-      //   { $pull: { savedEvents: args._id } },
-      //   { new: true }
-      // );
-    
-      // if (!updatedCharity) {
-      //   throw new AuthenticationError("You need to be logged in!");
-      // }
-    
-      return removedCharity;
+      throw new AuthenticationError('You must be logged in to perform this action');
     },
     // ---------------------------------- Authentication Mutations ----------------------------------
     loginAsVolunteer: async function (parent, args) {
