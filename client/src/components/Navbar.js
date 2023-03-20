@@ -85,7 +85,7 @@ function Navbar() {
     },
     skip: !userId,
   });
-
+console.log(isLoggedIn)
   useEffect(() => {
     if (dataCharity?.charity) {
       setUserData(dataCharity.charity);
@@ -334,7 +334,7 @@ function Navbar() {
                               {item.name}
                             </a>
                           ))
-                        : volunteerNavigation.slice(0, 4).map((item) => (
+                        : volunteerNavigation.slice(0, 2).map((item) => (
                             <a
                               key={item.name}
                               href={item.href}
