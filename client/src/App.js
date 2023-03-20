@@ -8,7 +8,7 @@ import VolunteerSignup from "./pages/VolunteerSignup";
 import CharitySignup from "./pages/CharitySignup";
 
 import Navbar from "./components/Navbar";
-
+import EventUpdate from "./pages/EventUpdate";
 import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
@@ -86,7 +86,7 @@ function App() {
 
             <Route path="/EventForm" element={<EventForm />} />
             <Route path="/event/:id" element ={<EventPage />}/>
-            
+            <Route path="/event/edit/:id" element ={<EventUpdate />}/>
             
             
             {/* <Route

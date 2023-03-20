@@ -188,8 +188,8 @@ export const ADD_CHARITY = gql`
 `;
 
 export const UPDATE_CHARITY = gql`
-mutation updateCharityDescription($_id: ID!, $savedEvents:inputEvent, $websiteURL:String!, $description:String, $address:String, $facebook:String, $instagram:String, $twitter:String, $phoneNumber:String, $charityName:String){
-  updateCharity(_id: $_id, savedEvents:$savedEvents, websiteURL:$websiteURL, description:$description, address:$address, facebook:$facebook, instagram:$instagram, twitter:$twitter, phoneNumber:$phoneNumber, charityName:$charityName){
+mutation updateCharityDescription($_id: ID!, $websiteURL:String!, $description:String, $address:String, $facebook:String, $instagram:String, $twitter:String, $phoneNumber:String, $charityName:String){
+  updateCharity(_id: $_id, websiteURL:$websiteURL, description:$description, address:$address, facebook:$facebook, instagram:$instagram, twitter:$twitter, phoneNumber:$phoneNumber, charityName:$charityName){
     _id
     description
     savedEvents{
@@ -266,3 +266,15 @@ mutation removeGoogleVolunteerEvent($eventId: ID!) {
   }
 }
 `
+export const UPDATE_CHARITY_EVENT=gql`
+mutation UpdateEvent($id: ID!, $title: String, $description: String, $image: String, $date: String, $time: String, $address: String) {
+  updateEvent(_id: $id, title: $title, description: $description, image: $image, date: $date, time: $time, address: $address) {
+    title
+    description
+    image
+    date
+    time
+    address
+    _id
+  }
+}`
