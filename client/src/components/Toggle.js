@@ -1,18 +1,19 @@
 import React from 'react';
 import { ThemeContext } from './ThemeContext';
+import styles from '../styles/Toggle.module.css'
 
 const Toggle = () => {
   const { theme, setTheme } = React.useContext(ThemeContext);
 
   return (
-    <div classNam="relative">
+    <div className="relative">
       {theme === 'dark' ? (
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className="text-gray-500 dark:text-gray-400 bg-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
+          className={"text-gray-500 dark:text-gray-400 bg-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer " + styles.toggleButtonLight}
         >
           <svg
-            className="w-6 h-6"
+            className={styles.icon}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -29,10 +30,10 @@ const Toggle = () => {
       ) : (
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className="text-white dark:text-gray-400 bg-indigo-600 focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer"
+          className={"text-white dark:text-gray-400 bg-indigo-600 focus:outline-none shadow-none p-2 text-lg rounded-full outline-none ring-transparent cursor-pointer " + styles.toggleButtonDark}
         >
           <svg
-            className="w-6 h-6"
+            className={styles.icon}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
