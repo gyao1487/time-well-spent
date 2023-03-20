@@ -72,7 +72,6 @@ function CharityProfile() {
       instagram: instagram,
       twitter: twitter,
       phoneNumber: phoneNumber,
-      savedEvents: savedEvents,
     },
   });
   // const {
@@ -478,6 +477,12 @@ function CharityProfile() {
             {data?.charity.savedEvents.map((event)=>{
                         return     <div className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
                         <EventCard event={event} key={event._id} />
+                        <button
+                className="group relative flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={()=>{window.location.href="/event/edit/" + event._id}}
+              >
+                Edit
+              </button>
                       </div>
                       })}
         </div>
