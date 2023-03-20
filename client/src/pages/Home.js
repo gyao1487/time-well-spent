@@ -1,5 +1,3 @@
-
-
 import React, { useCallback, useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
 import  Auth  from '../utils/auth'
@@ -34,9 +32,6 @@ const Home = () => {
   })
   
   const [map, setMap] = useState(null);
-
-  
-  
 
   const onLoad = React.useCallback(function callback(map) {
     

@@ -134,6 +134,14 @@ export const UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION = gql`
     }
   }
 `;
+export const UPDATE_VOLUNTEER_DESCRIPTION = gql`
+  mutation updateVolunteerDescription($_id: ID!, $user_description: String) {
+    updateVolunteerDescription(_id: $_id, user_description: $user_description) {
+      _id
+      user_description
+    }
+  }
+`;
 
 export const ADD_CHARITY = gql`
   mutation createCharity(

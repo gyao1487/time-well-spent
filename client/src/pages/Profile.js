@@ -4,9 +4,10 @@ import { useStateContext, useDispatchContext } from "../utils/GlobalState";
 import { useState, useEffect } from "react";
 import Auth from '../utils/auth'
 import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_EVENT, QUERY_GOOGLE_VOLUNTEER, QUERY_ALL_EVENTS } from '../utils/queries'
-import { UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION } from "../utils/mutations";
+import { QUERY_EVENT, QUERY_GOOGLE_VOLUNTEER, QUERY_ALL_EVENTS,QUERY_VOLUNTEER } from '../utils/queries'
+import { UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION, UPDATE_VOLUNTEER_DESCRIPTION } from "../utils/mutations";
 import styles from '../styles/Profile.module.css'
+import EventForm from "./EventForm";
 
 const Profile = () => {
   const state = useStateContext();
@@ -18,48 +19,62 @@ const Profile = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [isLocationLoading, setIsLocationLoading] = useState(false);
   const [isUserEditingDescription, setIsUserEditingDescription] = useState(false);
-  // const [isUserEditingLocation, setIsUserEditingLocation] = useState(false);
-  const { loading, error, data } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
+  
+  const { loading, error, data: googleVolunteerData } = useQuery(QUERY_GOOGLE_VOLUNTEER, {
     variables: {
       _id: userId
     },
     skip: !userId
   })
+  const { loading : volunteerLoading, error: volunteerError, data: volunteerData} = useQuery(QUERY_VOLUNTEER, {
+    variables: {
+      _id: userId
+    },
+    skip: !userId
+  })
+
   const [updateGoogleVolunteer] = useMutation(UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION,{
     variables: {
       user_description: userDescription,
       _id: Auth.getProfile()?.data._id,
     },
   })
-  const {loading: eventsLoading, error:eventsError, data: eventsData} = useQuery(QUERY_ALL_EVENTS,{
+  const [updateVolunteerDescription] = useMutation(UPDATE_VOLUNTEER_DESCRIPTION,{
     variables: {
-      _id: data?.googleVolunteer.savedEvents
-    }
-  });
-  
+      user_description: userDescription,
+      _id: Auth.getProfile()?.data._id,
+    },
+  })
 
-  
-  const handleDescriptionSubmit =(e)=>{
-    e.preventDefault();
-    this.blur();
-    setIsUserEditingDescription(false);
-  }
   const handleSaveDescription = async (e)=>{
     
     setIsUserEditingDescription(false);
-    const { data, error } = await updateGoogleVolunteer()
-    if(error){
-      alert('Something went wrong.')
-      console.log(error)
+    if(googleVolunteerData?.googleVolunteer){
+        const { data, error } = await updateGoogleVolunteer()
     }
-    
-  }
+    if(volunteerData?.volunteer){
+      const { data: vData, error: vError } = await updateVolunteerDescription()
+      if(vError){
+        alert('Something went wrong.')
+        console.log(vError)
+      }
+    }
+    }
+    console.log(volunteerData)
 
   useEffect(()=>{
-    setUserEvents(eventsData)
-    setUserData(data?.googleVolunteer)
-    setUserDescription(data?.googleVolunteer?.user_description)
-  },[data, eventsData])
+      if(volunteerData?.volunteer){
+        setUserData(volunteerData?.volunteer)
+        setUserDescription(volunteerData?.volunteer?.user_description)
+        setUserEvents(volunteerData?.volunteer?.savedEvents)
+      }
+      if(googleVolunteerData?.googleVolunteer){
+        setUserData(googleVolunteerData?.googleVolunteer)
+        setUserDescription(googleVolunteerData?.googleVolunteer?.user_description)
+        setUserEvents(googleVolunteerData?.googleVolunteer?.savedEvents)
+      }
+      
+  },[loading,volunteerLoading, userEvents])
 
   useEffect(()=>{
     const getUserLatLng = async () =>{
@@ -70,7 +85,6 @@ const Profile = () => {
         },
       })
       const locationData = await response.json();
-      console.log(locationData);
       return locationData;
     }
     // getUserLatLng();
@@ -78,7 +92,6 @@ const Profile = () => {
     const getUserAddress = async(locationData)=>{
       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${locationData.lat},${locationData.lng}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
       const addressData = await response.json();
-      console.log(addressData);
       return addressData.results[6].formatted_address;
     }
     setIsLocationLoading(true);
@@ -110,7 +123,7 @@ const Profile = () => {
                       
 
                       <span className="text-sm text-blueGray-400">Events</span>
-                      {userEvents?.allEvents?.map((event)=>{
+                      {userEvents?.map((event)=>{
                         return <a
                                   key={event._id}
                                   href={`/event/${event._id}`}

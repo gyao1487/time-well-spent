@@ -29,6 +29,10 @@ const userSchema = new Schema(
         type: String,
         require: false,
     },
+    user_description:{
+      type: String,
+      require: false,
+    },
     isCharity: {
       type: Boolean,
       required: false
