@@ -3,7 +3,8 @@
 import styles from "../styles/Profile.module.css";
 import React, { useEffect } from "react";
 import { QUERY_CHARITY, QUERY_ALL_EVENTS } from "../utils/queries";
-import { UPDATE_CHARITY } from "../utils/mutations";
+import { UPDATE_CHARITY,REMOVE_CHARITY } from "../utils/mutations";
+
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { gql } from "@apollo/client";
@@ -121,7 +122,20 @@ function CharityProfile() {
     setUserData();
     setIsEditing(true);
   };
-
+  const [removeCharity] = useMutation(REMOVE_CHARITY, {
+    onError: (err) => {
+      console.error('Error in removeCharity mutation:', err);
+    },
+  });
+  
+  const handleRemoveCharity = async () => {
+    try {
+      const { data, errors } = await removeCharity({ variables: { _id: userId } });
+      window.location.reload();
+    } catch (error) {
+      console.error('Error in remove charity mutation:', error);
+    }
+  };
   if (loading) return <Loading />;
   if (error) return <p>{error.message}</p>;
 
@@ -144,6 +158,7 @@ function CharityProfile() {
               >
                 Edit Profile
               </button>
+              
             )}
           </div>
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
@@ -465,7 +480,13 @@ function CharityProfile() {
                       </div>
                       })}
         </div>
-        
+        <button
+      type="button"
+      className="btn btn-danger"
+      onClick={handleRemoveCharity}
+    >
+      Remove Charity
+    </button>
       </section>
     </div>
   );

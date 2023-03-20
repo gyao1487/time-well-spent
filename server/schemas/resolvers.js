@@ -134,34 +134,6 @@ const resolvers = {
             throw new Error('Invalid token');
           }
         },
-        removeVolunteerEvent: async (parent,  {_id} , context) => {
-          const updatedVolunteer = await Volunteer.findOneAndUpdate(
-            { _id: context.user._id },
-            { $pull: { savedEvents: _id } },
-            { new: true }
-          );
-
-          if (!updatedVolunteer) {
-            throw new Error('Failed to remove volunteer event');
-          }
-
-          return updatedVolunteer;
-        },
-        removeGoogleVolunteerEvent: async (parent,  {_id} , context) => {
-          console.log(context.user._id)
-          console.log(_id);
-          const updatedVolunteer = await GoogleVolunteer.findOneAndUpdate(
-            { _id: context.user._id},
-            { $pull: { savedEvents:  _id  } },
-            { new: true }
-          );
-            console.log((await updatedVolunteer));
-          if (!updatedVolunteer) {
-            throw new Error('Failed to remove volunteer event');
-          }
-
-          return updatedVolunteer;
-        },
 
         updateVolunteer: async function(parent, args , ) { 
           const { _id,
@@ -235,42 +207,26 @@ const resolvers = {
     },
 
   // Needs looked at is not working on back end
-  updateCharity: async function (parent, args, context) {
-      
-    const { _id, ...updateFields } = args;
-  
-    const updatedCharity = await Charity.findByIdAndUpdate(
-      _id,
-      updateFields,
-      { new: true } // Return the updated document
-    );
-  
-    if (!updatedCharity) {
-      throw new Error("Charity not found");
-    }
-  
-    return updatedCharity;
-  },
-    // updateCharity: async function (parent, args, context) {
-    //   try {
-    //     const userc = await Charity.findOneAndUpdate(
-    //       {
-    //         _id: args._id,
-    //       },
-    //       {
-    //         $set: {description: args.description },
-    //       },
-    //       {
-    //         new: true,
-    //       }
-    //     );
+    updateCharity: async function (parent, args, context) {
+      try {
+        const userc = await Charity.findOneAndUpdate(
+          {
+            _id: args._id,
+          },
+          {
+            $set: {description: args.description },
+          },
+          {
+            new: true,
+          }
+        );
 
-    //     if (!userc) throw new Error("User not found.");
-    //     return { userc};
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+        if (!userc) throw new Error("User not found.");
+        return { userc};
+      } catch (err) {
+        console.log(err);
+      }
+    },
 
 
     createCharity: async function (parent, args) {
@@ -284,9 +240,9 @@ const resolvers = {
     },
     // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
     // {body} is destructured req.body
-    removeCharity: async function (parent, args, context) {
+    removeCharity: async function (parent, {_id}, context) {
       // Find and remove the event from the Events collection
-      const removedCharity = await Charity.findByIdAndDelete(args._id);
+      const removedCharity = await Charity.findByIdAndDelete(_id);
       if (!removedCharity) {
         throw new Error("Event not found");
       }
