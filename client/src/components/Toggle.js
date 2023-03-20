@@ -5,7 +5,7 @@ const Toggle = () => {
   const { theme, setTheme } = React.useContext(ThemeContext);
 
   return (
-    <div>
+    <div classNam="relative">
       {theme === 'dark' ? (
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
