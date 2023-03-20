@@ -110,7 +110,7 @@ const resolvers = {
           try {
             console.log('Token in context:', context.token); // Log the token in context for debugging
             const volunteerId = decodeToken(context.token);
-            const volunteer = await Volunteer.findById(volunteerId);
+            const volunteer = await Volunteer.findById(volunteerId).populate('savedEvents');
             const event = await Event.findById(eventId);
     
             if (!volunteer || !event) {
@@ -134,7 +134,7 @@ const resolvers = {
           try {
             console.log('Token in context:', context.token); // Log the token in context for debugging
             const volunteerId = decodeToken(context.token);
-            const volunteer = await GoogleVolunteer.findById(volunteerId);
+            const volunteer = await GoogleVolunteer.findById(volunteerId).populate('savedEvents');
             const event = await Event.findById(eventId);
     
             if (!volunteer || !event) {

@@ -5,10 +5,10 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 import styles from '../styles/EventCard.module.css'
-import client from '../App'
+
 
 function EventCard({ event }) {
-  console.log( "params " +window.location);
+  
   const [userToken, setUserToken] = useState(null);
   const [userData, setUserData] = useState(null)
   const [isEventRemoved, setIsEventRemoved] = useState(true);
@@ -38,7 +38,7 @@ function EventCard({ event }) {
   const [removeGoogleVolunteerEvent] = useMutation(REMOVE_GOOGLE_VOLUNTEER_EVENT,{
     context: { token: userToken}
   })
-  const {loading: volunteerLoading, error: volunteerError, data: volunteerData} = useQuery(QUERY_VOLUNTEER,{
+  const {loading: volunteerLoading, error: volunteerError, data: volunteerData, refetch: refetchV} = useQuery(QUERY_VOLUNTEER,{
     variables:{
       _id: userToken?.data._id,
     },
@@ -53,23 +53,20 @@ function EventCard({ event }) {
 
   const handleAddEvent = async (e) => { // Make the function async
     const eventId = e.target.dataset.id;
-    // console.log(eventId, userToken);
-    console.log(volunteerData)
-    console.log(googleVolunteerData)
   
     try {
-      if(volunteerData){
+      if(volunteerData?.volunteer){
         const { data, errors } = await addVolunteerEvent({
           variables: { eventId },
           update: (cache, { data: { addVolunteerEvent } }) => {
             // ...
           },
         });
-        refetch({
+        refetchV({
           _id: userToken?.data._id,
       })
       }
-      if(googleVolunteerData){
+      if(googleVolunteerData?.googleVolunteer){
         const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
           variables: { eventId }
         })
@@ -85,17 +82,17 @@ function EventCard({ event }) {
   };
   
   const handleRemoveEvent = async (e) =>{
-    if(volunteerData){
+    if(volunteerData?.volunteer){
       const { volunteerData, errors} = await removeVolunteerEvent({
         variables: {
           _id: event._id
         }
       });
-      refetch({
+      refetchV({
         _id: userToken?.data._id,
     })
     }
-    if(googleVolunteerData){
+    if(googleVolunteerData?.googleVolunteer){
       const {googleVolunteerData, errors: googleErrors} = await removeGoogleVolunteerEvent({
         variables: {
           _id: event._id,
@@ -183,7 +180,7 @@ function EventCard({ event }) {
           <div className ="grid place-self-end pt-2">
             {Auth.loggedIn() && 
             <div>
-              { googleVolunteerData?.googleVolunteer?.savedEvents?.includes(event._id) ||  volunteerData?.googleVolunteer?.savedEvents?.includes(event._id) ?
+              { googleVolunteerData?.googleVolunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ||  volunteerData?.volunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ?
             <button
               type="button"
               className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
