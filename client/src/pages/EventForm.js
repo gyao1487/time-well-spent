@@ -45,6 +45,8 @@ function EventForm(props) {
       setErrors(formErrors);
       setSubmitted(false);
       return; 
+    } else {
+        document.location.replace("/CharityProfile")
     }
 
     try {
@@ -282,98 +284,25 @@ function EventForm(props) {
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
-                    // onClick={() => document.location.replace("/CharityProfile")}
                     className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                  >
+                    >
                     Create Event
+
                   </button>
+
                 </div>
                 {/*---------------------------- Error Message (make it a modal/notification)------------------------- */}
                 {error ? (
                   <div>
                     <p className="error-text">Failed to create event. Please try again!</p>
                   </div>
-                ) : null}
+                ) : null }
               </div>
             </form>
           </div>
         </div>
       </div>
 
-      {/* <div className="container my-1">
-        <h2>Create New Event</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="title">Enter Title</label>
-            <input
-              placeholder="title"
-              name="title"
-              type="text"
-              id="title"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="description">Description:</label>
-            <input
-              placeholder="Describe the Event here"
-              name="description"
-              type="text"
-              id="description"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="date">Date:</label>
-            <input
-              placeholder="Enter date of event"
-              name="date"
-              type="text"
-              id="date"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="address">Address</label>
-            <input
-              placeholder="Enter address"
-              name="address"
-              type="text"
-              id="address"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="image">Image:</label>
-            <input
-              placeholder="Place an Image link here"
-              name="image"
-              type="text"
-              id="image"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="image">Name of your charity:</label>
-            <input
-              placeholder="Type Charity Name Here"
-              name="charity"
-              type="text"
-              id="charity"
-              onChange={handleChange}
-            />
-          </div>
-
-          {error ? (
-            <div>
-              <p className="error-text">Fail to create an Event</p>
-            </div>
-          ) : null}
-          <div className="flex-row flex-end">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      </div> */}
     </>
   );
 }
