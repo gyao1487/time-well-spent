@@ -26,7 +26,7 @@ type Charity{
     username:String!
     email:String!
     savedEvents:[Event]
-    websiteURL:String
+    websiteURL:String!
     description:String
     address:String
     facebook:String

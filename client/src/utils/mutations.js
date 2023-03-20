@@ -166,7 +166,7 @@ export const ADD_CHARITY = gql`
     $username: String!
     $password: String!
     $email: String!
-    $websiteURL: String
+    $websiteURL: String!
   ) {
     createCharity(
       username: $username

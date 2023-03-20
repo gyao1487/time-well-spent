@@ -30,13 +30,14 @@ function CharityProfile() {
   const [userData, setUserData] = useState(null); // add closing parenthesis
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(""); // add missing variables
-  const [charityName, setCharityName] = useState("");
+  // const [charityName, setCharityName] = useState("");
   const [websiteURL, setWebsiteURL] = useState("");
   const [address, setAddress] = useState("");
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
   const [twitter, setTwitter] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const[username, setUsername] = useState(data?.charity.username)
  
   const [image, setImage] = useState("");
   // const [userEvents, setUserEvents] =useState(null)
@@ -66,7 +67,8 @@ function CharityProfile() {
     variables: {
       _id: Auth.getProfile()?.data._id,
       description: description,
-      charityName: charityName,
+      // charityName: charityName,
+      username: username,
       websiteURL: websiteURL,
       address: address,
       facebook: facebook,
@@ -90,7 +92,8 @@ function CharityProfile() {
   useEffect(() => {
     // setUserData(data);
     setDescription(data?.charity?.description);
-    setCharityName(data?.charityName);
+    // setCharityName(data?.charityName);
+    setUsername(data?.charity.username);
     setWebsiteURL(data?.charity?.websiteURL);
     setAddress(data?.charity?.address);
     setFacebook(data?.charity?.facebook);
@@ -127,7 +130,7 @@ function CharityProfile() {
       console.error('Error in removeCharity mutation:', err);
     },
   });
-  
+
   const handleRemoveCharity = async () => {
     try {
       const { data, errors } = await removeCharity({ variables: { _id: userId } });
@@ -347,11 +350,11 @@ function CharityProfile() {
                     </label>
                     <input
                       className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder={charityName}
+                      placeholder={username}
                       type="username"
                       autoFocus={true}
                       id="username"
-                      value={charityName}
+                      value={username}
                       // onChange={(e) => setWebsiteURL(e.target.value)}
                       // onKeyDown={(e) => {
                       //   if (e.keyCode === 27) {
@@ -422,7 +425,7 @@ function CharityProfile() {
               ) : (
                 <div className="text-center mt-12">
                   <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2">
-                    {charityName}
+                    {username}
                   </h3>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-location-dot mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
