@@ -218,6 +218,8 @@ const resolvers = {
     
       return removedVolunteer;
     },
+    
+    
         
 
     // ---------------------------------- Charity Mutations ----------------------------------

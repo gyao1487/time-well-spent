@@ -220,17 +220,17 @@ export const REMOVE_CHARITY = gql`
   }
 `;
 
-export const DELETE_VOLUNTEER =gql`
-mutation deleteVolunteer($_id: ID!){
-  deleteVolunteer(_id: $_id){
+export const REMOVE_VOLUNTEER =gql`
+mutation removeVolunteer($_id: ID!){
+  removeVolunteer(_id: $_id){
     _id
-    address
-    time
-    date
-    savedCharity
-    title
-    image
-    description
+  }
+}
+`
+export const REMOVE_GOOGLE_VOLUNTEER =gql`
+mutation removeGoogleVolunteer($_id: ID!){
+  removeGoogleVolunteer(_id: $_id){
+    _id
   }
 }
 `
