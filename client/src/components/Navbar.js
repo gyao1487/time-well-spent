@@ -160,9 +160,9 @@ if(isCharity)
               </div>
               {Auth.loggedIn() && 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">               
+                  
                   <Toggle />
 
-                
                   <Menu as="div" className="relative ml-3">
                   <div 
                     className="flex"
@@ -447,9 +447,9 @@ if(isCharity)
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={item.current ? "page" : undefined}                 
                 >
-                </Disclosure.Button>
+                </Disclosure.Button>  
               })}
               
             </div>

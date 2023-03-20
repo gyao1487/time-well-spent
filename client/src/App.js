@@ -70,7 +70,7 @@ function App() {
       <header className="sticky top-0 z-50">
         <Navbar />
       </header>
-      <main className="pb-60 pt-10 bg-gray-100 dark:bg-gray-800">
+      <main className="main pb-60 pt-10 bg-gray-100 dark:bg-gray-800">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -103,7 +103,7 @@ function App() {
           </Routes>
         </Router>
       </main>
-      <Footer />
+      <Footer className="footer"/>
     </ApolloProvider>
   );
 }

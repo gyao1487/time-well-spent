@@ -147,7 +147,7 @@ function CharityProfile() {
             )}
           </div>
           <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-            <div className="px-6">
+            <div className="px-6 bg-gray-200 dark:bg-gray-600  text-gray-900">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full px-4 flex justify-center">
                   <div className="">
@@ -185,7 +185,7 @@ function CharityProfile() {
                         </div>
                       </div>
 
-                      <span className="text-sm text-blueGray-400"></span>
+                      <span className="text-sm text-gray-900"></span>
                     </div>
 
                     {/* -----------------------Twitter-------------------------- */}
@@ -210,7 +210,7 @@ function CharityProfile() {
                       </div>
 
                       {/* -----------------------Instagram------------------------- */}
-                      <span className="text-sm text-blueGray-400"></span>
+                      <span className="text-sm text-gray-900"></span>
                     </div>
                     <div className="lg:mr-4 p-3 text-center">
                       <div className="flex justify-center space-x-2">
@@ -229,7 +229,7 @@ function CharityProfile() {
                           </a>
                         </div>
                       </div>
-                      <span className="text-sm text-blueGray-400"></span>
+                      <span className="text-sm text-gray-900"></span>
                     </div>
                   </div>
                 </div>
@@ -405,15 +405,15 @@ function CharityProfile() {
                 </div>
               ) : (
                 <div className="text-center mt-12">
-                  <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                  <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2">
                     {data?.charity.username}
                   </h3>
                   <div className="mb-2 text-blueGray-600 mt-10">
-                    <i className="fas fa-location-dot mr-2 text-lg text-blueGray-400"></i>
+                    <i className="fas fa-location-dot mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
                     {data?.charity.address}
                   </div>
                   <div className="mb-2 text-blueGray-600 mt-10">
-                    <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
+                    <i className="fas fa-phone mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
                     {data?.charity.phoneNumber}
                   </div>
                 </div>
