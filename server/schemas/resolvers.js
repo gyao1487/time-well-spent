@@ -123,7 +123,7 @@ const resolvers = {
               await volunteer.save();
             }
             console.log("Volunteer:", volunteer); // Add this line
-            console.log("Volunteer.toObject():", volunteer.toObject());
+            // console.log("Volunteer.toObject():", volunteer.toObject());
             return volunteer;
           } catch (error) {
             console.error('Token error:', error.message); // Log the error message for debugging
@@ -147,12 +147,38 @@ const resolvers = {
               await volunteer.save();
             }
             console.log("Volunteer:", volunteer); // Add this line
-            console.log("Volunteer.toObject():", volunteer.toObject());
+            // console.log("Volunteer.toObject():", volunteer.toObject());
             return volunteer;
           } catch (error) {
             console.error('Token error:', error.message); // Log the error message for debugging
             throw new Error('Invalid token');
           }
+        },
+        removeVolunteerEvent: async (parent,  {eventId} , context) => {
+          const updatedVolunteer = await Volunteer.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { savedEvents: eventId } },
+            { new: true }
+          );
+
+          if (!updatedVolunteer) {
+            throw new Error('Failed to remove volunteer event');
+          }
+
+          return updatedVolunteer;
+        },
+        removeGoogleVolunteerEvent: async (parent,  {eventId} , context) => {
+          const updatedVolunteer = await GoogleVolunteer.findOneAndUpdate(
+            { _id: context.user._id},
+            { $pull: { savedEvents:  eventId  } },
+            { new: true }
+          );
+            console.log((await updatedVolunteer));
+          if (!updatedVolunteer) {
+            throw new Error('Failed to remove volunteer event');
+          }
+
+          return updatedVolunteer;
         },
 
         updateVolunteer: async function(parent, args , ) { 
