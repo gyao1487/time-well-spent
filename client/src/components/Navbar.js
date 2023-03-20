@@ -105,7 +105,7 @@ function Navbar() {
 
   if (isCharity)
     return (
-      <Disclosure as="nav" className="bg-gray-700 sticky absolute top-0">
+      <Disclosure as="nav" className="bg-gray-700 sticky absolute top-0 dark:">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -386,6 +386,7 @@ function Navbar() {
                             alt=""
                           />
                         </Menu.Button>
+                        
                       </div>
                       <Transition
                         as={Fragment}
@@ -460,7 +461,7 @@ function Navbar() {
                 })}
                 {!isLoggedIn &&
                   loggedInNav.map((item) => {
-                    return (
+                    return (<>
                       <Disclosure.Button
                         key={item.name}
                         href={item.href}
@@ -472,6 +473,16 @@ function Navbar() {
                         )}
                         aria-current={item.current ? "page" : undefined}
                       ></Disclosure.Button>
+                      <div
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                    Auth.logout();
+                  }}
+                  className="border-b border-gray-400 my-8 uppercase"
+                >
+                  Logout
+                </div>
+                      </>
                     );
                   })}
               </div>

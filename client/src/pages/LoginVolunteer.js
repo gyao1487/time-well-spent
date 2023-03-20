@@ -150,14 +150,14 @@ function LoginVolunteer(props) {
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
-              className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
+              className="mx-auto h-20 w-auto"
+              src="./assets/volunteerLogo.png"
+              alt="volunteer icon"
             />
             <h2 className="mt-6 text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Sign in to your account
+              Welcome Back!
             </h2>
-            <p className="mt-2 text-center text-xl text-gray-600 dark:text-amber-200">
+            <p className="mt-2 text-center text-xl text-gray-600 font-bold dark:text-amber-200">
               If you're a charity, {" "}
               <Link
                 to="/LoginCharity"
@@ -214,7 +214,7 @@ function LoginVolunteer(props) {
                 Sign in
               </button>
             </div>
-            <p className="mt-2 text-center text-sm text-gray-600">
+            <p className="mt-2 text-center text-sm text-gray-600 dark:text-white">
               New here?{" "}
               <Link
                 to="/signup"
