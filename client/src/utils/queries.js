@@ -67,6 +67,7 @@ export const QUERY_CHARITY = gql`
       phoneNumber
       charityName
       isCharity
+      image
       savedEvents{
         _id
         title

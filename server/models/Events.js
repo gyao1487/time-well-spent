@@ -10,9 +10,10 @@ const eventSchema = new Schema({
     type: String,
     required: false,
   },
-  // saved book id from GoogleBooks
+
   image: {
     type: String,
+    default: "https://static.vecteezy.com/system/resources/previews/001/880/049/non_2x/volunteers-collecting-donations-for-charity-free-vector.jpg"
   },
   date: {
     type: String,
