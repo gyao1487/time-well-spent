@@ -10,7 +10,7 @@ const resolvers = {
     },
 
     volunteer: async (parent, { _id }, context) => {
-      return Volunteer.findOne({ _id: _id });
+      return Volunteer.findOne({ _id: _id }).populate('savedEvents');
     },
 
     allCharity: async () => {
@@ -32,7 +32,7 @@ const resolvers = {
       return Event.findOne({ _id: _id });
     },
     googleVolunteer: async (parent, { _id }, context) => {
-      return GoogleVolunteer.findOne({ _id: _id });
+      return GoogleVolunteer.findOne({ _id: _id }).populate('savedEvents');
     },
   },
 
@@ -79,6 +79,26 @@ const resolvers = {
     
             if(!googlev) throw new Error('User not found.')
             return { googlev }
+        }catch(err){
+          console.log(err)
+        }
+      },
+      updateVolunteerDescription: async function (parent, args, context){
+        try{
+          const volunteer = await Volunteer.findOneAndUpdate(
+            {
+              _id: args._id
+            },
+            {
+               $set : { user_description: args.user_description },
+            },
+            {
+              new: true,
+            })
+            console.log(volunteer)
+    
+            if(!volunteer) throw new Error('User not found.')
+            return { volunteer }
         }catch(err){
           console.log(err)
         }
