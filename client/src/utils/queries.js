@@ -10,6 +10,12 @@ export const QUERY_VOLUNTEER = gql`
       savedEvents{
         _id
         title
+        description
+        date
+        savedCharity
+        time
+        address
+        image
       }
       user_description
   }
@@ -109,6 +115,11 @@ export const QUERY_GOOGLE_VOLUNTEER = gql`
       savedEvents{
         _id
         title
+        image
+        description
+        time
+        address
+        date
       }
       user_description
     }

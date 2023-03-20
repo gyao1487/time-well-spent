@@ -60,7 +60,16 @@ export const ADD_VOLUNTEER_EVENT = gql`
       email
       skills
       password
-      savedEvents
+      savedEvents{
+        _id
+        title
+        description
+        image
+        address
+        time
+        savedCharity
+        date
+      }
     }
   }
 `;
@@ -71,7 +80,16 @@ export const ADD_GOOGLE_VOLUNTEER_EVENT = gql`
       username
       email
       skills
-      savedEvents
+      savedEvents{
+        _id
+        title
+        description
+        image
+        address
+        time
+        savedCharity
+        date
+      }
     }
   }
 `;
@@ -200,20 +218,45 @@ export const DELETE_VOLUNTEER =gql`
 mutation deleteVolunteer($_id: ID!){
   deleteVolunteer(_id: $_id){
     _id
+    address
+    time
+    date
+    savedCharity
+    title
+    image
+    description
   }
 }
 `
 export const REMOVE_VOLUNTEER_EVENT =gql`
 mutation removeVolunteerEvent($_id: ID!) {
   removeVolunteerEvent(_id: $_id) {
-    savedEvents 
+    savedEvents{
+      _id
+    address
+    time
+    date
+    savedCharity
+    title
+    image
+    description
+    }
   }
 }
 `
 export const REMOVE_GOOGLE_VOLUNTEER_EVENT =gql`
 mutation removeGoogleVolunteerEvent($_id: ID!) {
   removeGoogleVolunteerEvent(_id: $_id) {
-    savedEvents
+    savedEvents{
+      _id
+    address
+    time
+    date
+    savedCharity
+    title
+    image
+    description
+    }
   }
 }
 `
