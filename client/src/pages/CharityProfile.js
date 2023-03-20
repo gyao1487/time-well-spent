@@ -23,6 +23,7 @@ function CharityProfile() {
     variables: {
       _id: userId,
     },
+    skip:!userId
   });
 
   console.log(userId);
@@ -36,7 +37,7 @@ function CharityProfile() {
   const [instagram, setInstagram] = useState("");
   const [twitter, setTwitter] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [savedEvents, setSavedEvents] = useState("");
+ 
   const [image, setImage] = useState("");
   // const [userEvents, setUserEvents] =useState(null)
   // const [userData, setUserData] = useState(
@@ -72,7 +73,6 @@ function CharityProfile() {
       instagram: instagram,
       twitter: twitter,
       phoneNumber: phoneNumber,
-      savedEvents: savedEvents,
     },
   });
   // const {
@@ -89,14 +89,14 @@ function CharityProfile() {
 
   useEffect(() => {
     // setUserData(data);
-    setDescription(data?.charity.description);
+    setDescription(data?.charity?.description);
     setCharityName(data?.charityName);
-    setWebsiteURL(data?.charity.websiteURL);
-    setAddress(data?.charity.address);
-    setFacebook(data?.charity.facebook);
-    setInstagram(data?.charity.instagram);
-    setTwitter(data?.charity.twitter);
-    setPhoneNumber(data?.charity.phoneNumber);
+    setWebsiteURL(data?.charity?.websiteURL);
+    setAddress(data?.charity?.address);
+    setFacebook(data?.charity?.facebook);
+    setInstagram(data?.charity?.instagram);
+    setTwitter(data?.charity?.twitter);
+    setPhoneNumber(data?.charity?.phoneNumber);
     setImage(data?.image);
   }, [data]);
   // const { _id } = useParams();
@@ -110,7 +110,7 @@ function CharityProfile() {
   const handleSave = async (e) => {
     setIsEditing(false);
     const { data, error } = await updateCharity();
-    window.location.reload();
+   
     if (error) {
       alert("Something went wrong.");
       console.log(error);
@@ -185,7 +185,7 @@ function CharityProfile() {
                       <div className="flex justify-center space-x-2">
                         <div>
                           <a
-                            href={`https://${data?.charity.websiteURL}`}
+                            href={`https://${websiteURL}`}
                             target="blank"
                             rel="noopener"
                           >
@@ -209,7 +209,7 @@ function CharityProfile() {
                       <div className="flex justify-center space-x-2">
                         <div>
                           <a
-                            href={`https://twitter.com/${data?.charity.twitter}`}
+                            href={`https://twitter.com/${twitter}`}
                             target="blank"
                             rel="noopener"
                           >
@@ -232,7 +232,7 @@ function CharityProfile() {
                       <div className="flex justify-center space-x-2">
                         <div>
                           <a
-                            href={`https://instagram.com/${data?.charity.instagram}`}
+                            href={`https://instagram.com/${instagram}`}
                           >
                             <button
                               type="button"
@@ -347,11 +347,11 @@ function CharityProfile() {
                     </label>
                     <input
                       className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder={data?.charity.username}
+                      placeholder={charityName}
                       type="username"
                       autoFocus={true}
                       id="username"
-                      value={data?.charity.username}
+                      value={charityName}
                       // onChange={(e) => setWebsiteURL(e.target.value)}
                       // onKeyDown={(e) => {
                       //   if (e.keyCode === 27) {
@@ -422,15 +422,15 @@ function CharityProfile() {
               ) : (
                 <div className="text-center mt-12">
                   <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2">
-                    {data?.charity.username}
+                    {charityName}
                   </h3>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-location-dot mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
-                    {data?.charity.address}
+                    {address}
                   </div>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-phone mr-2 text-lg text-gray-900 dark:text-gray-200"></i>
-                    {data?.charity.phoneNumber}
+                    {phoneNumber}
                   </div>
                 </div>
               )}
@@ -466,7 +466,7 @@ function CharityProfile() {
                 ) : (
                   <div className="flex flex-wrap justify-center flex-col items-center">
                     <div className="w-full lg:w-9/12 px-4">
-                      <p>{data?.charity.description}</p>
+                      <p>{description}</p>
                     </div>
                   </div>
                 )}
@@ -475,9 +475,17 @@ function CharityProfile() {
            
           </div>
           
-            {data?.charity.savedEvents.map((event)=>{
-                        return     <div className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
+            {data?.charity.savedEvents.map((event,i)=>{
+                        return     <div 
+                        key={i}
+                        className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center">
                         <EventCard event={event} key={event._id} />
+                        <button
+                className="group relative flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={()=>{window.location.href="/event/edit/" + event._id}}
+              >
+                Edit
+              </button>
                       </div>
                       })}
         </div>

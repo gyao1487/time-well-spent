@@ -259,14 +259,14 @@ const resolvers = {
           {
             _id: args._id,
           },
-          {
-            $set: {description: args.description },
-          },
+          
+           args,
+          
           {
             new: true,
           }
         );
-
+console.log(userc)
         if (!userc) throw new Error("User not found.");
         return { userc};
       } catch (err) {
