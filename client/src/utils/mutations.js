@@ -235,10 +235,10 @@ mutation deleteVolunteer($_id: ID!){
 }
 `
 export const REMOVE_VOLUNTEER_EVENT =gql`
-mutation removeVolunteerEvent($_id: ID!) {
-  removeVolunteerEvent(_id: $_id) {
+mutation removeVolunteerEvent($eventId: ID!) {
+  removeVolunteerEvent(eventId: $eventId) {
     savedEvents{
-      _id
+    _id
     address
     time
     date
@@ -251,10 +251,10 @@ mutation removeVolunteerEvent($_id: ID!) {
 }
 `
 export const REMOVE_GOOGLE_VOLUNTEER_EVENT =gql`
-mutation removeGoogleVolunteerEvent($_id: ID!) {
-  removeGoogleVolunteerEvent(_id: $_id) {
+mutation removeGoogleVolunteerEvent($eventId: ID!) {
+  removeGoogleVolunteerEvent(eventId: $eventId) {
     savedEvents{
-      _id
+    _id
     address
     time
     date

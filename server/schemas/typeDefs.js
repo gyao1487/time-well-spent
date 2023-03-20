@@ -86,8 +86,8 @@ type Mutation{
     addGoogleVolunteerEvent(eventId: ID!): GoogleVolunteer
     updateVolunteer(_id:ID!,fullName:String!, username:String!, email:String!, skills:String):Volunteer
     updateEvent(_id:ID!,title:String, description:String, image:String, date:String, time:String, address:String):Event
-    removeVolunteerEvent(_id:ID!):Volunteer
-    removeGoogleVolunteerEvent(_id:ID!):GoogleVolunteer
+    removeVolunteerEvent(eventId:ID!):Volunteer
+    removeGoogleVolunteerEvent(eventId:ID!):GoogleVolunteer
     removeEvent(_id:ID!):Event
     removeVolunteer(_id:ID!):Volunteer
     removeCharity(_id: ID!): Charity

@@ -57,7 +57,9 @@ function EventCard({ event }) {
     try {
       if(volunteerData?.volunteer){
         const { data, errors } = await addVolunteerEvent({
-          variables: { eventId },
+          variables: {
+            eventId: event._id,
+          },
           update: (cache, { data: { addVolunteerEvent } }) => {
             // ...
           },
@@ -68,7 +70,9 @@ function EventCard({ event }) {
       }
       if(googleVolunteerData?.googleVolunteer){
         const {googleData, errors: googleErrors} = await addGoogleVolunteerEvent({
-          variables: { eventId }
+          variables: {
+            eventId: event._id,
+          }
         })
         refetch({
           _id: userToken?.data._id,
@@ -85,7 +89,7 @@ function EventCard({ event }) {
     if(volunteerData?.volunteer){
       const { volunteerData, errors} = await removeVolunteerEvent({
         variables: {
-          _id: event._id
+          eventId: event._id
         }
       });
       refetchV({
@@ -95,7 +99,7 @@ function EventCard({ event }) {
     if(googleVolunteerData?.googleVolunteer){
       const {googleVolunteerData, errors: googleErrors} = await removeGoogleVolunteerEvent({
         variables: {
-          _id: event._id,
+          eventId: event._id,
         }
       });
       refetch({
@@ -106,8 +110,9 @@ function EventCard({ event }) {
       
   }
   
-
+console.log(googleVolunteerData)
   useEffect(() => {
+    console.log(googleVolunteerData)
     setUserToken(Auth.getProfile())
     console.log(event._id);
   }, [event]);
