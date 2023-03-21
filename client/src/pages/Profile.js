@@ -192,7 +192,7 @@ const Profile = () => {
                   <div className="flex flex-wrap justify-center flex-col items-center">
                     {isUserEditingDescription ? (
                       <button
-                        className={styles.saveDescription}
+                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         onClick={handleSaveDescription}
                       >
                         Save
@@ -239,20 +239,26 @@ const Profile = () => {
               return (
                 <div
                   key={i}
-                  className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
+                  className="flex flex-wrap justify-center pb-4 gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
                 >
                   <EventCard event={event} key={event._id} />
                 </div>
               );
             })}
           </div>
-          <label
-            htmlFor="nuke-user-modal"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Deactivate Account
-          </label>
-          <input type="checkbox" id="nuke-user-modal" className="modal-toggle" />
+          <div className="flex flex-wrap justify-center">
+            <label
+              htmlFor="nuke-user-modal"
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Deactivate Account
+            </label>
+          </div>
+          <input
+            type="checkbox"
+            id="nuke-user-modal"
+            className="modal-toggle"
+          />
           <div className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">
@@ -286,8 +292,6 @@ const Profile = () => {
           </div>
         </section>
       </div>
-
-      
     </>
   );
 };
