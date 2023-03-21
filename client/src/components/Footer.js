@@ -89,7 +89,7 @@ function Footer() {
               </h2>
               <ul className="text-gray-600 dark:text-gray-400">
                 <li className="mb-4">
-                  <label htmlFor ="pp-modal" className="hover:underline">
+                  <label htmlFor ="pp-modal" className="hover:underline cursor-pointer">
                     Privacy Policy
                   </label>
                 </li>
@@ -108,7 +108,7 @@ function Footer() {
                   </div>
                 </div>
                 <li>
-                  <label htmlFor="pp-modal" className="hover:underline">
+                  <label htmlFor="pp-modal" className="hover:underline cursor-pointer">
                     Terms &amp; Conditions
                   </label>
                 </li>
