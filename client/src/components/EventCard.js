@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ADD_VOLUNTEER_EVENT, ADD_GOOGLE_VOLUNTEER_EVENT, REMOVE_VOLUNTEER_EVENT, REMOVE_GOOGLE_VOLUNTEER_EVENT } from "../utils/mutations";
-import { QUERY_VOLUNTEER, QUERY_GOOGLE_VOLUNTEER } from '../utils/queries'
+import { QUERY_VOLUNTEER, QUERY_GOOGLE_VOLUNTEER, QUERY_CHARITY } from '../utils/queries'
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
@@ -45,6 +45,13 @@ function EventCard({ event }) {
     skip: !userToken?.data._id,
   })
   const {loading: googleVolunteerLoading, error: googleVolunteerError, data: googleVolunteerData, refetch} = useQuery(QUERY_GOOGLE_VOLUNTEER,{
+    variables:{
+      _id: userToken?.data._id,
+    },
+    skip: !userToken?.data._id,
+  })
+
+  const {loading: charityLoading, error: charityError, data: charityData} = useQuery(QUERY_CHARITY,{
     variables:{
       _id: userToken?.data._id,
     },
@@ -109,7 +116,7 @@ function EventCard({ event }) {
       
       
   }
-  
+  console.log(charityData)
 console.log(googleVolunteerData)
   useEffect(() => {
     console.log(googleVolunteerData)
@@ -183,9 +190,9 @@ console.log(googleVolunteerData)
            
           </div>
           <div className ="grid place-self-end pt-2">
-            {(volunteerData || googleVolunteerData) &&
+            {
               <div>
-              {Auth.loggedIn() &&
+              {(!charityData?.charity && Auth.loggedIn()) &&
               <div>
                 { googleVolunteerData?.googleVolunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ||  volunteerData?.volunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ?
               <button
