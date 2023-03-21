@@ -189,7 +189,7 @@ function CharityProfile() {
               </button>
             )}
           </div>
-          <div className=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+          <div className=" flex flex-col min-w-0 break-words bg-inherit w-full mb-6 shadow-xl rounded-lg ">
             <div className="px-6 bg-gray-200 dark:bg-gray-600  text-gray-900">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full px-4 flex justify-center">
@@ -277,17 +277,17 @@ function CharityProfile() {
 
               {/* -----------------------Edit Icons Input-------------------------- */}
               {isEditing ? (
-                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                <div className="space-y-6 bg-inherit dark:bg-inherit px-4 py-5 sm:p-6">
                   {/* Email edit field */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="text-sm font-small leading-6 text-gray-900"
+                      className="text-sm font-small leading-6 text-gray-900 dark:text-white"
                     >
                       Website
                     </label>
                     <input
-                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white"
                       placeholder="www.mynewURL.com"
                       type="website"
                       autoFocus={true}
@@ -308,12 +308,12 @@ function CharityProfile() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="text-sm font-small leading-6 text-gray-900"
+                      className="text-sm font-small leading-6 text-gray-900 dark:text-white"
                     >
                       Twitter Handle
                     </label>
                     <input
-                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white"
                       placeholder="myTwitterHandle"
                       type="twitter"
                       autoFocus={true}
@@ -334,12 +334,12 @@ function CharityProfile() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="text-sm font-small leading-6 text-gray-900"
+                      className="text-sm font-small leading-6 text-gray-900 dark:text-white"
                     >
                       Instagram Handle
                     </label>
                     <input
-                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white"
                       placeholder="myInstagramHandle"
                       type="instagram"
                       autoFocus={true}
@@ -360,7 +360,7 @@ function CharityProfile() {
 
               {/* Editing Written Fields */}
               {isEditing ? (
-                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                <div className="space-y-6 bg-inherit px-4 py-5 sm:p-6">
                   {/* Name field edit */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
@@ -400,7 +400,7 @@ function CharityProfile() {
                       Address
                     </label>
                     <input
-                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white"
                       placeholder="MyOrganizationAddress"
                       type="address"
                       autoFocus={true}
@@ -426,7 +426,7 @@ function CharityProfile() {
                       Phone Number:
                     </label>
                     <input
-                      className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white"
                       placeholder="(800)-800-0000"
                       type="phoneNumber"
                       autoFocus={true}
@@ -461,7 +461,7 @@ function CharityProfile() {
 
               <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
                 {isEditing ? (
-                  <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                  <div className="space-y-6 bg-inherit px-4 py-5 sm:p-6">
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="title"
@@ -470,7 +470,7 @@ function CharityProfile() {
                         Description
                       </label>
                       <textarea
-                        className=" block w-full text-sm bg-white rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Mission statement: We are an charity that does things that charities do."
                         type="description"
                         autoFocus={true}
@@ -535,11 +535,12 @@ function CharityProfile() {
           })}
           
         </div>
-        
+        <div className="flex flex-wrap justify-center">
         <label htmlFor="nuke-modal" className="btn btn-danger"
         >
           Deactivate Account
         </label>
+        </div>
       </section>
       {/* The button to open modal
       <label htmlFor="nuke-modal" className="btn">

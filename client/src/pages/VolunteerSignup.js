@@ -16,6 +16,8 @@ const VolunteerSignup = () => {
     username: "",
     email: "",
     password: "",
+    fullName:"",
+    skills:""
   });
   const [createVolunteer, { error }] = useMutation(ADD_VOLUNTEER);
 
@@ -49,6 +51,7 @@ const VolunteerSignup = () => {
       email: "",
       password: "",
       fullName: "",
+      skills:""
     });
   };
 
@@ -228,15 +231,15 @@ const VolunteerSignup = () => {
 
                 <div>
                   <label
-                    for="fullName"
+                    for="skills"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                   Skills: 
                   </label>
                   <input
-                    type="textinput"
-                    name="fullName"
-                    id="fullName"
+                    type="skills"
+                    name="skills"
+                    id="skills"
                     onChange={handleChange}
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Organizing, networking, fundrainsing, etc..."
@@ -288,6 +291,88 @@ const VolunteerSignup = () => {
         </div>
       </section>
 
+
+
+
+      {/* <div className="container my-1">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleFormSubmit}>
+          <div className="flex-row space-between my-2">
+            <label htmlFor="username">Username</label>
+            <input
+              placeholder="Amazing person"
+              autoComplete="username"
+              name="username"
+              type="username"
+              id="username"
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+
+          <div className="flex-row space-between my-2">
+            <label htmlFor="email">Email:</label>
+            <input
+              placeholder="email@domain.com"
+              autoComplete="email"
+              name="email"
+              type="email"
+              id="email"
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="flex-row space-between my-2">
+            <label htmlFor="pwd">Password:</label>
+            <input
+              placeholder="******"
+              autoComplete="current-password"
+              name="password"
+              type="password"
+              id="pwd"
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="flex-row space-between my-2">
+            <label htmlFor="fullName">Full Name:</label>
+            <input
+              placeholder="Put your full name here"
+              name="fullName"
+              type="fullName"
+              id="fullName"
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="flex-row space-between my-2">
+            <label htmlFor="skills">Skills:</label>
+            <input
+              placeholder="Organizing, outgoing,"
+              name="skills"
+              type="skills"
+              id="skills"
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {error ? (
+            <div>
+              <p className="error-text">
+                The provided credentials are incorrect
+              </p>
+            </div>
+          ) : null}
+          <div className="flex-row flex-end">
+            <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div> */}
     </>
   );
 };
