@@ -33,7 +33,7 @@ function ViewOnlyProfile() {
                     <div className="">
                       <img
                         alt=""
-                        src={charity.image}
+                        src={charity.image ? charity.image : 'https://static.vecteezy.com/system/resources/previews/001/880/049/non_2x/volunteers-collecting-donations-for-charity-free-vector.jpg'}
                         className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       ></img>
                     </div>
@@ -140,16 +140,20 @@ function ViewOnlyProfile() {
               </div>
             </div>
   
+          <div
+            className="flex flex-wrap "
+          >
             {charity.savedEvents?.map((event, i) => {
               return (
                 <div
                   key={i}
-                  className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
+                  className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center m-2"
                 >
                   <EventCard event={event} key={event._id} />
                 </div>
               );
             })}
+          </div>
           </div>
    
         </section>  
