@@ -3,8 +3,7 @@
 import styles from "../styles/Profile.module.css";
 import React, { useEffect } from "react";
 import { QUERY_CHARITY, QUERY_ALL_EVENTS } from "../utils/queries";
-import { UPDATE_CHARITY, REMOVE_CHARITY } from "../utils/mutations";
-
+import { UPDATE_CHARITY, REMOVE_CHARITY,REMOVE_EVENT } from "../utils/mutations";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { gql } from "@apollo/client";
@@ -128,6 +127,25 @@ function CharityProfile() {
     setUserData();
     setIsEditing(true);
   };
+
+  const [removeEvent] = useMutation(REMOVE_EVENT, {
+    onError: (err) => {
+      console.error("Error in removeEvent mutation:", err);
+    },
+  });
+  
+  const handleRemoveEvent = async (eventId) => {
+    try {
+      const { data, errors } = await removeEvent({
+        variables: { _id: eventId },
+      });
+    } catch (error) {
+      console.error("Error in remove event mutation:", error);
+    }
+  };
+
+
+
   const [removeCharity] = useMutation(REMOVE_CHARITY, {
     onError: (err) => {
       console.error("Error in removeCharity mutation:", err);
@@ -482,22 +500,40 @@ function CharityProfile() {
 
           {data?.charity.savedEvents.map((event, i) => {
             return (
+
+
+              
               <div
                 key={i}
                 className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
               >
                 <EventCard event={event} key={event._id} />
+                
                 <button
-                  className=" group absolute flex rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="  justify-left translate-x-32  lg:translate-x-36  absolute flex rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={() => {
                     window.location.href = "/event/edit/" + event._id;
                   }}
                 >
                   Edit Event
                 </button>
-              </div>
+                
+                
+                <button
+                  className="  justify-right absolute flex -translate-x-28 lg:-translate-x-32 rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => {handleRemoveEvent(event._id)}}
+                  >
+                 Remove Event
+                </button>
+                
+                </div>
+                
+             
             );
+            
+            
           })}
+          
         </div>
         <div className="flex flex-wrap justify-center">
         <label htmlFor="nuke-modal" className="btn btn-danger"

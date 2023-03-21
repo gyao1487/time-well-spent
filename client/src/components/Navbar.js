@@ -295,7 +295,7 @@ console.log(isLoggedIn)
     );
   else {
     return (
-      <Disclosure as="nav" className="bg-gray-700 sticky absolute top-0">
+      <Disclosure as="nav" className="bg-gray-900 sticky absolute top-0">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

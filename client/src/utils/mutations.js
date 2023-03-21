@@ -280,3 +280,10 @@ mutation UpdateEvent($id: ID!, $title: String, $description: String, $image: Str
     _id
   }
 }`
+export const REMOVE_EVENT = gql`
+  mutation RemoveEvent($_id: ID!) {
+    removeEvent(_id: $_id) {
+      _id
+    }
+  }
+`;
