@@ -75,6 +75,7 @@ function CharityProfile() {
       instagram: instagram,
       twitter: twitter,
       phoneNumber: phoneNumber,
+      image: image
     },
   });
   // const {
@@ -247,7 +248,7 @@ function CharityProfile() {
                               type="button"
                               data-te-ripple-init
                               data-te-ripple-color="light"
-                              className="inline-flex items-center justify-center w-8 h-8 px-9  rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                              className="inline-flex items-center justify-center w-8 h-8 px-9 rounded-full bg-primary p-2 uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                             >
                               <i className="fa-brands fa-twitter"></i>
                             </button>
@@ -258,7 +259,7 @@ function CharityProfile() {
                       {/* -----------------------Instagram------------------------- */}
                       <span className="text-sm text-gray-900"></span>
                     </div>
-                    <div className="lg:p-3 text-center">
+                    <div className="p-3 text-center">
                       <div className="flex justify-center space-x-2">
                         <div>
                           <a href={`https://instagram.com/${instagram}`}>
@@ -282,6 +283,32 @@ function CharityProfile() {
               {/* -----------------------Edit Icons Input-------------------------- */}
               {isEditing ? (
                 <div className="space-y-6 bg-inherit dark:bg-inherit px-4 py-5 sm:p-6">
+                  {/* image edit field */}
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="image"
+                      className="text-sm font-small leading-6 text-gray-900 dark:text-white"
+                    >
+                      Image
+                    </label>
+                    <input
+                      className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white"
+                      placeholder="www.mynewURL.com"
+                      type="text"
+                      autoFocus={true}
+                      id="image"
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 27) {
+                          e.currentTarget.blur();
+                          setIsEditing(false);
+                        }
+                      }}
+                  
+                    />
+                  </div>
+                  
                   {/* Email edit field */}
                   <div className="col-span-6 sm:col-span-3">
                     <label
@@ -449,7 +476,7 @@ function CharityProfile() {
                 </div>
               ) : (
                 <div className="text-center mt-12 dark:text-white">
-                  <h3 className="text-6xl font-semibold leading-normal mb-2 text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 dark:text-white mb-2">
                     {username}
                   </h3>
                   <div className="mb-2 text-blueGray-600 mt-10 dark:text-white">
