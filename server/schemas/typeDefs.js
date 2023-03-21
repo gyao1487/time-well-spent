@@ -28,6 +28,7 @@ type Charity{
     savedEvents:[Event]
     websiteURL:String!
     description:String
+    image:String
     address:String
     facebook:String
     instagram:String
@@ -51,7 +52,7 @@ type Event{
 input inputEvent {
     title:String!
     description:String
-    image:String
+    image: String
     time:String
     date:String!
     address:String!

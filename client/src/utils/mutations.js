@@ -188,7 +188,7 @@ export const ADD_CHARITY = gql`
 `;
 
 export const UPDATE_CHARITY = gql`
-mutation updateCharityDescription($_id: ID!, $websiteURL:String, $description:String, $address:String, $facebook:String, $instagram:String, $twitter:String, $phoneNumber:String, $charityName:String){
+mutation updateCharityDescription($_id: ID!, $websiteURL:String!, $description:String, $address:String, $facebook:String, $instagram:String, $twitter:String, $phoneNumber:String, $charityName:String){
   updateCharity(_id: $_id, websiteURL:$websiteURL, description:$description, address:$address, facebook:$facebook, instagram:$instagram, twitter:$twitter, phoneNumber:$phoneNumber, charityName:$charityName){
     _id
     description

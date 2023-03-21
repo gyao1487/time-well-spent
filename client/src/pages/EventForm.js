@@ -31,11 +31,13 @@ function EventForm(props) {
     event.preventDefault();
 
     //Form validation:
-    const {title, description, image, date, time, address, savedCharity} = usercformState;
+    const {title, description, 
+      image, 
+      date, time, address, savedCharity} = usercformState;
     const formErrors = {
       title: title ? "" : "Please enter a title for your event",
       description: description ? "" : "Please enter a description for your event",
-      image: image ? "" : "Please insert an image for your event",
+      // image: image ? "" : "Please insert an image for your event",
       date: date ? "" : "Please enter the date of your event",
       time: time ? "" : "Please enter the time of your event",
       address: address ? "" : "Please enter the address of your event",
@@ -258,7 +260,7 @@ function EventForm(props) {
                       onChange={handleChange}
                       className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-600 bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
-                    {errors.image && <p className="mt-1 text-sm text-red-500">{errors.image}</p>}
+                    {/* {errors.image && <p className="mt-1 text-sm text-red-500">{errors.image}</p>} */}
                   </div>
                   {/*---------------------------- PLACEHOLDER ONLY: Charity Name------------------------- */}
                   {/* <div className="col-span-6 sm:col-span-3">

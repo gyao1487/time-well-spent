@@ -105,7 +105,7 @@ console.log(isLoggedIn)
 
   if (isCharity)
     return (
-      <Disclosure as="nav" className="bg-gray-700 sticky absolute top-0 dark:">
+      <Disclosure as="nav" className="bg-gray-900 sticky absolute top-0 ">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -240,7 +240,7 @@ console.log(isLoggedIn)
                       </Transition>
                     </Menu>
                     <p
-                      className="hidden sm:flex ml-2 cursor-pointer"
+                      className="hidden sm:flex ml-2 cursor-pointer text-white"
                       onClick={()=>{
                         setIsLoggedIn(false)
                         Auth.logout()}}
@@ -430,7 +430,7 @@ console.log(isLoggedIn)
                       </Transition>
                     </Menu>
                     <p
-                      className="hidden sm:flex ml-2 cursor-pointer"
+                      className="hidden sm:flex ml-2 cursor-pointer text-white"
                       onClick={()=>{
                         setIsLoggedIn(false)
                         Auth.logout()}}
@@ -460,6 +460,7 @@ console.log(isLoggedIn)
                 })}
                 {!isLoggedIn &&
                   loggedInNav.map((item) => {
+
                     return <Disclosure.Button
                       key={item.name}
                       href={item.href}
@@ -482,6 +483,7 @@ console.log(isLoggedIn)
                     Logout
                   </div>
                 }
+
               </div>
             </Disclosure.Panel>
           </>
