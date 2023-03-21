@@ -369,12 +369,12 @@ function CharityProfile() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="text-sm font-small leading-6 text-gray-900"
+                      className="text-sm font-small leading-6 text-gray-900  dark:text-white"
                     >
                       Organization Name
                     </label>
                     <input
-                      className=" block w-full text-4xl bg-white rounded-md border-0 py-1 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" block w-full text-4xl bg-white rounded-md border-0 py-1 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-gray-400"
                       placeholder={username}
                       type="username"
                       autoFocus={true}
@@ -389,7 +389,7 @@ function CharityProfile() {
                       // }}
                       disabled
                     />
-                    <p className="mt-2 text-xs text-gray-500">
+                    <p className="mt-2 text-xs text-gray-500  dark:text-white">
                       To change the name of your organization, please contact
                       support.
                     </p>
@@ -399,7 +399,7 @@ function CharityProfile() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="text-sm font-small leading-6 text-gray-900"
+                      className="text-sm font-small leading-6 text-gray-900  dark:text-white"
                     >
                       Address
                     </label>
@@ -425,7 +425,7 @@ function CharityProfile() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="title"
-                      className="text-sm font-small leading-6 text-gray-900"
+                      className="text-sm font-small leading-6 text-gray-900  dark:text-white"
                     >
                       Phone Number:
                     </label>
@@ -469,12 +469,12 @@ function CharityProfile() {
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="title"
-                        className="text-sm font-small leading-6 text-gray-900"
+                        className="text-sm font-small leading-6 text-gray-900  dark:text-white"
                       >
                         Description
                       </label>
                       <textarea
-                        className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className=" block w-full text-sm bg-inherit rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  dark:text-white"
                         placeholder="Mission statement: We are an charity that does things that charities do."
                         type="description"
                         autoFocus={true}
