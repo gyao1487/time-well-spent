@@ -330,7 +330,7 @@ const Home = () => {
                 <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 mx-2 text-blue-500"
+                    className="w-6 h-6 mx-2 text-indigo-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -349,7 +349,7 @@ const Home = () => {
                 <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 mx-2 text-blue-500"
+                    className="w-6 h-6 mx-2 text-indigo-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -368,7 +368,7 @@ const Home = () => {
                 <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 mx-2 text-blue-500"
+                    className="w-6 h-6 mx-2 text-indigo-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -381,12 +381,12 @@ const Home = () => {
                     />
                   </svg>
 
-                  <span className="mx-2">Donate and/or sign up at the click of a button!</span>
+                  <span className="mx-2">For Charities: Host events that volunteers can find</span>
                 </p>
               </div>
             </div>
 
-            <div className="w-full mt-8 bg-transparent border rounded-md lg:max-w-sm dark:border-gray-700 focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 dark:focus-within:border-blue-400 focus-within:ring-opacity-40">
+            <div className="w-full mt-8 bg-transparent border rounded-md lg:max-w-sm dark:border-gray-700 focus-within:border-indigo-400 focus-within:ring focus-within:ring-indigo-300 dark:focus-within:border-indigo-400 focus-within:ring-opacity-40">
               <form className="flex flex-col lg:flex-row">
                 <input
                   type="input"
@@ -408,7 +408,7 @@ const Home = () => {
 
                 <button
                   type="button"
-                  className="h-10 px-4 py-2 m-1 text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400"
+                  className="h-10 px-4 py-2 m-1 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-400 focus:outline-none focus:bg-indigo-400"
                   onClick={handleSearchClick}
                 >
                   Search
