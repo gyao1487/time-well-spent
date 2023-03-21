@@ -13,7 +13,7 @@ function EventCard({ event }) {
   const [userData, setUserData] = useState(null)
   const [isEventRemoved, setIsEventRemoved] = useState(true);
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
-    context: { token: userToken }, // Pass the JWT token in the context here
+    context: { token: userToken },
     update: (cache, { data: { addVolunteerEvent } }) => {
       
       // Update the cache
@@ -23,7 +23,7 @@ function EventCard({ event }) {
     },
   });
   const [addGoogleVolunteerEvent, { error: googlevError }] = useMutation(ADD_GOOGLE_VOLUNTEER_EVENT, {
-    context: { token: userToken }, // Pass the JWT token in the context here
+    context: { token: userToken }, 
     update: (cache, { data: { addVolunteerEvent } }) => {
       
       // Update the cache
@@ -58,7 +58,7 @@ function EventCard({ event }) {
     skip: !userToken?.data._id,
   })
 
-  const handleAddEvent = async (e) => { // Make the function async
+  const handleAddEvent = async (e) => {
     const eventId = e.target.dataset.id;
   
     try {
@@ -88,7 +88,6 @@ function EventCard({ event }) {
         
       
     } catch (error) {
-      // console.error('Error in addVolunteerEvent mutation:', error); // Add this line
     }
   };
   

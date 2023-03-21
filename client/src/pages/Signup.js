@@ -1,10 +1,3 @@
-//!!! NEED TO REPLACE WITH TAILWIND///
-//Need to create SignUp Landing Page
-//Components:
-// Logo
-//Background image
-// Buttons for two options as well as images/icons?
-
 import React from "react";
 
 const Signup = () => {

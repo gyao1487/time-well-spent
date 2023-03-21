@@ -11,7 +11,6 @@ const containerStyle = {
   height: '400px',
   alignSelf: 'center',
   borderRadius: '5px',
-  // marginLeft: '50em'
 };
 const googleMapsLibraries = ['places']
 const center = {
@@ -169,23 +168,6 @@ const Home = () => {
         clickForWebsite.style.color = 'green'
         content.appendChild(clickForWebsite);
       }
-    // let isOpen = false;
-    //  markerObject.marker.addListener('click', ()=>{
-    //     if(!isOpen){
-    //       isOpen = true;
-    //       infoWindow.open({
-    //         anchor: markerObject.marker,
-    //         map: map,
-    //       })
-    //     }
-    //     else{
-    //       isOpen = false;
-    //       infoWindow.close({
-    //         anchor: markerObject.marker,
-    //         map: map,
-    //       })
-    //     }
-    //   })
 
       return infoWindow;
     }
@@ -253,16 +235,6 @@ const Home = () => {
       Auth.logout();
     }
   },[])
-  // const getPlacePhotos = async (placesDetails)=>{
-  //   let responses =[];
-  //   for(const placeDetail of placesDetails){
-  //     let response = await fetch(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
-  //     let photoData = await response.json()
-  //     responses.push(photoData);
-  //   }
-  //   return Promise.all(responses).then((data)=> console.log(data))
-  // }
-
   return (
     <div>
       <div className="relative isolate px-6 lg:px-8">
@@ -402,7 +374,6 @@ const Home = () => {
                     if (e.key === 'Escape') {
                         e.target.blur()
                     }
-                    //for some reason e.preventDefault works here but not in onSubmit.
                     if(e.key === 'Enter'){
                       e.preventDefault();
                       handleSearchClick();
@@ -431,22 +402,12 @@ const Home = () => {
                 onLoad={onLoad}
                 onUnmount={onUnmount}
               >
-                {/* <button
-                  id='location button'
-                  className=""
-                  style={{width: '5em', height: '3em'}}
-                >
-                  Find Current Location
-                </button> */}
               </GoogleMap>
         }
           </div>
         </div>
       </section>
         {/* ---------------Event Cards----------------- */}
-        {/* If loading, show loading div. If done loading, show event cards
-       !!!!!!!!!!!!!!!  Need to create better loading element later */}
-        
           <div>
           {loading ? (
             <div>Loading...</div>
@@ -467,17 +428,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// <div className="bg-neutral-50 py-20 px-6 text-center text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200">
-//   <h1 className="mb-6 text-5xl font-bold">Heading</h1>
-//   <h3 className="mb-8 text-3xl font-bold">Subeading</h3>
-//   <a
-//     className="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-//     data-te-ripple-init
-//     data-te-ripple-color="light"
-//     href="#!"
-//     role="button"
-//   >
-//     Get started
-//   </a>
-// </div>

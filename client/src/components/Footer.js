@@ -94,7 +94,7 @@ function Footer() {
                   </label>
                 </li>
 
-                {/* Put this part before </body> tag */}
+            
                 <input type="checkbox" id="pp-modal" className="modal-toggle" />
                 <div className="modal">
                   <div className="modal-box">

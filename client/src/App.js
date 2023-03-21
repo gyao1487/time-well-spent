@@ -1,22 +1,16 @@
-// ------------------- ORIGINAL CODE ---------------------
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import VolunteerSignup from "./pages/VolunteerSignup";
 import CharitySignup from "./pages/CharitySignup";
-
 import Navbar from "./components/Navbar";
 import EventUpdate from "./pages/EventUpdate";
 import Discover from "./pages/Discover";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import CharityProfile from "./pages/CharityProfile"
-
-//GY - working on non-logged in charity profile view
 import ViewOnlyProfile from "./pages/ViewOnlyProfile"
-
 import EventPage from "./pages/EventPage";
 import Footer from "./components/Footer";
 import Auth from './utils/auth'
@@ -29,7 +23,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import GoogleSignUp from "./pages/volunteers/signup";
 import LoginVolunteer from "./pages/LoginVolunteer";
 import LoginCharity from "./pages/LoginCharity";
 import EventForm from "./pages/EventForm";
@@ -77,22 +70,12 @@ function App() {
             <Route path="/LoginVolunteer" element={<LoginVolunteer />} />
             <Route path="/LoginCharity" element={<LoginCharity />} />
             <Route path="/Signup" element={<Signup />} />
-
-            
-
-            <Route path="/volunteers/signup" element={<GoogleSignUp />} />
             <Route path="/VolunteerSignup" element={<VolunteerSignup />} />
             <Route path="/charitySignup" element={<CharitySignup />} />
 
             <Route path="/EventForm" element={<EventForm />} />
             <Route path="/event/:id" element ={<EventPage />}/>
             <Route path="/event/edit/:id" element ={<EventUpdate />}/>
-            
-            
-            {/* <Route
-                path="/success"
-                element={<Success />}
-              /> */}
             <Route path="/discover" element={<Discover />} />
 {/* change back to /profile */}
             <Route path="/profile" element={<Profile />} />
