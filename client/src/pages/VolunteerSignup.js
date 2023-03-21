@@ -35,7 +35,11 @@ const VolunteerSignup = () => {
         variables: { ...uservFormData },
       });
 
-      Auth.login(data.createVolunteer.token);
+      if(data){
+        console.log('success')
+        Auth.login(data.createVolunteer.token);
+      }
+      
     } catch (err) {
       console.error(err);
     }
@@ -48,11 +52,9 @@ const VolunteerSignup = () => {
     });
   };
 
-  useEffect(() => {
-    if (Auth.loggedIn()) {
-      return;
-    }
-    const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+  useEffect(()=>{
+    const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
     const options = {
       client_id: clientID,
       auto_select: false,
