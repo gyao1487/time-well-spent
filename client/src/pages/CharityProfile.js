@@ -528,15 +528,14 @@ function CharityProfile() {
               </div>
             </div>
           </div>
-
-          {data?.charity.savedEvents.map((event, i) => {
+          <div
+            className="flex flex-wrap "
+          >
+            {data?.charity.savedEvents.map((event, i) => {
             return (
-
-
-              
               <div
                 key={i}
-                className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center"
+                className="flex flex-wrap justify-center gap-4 mx-auto lg:flex lg:flex-wrap lg:justify-center m-2"
               >
                 <EventCard event={event} key={event._id} />
                 
@@ -558,15 +557,13 @@ function CharityProfile() {
                 </button>
                 
                 </div>
-                
-             
             );
-            
-            
           })}
+          </div>
+          
           
         </div>
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center mt-4">
         <label htmlFor="nuke-modal" className="btn btn-danger"
         >
           Deactivate Account

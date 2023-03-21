@@ -114,12 +114,12 @@ console.log(isLoggedIn)
                   <div className="flex flex-shrink-0 items-center">
                     <img
                       className="block h-8 w-auto lg:hidden"
-                      src="assets/logoLite.png"
+                      src="/assets/logoLite.png"
                       alt="TimeWellSpent"
                     />
                     <img
                       className="hidden h-8 w-auto lg:block"
-                      src="assets/logoLite.png"
+                      src="/assets/logoLite.png"
                       alt="TimeWellSpent"
                     />
                   </div>
@@ -188,7 +188,7 @@ console.log(isLoggedIn)
                           onClick={()=> document.location.replace('/charityprofile')}
                             className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
-                            src={'../assets/letter-c-svgrepo-com.png'}
+                            src={'/assets/letter-c-svgrepo-com.png'}
                             alt=""
                           />
                         
@@ -377,7 +377,7 @@ console.log(isLoggedIn)
                             onClick={()=> document.location.replace('/profile')}
                             className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
-                            src={userData?.picture ? userData?.picture : '../assets/letter-v-svgrepo-com.png'}
+                            src={userData?.picture ? userData?.picture : '/assets/letter-v-svgrepo-com.png'}
                             alt=""
                           />
                        
