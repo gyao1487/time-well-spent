@@ -24,6 +24,7 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [userId, setUserId] = useState(Auth.getProfile()?.data?._id);
   const [userDescription, setUserDescription] = useState("");
+  const [userSkills, setUserSkills] = useState(Auth.getProfile()?.data?.skills)
   const [userEvents, setUserEvents] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [isLocationLoading, setIsLocationLoading] = useState(false);
@@ -57,6 +58,7 @@ const Profile = () => {
       variables: {
         user_description: userDescription,
         _id: Auth.getProfile()?.data._id,
+        skills: userSkills,
       },
     }
   );
@@ -66,6 +68,7 @@ const Profile = () => {
       variables: {
         user_description: userDescription,
         _id: Auth.getProfile()?.data._id,
+        skills: userSkills,
       },
     }
   );

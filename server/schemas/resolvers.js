@@ -73,7 +73,10 @@ const resolvers = {
             _id: args._id,
           },
           {
-            $set: { user_description: args.user_description },
+            $set: { 
+              user_description: args.user_description,
+              skills: args.skills, 
+            },
           },
           {
             new: true,
@@ -94,7 +97,10 @@ const resolvers = {
             _id: args._id,
           },
           {
-            $set: { user_description: args.user_description },
+            $set: { 
+              user_description: args.user_description,
+              skills: args.skills,
+            },
           },
           {
             new: true,
