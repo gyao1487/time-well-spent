@@ -100,12 +100,14 @@ export const ADD_VOLUNTEER = gql`
     $password: String!
     $email: String!
     $fullName: String!
+    $skills: String
   ) {
     createVolunteer(
       username: $username
       password: $password
       email: $email
       fullName: $fullName
+      skills:$skills
     ) {
       userv {
         _id

@@ -98,16 +98,17 @@ function Footer() {
                 <input type="checkbox" id="pp-modal" className="modal-toggle" />
                 <div className="modal">
                   <div className="modal-box">
-                   <PrivacyPolicy />
-                    <div className="modal-action">
-                      <label htmlFor="pp-modal" className="btn">
+                  <label htmlFor="pp-modal" className="btn">
                         Back
                       </label>
+                   <PrivacyPolicy />
+                    <div className="modal-action">
+                   
                     </div>
                   </div>
                 </div>
                 <li>
-                  <label htmljFor="pp-modal" className="hover:underline">
+                  <label htmlFor="pp-modal" className="hover:underline">
                     Terms &amp; Conditions
                   </label>
                 </li>

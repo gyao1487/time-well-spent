@@ -182,7 +182,11 @@ const Profile = () => {
                   ) : (
                     <div></div>
                   )}
-                  <div className="mb-2 mt-10 text-gray-900">
+
+
+     {/* GY - I can't get skills to populate. Please help!              */}
+
+                  <div className="mb-2 mt-10 text-gray-900 dark:text-white">
                     <i className="fas fa-briefcase mr-2 text-lg dark:text-white "></i>
                     {userData?.skills}
                   </div>
@@ -209,7 +213,7 @@ const Profile = () => {
                     <div className="w-full lg:w-9/12 px-4">
                       {isUserEditingDescription ? (
                         <textarea
-                          className="textarea textarea-info bg-transparent w-96 mt-7"
+                          className="textarea textarea-info bg-transparent dark:text-white w-96 mt-7"
                           placeholder="Bio"
                           type="text"
                           autoFocus={true}
