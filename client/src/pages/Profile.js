@@ -208,11 +208,12 @@ const Profile = () => {
                         />
                       ) : (
                         <p className="mb-4 text-blueGray-700 mt-7 dark:text-white">
+                          <i className="fas fa-briefcase mr-2 text-lg dark:text-white "></i>
                           {userSkills}
                         </p>
                       )}
                     
-                    <i className="fas fa-briefcase mr-2 text-lg dark:text-white "></i>
+                    
                   </div>
                   <div
                     className="flex flex-col items-center"
@@ -238,23 +239,7 @@ const Profile = () => {
 
                 <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
                   <div className="flex flex-wrap justify-center flex-col items-center">
-                    {isUserEditingDescription ? (
-                      <button
-                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={handleSaveDescription}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={() => setIsUserEditingDescription(true)}
-                      >
-                        Edit Description
-                      </button>
-                    )}
-
-                    <div className="w-full lg:w-9/12 px-4">
+                    <div className="w-full lg:w-9/12 px-4 flex flex-col items-center">
                       {isUserEditingDescription ? (
                         <textarea
                           className="textarea textarea-info bg-transparent dark:text-white w-96 mt-7"
@@ -276,6 +261,21 @@ const Profile = () => {
                           {userDescription}
                         </p>
                       )}
+                      {isUserEditingDescription ? (
+                      <button
+                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        onClick={handleSaveDescription}
+                      >
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-max"
+                        onClick={() => setIsUserEditingDescription(true)}
+                      >
+                        Edit Description
+                      </button>
+                    )}
                     </div>
                   </div>
                 </div>
