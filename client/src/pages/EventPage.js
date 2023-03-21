@@ -45,16 +45,14 @@ const EventPage = () => {
               <a className="pt-8 text-md text-gray-800 dark:text-gray-200">{event.description}</a>
 
               <div className="pt-12 pb-8">
-                <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
-                  Get In Touch
-                </button>
+                {/* <a href={`/profile/${event.savedCharity}`}>
+                  <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+                    Get In Touch
+                  </button>
+                </a> */}
               </div>
-
-
               {/* <!-- Use https://simpleicons.org/ to find the svg for your preferred product -->  */}
-
             </div>
-
           </div>
           <div className="absolute top-0 right-0 h-12 w-18 p-4">
             <button className="js-change-theme focus:outline-none">🌙</button>
