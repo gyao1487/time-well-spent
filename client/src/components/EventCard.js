@@ -12,6 +12,7 @@ function EventCard({ event }) {
   const [userToken, setUserToken] = useState(null);
   const [userData, setUserData] = useState(null)
   const [isEventRemoved, setIsEventRemoved] = useState(true);
+  const [charityName, setCharityName] = useState(event.savedCharity)
   const [addVolunteerEvent, { error }] = useMutation(ADD_VOLUNTEER_EVENT, {
     context: { token: userToken },
     update: (cache, { data: { addVolunteerEvent } }) => {
@@ -144,7 +145,7 @@ console.log(googleVolunteerData)
               </h5>
             </Link>
             <p className="font-normal text-gray-700 mb-3 text-left dark:text-gray-400">
-              <Link to ={`/profile/${event.savedCharity}`}>{event.savedCharity}</Link>
+              <Link to ={`/profile/${charityName}`}>{charityName}</Link>
             </p>
           <div className="flex space-x-1 mb-2">
             <svg
