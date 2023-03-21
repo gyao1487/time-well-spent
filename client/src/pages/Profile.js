@@ -158,8 +158,8 @@ const Profile = () => {
                     <div className="">
                       <img
                         alt=""
-                        src={userData?.picture}
-                        className="shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                        src={userData?.picture ? userData?.picture : '../assets/letter-v-svgrepo-com.png' }
+                        className={"shadow-xl rounded-full h-auto align-middle border-none  -m-16 -ml-20 lg:-ml-16 max-w-150-px " + (userData?.picture ? '' : 'h-24 w-24')}
                       ></img>
                     </div>
                   </div>
