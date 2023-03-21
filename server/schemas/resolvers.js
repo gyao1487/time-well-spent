@@ -16,11 +16,6 @@ const resolvers = {
     allCharity: async () => {
       return Charity.find();
     },
-
-    // charity: async (parent, { charityId }) => {
-    //   return Charity.findOne({ _id: charityId });
-    // },
-    //GY: for view
     charity: async (parent, { _id, username }) => {
       return Charity.findOne({
         $or: [{ _id: _id }, { username: username }],
@@ -53,7 +48,6 @@ const resolvers = {
     createGoogleVolunteer: async function (parent, args) {
       try {
         let googlev = await GoogleVolunteer.findOne({ email: args.email });
-        console.log(googlev);
         if (!googlev)
           googlev = await GoogleVolunteer.create({ ...args, isCharity: false });
         const token = signToken(googlev);
@@ -82,8 +76,6 @@ const resolvers = {
             new: true,
           }
         );
-        console.log(googlev);
-
         if (!googlev) throw new Error("User not found.");
         return { googlev };
       } catch (err) {
@@ -106,8 +98,6 @@ const resolvers = {
             new: true,
           }
         );
-        console.log(volunteer);
-
         if (!volunteer) throw new Error("User not found.");
         return { volunteer };
       } catch (err) {
@@ -116,10 +106,7 @@ const resolvers = {
     },
 
     addVolunteerEvent: async function (parent, { eventId }, context) {
-      console.log("addVolunteerEvent called"); // Add this line
-
       try {
-        console.log("Token in context:", context.token); // Log the token in context for debugging
         const volunteerId = decodeToken(context.token);
         const volunteer = await Volunteer.findById(volunteerId).populate(
           "savedEvents"
@@ -139,8 +126,6 @@ const resolvers = {
           volunteer.savedEvents.push(eventId);
           await volunteer.save();
         }
-        console.log("Volunteer:", volunteer); // Add this line
-        // console.log("Volunteer.toObject():", volunteer.toObject());
         return volunteer;
       } catch (error) {
         console.error("Token error:", error.message); // Log the error message for debugging
@@ -149,7 +134,6 @@ const resolvers = {
     },
     addGoogleVolunteerEvent: async function (parent, { eventId }, context) {
       try {
-        console.log("Token in context:", context.token); // Log the token in context for debugging
         const volunteerId = decodeToken(context.token);
         const volunteer = await GoogleVolunteer.findById(volunteerId).populate(
           "savedEvents"
@@ -169,8 +153,6 @@ const resolvers = {
           volunteer.savedEvents.push(eventId);
           await volunteer.save();
         }
-        console.log("Volunteer:", volunteer); // Add this line
-        // console.log("Volunteer.toObject():", volunteer.toObject());
         return volunteer;
       } catch (error) {
         console.error("Token error:", error.message); // Log the error message for debugging
@@ -196,7 +178,6 @@ const resolvers = {
         { $pull: { savedEvents: eventId } },
         { new: true }
       );
-      console.log(await updatedVolunteer);
       if (!updatedVolunteer) {
         throw new Error("Failed to remove volunteer event");
       }
@@ -224,18 +205,6 @@ const resolvers = {
       if (!removedVolunteer) {
         throw new Error("Event not found");
       }
-
-      // Remove the event from the savedEvents array in the Charity document
-      // const updatedCharity = await Charity.findOneAndUpdate(
-      //   { _id: context.user._id },
-      //   { $pull: { savedEvents: args._id } },
-      //   { new: true }
-      // );
-
-      // if (!updatedCharity) {
-      //   throw new AuthenticationError("You need to be logged in!");
-      // }
-
       return removedVolunteer;
     },
     removeGoogleVolunteer: async function (parent, args, context) {
@@ -251,35 +220,24 @@ const resolvers = {
 
     // ---------------------------------- Charity Mutations ----------------------------------
     addCharityEvent: async function (parent, { savedEvents }, context) {
-      console.log(context.user);
-      // console.log(context.user._id);
       try {
         if (!savedEvents.description) {
           throw new Error("Event description is required.");
         }
         if (savedEvents.image !== "") {
-          //Need to change parameters to id? {_id: context.user._id}?
           const charity = await Charity.findOne({ _id: context.user._id });
-          // savedEvents.savedCharity = charity._id;
-          console.log(charity);
           const newEvent = await Event.create({
             ...savedEvents,
             savedCharity: charity.username,
           });
-
-          console.log("Newly created event:", newEvent); // Add this line
           const updatedCharity = await Charity.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { savedEvents: newEvent._id } },
             { new: true, runValidators: true }
           );
-          console.log("charity updated", updatedCharity);
           return { updatedCharity, newEvent };
         } else {
-          //Need to change parameters to id? {_id: context.user._id}?
           const charity = await Charity.findOne({ _id: context.user._id });
-          // savedEvents.savedCharity = charity._id;
-          console.log(charity);
           const newEvent = await Event.create({
             title:savedEvents.title,
             description:savedEvents.description,
@@ -289,14 +247,11 @@ const resolvers = {
            
             savedCharity: charity.username,
           });
-
-          console.log("Newly created event:", newEvent); // Add this line
           const updatedCharity = await Charity.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { savedEvents: newEvent._id } },
             { new: true, runValidators: true }
           );
-          console.log("charity updated", updatedCharity);
           return { updatedCharity, newEvent };
         }
       } catch (err) {
@@ -305,9 +260,7 @@ const resolvers = {
       }
     },
 
-    // Needs looked at is not working on back end
     updateCharity: async function (parent, args, context) {
-      console.log(args)
       try {
         const userc = await Charity.findOneAndUpdate(
           {
@@ -320,7 +273,6 @@ const resolvers = {
             new: true,
           }
         );
-        console.log(userc);
         if (!userc) throw new Error("User not found.");
         return { userc };
       } catch (err) {
@@ -329,7 +281,6 @@ const resolvers = {
     },
 
     createCharity: async function (parent, args) {
-      console.log(args);
       const userc = await Charity.create({ ...args, isCharity: true });
 
       if (!userc) {
@@ -338,8 +289,6 @@ const resolvers = {
       const token = signToken(userc);
       return { token, userc };
     },
-    // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
-    // {body} is destructured req.body
     removeCharity: async (parent, { _id }, context) => {
       // Check if the user is authenticated
       if (context.user) {
@@ -354,12 +303,8 @@ const resolvers = {
         const eventsToDelete = await Event.find({
           savedCharity: charity.username,
         });
-        console.log("Events to delete:", eventsToDelete);
-
         // Remove all events with the same savedCharity name
         await Event.deleteMany({ savedCharity: charity.username });
-        console.log("Deleting events with savedCharity:", charity.username);
-
         // Remove the charity
         await Charity.findByIdAndDelete(_id);
 
@@ -434,18 +379,6 @@ const resolvers = {
       if (!removedEvent) {
         throw new Error("Event not found");
       }
-
-      // Remove the event from the savedEvents array in the Charity document
-      // const updatedCharity = await Charity.findOneAndUpdate(
-      //   { _id: context.user._id },
-      //   { $pull: { savedEvents: args._id } },
-      //   { new: true }
-      // );
-
-      // if (!updatedCharity) {
-      //   throw new AuthenticationError("You need to be logged in!");
-      // }
-
       return removedEvent;
     },
   },

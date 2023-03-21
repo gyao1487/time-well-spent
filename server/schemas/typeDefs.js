@@ -106,6 +106,3 @@ type Mutation{
 }
 `
 module.exports=typeDefs
-
-// addEvent(savedEvent:inputEvent):Charity
-//replqced with addEvent(savedEvent:inputEvent):Event

@@ -151,7 +151,7 @@ export const UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION = gql`
     updateGoogleVolunteer(_id: $_id, user_description: $user_description, skills: $skills) {
       _id
       user_description
-      user_skills
+      skills
     }
   }
 `;
@@ -160,7 +160,7 @@ export const UPDATE_VOLUNTEER_DESCRIPTION = gql`
     updateVolunteerDescription(_id: $_id, user_description: $user_description, skills: $skills) {
       _id
       user_description
-      user_skills
+      skills
     }
   }
 `;
