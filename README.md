@@ -50,7 +50,6 @@ Both Volunteers and Charites/Nonprofit profile pages are unique.  Volunteer page
 
 * Video demo 1: https://youtu.be/qj8QTrw9Jpk 
 * Video demo 2: https://youtu.be/GD4ajuFWtYM
-* The site: https://morning-wildwood-88697.herokuapp.com/ {rename pending review at heroku}
 * [The site](https://morning-wildwood-88697.herokuapp.com/)   
 * Github: https://github.com/TotallyReactingNodeTurtles/timewellspent 
 
