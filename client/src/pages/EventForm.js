@@ -95,6 +95,7 @@ function EventForm(props) {
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-200 text-center">
                 Just type in details about your event, and we'll work our magic!
               </p>
+              <img src="/assets/eventpage.png" className="hidden lg:block pt-10"/>
             </div>
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0">
