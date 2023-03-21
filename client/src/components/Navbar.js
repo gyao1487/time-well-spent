@@ -120,13 +120,13 @@ console.log(isLoggedIn)
                   <div className="flex flex-shrink-0 items-center">
                     <img
                       className="block h-8 w-auto lg:hidden"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
+                      src="assets/logoLite.png"
+                      alt="TimeWellSpent"
                     />
                     <img
                       className="hidden h-8 w-auto lg:block"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
+                      src="assets/logoLite.png"
+                      alt="TimeWellSpent"
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
@@ -309,13 +309,13 @@ console.log(isLoggedIn)
                   <div className="flex flex-shrink-0 items-center">
                     <img
                       className="block h-8 w-auto lg:hidden"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
+                      src="assets/logoLite.png"
+                      alt="TimeWellSpent"
                     />
                     <img
                       className="hidden h-8 w-auto lg:block"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
+                      src="assets/logoLite.png"
+                      alt="TimeWellSpent"
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">

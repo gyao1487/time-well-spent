@@ -11,9 +11,9 @@ function Footer() {
               className="flex items-center pb-5 "
             >
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
+                src="assets/logo.png"
                 className="h-8 mr-3"
-                alt="FlowBite Logo"
+                alt="TimeWellSpent Logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 TimeWellSpent
