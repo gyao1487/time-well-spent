@@ -115,7 +115,7 @@ function EventForm(props) {
                       type="text"
                       id="title"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title}</p>}
                   </div>
@@ -123,7 +123,7 @@ function EventForm(props) {
                   <div>
                     <label
                       htmlFor="details"
-                      className="block text-sm font-medium leading-6 text-gray-600 dark:text-gray-200"
+                      className="block text-sm font-medium leading-6 text-gray-600"
                     >
                       Event Details
                     </label>
@@ -135,7 +135,7 @@ function EventForm(props) {
                         id="description"
                         onChange={handleChange}
                         defaultValue={""}
-                        className="mt-1 block w-full rounded-md border-0 text-gray-600 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                        className="mt-1 block w-full rounded-md border-0 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       />
                     </div>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-200">
@@ -159,7 +159,7 @@ function EventForm(props) {
                       type="date"
                       id="date"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.date && <p className="mt-1 text-sm text-red-500">{errors.date}</p>}
                   </div>
@@ -179,7 +179,7 @@ function EventForm(props) {
                       type="time"
                       id="time"
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.time && <p className="mt-1 text-sm text-red-500">{errors.time}</p>}
                   </div>
