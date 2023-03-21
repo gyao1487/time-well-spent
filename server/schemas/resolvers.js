@@ -232,6 +232,16 @@ const resolvers = {
 
       return removedVolunteer;
     },
+    removeGoogleVolunteer: async function (parent, args, context) {
+      // Find and remove the event from the Events collection
+      const removedGoogleVolunteer = await GoogleVolunteer.findByIdAndDelete(args._id);
+      if (!removedGoogleVolunteer) {
+        throw new Error("Event not found");
+      }
+
+
+      return removedGoogleVolunteer;
+    },
 
     // ---------------------------------- Charity Mutations ----------------------------------
     addCharityEvent: async function (parent, { savedEvents }, context) {
