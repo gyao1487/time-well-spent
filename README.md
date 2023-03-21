@@ -3,7 +3,7 @@
 ## Description
 One of humanity's greatest strengths is the yearning to help those who need it.  Small, simple, random acts of kindness inhabit our days in ways we cannot even see, but they're there, making our time on this earth that little bit easier, just when we need it.  However, as we venture further into the future, and further from each other, finding opportunities to help others in more substantial ways becomes more difficult.
 
-TIME WELL SPENT is an application designed to connect users to charities and nonprofits in need of help.  Charities will be able to post repeating or singular events on their pages, and users will be able to discover them using our search feature or google maps integration.  Once charities are discovered, users can volunteer for posted events or donate directly to that charity.  With greater access to altruistic opportunities, connections with others will strengthen and communities grow.
+[TIME WELL SPENT](https://morning-wildwood-88697.herokuapp.com/) is an application designed to connect users to charities and nonprofits in need of help.  Charities will be able to post repeating or singular events on their pages, and users will be able to discover them using our search feature or google maps integration.  Once charities are discovered, users can volunteer for posted events or donate directly to that charity.  With greater access to altruistic opportunities, connections with others will strengthen and communities grow.
 
 
 ## Table of Contents
