@@ -28,8 +28,8 @@ const Profile = () => {
   const [userEvents, setUserEvents] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [isLocationLoading, setIsLocationLoading] = useState(false);
-  const [isUserEditingDescription, setIsUserEditingDescription] =
-    useState(false);
+  const [isUserEditingDescription, setIsUserEditingDescription] = useState(false);
+  const [isUserEditingSkills, setIsUserEditingSkills] = useState(false);
 
   const {
     loading,
@@ -93,6 +93,7 @@ const Profile = () => {
 
   const handleSaveDescription = async (e) => {
     setIsUserEditingDescription(false);
+    setIsUserEditingSkills(false)
     if (googleVolunteerData?.googleVolunteer) {
       const { data, error } = await updateGoogleVolunteer();
     }
@@ -110,13 +111,13 @@ const Profile = () => {
     if (volunteerData?.volunteer) {
       setUserData(volunteerData?.volunteer);
       setUserDescription(volunteerData?.volunteer?.user_description);
+      setUserSkills(volunteerData?.volunteer?.skills)
       setUserEvents(volunteerData?.volunteer?.savedEvents);
     }
     if (googleVolunteerData?.googleVolunteer) {
       setUserData(googleVolunteerData?.googleVolunteer);
-      setUserDescription(
-        googleVolunteerData?.googleVolunteer?.user_description
-      );
+      setUserDescription(googleVolunteerData?.googleVolunteer?.user_description);
+      setUserSkills(googleVolunteerData?.googleVolunteer?.skills)
       setUserEvents(googleVolunteerData?.googleVolunteer?.savedEvents);
     }
   }, [loading, volunteerLoading, userEvents]);
@@ -189,9 +190,50 @@ const Profile = () => {
      {/* GY - I can't get skills to populate. Please help!              */}
 
                   <div className="mb-2 mt-10 text-gray-900 dark:text-white">
+                  {isUserEditingSkills ? (
+                        <textarea
+                          className="textarea textarea-info bg-transparent dark:text-white w-96 mt-7"
+                          placeholder="Skills"
+                          type="text"
+                          autoFocus={true}
+                          id="description"
+                          value={userSkills}
+                          onChange={(e) => setUserSkills(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.keyCode === 27) {
+                              e.currentTarget.blur();
+                              setIsUserEditingSkills(false);
+                            }
+                          }}
+                        />
+                      ) : (
+                        <p className="mb-4 text-blueGray-700 mt-7 dark:text-white">
+                          {userSkills}
+                        </p>
+                      )}
+                    
                     <i className="fas fa-briefcase mr-2 text-lg dark:text-white "></i>
-                    {userData?.skills}
                   </div>
+                  <div
+                    className="flex flex-col items-center"
+                  >
+                    {isUserEditingSkills ? 
+                      <button
+                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        onClick={handleSaveDescription}
+                      >
+                        Save
+                      </button>
+                      :
+                    <button
+                        onClick={() => setIsUserEditingSkills(true)}
+                        className="group relative flex  justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-30"
+                      >
+                        Edit Skills
+                      </button>
+                    }
+                  </div>
+                  
                 </div>
 
                 <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
