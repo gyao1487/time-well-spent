@@ -147,22 +147,23 @@ export const ADD_GOOGLE_VOLUNTEER = gql`
   }
 `;
 export const UPDATE_GOOGLE_VOLUNTEER_DESCRIPTION = gql`
-  mutation updateGoogleVolunteer($_id: ID!, $user_description: String) {
-    updateGoogleVolunteer(_id: $_id, user_description: $user_description) {
+  mutation updateGoogleVolunteer($_id: ID!, $user_description: String, $skills: String) {
+    updateGoogleVolunteer(_id: $_id, user_description: $user_description, skills: $skills) {
       _id
       user_description
+      user_skills
     }
   }
 `;
 export const UPDATE_VOLUNTEER_DESCRIPTION = gql`
-  mutation updateVolunteerDescription($_id: ID!, $user_description: String) {
-    updateVolunteerDescription(_id: $_id, user_description: $user_description) {
+  mutation updateVolunteerDescription($_id: ID!, $user_description: String, $skills: String) {
+    updateVolunteerDescription(_id: $_id, user_description: $user_description, skills: $skills) {
       _id
       user_description
+      user_skills
     }
   }
 `;
-
 export const ADD_CHARITY = gql`
   mutation createCharity(
     $username: String!
