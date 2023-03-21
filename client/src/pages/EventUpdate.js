@@ -106,10 +106,10 @@ function EventUpdate(props) {
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
               <h2 className="text-base font-semibold leading-6 text-gray-900 dark:text-white text-center">
-                Create a new event
+                Edit Event
               </h2>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-200 text-center">
-                Just type in details about your event, and we'll work our magic!
+                Change any details about your event
               </p>
             </div>
           </div>
@@ -132,7 +132,7 @@ function EventUpdate(props) {
                       id="title"
                       value={usercformState.title}
                       onChange={handleChange}
-                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-600 dark:text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title}</p>}
                   </div>
@@ -153,7 +153,7 @@ function EventUpdate(props) {
                         onChange={handleChange}
                         value={usercformState.description}
                         
-                        className="mt-1 block w-full rounded-md border-0 text-gray-600 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                        className="mt-1 block w-full rounded-md border-0 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       />
                     </div>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-200">
@@ -247,7 +247,7 @@ function EventUpdate(props) {
                     type="submit"
                     className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                     >
-                    Create Event
+                    Save Changes
 
                   </button>
 
@@ -255,7 +255,7 @@ function EventUpdate(props) {
                 {/*---------------------------- Error Message (make it a modal/notification)------------------------- */}
                 {error ? (
                   <div>
-                    <p className="error-text">Failed to create event. Please try again!</p>
+                    <p className="error-text">Failed to save changes. Please try again!</p>
                   </div>
                 ) : null }
               </div>
