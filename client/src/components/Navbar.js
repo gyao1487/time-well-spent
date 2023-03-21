@@ -334,7 +334,7 @@ console.log(isLoggedIn)
                               {item.name}
                             </a>
                           ))
-                        : volunteerNavigation.slice(0, 2).map((item) => (
+                        : volunteerNavigation.slice(0,2).map((item) => (
                             <a
                               key={item.name}
                               href={item.href}
@@ -402,7 +402,7 @@ console.log(isLoggedIn)
                             {({ active }) => (
                               <Link
                                 to="/profile"
-                                //href=""
+                               
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
@@ -415,7 +415,7 @@ console.log(isLoggedIn)
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                // we still need to make a signout route?
+                                
                                 to="/signout"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
@@ -441,7 +441,6 @@ console.log(isLoggedIn)
                 }
               </div>
             </div>
-            {/* Navbar View in Desktop Mode. VolunteerNavigation items are mapped over and buttons are generated */}
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pt-2 pb-3">
                 {volunteerNavigation.map((item) => {
@@ -461,30 +460,28 @@ console.log(isLoggedIn)
                 })}
                 {!isLoggedIn &&
                   loggedInNav.map((item) => {
-                    return (<>
-                      <Disclosure.Button
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "block rounded-md px-3 py-2 text-base font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      ></Disclosure.Button>
-                      <div
-                  onClick={() => {
-                    setIsLoggedIn(false);
-                    Auth.logout();
-                  }}
-                  className="border-b border-gray-400 my-8 uppercase"
-                >
-                  Logout
-                </div>
-                      </>
-                    );
-                  })}
+                    return <Disclosure.Button
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        item.current
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "block rounded-md px-3 py-2 text-base font-medium"
+                      )}
+                      aria-current={item.current ? "page" : undefined}
+                    ></Disclosure.Button>
+                  })
+                  && <div
+                    onClick={() => {
+                      setIsLoggedIn(false);
+                      Auth.logout();
+                    }}
+                    className="border-b border-gray-400 my-8 uppercase"
+                  >
+                    Logout
+                  </div>
+                }
               </div>
             </Disclosure.Panel>
           </>
