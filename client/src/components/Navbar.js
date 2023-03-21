@@ -188,7 +188,7 @@ console.log(isLoggedIn)
                           onClick={()=> document.location.replace('/charityprofile')}
                             className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
-                            src={userData?.picture}
+                            src={'../assets/letter-c-svgrepo-com.png'}
                             alt=""
                           />
                         
@@ -377,7 +377,7 @@ console.log(isLoggedIn)
                             onClick={()=> document.location.replace('/profile')}
                             className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
-                            src={userData?.picture}
+                            src={userData?.picture ? userData?.picture : '../assets/letter-v-svgrepo-com.png'}
                             alt=""
                           />
                        
