@@ -183,41 +183,47 @@ console.log(googleVolunteerData)
            
           </div>
           <div className ="grid place-self-end pt-2">
-            {Auth.loggedIn() && 
-            <div>
-              { googleVolunteerData?.googleVolunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ||  volunteerData?.volunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ?
-            <button
-              type="button"
-              className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
-              hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
-              focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
-              text-4xl text-center m-2 
-              rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.removeEvent}
-              data-te-ripple-init
-              data-te-ripple-color="light"
-              data-id={event._id} 
-              data-button='remove'
-              onClick={handleRemoveEvent}>
-              Remove Event
-            </button>
-            :
-            <button
-              type="button"
-              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 
-              hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
-              focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
-              text-4xl text-center m-2 
-              rounded-full px-3 py-1 text-sm font-semibold   mb-2"
-              data-te-ripple-init
-              data-te-ripple-color="light"
-              data-id={event._id} 
-              data-button='add'
-              onClick={handleAddEvent}>
-              Sign up!
-            </button>
-          }
-            </div>
+            {(volunteerData || googleVolunteerData) &&
+              <div>
+              {Auth.loggedIn() &&
+              <div>
+                { googleVolunteerData?.googleVolunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ||  volunteerData?.volunteer?.savedEvents?.some((eventObj)=> eventObj._id === event._id) ?
+              <button
+                type="button"
+                className={`text-white bg-gradient-to-r from-cyan-500 to-blue-500 
+                hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+                focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
+                text-4xl text-center m-2 
+                rounded-full px-3 py-1 text-sm font-semibold   mb-2 ` + styles.removeEvent}
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                data-id={event._id} 
+                data-button='remove'
+                onClick={handleRemoveEvent}>
+                Remove Event
+              </button>
+              :
+              <button
+                type="button"
+                className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 
+                hover:bg-gradient-to-bl focus:ring-4 focus:outline-none 
+                focus:ring-cyan-300 dark:focus:ring-cyan-800 font-small 
+                text-4xl text-center m-2 
+                rounded-full px-3 py-1 text-sm font-semibold   mb-2"
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                data-id={event._id} 
+                data-button='add'
+                onClick={handleAddEvent}>
+                Sign up!
+              </button>
             }
+              </div>
+              }
+              </div>
+            }
+            
+            
           
             
           </div>
