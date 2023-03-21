@@ -22,7 +22,7 @@ const Profile = () => {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const [userData, setUserData] = useState(null);
-  const [userId, setUserId] = useState(Auth.getProfile().data._id);
+  const [userId, setUserId] = useState(Auth.getProfile()?.data?._id);
   const [userDescription, setUserDescription] = useState("");
   const [userEvents, setUserEvents] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
