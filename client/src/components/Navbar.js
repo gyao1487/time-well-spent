@@ -145,7 +145,7 @@ console.log(isLoggedIn)
                               {item.name}
                             </a>
                           ))
-                        : charityNavigation.slice(0, 4).map((item) => (
+                        : charityNavigation.slice(0, 2).map((item) => (
                             <a
                               key={item.name}
                               href={item.href}
