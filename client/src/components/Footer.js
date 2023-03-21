@@ -11,7 +11,7 @@ function Footer() {
               className="flex items-center pb-5 "
             >
               <img
-                src="assets/logo.png"
+                src="/assets/logo.png"
                 className="h-8 mr-3"
                 alt="TimeWellSpent Logo"
               />
