@@ -35,8 +35,9 @@ function LoginVolunteer(props) {
           password: uservformState.password,
         },
       });
+      
       const token = mutationResponse.data.loginAsVolunteer.token;
-      console.log(token);
+     
       Auth.login(token);
     } catch (e) {
       console.log(e);
