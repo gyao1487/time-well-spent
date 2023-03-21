@@ -16,6 +16,8 @@ const VolunteerSignup = () => {
     username: "",
     email: "",
     password: "",
+    fullName:"",
+    skills:""
   });
   const [createVolunteer, { error }] = useMutation(ADD_VOLUNTEER);
 
@@ -49,6 +51,7 @@ const VolunteerSignup = () => {
       email: "",
       password: "",
       fullName: "",
+      skills:""
     });
   };
 
@@ -234,7 +237,7 @@ const VolunteerSignup = () => {
                   Skills: 
                   </label>
                   <input
-                    type="textinput"
+                    type="skills"
                     name="skills"
                     id="skills"
                     onChange={handleChange}
@@ -291,7 +294,7 @@ const VolunteerSignup = () => {
 
 
 
-      <div className="container my-1">
+      {/* <div className="container my-1">
         <h2>Sign Up</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="flex-row space-between my-2">
@@ -369,7 +372,7 @@ const VolunteerSignup = () => {
             </button>
           </div>
         </form>
-      </div>
+      </div> */}
     </>
   );
 };
