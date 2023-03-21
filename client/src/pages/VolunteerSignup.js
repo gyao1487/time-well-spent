@@ -27,6 +27,7 @@ const VolunteerSignup = () => {
     setVolunteerFormData({ ...uservFormData, [name]: value });
   };
   const handleFormSubmit = async (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
@@ -119,7 +120,7 @@ const VolunteerSignup = () => {
   return (
     <>
       <section>
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
           <div>
             <img
               className="mx-auto h-20 w-auto "
@@ -130,16 +131,16 @@ const VolunteerSignup = () => {
               Start making a change today!
             </h2>
           </div>
-          <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-700 dark:border-gray-600">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-700 dark:border-gray-600">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
               </h1>
-              <form class="space-y-4 md:space-y-6" onSubmit={handleFormSubmit}>
+              <form className="space-y-4 md:space-y-6" onSubmit={handleFormSubmit}>
                 <div>
                   <label
-                    for="username"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="username"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Username
                   </label>
@@ -148,7 +149,7 @@ const VolunteerSignup = () => {
                     name="username"
                     id="username"
                     onChange={handleChange}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="kindperson123"
                     required="yes"
                   />
@@ -156,8 +157,8 @@ const VolunteerSignup = () => {
 
                 <div>
                   <label
-                    for="fullName"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="fullName"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Full Name
                   </label>
@@ -166,7 +167,7 @@ const VolunteerSignup = () => {
                     name="fullName"
                     id="fullName"
                     onChange={handleChange}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Your full name here"
                     required="yes"
                   />
@@ -174,8 +175,8 @@ const VolunteerSignup = () => {
 
                 <div>
                   <label
-                    for="email"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Email
                   </label>
@@ -184,15 +185,15 @@ const VolunteerSignup = () => {
                     name="email"
                     id="email"
                     onChange={handleChange}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@email.com"
                     required="yes"
                   />
                 </div>
                 <div>
                   <label
-                    for="pwd"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="pwd"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
                   </label>
@@ -202,14 +203,14 @@ const VolunteerSignup = () => {
                     id="pwd"
                     placeholder="••••••••"
                     onChange={handleChange}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required="yes"
                   />
                 </div>
                 <div>
                   <label
-                    for="confirm-password"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="confirm-password"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Confirm password
                   </label>
@@ -218,15 +219,15 @@ const VolunteerSignup = () => {
                     name="confirm-password"
                     id="confirm-password"
                     placeholder="••••••••"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required="yes"
                   />
                 </div>
 
                 <div>
                   <label
-                    for="skills"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="skills"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                   Skills: 
                   </label>
@@ -235,30 +236,30 @@ const VolunteerSignup = () => {
                     name="skills"
                     id="skills"
                     onChange={handleChange}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Organizing, networking, fundrainsing, etc..."
                     required="yes"
                   />
                 </div>
 
-                <div class="flex items-start">
-                  <div class="flex items-center h-5">
+                <div className="flex items-start">
+                  <div className="flex items-center h-5">
                     <input
                       id="terms"
                       aria-describedby="terms"
                       type="checkbox"
-                      class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-600 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required="true"
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-600 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                      required={true}
                     />
                   </div>
-                  <div class="ml-3 text-sm">
+                  <div className="ml-3 text-sm">
                     <label
-                      for="terms"
-                      class="font-light text-gray-500 dark:text-gray-300"
+                      htmlFor="terms"
+                      className="font-light text-gray-500 dark:text-gray-300"
                     >
                       I accept the{" "}
                       <a
-                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                         href="#"
                       >
                         Terms and Conditions
@@ -269,13 +270,13 @@ const VolunteerSignup = () => {
 
                 <button
                   type="submit"
-                  class=" btn w-full text-white btn-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-700 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  className=" btn w-full text-white btn-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-700 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Get Started
                 </button>
-                <p class="text-sm font-light text-gray-500 dark:text-white">
+                <p className="text-sm font-light text-gray-500 dark:text-white">
                   Already have an account?{" "}
-                  <Link to="/loginvolunteer" class="text-indigo-700 hover:underline">
+                  <Link to="/loginvolunteer" className="text-indigo-700 hover:underline">
                     Login here
                   </Link>
                 </p>
