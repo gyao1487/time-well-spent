@@ -18,12 +18,13 @@ import EventCard from "../components/EventCard";
 function CharityProfile() {
   const state = useStateContext();
   const dispatch = useDispatchContext();
-  const userId = Auth.getProfile().data._id;
+  // const userId = Auth.getProfile().data._id;
+  const [userId, setUserId] = useState(null)
   const { loading, error, data } = useQuery(QUERY_CHARITY, {
     variables: {
       _id: userId,
     },
-    skip: !userId,
+    skip: !userId || userId === null,
   });
 
   console.log(userId);
@@ -91,6 +92,7 @@ function CharityProfile() {
 
   useEffect(() => {
     // setUserData(data);
+    setUserId(Auth.getProfile()?.data?._id)
     setDescription(data?.charity?.description);
     // setCharityName(data?.charityName);
     setUsername(data?.charity.username);
@@ -133,14 +135,16 @@ function CharityProfile() {
   });
 
   const handleRemoveCharity = async () => {
+    
     try {
       const { data, errors } = await removeCharity({
         variables: { _id: userId },
       });
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Error in remove charity mutation:", error);
     }
+    setUserId(null);
     Auth.logout();
   };
   if (loading) return <Loading />;
