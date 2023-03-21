@@ -14,7 +14,7 @@ function SearchBar({ searchInput, setSearchInput }) {
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Fundraiser"
             />
-            <button className="h-10 px-4 py-2 m-1 text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+            <button className="h-10 px-4 py-2 m-1 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-400 focus:outline-none focus:bg-blue-400">
               Search
             </button>
           </div>

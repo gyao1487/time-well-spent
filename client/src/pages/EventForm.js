@@ -95,7 +95,7 @@ function EventForm(props) {
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-200 text-center">
                 Just type in details about your event, and we'll work our magic!
               </p>
-              <img src="/assets/eventpage.png" className="hidden lg:block pt-10"/>
+              <img src="/assets/eventpage.png" alt="Two children participating in a food drive " className="hidden lg:block pt-10"/>
             </div>
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0">
@@ -299,6 +299,7 @@ function EventForm(props) {
                     <p className="error-text">Failed to create event. Please try again!</p>
                   </div>
                 ) : null }
+                 <img src="/assets/eventpage.png" alt="Two children participating in a food drive " className="sm:hidden pt-10"/>
               </div>
             </form>
           </div>
