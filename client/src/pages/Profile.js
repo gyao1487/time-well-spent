@@ -170,12 +170,12 @@ const Profile = () => {
                   ----------------------- Website ------------------------- */}
                 </div>
                 <div className="text-center mt-12">
-                  <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2">
+                  <h3 className="text-xl font-semibold leading-normal mb-2 text-gray-900 mb-2 dark:text-white">
                     {userData?.username}
                   </h3>
                   {!isLocationLoading ? (
-                    <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                      <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                    <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 dark:text-white font-bold uppercase">
+                      <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400 dark:text-white"></i>
 
                       {userLocation}
                     </div>
@@ -183,7 +183,7 @@ const Profile = () => {
                     <div></div>
                   )}
                   <div className="mb-2 mt-10 text-gray-900">
-                    <i className="fas fa-briefcase mr-2 text-lg  "></i>
+                    <i className="fas fa-briefcase mr-2 text-lg dark:text-white "></i>
                     {userData?.skills}
                   </div>
                 </div>
@@ -225,7 +225,7 @@ const Profile = () => {
                           // onBlur={()=> setIsUserEditingDescription(false)}
                         />
                       ) : (
-                        <p className="mb-4 text-blueGray-700 mt-7">
+                        <p className="mb-4 text-blueGray-700 mt-7 dark:text-white">
                           {userDescription}
                         </p>
                       )}
