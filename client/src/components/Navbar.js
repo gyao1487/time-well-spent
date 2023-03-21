@@ -9,7 +9,7 @@ import CharityHamburger from "./CharityHamburger";
 import UserHamburger from "./UserHamburger";
 
 import { useStateContext } from "../utils/GlobalState";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { useQuery } from "@apollo/client";
 import {
   QUERY_GOOGLE_VOLUNTEER,
@@ -50,6 +50,8 @@ function classNames(...classes) {
 
 function Navbar() {
   const state = useStateContext();
+  // const { basename } = useContext(MyContext)
+
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(Auth.getProfile()?.data._id);
@@ -187,15 +189,15 @@ console.log(isLoggedIn)
                         {userData?.name && (
                           <span className="mr-2">{userData?.name}</span>
                         )}
-                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                          <span className="sr-only">Open user menu</span>
+                        
                           <img
-                            className="h-10 w-10 rounded-full"
+                          onClick={()=> document.location.replace('/charityprofile')}
+                            className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
                             src={userData?.picture}
                             alt=""
                           />
-                        </Menu.Button>
+                        
                       </div>
                       <Transition
                         as={Fragment}
@@ -371,21 +373,22 @@ console.log(isLoggedIn)
                 <Toggle />
                 {Auth.loggedIn() && 
                   <div className="relative inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0">
+
+
                     {/* <Toggle /> */}
                     <Menu as="div" className="relative ml-3">
                       <div className="flex">
                         {userData?.name && (
                           <span className="mr-2">{userData?.name}</span>
                         )}
-                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                          <span className="sr-only">Open user menu</span>
                           <img
-                            className="h-10 w-10 rounded-full"
+                            onClick={()=> document.location.replace('/profile')}
+                            className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
                             src={userData?.picture}
                             alt=""
                           />
-                        </Menu.Button>
+                       
                         
                       </div>
                       <Transition
@@ -429,6 +432,9 @@ console.log(isLoggedIn)
                         </Menu.Items>
                       </Transition>
                     </Menu>
+
+
+
                     <p
                       className="hidden sm:flex ml-2 cursor-pointer text-white"
                       onClick={()=>{
