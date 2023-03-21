@@ -5,16 +5,13 @@ import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 
 const CharitySignup = () => {
-  // set initial form state
   const [usercFormData, setCharityFormData] = useState({
     username: "",
     email: "",
     password: "",
     websiteURL: "",
   });
-  // set state for form validation
 
-  // new code
   const [createCharity, { error }] = useMutation(ADD_CHARITY);
 
   const handleChange = (event) => {
@@ -27,10 +24,8 @@ const CharitySignup = () => {
     event.preventDefault();
     console.log(usercFormData)
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      // event.preventDefault();
       event.stopPropagation();
     }
 

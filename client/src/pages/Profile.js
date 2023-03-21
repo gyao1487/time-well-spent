@@ -132,7 +132,6 @@ const Profile = () => {
       const locationData = await response.json();
       return locationData;
     };
-    // getUserLatLng();
 
     const getUserAddress = async (locationData) => {
       const response = await fetch(
@@ -226,7 +225,6 @@ const Profile = () => {
                               setIsUserEditingDescription(false);
                             }
                           }}
-                          // onBlur={()=> setIsUserEditingDescription(false)}
                         />
                       ) : (
                         <p className="mb-4 text-blueGray-700 mt-7 dark:text-white">

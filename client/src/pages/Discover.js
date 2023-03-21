@@ -6,12 +6,10 @@ import SearchBar from "../components/SearchBar"
 import Loading from "../components/Loading";
 
 const Discover = () => {
-  // query for all events
   const { loading, data } = useQuery( QUERY_ALL_EVENTS);
   const events = data?.allEvents || [];
   const [searchInput, setSearchInput] = useState('');
 
-  // if loading, return something else]
   return (
     <div className="mx-auto">
       <h1 className="text-center text-gray-900 font-bold text-2xl tracking-tight m-4 dark:text-white mx-auto">

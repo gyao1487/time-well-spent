@@ -139,7 +139,6 @@ function LoginVolunteer(props) {
         });
         const responsePayload = decodeJwtResponse(response.credential);
         console.log(responsePayload);
-        // localStorage.setItem('ID', JSON.stringify(data.loginAsGoogleVolunteer.googlev._id));
         Auth.login(data.loginAsGoogleVolunteer.token);
       }
     });

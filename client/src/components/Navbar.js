@@ -19,8 +19,6 @@ import {
 import Toggle from "../components/Toggle";
 
 const volunteerNavigation = [
-  //This create event field needs to be conditionally rendered IF the user logged in is userc
-  // { name: "Create Event",to: '/EventForm', href:"/EventForm", current:false},
   { name: "Home", to: "/", href: "/", current: false },
   { name: "Find Opportunities", href: "/discover", current: false },
   { name: "Profile", href: "/profile", current: false },
@@ -34,8 +32,6 @@ const charityNavigation = [
     current: false,
   },
   { name: "Home", to: "/", href: "/", current: false },
-  // { name: "Find Opportunities", href: "/discover", current: false },
-  // { name: "Find Volunteers", href: "/LoginCharity", current: false },
   { name: "Profile", href: "/CharityProfile", current: false },
 ];
 
@@ -50,8 +46,6 @@ function classNames(...classes) {
 
 function Navbar() {
   const state = useStateContext();
-  // const { basename } = useContext(MyContext)
-
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(Auth.getProfile()?.data._id);
@@ -194,7 +188,7 @@ console.log(isLoggedIn)
                           onClick={()=> document.location.replace('/charityprofile')}
                             className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
-                            src={userData?.picture}
+                            src={'../assets/letter-c-svgrepo-com.png'}
                             alt=""
                           />
                         
@@ -213,7 +207,6 @@ console.log(isLoggedIn)
                             {({ active }) => (
                               <Link
                                 to="/profile"
-                                //href=""
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
@@ -227,7 +220,6 @@ console.log(isLoggedIn)
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                // we still need to make a signout route?
                                 to="/signout"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
@@ -385,7 +377,7 @@ console.log(isLoggedIn)
                             onClick={()=> document.location.replace('/profile')}
                             className="h-10 w-10 rounded-full cursor-pointer"
                             referrerPolicy="no-referrer"
-                            src={userData?.picture}
+                            src={userData?.picture ? userData?.picture : '../assets/letter-v-svgrepo-com.png'}
                             alt=""
                           />
                        
