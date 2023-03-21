@@ -132,6 +132,10 @@ function CharityProfile() {
     onError: (err) => {
       console.error("Error in removeEvent mutation:", err);
     },
+    onCompleted: () => {
+      // Reload the page after successfully removing the event
+      window.location.reload();
+    },
   });
   
   const handleRemoveEvent = async (eventId) => {
