@@ -23,7 +23,6 @@ Once the github has been cloned, the following technologies are required using '
 - graphql
 - daisyui
 - Google onetap
-- Stripe
 
 Other technologies required are Sequelize, Node.js and Insomnia.  
 
@@ -41,17 +40,17 @@ Both Volunteers and Charites/Nonprofit profile pages are unique.  Volunteer page
 
 ## Screenshot
 
-![Screenshot](/public/assets/SCREENSHOTS GO HERE.png)
-![Screenshot](/public/assets/SCREENSHOTS GO HERE.png)
-![Screenshot](/public/assets/SCREENSHOTS GO HERE.png)
-![Screenshot](/public/assets/SCREENSHOTS GO HERE.png)
-![Screenshot](/public/assets/SCREENSHOTS GO HERE.png)
+![Screenshot](/client/public/assets/screenshot1.png)
+![Screenshot](/client/public/assets/screenshot2.png)
+![Screenshot](/client/public/assets/screenshot3.png)
+![Screenshot](/client/public/assets/screenshot4.png)
 
 
 ## Links
 
-* Video demo:  
-* The site:   
+* Video demo 1: https://youtu.be/qj8QTrw9Jpk 
+* Video demo 2: https://youtu.be/GD4ajuFWtYM
+* The site: https://morning-wildwood-88697.herokuapp.com/ {rename pending review at heroku}
 * Github: https://github.com/TotallyReactingNodeTurtles/timewellspent 
 
 
