@@ -24,10 +24,6 @@ Once the github has been cloned, the following technologies are required using '
 - daisyui
 - Google onetap
 
-Other technologies required are Sequelize, Node.js and Insomnia.  
-
-Finally, technologies used to create the project include Stripe and Heroku, which was used to publish the website.
-
 
 ## Usage
 
