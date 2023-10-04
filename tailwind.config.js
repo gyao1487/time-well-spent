@@ -1,14 +1,13 @@
 const defaultTheme = require("./node_modules/@tailwindcss/forms");
 
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html",
+    "./node_modules/flowbite/**/*.js"
   ], 
   darkMode: 'class',
-  content: ["./src/**/*.{js,jsx,ts,tsx}","./node_modules/flowbite/**/*.js"],
- 
   theme: { 
     extend: {  
       textOpacity: ['dark'],
@@ -20,5 +19,5 @@ module.exports = {
   plugins: [
   require('flowbite/plugin'),
   require("daisyui"), 
-  require("@tailwindcss/forms")],
+  require("@tailwindcss/forms")()],
 };

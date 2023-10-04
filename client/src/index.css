@@ -4,10 +4,17 @@
     box-sizing: border-box;
 }
 
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind forms;
+@tailwind forms; */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/forms';
+@import 'tailwindcss/typography';
+@import '../../tailwind.config.js';
 
 body {
   min-height: 100vh;
