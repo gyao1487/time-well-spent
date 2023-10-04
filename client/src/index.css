@@ -13,7 +13,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import 'tailwindcss/forms';
-@import 'tailwindcss/typography';
 @import '../../tailwind.config.js';
 
 body {
