@@ -1,12 +1,16 @@
 {
     "builds": [
         {
-            "src": "/client/*",
+            "src": "/client/build/*",
             "use": "@vercel/static-build"
         },
         {
             "src": "/server/*",
             "use": "@vercel/node"
         }
-    ]
+    ],
+    "routes": [
+        {
+            "src": "/(.*)", "dest": "/client/build/$1"
+        }]
 }
