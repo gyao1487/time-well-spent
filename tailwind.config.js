@@ -1,7 +1,11 @@
 const defaultTheme = require("./node_modules/@tailwindcss/forms");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = { 
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html",
+  ], 
   darkMode: 'class',
   content: ["./src/**/*.{js,jsx,ts,tsx}","./node_modules/flowbite/**/*.js"],
  
