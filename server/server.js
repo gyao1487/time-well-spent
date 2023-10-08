@@ -4,7 +4,7 @@ const path = require('path');
 const {authMiddleware} = require('./utils/auth')
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-// const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config();
 const apiRoutes = require('./routes/api/index');
 
 // // Stripe

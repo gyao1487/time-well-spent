@@ -1,13 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind forms;
-
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind forms;
 
 body {
   min-height: 100vh;
